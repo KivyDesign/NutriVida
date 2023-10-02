@@ -22,3 +22,68 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# #####################################
+
+# Ignorar estas carpetas
+/build/
+/test/
+/dist/
+/nbproject/private/
+
+# Ignorar archivos properties
+*.properties
+nbproject/project.properties
+
+# Ignorar archivo de Conexion.java
+src/UniversidadGrupo22/accesoADatos/Conexion.java
+
+# Ignora archivos jar compilados localmente
+*.jar
+
+# Ignora archivos del sistema Mac 
+.DS_store
+
+# Ignora todos los archivos de log
+*.log
+
+# Ignora la carpeta node_modules
+node_modules
+
+# Ignora todos los archivos de texto
+*.txt
+
+# Ignora los archivos relacionados a API keys
+.env
+
+# Ignora archivos de configuración SASS
+.sass-cache
+
+# ######################################################
+
+# Created by https://www.toptal.com/developers/gitignore/api/netbeans
+# Edit at https://www.toptal.com/developers/gitignore?templates=netbeans
+# Probar en ---> https://www.toptal.com/developers/gitignore
+
+### NetBeans ###
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# End of https://www.toptal.com/developers/gitignore/api/netbeans
+
+# ######################################################
+
+# Correr desde linea de comandos de GIT
+
+# git rm --cached *.properties
+# git rm --cached nbproject/project.properties
+# git rm --cached src/UniversidadGrupo22/accesoADatos/Conexion.java
+
+# Si nada de TODO esto funciona, ignorelo :(
+
