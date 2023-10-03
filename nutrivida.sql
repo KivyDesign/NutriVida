@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2023 a las 04:01:28
+-- Tiempo de generación: 04-10-2023 a las 01:30:47
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -74,12 +74,28 @@ CREATE TABLE `dietacomida` (
 
 CREATE TABLE `paciente` (
   `idPaciente` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
   `dni` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   `domicilio` varchar(100) NOT NULL,
   `telefono` varchar(20) NOT NULL,
   `estado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `paciente`
+--
+
+INSERT INTO `paciente` (`idPaciente`, `dni`, `nombre`, `domicilio`, `telefono`, `estado`) VALUES
+(1, 22221111, 'Gomez Pablo', '2332 Colon', '456-123', 1),
+(2, 11113333, 'Pabla Gomes', 'Union 562', '123-564', 1),
+(3, 11114444, 'Paola Guzman', 'Pellegrini 456', '423-456', 1),
+(4, 11115555, 'Paulo Salas', 'Campos 458', '123-456', 1),
+(5, 11116666, 'Paula Diaz', 'Belgrano 123', '456-456', 1),
+(6, 11117777, 'Pedro Perez', 'Talleres 789', '123-456', 1),
+(7, 11118888, 'Adrian Gil', 'Maipu 471', '123-741', 1),
+(8, 11119999, 'Adriana Ramos', 'Mitre 1447', '415-456', 0),
+(9, 11110000, 'Carlos Robledo', 'Pasco 1587', '478-456', 1),
+(10, 11111111, 'Carla Funes', 'Sarmiento 569', '100-456', 1);
 
 --
 -- Índices para tablas volcadas
@@ -139,7 +155,7 @@ ALTER TABLE `dietacomida`
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
