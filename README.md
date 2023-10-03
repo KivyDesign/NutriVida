@@ -34,4 +34,4 @@ Todas las entregas se realizarán usando un repositorio GitHub y compartiendo el
 • Se necesita saber las comidas incluidas en una dieta específica y agregar o borrar comidas a una Dieta.
 • Se necesita consultar la búsqueda de comidas que tengan una cantidad menor de un determinado número de calorías.
 
-![image]("https://github.com/KivyDesign/NutriVida/Vista de Diseñador.png")
+![image](https://github.com/KivyDesign/NutriVida/VistaDeDiseñador.png)
