@@ -20,26 +20,30 @@ public class NutriVida {
         }
 
         //agrego un paciente nuevo
-//        Paciente paciente = new Paciente(11112222,"Pablo Gomez","Colon 2332","123-456",true);
-        Paciente paciente1 = new Paciente(11113333,"Pabla Gomes","Union 562","123-564",true);
-        Paciente paciente2 = new Paciente(11114444,"Paola Guzman","Pellegrini 456","423-456",true);
-        Paciente paciente3 = new Paciente(11115555,"Paulo Salas","Campos 458","123-456",true);
-        Paciente paciente4 = new Paciente(11116666,"Paula Diaz","Belgrano 123","456-456",true);
-        Paciente paciente5 = new Paciente(11117777,"Pedro Perez","Talleres 789","123-456",true);
-        Paciente paciente6= new Paciente(11118888,"Adrian Gil","Maipu 471","123-741",true);
-        Paciente paciente7 = new Paciente(11119999,"Adriana Ramos","Mitre 1447","415-456",true);
-        Paciente paciente8 = new Paciente(11110000,"Carlos Robledo","Pasco 1587","478-456",true);
-        Paciente paciente9 = new Paciente(11111111,"Carla Funes","Sarmiento 569","100-456",true);
+//        Paciente paciente0 = new Paciente(11112222,"Pablo Gomez","Colon 2332","123-456",true);
+//        Paciente paciente1 = new Paciente(11113333,"Pabla Gomes","Union 562","123-564",true);
+//        Paciente paciente2 = new Paciente(11114444,"Paola Guzman","Pellegrini 456","423-456",true);
+//        Paciente paciente3 = new Paciente(11115555,"Paulo Salas","Campos 458","123-456",true);
+//        Paciente paciente4 = new Paciente(11116666,"Paula Diaz","Belgrano 123","456-456",true);
+//        Paciente paciente5 = new Paciente(11117777,"Pedro Perez","Talleres 789","123-456",true);
+//        Paciente paciente6= new Paciente(11118888,"Adrian Gil","Maipu 471","123-741",true);
+//        Paciente paciente7 = new Paciente(11119999,"Adriana Ramos","Mitre 1447","415-456",true);
+//        Paciente paciente8 = new Paciente(11110000,"Carlos Robledo","Pasco 1587","478-456",true);
+//        Paciente paciente9 = new Paciente(11111111,"Carla Funes","Sarmiento 569","100-456",true);
         PacienteData pacData=new PacienteData();
-        pacData.guardarPaciente(paciente1);
-        pacData.guardarPaciente(paciente2);
-        pacData.guardarPaciente(paciente3);
-        pacData.guardarPaciente(paciente4);
-        pacData.guardarPaciente(paciente5);
-        pacData.guardarPaciente(paciente6);
-        pacData.guardarPaciente(paciente7);
-        pacData.guardarPaciente(paciente8);
-        pacData.guardarPaciente(paciente9);
+//        pacData.guardarPaciente(paciente0);
+//        pacData.guardarPaciente(paciente1);
+//        pacData.guardarPaciente(paciente2);
+//        pacData.guardarPaciente(paciente3);
+//        pacData.guardarPaciente(paciente4);
+//        pacData.guardarPaciente(paciente5);
+//        pacData.guardarPaciente(paciente6);
+//        pacData.guardarPaciente(paciente7);
+//        pacData.guardarPaciente(paciente8);
+//        pacData.guardarPaciente(paciente9);
+        
+        // Elimino un paciente
+        pacData.eliminarPaciente(8);
 
     }
 

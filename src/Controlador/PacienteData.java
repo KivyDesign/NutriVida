@@ -37,4 +37,17 @@ public class PacienteData {
         }
         
     }
+    public void eliminarPaciente(int idPaciente){
+        try {
+            String sql = "UPDATE paciente SET estado = 0 WHERE idPaciente = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idPaciente);
+            ps.executeUpdate();
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
+        }
+        
+    }
 }
