@@ -20,27 +20,21 @@ Todas las entregas se realizarán usando un repositorio GitHub y compartiendo el
 
 ## Relaciones
 
-• La nutricionista al planificar la dieta para un paciente, y considera un conjunto de comidas.
-
-• Una comida puede ser considerada para diferentes pacientes que realizan dieta.
-
-• Una dieta se planifica para cada paciente y considera una lista de comidas.
+* La nutricionista al planificar la dieta para un paciente, y considera un conjunto de comidas.
+* Una comida puede ser considerada para diferentes pacientes que realizan dieta.
+* Una dieta se planifica para cada paciente y considera una lista de comidas.
 
 ## Clases
 
-• Una nutricionista tiene pacientes con diferentes perfiles de dieta. Interesa saber su nombre completo, DNI, domicilio y celular. Realizar el ABM paciente.
-
-• Una comida tiene un nombre, un detalle y una cantidad de calorías. Realizar el ABM comida.
-
-• Una dieta cuenta de una variedad de comidas, además tiene un paciente, una fecha de inicio, fecha de fin, un peso inicial y un peso buscado. ABM dieta.
+* Una nutricionista tiene pacientes con diferentes perfiles de dieta. Interesa saber su nombre completo, DNI, domicilio y celular. Realizar el ABM paciente.
+* Una comida tiene un nombre, un detalle y una cantidad de calorías. Realizar el ABM comida.
+* Una dieta cuenta de una variedad de comidas, además tiene un paciente, una fecha de inicio, fecha de fin, un peso inicial y un peso buscado. ABM dieta.
 
 ## Comportamientos
 
-• Se necesita listar los pacientes que a la fecha de fin no han llegado al peso buscado.
-
-• Se necesita saber las comidas incluidas en una dieta específica y agregar o borrar comidas a una Dieta.
-
-• Se necesita consultar la búsqueda de comidas que tengan una cantidad menor de un determinado número de calorías.
+* Se necesita listar los pacientes que a la fecha de fin no han llegado al peso buscado.
+* Se necesita saber las comidas incluidas en una dieta específica y agregar o borrar comidas a una Dieta.
+* Se necesita consultar la búsqueda de comidas que tengan una cantidad menor de un determinado número de calorías.
 
 ![image](https://github.com/KivyDesign/NutriVida/blob/main/VistaDeDise%C3%B1ador.png)
 
