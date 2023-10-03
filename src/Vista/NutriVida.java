@@ -51,7 +51,8 @@ public class NutriVida {
 
         // Consulta de un paciente
         
-
+Paciente paciente =pacData.buscarPacienteporDni(22221111);
+        System.out.println(paciente.toString());
     }
 
 }
