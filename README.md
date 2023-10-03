@@ -2,17 +2,12 @@
 
 ## INSTRUCTIVO: El proyecto será una aplicación en Java / MySQL. Se debe crear las tablas de la base de datos, y las correspondientes clases. Utilice una clase para la conexión y confeccione la interfaz gráfica (GUI). El grupo deberá presentar el proyecto en 3 etapas.
 
-1- Entrega de:
-
-A. Script de la base de datos completa, y captura de pantalla de vista diseñador.
-
-B. Proyecto en Netbean con todas las entidades del modelo.
-
-C. Clase de conexión, ABM de la clase Paciente (PacienteData) y pruebas desde el main.
-
-2- Desarrollo de todas las clases principales del dominio (ABM), consultas SQL embebidas. pruebas desde el main.
-
-3- Implementación de todos los métodos necesarios, listados, ABM de clases relacionadas, interfaces gráficas y aplicación terminada.
+1. Entrega de:
+   - Script de la base de datos completa, y captura de pantalla de vista diseñador.
+   - Proyecto en Netbean con todas las entidades del modelo.
+   - Clase de conexión, ABM de la clase Paciente (PacienteData) y pruebas desde el main.
+1. Desarrollo de todas las clases principales del dominio (ABM), consultas SQL embebidas. pruebas desde el main.
+1. Implementación de todos los métodos necesarios, listados, ABM de clases relacionadas, interfaces gráficas y aplicación terminada.
 
 Todas las entregas se realizarán usando un repositorio GitHub y compartiendo el link publico.
 
