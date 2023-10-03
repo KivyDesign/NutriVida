@@ -43,7 +43,14 @@ public class NutriVida {
 //        pacData.guardarPaciente(paciente9);
         
         // Elimino un paciente
-        pacData.eliminarPaciente(8);
+//        pacData.eliminarPaciente(8);
+
+        // Modificar un paciente
+//        Paciente paciente = new Paciente(1, 22221111,"Gomez Pablo","2332 Colon","456-123",false);
+//        pacData.modificarPaciente(paciente);
+
+        // Consulta de un paciente
+        
 
     }
 

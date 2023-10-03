@@ -35,8 +35,8 @@ public class PacienteData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al insertar en la tabla Paciente");
         }
-        
     }
+    
     public void eliminarPaciente(int idPaciente){
         try {
             String sql = "UPDATE paciente SET estado = 0 WHERE idPaciente = ?";
@@ -48,6 +48,48 @@ public class PacienteData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
         }
-        
+    }
+    
+    public void modificarPaciente(Paciente paciente){
+        try {
+            String sql = "UPDATE paciente SET dni = ?, nombre = ?, domicilio = ?, telefono = ? WHERE idPaciente = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, paciente.getDni());
+            ps.setString(2, paciente.getNombre());
+            ps.setString(3, paciente.getDomicilio());
+            ps.setString(4, paciente.getTelefono());
+            ps.setInt(5, paciente.getIdPaciente());
+            ps.executeUpdate();
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
+        }
+    }
+    
+    public Paciente buscarPacienteporDni(int dni){
+        Paciente paciente = null;
+        PreparedStatement ps = null;
+        try {
+            String sql = "SELECT idPacinte, dni, nombre, domicilio, telefono, estado FROM paciente WHERE dni = ?";
+            
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                paciente = new Paciente();
+                paciente.setIdPaciente(rs.getInt("idPaciente"));
+                paciente.setDni(rs.getInt("dni"));
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setDomicilio(rs.getString("domicilio"));
+                paciente.setTelefono(rs.getString("telefono"));
+                paciente.setEstado(rs.getBoolean("estado"));
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
+        }
+        return paciente;
     }
 }
