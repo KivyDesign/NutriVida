@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
-/**
- *
- * @author german
- */
 public class Comida {
     private int idComida;
     private String nombre;
@@ -78,6 +69,5 @@ public class Comida {
     public String toString() {
         return "Comida{" + "idComida=" + idComida + ", nombre=" + nombre + ", detalle=" + detalle + ", calorias=" + calorias + ", estado=" + estado + '}';
     }
-    
     
 }

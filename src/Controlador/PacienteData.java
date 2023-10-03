@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Modelo.Paciente;
@@ -15,15 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Pc
- */
-public class PacienteABM {
+public class PacienteData {
     private Connection con = null;
-    private PacienteABM pacienteABM;
+    private PacienteData pacienteData;
     
-    public PacienteABM(){
+    public PacienteData(){
         con = Conexion.getConexion();
     }
     
