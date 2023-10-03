@@ -71,7 +71,7 @@ public class PacienteData {
         Paciente paciente = null;
         PreparedStatement ps = null;
         try {
-            String sql = "SELECT idPacinte, dni, nombre, domicilio, telefono, estado FROM paciente WHERE dni = ?";
+            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono, estado FROM paciente WHERE dni = ?";
             
             ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
