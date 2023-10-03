@@ -1,6 +1,8 @@
 # NutriVida
 
-## INSTRUCTIVO: El proyecto será una aplicación en Java / MySQL. Se debe crear las tablas de la base de datos, y las correspondientes clases. Utilice una clase para la conexión y confeccione la interfaz gráfica (GUI). El grupo deberá presentar el proyecto en 3 etapas.
+## INSTRUCTIVO:
+
+> El proyecto será una aplicación en Java/MySQL. Se debe crear las tablas de la base de datos, y las correspondientes clases. Utilice una clase para la conexión y confeccione la interfaz gráfica (GUI). El grupo deberá presentar el proyecto en 3 etapas.
 
 1. Entrega de:
    - Script de la base de datos completa, y captura de pantalla de vista diseñador.
