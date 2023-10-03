@@ -9,7 +9,7 @@
 1. Desarrollo de todas las clases principales del dominio (ABM), consultas SQL embebidas. pruebas desde el main.
 1. Implementación de todos los métodos necesarios, listados, ABM de clases relacionadas, interfaces gráficas y aplicación terminada.
 
-Todas las entregas se realizarán usando un repositorio GitHub y compartiendo el link publico.
+> Todas las entregas se realizarán usando un repositorio GitHub y compartiendo el link publico.
 
 # NUTRICIONISTA
 
