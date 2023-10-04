@@ -1,22 +1,29 @@
 package Modelo;
 
 public class DietaComida {
+
     private int idDietaComida;
     private Comida comida;
     private Dieta dieta;
+    private int porcion;
+    private Horario horario;
 
     public DietaComida() {
     }
 
-    public DietaComida(int idDietaComida, Comida comida, Dieta dieta) {
+    public DietaComida(Comida comida, Dieta dieta, int porcion, Horario horario) {
+        this.comida = comida;
+        this.dieta = dieta;
+        this.porcion = porcion;
+        this.horario = horario;
+    }
+
+    public DietaComida(int idDietaComida, Comida comida, Dieta dieta, int porcion, Horario horario) {
         this.idDietaComida = idDietaComida;
         this.comida = comida;
         this.dieta = dieta;
-    }
-
-    public DietaComida(Comida comida, Dieta dieta) {
-        this.comida = comida;
-        this.dieta = dieta;
+        this.porcion = porcion;
+        this.horario = horario;
     }
 
     public int getIdDietaComida() {
@@ -43,9 +50,26 @@ public class DietaComida {
         this.dieta = dieta;
     }
 
+    public int getPorcion() {
+        return porcion;
+    }
+
+    public void setPorcion(int porcion) {
+        this.porcion = porcion;
+    }
+
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+
+    
     @Override
     public String toString() {
         return "DietaComida{" + "idDietaComida=" + idDietaComida + ", comida=" + comida + ", dieta=" + dieta + '}';
     }
-    
+
 }
