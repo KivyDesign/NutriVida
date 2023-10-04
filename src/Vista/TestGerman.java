@@ -14,9 +14,9 @@ public class TestGerman {
         // Si la conexion fue exitosa lo informo como conectado con un (sout)
         // para no tener ese molesto dialogo de conexion
         if (con != null) {
-            System.out.println("Sistema de Gestión para la Universidad de La Punta - Estado: Conectado");
+            System.out.println("NutriVida - Estado: Conectado");
         } else {
-            System.out.println("Sistema de Gestión para la Universidad de La Punta - Estado: Error");
+            System.out.println("NutriVida - Estado: Error");
         }
 
         //agrego un paciente nuevo
