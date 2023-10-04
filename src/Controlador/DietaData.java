@@ -40,5 +40,16 @@ public class DietaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta " + ex.getMessage());
         }
     }
-    
+    public void eliminarDietaPorId(int id){
+            try {
+            String sql = "UPDATE dieta SET estado = 0 WHERE idDieta = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta");
+        }
+    }
 }
