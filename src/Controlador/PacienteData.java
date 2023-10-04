@@ -32,6 +32,8 @@ public class PacienteData {
             if(rs.next()){
                 paciente.setIdPaciente(rs.getInt(1));
             }
+            
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al insertar en la tabla Paciente");
         }
