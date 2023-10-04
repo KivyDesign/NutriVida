@@ -68,10 +68,10 @@ public class ComidaData {
 
     public Comida buscarComidaPorId(int idComida) {
         Comida comida = null;
-//        PreparedStatement ps= null;
+        PreparedStatement ps = null;
         try {
             String sql = "SELECT idComida, nombre, detalle, cantCalorias, estado FROM comida WHERE idComida = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setInt(1, idComida);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {

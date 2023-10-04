@@ -19,8 +19,8 @@ public class DietaData {
     }
 
     public void guardarDieta(Dieta dieta) {
-        String sql = "INSERT INTO dieta (nombre, idPaciente, pesoInicial, pesoFinal, fechaInicial, fechaFinal, estado) VALUES (?,?,?,?,?,?,?)";
         try {
+            String sql = "INSERT INTO dieta (nombre, idPaciente, pesoInicial, pesoFinal, fechaInicial, fechaFinal, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, dieta.getNombre());
             ps.setInt(2, dieta.getPaciente().getIdPaciente());
@@ -57,7 +57,7 @@ public class DietaData {
 
     public void modificarDieta(Dieta dieta) {
         try {
-            String sql = "UPDATE dieta SET nombre = ?, idPaciente = ?, pesoInicial = ?, pesoFinal = ?, fechaInicial= ?, fechaFinal= ?, estado = ? WHERE idDieta = ?";
+            String sql = "UPDATE dieta SET nombre = ?, idPaciente = ?, pesoInicial = ?, pesoFinal = ?, fechaInicial = ?, fechaFinal = ?, estado = ? WHERE idDieta = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, dieta.getNombre());
             ps.setString(2, dieta.getPaciente().getIdPaciente() + "");
@@ -79,7 +79,7 @@ public class DietaData {
         PreparedStatement ps = null;
         PacienteData pacData = new PacienteData();
         try {
-            String sql = "SELECT idDieta,nombre,idPaciente,pesoInicial,pesoFinal,fechaInicial,fechaFinal,estado FROM dieta WHERE idPaciente= ?";
+            String sql = "SELECT idDieta, nombre, idPaciente, pesoInicial, pesoFinal, fechaInicial, fechaFinal, estado FROM dieta WHERE idPaciente = ?";
             ps = con.prepareStatement(sql);
             ps.setInt(1, idPaciente);
             ResultSet rs = ps.executeQuery();
