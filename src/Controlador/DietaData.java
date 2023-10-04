@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Dieta;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,8 +41,9 @@ public class DietaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta " + ex.getMessage());
         }
     }
-    public void eliminarDietaPorId(int id){
-            try {
+
+    public void eliminarDietaPorId(int id) {
+        try {
             String sql = "UPDATE dieta SET estado = 0 WHERE idDieta = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -52,4 +54,24 @@ public class DietaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta");
         }
     }
+
+    public void modificarDieta(Dieta dieta) {
+        try {
+            String sql = "UPDATE dieta SET nombre = ?, idPaciente = ?, pesoInicial = ?, pesoFinal = ?, fechaInicial= ?, fechaFinal= ?, estado = ? WHERE idDieta = ?";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setString(1,dieta.getNombre());
+            ps.setString(2,dieta.getPaciente().getIdPaciente()+"");
+            ps.setDouble(3, dieta.getPesoInicial());
+            ps.setDouble(4, dieta.getPesoFinal());
+            ps.setDate(5, Date.valueOf(dieta.getFechaInicial()));
+            ps.setDate(6, Date.valueOf(dieta.getFechaFinal()));
+            ps.setBoolean(7, dieta.isEstado());
+            ps.executeUpdate();
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta");
+        }
+    }
+    
 }
