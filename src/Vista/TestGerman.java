@@ -50,7 +50,7 @@ public class TestGerman {
 //        pacData.modificarPaciente(paciente);
 
         // Consulta de un paciente
-        Paciente paciente =pacData.buscarPacienteporDni(22221111);
+        Paciente paciente =pacData.buscarPacientePorDni(22221111);
         System.out.println(paciente.toString());
     }
 

@@ -75,19 +75,29 @@ public class DietaData {
     }
 
     public Dieta buscarDietaporIdPaciente(int idPaciente) {
-        Dieta dieta= null;
-        PreparedStatement ps=null;
+        Dieta dieta = null;
+        PreparedStatement ps = null;
+        PacienteData pacData = new PacienteData();
         try {
-            String sql= "SELECT idDieta,nombre,idPaciente,pesoInicial,pesoFinal,fechaInicial,fechaFinal,estado FROM dieta WHERE idPaciente= ?";
+            String sql = "SELECT idDieta,nombre,idPaciente,pesoInicial,pesoFinal,fechaInicial,fechaFinal,estado FROM dieta WHERE idPaciente= ?";
             ps = con.prepareStatement(sql);
             ps.setInt(1, idPaciente);
-            ResultSet rs= ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                dieta= new Dieta();
-                dieta.setIdDieta(idPaciente);
+                dieta = new Dieta();
+                dieta.setIdDieta(rs.getInt("idDieta"));
+                dieta.setNombre(rs.getString("nombre"));
+                dieta.setPaciente(pacData.buscarPacientePorId(rs.getInt("idPaciente")));
+                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
+                dieta.setPesoFinal(rs.getDouble("pesoFinal"));
+                dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
+                dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                dieta.setEstado(rs.getBoolean("estado"));
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta");
         }
+        return dieta;
     }
 }
