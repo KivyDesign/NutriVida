@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2023 a las 01:30:47
+-- Tiempo de generación: 04-10-2023 a las 23:42:11
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -37,6 +37,17 @@ CREATE TABLE `comida` (
   `estado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `comida`
+--
+
+INSERT INTO `comida` (`idComida`, `nombre`, `detalle`, `cantCalorias`, `estado`) VALUES
+(1, 'Frutilla', 'Es una fruta', 33, 1),
+(2, 'Lenteja', 'Legumbres', 116, 1),
+(3, 'Banana', 'Fruta', 89, 1),
+(4, 'Atún', 'Pescado', 130, 0),
+(5, 'Zanahoria', 'Verdura', 37, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -63,7 +74,9 @@ CREATE TABLE `dieta` (
 CREATE TABLE `dietacomida` (
   `idDietaComida` int(11) NOT NULL,
   `idComida` int(11) NOT NULL,
-  `idDieta` int(11) NOT NULL
+  `idDieta` int(11) NOT NULL,
+  `horario` enum('DESAYUNO','ALMUERZO','MERIENDA','CENA','SNACK') NOT NULL,
+  `porcion` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -137,7 +150,7 @@ ALTER TABLE `paciente`
 -- AUTO_INCREMENT de la tabla `comida`
 --
 ALTER TABLE `comida`
-  MODIFY `idComida` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `dieta`
