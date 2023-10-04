@@ -5,7 +5,7 @@ import Controlador.PacienteData;
 import Modelo.Paciente;
 import java.sql.Connection;
 
-public class NutriVida {
+public class TestGerman {
 
     public static void main(String[] args) {
         // Realizo la coneccion a la DB
