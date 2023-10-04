@@ -1,21 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
-/**
- *
- * @author PC
- */
+import Controlador.Conexion;
+import java.sql.Connection;
+
 public class TestGuido {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // Realizo la coneccion a la DB
+        Connection con = Conexion.getConexion();
+
+        // Si la conexion fue exitosa lo informo como conectado con un (sout)
+        // para no tener ese molesto dialogo de conexion
+        if (con != null) {
+            System.out.println("NutriVida - Estado: Conectado");
+        } else {
+            System.out.println("Nutrivida - Estado: Error");
+        }
+        
+        
     }
     
 }
