@@ -6,33 +6,33 @@ public class Dieta {
     private int idDieta;
     private String nombre;
     private Paciente paciente;
-    private LocalDate fechaInicial;
-    private LocalDate fechaFinal;
     private double pesoInicial;
     private double pesoFinal;
+    private LocalDate fechaInicial;
+    private LocalDate fechaFinal;
     private boolean estado;
 
     public Dieta() {
     }
 
-    public Dieta(int idDieta, String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
+    public Dieta(int idDieta, String nombre, Paciente paciente, double pesoInicial, double pesoFinal, LocalDate fechaInicial, LocalDate fechaFinal, boolean estado) {
         this.idDieta = idDieta;
         this.nombre = nombre;
         this.paciente = paciente;
-        this.fechaInicial = fechaInicial;
-        this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
         this.pesoFinal = pesoFinal;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
         this.estado = estado;
     }
 
-    public Dieta(String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
+    public Dieta(String nombre, Paciente paciente, double pesoInicial, double pesoFinal, LocalDate fechaInicial, LocalDate fechaFinal, boolean estado) {
         this.nombre = nombre;
         this.paciente = paciente;
-        this.fechaInicial = fechaInicial;
-        this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
         this.pesoFinal = pesoFinal;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
         this.estado = estado;
     }
 
@@ -102,7 +102,7 @@ public class Dieta {
 
     @Override
     public String toString() {
-        return "Dieta{" + "idDieta=" + idDieta + ", nombre=" + nombre + ", paciente=" + paciente + ", fechaInicial=" + fechaInicial + ", fechaFinal=" + fechaFinal + ", pesoInicial=" + pesoInicial + ", pesoFinal=" + pesoFinal + ", estado=" + estado + '}';
+        return "Dieta{" + "idDieta=" + idDieta + ", nombre=" + nombre + ", paciente=" + paciente + ", pesoInicial=" + pesoInicial + ", pesoFinal=" + pesoFinal + ", fechaInicial=" + fechaInicial + ", fechaFinal=" + fechaFinal + ", estado=" + estado + '}';
     }
-        
+
 }
