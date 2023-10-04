@@ -70,7 +70,7 @@ public class DietaData {
             
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta");
         }
     }
     
