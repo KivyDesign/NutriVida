@@ -59,10 +59,34 @@ public class ComidaData {
             ps.setInt(3, comida.getCalorias());
             ps.setInt(4, comida.getIdComida());
             ps.executeUpdate();
-            
+
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Comida");
         }
+    }
+
+    public Comida buscarComidaPorId(int idComida) {
+        Comida comida = null;
+//        PreparedStatement ps= null;
+        try {
+            String sql = "SELECT idComida, nombre, detalle, cantCalorias, estado FROM comida WHERE idComida = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idComida);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                comida = new Comida();
+                comida.setIdComida(rs.getInt("idComida"));
+                comida.setNombre(rs.getString("nombre"));
+                comida.setDetalle(rs.getString("detalle"));
+                comida.setCalorias(rs.getInt("cantCalorias"));
+                comida.setEstado(rs.getBoolean("estado"));
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Comida");
+        }
+        return comida;
     }
 }

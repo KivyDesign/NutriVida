@@ -42,7 +42,8 @@ public class TestAriel {
 //        comData.modificarComida(comida);
 
         // Consulta de una comida
-        
+        Comida comid = comData.buscarComidaPorId(4);
+        System.out.println(comid.toString());
     }
     
 }
