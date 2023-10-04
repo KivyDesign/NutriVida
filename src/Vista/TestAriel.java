@@ -35,14 +35,14 @@ public class TestAriel {
 //        comData.guardarComida(com5);
 
         // Elimino una comida
-//        comData.eliminarComida(4);
+        comData.eliminarComida(4);
 
         // Modifico una comida
-        Comida comida = new Comida(1, "Frutilla", "Es una fruta", 33, false);
-        comData.modificarComida(comida);
+//        Comida comida = new Comida(1, "Frutilla", "Es una fruta", 33, false);
+//        comData.modificarComida(comida);
 
         // Consulta de una comida
-        Comida comid = comData.buscarComidaPorId(1);
+        Comida comid = comData.buscarComidaPorId(4);
         System.out.println(comid.toString());
     }
     
