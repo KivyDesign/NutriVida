@@ -25,7 +25,7 @@ public class TestGerman {
 
         //agrego un paciente nuevo
 //        Paciente paciente0 = new Paciente(11112222,"Pablo Gomez","Colon 2332","123-456",true);
-        Paciente paciente1 = new Paciente(11113333, "Pabla Gomes", "Union 562", "123-564", true);
+//        Paciente paciente1 = new Paciente(11113333, "Pabla Gomes", "Union 562", "123-564", true);
 //        Paciente paciente2 = new Paciente(11114444,"Paola Guzman","Pellegrini 456","423-456",true);
 //        Paciente paciente3 = new Paciente(11115555,"Paulo Salas","Campos 458","123-456",true);
 //        Paciente paciente4 = new Paciente(11116666,"Paula Diaz","Belgrano 123","456-456",true);
@@ -55,15 +55,22 @@ public class TestGerman {
 //        Paciente paciente =pacData.buscarPacientePorDni(22221111);
 //        System.out.println(paciente.toString());
 //probar guardarDieta
-//        Dieta dieta = new Dieta("Intensiva", pacData.buscarPacientePorId(2), 150.52, 98.00, LocalDate.of(2023, 8, 23), LocalDate.of(2023, 12, 23), true);
+//        Dieta dieta1 = new Dieta("Masiva", pacData.buscarPacientePorId(3), 150.52, 98.00, LocalDate.of(2023, 8, 23), LocalDate.of(2023, 12, 23), true);
+//        Dieta dieta2 = new Dieta("Liviana", pacData.buscarPacientePorId(4), 150.52, 98.00, LocalDate.of(2023, 8, 23), LocalDate.of(2023, 12, 23), true);
+//        Dieta dieta3 = new Dieta("Normal", pacData.buscarPacientePorId(5), 150.52, 98.00, LocalDate.of(2023, 8, 23), LocalDate.of(2023, 12, 23), true);
         DietaData dietaData = new DietaData();
-//    dietaData.guardarDieta(dieta);
+//    dietaData.guardarDieta(dieta1);
+//    dietaData.guardarDieta(dieta2);
+//    dietaData.guardarDieta(dieta3);
         //probar eliminar dieta
 //    dietaData.eliminarDietaPorId(5);
 //Probar modificarDieta 
-        Dieta dieta = new Dieta(5, "Masiva", pacData.buscarPacientePorId(3), 100.52, 75.50, LocalDate.of(2023, 5, 23), LocalDate.of(2023, 11, 23), true);
+//        Dieta dieta = new Dieta(5, "Masiva", pacData.buscarPacientePorId(3), 100.52, 75.50, LocalDate.of(2023, 5, 23), LocalDate.of(2023, 11, 23), true);
+//
+//        dietaData.modificarDieta(dieta);
 
-        dietaData.modificarDieta(dieta);
+// probar buscarDietaPorPaciente
+        System.out.println(dietaData.buscarDietaporIdPaciente(3));
 
     }
 

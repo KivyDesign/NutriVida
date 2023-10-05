@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2023 a las 23:42:11
+-- Tiempo de generación: 05-10-2023 a las 23:54:23
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -43,7 +43,7 @@ CREATE TABLE `comida` (
 
 INSERT INTO `comida` (`idComida`, `nombre`, `detalle`, `cantCalorias`, `estado`) VALUES
 (1, 'Frutilla', 'Es una fruta', 33, 1),
-(2, 'Lenteja', 'Legumbres', 116, 1),
+(2, 'Lenteja', 'legumbres', 116, 1),
 (3, 'Banana', 'Fruta', 89, 1),
 (4, 'Atún', 'Pescado', 130, 0),
 (5, 'Zanahoria', 'Verdura', 37, 1);
@@ -65,6 +65,16 @@ CREATE TABLE `dieta` (
   `estado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `dieta`
+--
+
+INSERT INTO `dieta` (`idDieta`, `nombre`, `idPaciente`, `pesoInicial`, `pesoFinal`, `fechaInicial`, `fechaFinal`, `estado`) VALUES
+(1, 'Intensiva', 2, 150.52, 98, '2023-08-23', '2023-12-23', 1),
+(2, 'Masiva', 3, 150.52, 98, '2023-08-23', '2023-12-23', 1),
+(3, 'Liviana', 4, 150.52, 98, '2023-08-23', '2023-12-23', 1),
+(4, 'Normal', 5, 150.52, 98, '2023-08-23', '2023-12-23', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -74,9 +84,7 @@ CREATE TABLE `dieta` (
 CREATE TABLE `dietacomida` (
   `idDietaComida` int(11) NOT NULL,
   `idComida` int(11) NOT NULL,
-  `idDieta` int(11) NOT NULL,
-  `horario` enum('DESAYUNO','ALMUERZO','MERIENDA','CENA','SNACK') NOT NULL,
-  `porcion` double NOT NULL
+  `idDieta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -156,7 +164,7 @@ ALTER TABLE `comida`
 -- AUTO_INCREMENT de la tabla `dieta`
 --
 ALTER TABLE `dieta`
-  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `dietacomida`
