@@ -45,14 +45,36 @@ public class DietaComidaData {
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla DietaComida");
-
         }
     }
     
     public void modificarDietaComida(DietaComida dietaComida) {
         try {
-            String sql = "UPDATE dietaComida SET idComida";
-        } catch (Exception e) {
+            String sql = "UPDATE dietacomida SET idComida = ?, idDieta = ?, horario = ?, porcion = ? WHERE idDietaComida = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, dietaComida.getComida().getIdComida());
+            ps.setInt(2, dietaComida.getDieta().getIdDieta());
+            ps.setObject(3, dietaComida.getHorario().name());
+            ps.setDouble(4, dietaComida.getPorcion());
+            ps.setInt(5, dietaComida.getIdDietaComida());
+            ps.executeUpdate();
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla DietaComida");
+        }
+    }
+    
+    public void eliminarDietaComida(int idDietaComida) {
+        try {
+            String sql = "DELETE * FROM dietacomida WHERE idDietaComida = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idDietaComida);
+            ps.executeUpdate();
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla DietaComida");
         }
     }
 }
