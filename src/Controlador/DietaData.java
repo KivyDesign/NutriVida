@@ -60,12 +60,13 @@ public class DietaData {
             String sql = "UPDATE dieta SET nombre = ?, idPaciente = ?, pesoInicial = ?, pesoFinal = ?, fechaInicial = ?, fechaFinal = ?, estado = ? WHERE idDieta = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, dieta.getNombre());
-            ps.setString(2, dieta.getPaciente().getIdPaciente() + "");
+            ps.setInt(2, dieta.getPaciente().getIdPaciente());
             ps.setDouble(3, dieta.getPesoInicial());
             ps.setDouble(4, dieta.getPesoFinal());
             ps.setDate(5, Date.valueOf(dieta.getFechaInicial()));
             ps.setDate(6, Date.valueOf(dieta.getFechaFinal()));
             ps.setBoolean(7, dieta.isEstado());
+            ps.setInt(8,dieta.getIdDieta());
             ps.executeUpdate();
 
             ps.close();
