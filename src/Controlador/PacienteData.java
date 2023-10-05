@@ -119,30 +119,5 @@ public class PacienteData {
         return paciente;
     }
     
-    public idPaciente buscarPacientePorIdPaciente(int idPaciente) {
-        Paciente paciente = null;
-        PreparedStatement ps = null;
-        try {
-            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono, estado FROM paciente WHERE idPaciente = ?";
-
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, idPaciente);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                paciente = new Paciente();
-                paciente.setIdPaciente(rs.getInt("idPaciente"));
-                paciente.setDni(rs.getInt("dni"));
-                paciente.setNombre(rs.getString("nombre"));
-                paciente.setDomicilio(rs.getString("domicilio"));
-                paciente.setTelefono(rs.getString("telefono"));
-                paciente.setEstado(rs.getBoolean("estado"));
-            }
-
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
-        }
-        idPaciente = paciente.getIdPaciente();
-        return idPaciente;
-    }
+    
 }
