@@ -48,4 +48,11 @@ public class DietaComidaData {
 
         }
     }
+    
+    public void modificarDietaComida(DietaComida dietaComida) {
+        try {
+            String sql = "UPDATE dietaComida SET idComida";
+        } catch (Exception e) {
+        }
+    }
 }
