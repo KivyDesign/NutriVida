@@ -160,7 +160,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jtfTelefono.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jtfTelefono.setForeground(new java.awt.Color(255, 255, 255));
 
-        jPanel3.setBackground(new java.awt.Color(13, 17, 23));
+        jPanel3.setBackground(new java.awt.Color(31, 75, 128));
 
         jbBuscar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/1-32x32.png"))); // NOI18N
@@ -271,7 +271,7 @@ public class PacientesForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -324,8 +324,8 @@ public class PacientesForm extends javax.swing.JFrame {
         // y mostrar el form del menu en su lugar
 //        this.dispose();
 
-        // Instancio el form de pacientes y lo hago visible mientras oculto el
-        // form con el menu
+        // Instancio el form de menu y lo hago visible mientras oculto el
+        // form con pacientes
         NutriVidaForm nutvidForm = new NutriVidaForm();
         nutvidForm.setVisible(true);
         this.setVisible(false);
