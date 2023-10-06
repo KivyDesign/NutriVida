@@ -68,7 +68,7 @@ public class DietaData {
             ps.setDate(5, Date.valueOf(dieta.getFechaInicial()));
             ps.setDate(6, Date.valueOf(dieta.getFechaFinal()));
             ps.setBoolean(7, dieta.isEstado());
-            ps.setInt(8,dieta.getIdDieta());
+            ps.setInt(8, dieta.getIdDieta());
             ps.executeUpdate();
 
             ps.close();
@@ -103,7 +103,8 @@ public class DietaData {
         }
         return dieta;
     }
-      public Dieta buscarDietaPorId(int idDieta) {
+
+    public Dieta buscarDietaPorId(int idDieta) {
         Dieta dieta = null;
         PreparedStatement ps = null;
         PacienteData pacData = new PacienteData();
@@ -129,13 +130,14 @@ public class DietaData {
         }
         return dieta;
     }
+
     public ArrayList<Dieta> listarDietas() {
         ArrayList<Dieta> dietas = new ArrayList<>();
 
         try {
             String sql = "SELECT idDieta FROM dieta WHERE estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ResultSet rs = ps.executeQuery();
 
             // Recorro el ResultSet y lo cargo en el Array alumnos
@@ -149,5 +151,5 @@ public class DietaData {
         }
         // Retorno el Array alumnos con los valores de la consulta
         return dietas;
-}
+    }
 }
