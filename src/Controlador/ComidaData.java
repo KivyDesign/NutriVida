@@ -5,8 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import org.mariadb.jdbc.Statement;
 
 public class ComidaData {
 
@@ -88,5 +89,28 @@ public class ComidaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Comida");
         }
         return comida;
+    }
+
+    public ArrayList<Comida> listarComidasCalorias(int calMin, int calMax) {
+        ArrayList<Comida> comidas = new ArrayList<>();
+
+        try {
+            String sql = "SELECT idComida FROM comida WHERE estado = 1 and cantCalorias>=? and cantCalorias<=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, calMin);
+            ps.setInt(2, calMax);
+            ResultSet rs = ps.executeQuery();
+
+            // Recorro el ResultSet y lo cargo en el Array alumnos
+            while (rs.next()) {
+
+                comidas.add(buscarComidaPorId(rs.getInt("idComida")));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "listarAlumnos = Error al acceder a la tabla Alumno: " + ex.getMessage());
+        }
+        // Retorno el Array alumnos con los valores de la consulta
+        return comidas;
     }
 }

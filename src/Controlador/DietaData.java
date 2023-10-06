@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.Comida;
 import Modelo.Dieta;
 import java.sql.Connection;
 import java.sql.Date;
@@ -7,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class DietaData {
@@ -101,4 +103,51 @@ public class DietaData {
         }
         return dieta;
     }
+      public Dieta buscarDietaPorId(int idDieta) {
+        Dieta dieta = null;
+        PreparedStatement ps = null;
+        PacienteData pacData = new PacienteData();
+        try {
+            String sql = "SELECT idDieta, nombre, idPaciente, pesoInicial, pesoFinal, fechaInicial, fechaFinal, estado FROM dieta WHERE idPaciente = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idDieta);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                dieta = new Dieta();
+                dieta.setIdDieta(rs.getInt("idDieta"));
+                dieta.setNombre(rs.getString("nombre"));
+                dieta.setPaciente(pacData.buscarPacientePorId(rs.getInt("idPaciente")));
+                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
+                dieta.setPesoFinal(rs.getDouble("pesoFinal"));
+                dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
+                dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                dieta.setEstado(rs.getBoolean("estado"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta");
+        }
+        return dieta;
+    }
+    public ArrayList<Dieta> listarDietas() {
+        ArrayList<Dieta> dietas = new ArrayList<>();
+
+        try {
+            String sql = "SELECT idDieta FROM dieta WHERE estado = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+
+            // Recorro el ResultSet y lo cargo en el Array alumnos
+            while (rs.next()) {
+
+                dietas.add(buscarDietaPorId(rs.getInt("idDieta")));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "listarAlumnos = Error al acceder a la tabla Alumno: " + ex.getMessage());
+        }
+        // Retorno el Array alumnos con los valores de la consulta
+        return dietas;
+}
 }
