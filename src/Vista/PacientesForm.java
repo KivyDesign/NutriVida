@@ -136,6 +136,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jLabel9.setText("Estado:");
 
         jcbEstado.setBackground(new java.awt.Color(21, 65, 118));
+        jcbEstado.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jcbEstado.setForeground(new java.awt.Color(255, 255, 255));
         jcbEstado.setText("Activo");
 
@@ -259,10 +260,10 @@ public class PacientesForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jtfDomicilio, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfID)
                     .addComponent(jtfDNI)
                     .addComponent(jtfTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                    .addComponent(jcbEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jtfID, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbEstado, javax.swing.GroupLayout.Alignment.LEADING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
