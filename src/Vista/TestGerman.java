@@ -1,8 +1,10 @@
 package Vista;
 
+import Controlador.ComidaData;
 import Controlador.Conexion;
 import Controlador.DietaData;
 import Controlador.PacienteData;
+import Modelo.Comida;
 import Modelo.Dieta;
 import Modelo.Paciente;
 import java.sql.Connection;
@@ -70,8 +72,12 @@ public class TestGerman {
 //        dietaData.modificarDieta(dieta);
 
 // probar buscarDietaPorPaciente
-        System.out.println(dietaData.buscarDietaporIdPaciente(3));
-
-    }
-
+//        System.out.println(dietaData.buscarDietaporIdPaciente(3));
+        //probar comidasCalorias
+        ComidaData comData = new ComidaData();
+        for (Comida comida : comData.listarComidasCalorias(89, 130)) {
+            System.out.println("comida calorias requeridas " + comida.getNombre());
+        }
+        }
 }
+    
