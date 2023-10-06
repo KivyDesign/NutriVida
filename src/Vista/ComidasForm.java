@@ -214,6 +214,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jlEstado.setForeground(new java.awt.Color(255, 255, 255));
         jlEstado.setText("Estado:");
 
+        jtfID.setEditable(false);
         jtfID.setBackground(new java.awt.Color(21, 65, 118));
         jtfID.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jtfID.setForeground(new java.awt.Color(255, 255, 255));
