@@ -3,7 +3,7 @@ package Vista;
 import Controlador.Conexion;
 import java.sql.Connection;
 
-public class TestGuido {
+public class NutriVidaTest {
 
     public static void main(String[] args) {
         // Realizo la coneccion a la DB
@@ -17,6 +17,9 @@ public class TestGuido {
             System.out.println("Nutrivida - Estado: Error");
         }
         
+        /**
+         * Aquí van todas las pruebas realizadas por el Grupo 22
+         */
         
     }
     
