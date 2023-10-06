@@ -40,12 +40,12 @@ public class PacientesForm extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jtID = new javax.swing.JTextField();
-        jtNombre = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jcbEstado = new javax.swing.JCheckBox();
+        jtfID = new javax.swing.JTextField();
+        jtfNombre = new javax.swing.JTextField();
+        jtfDNI = new javax.swing.JTextField();
+        jtfDomicilio = new javax.swing.JTextField();
+        jtfTelefono = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jbBuscar = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
@@ -53,7 +53,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        jlMensajeSB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,32 +114,29 @@ public class PacientesForm extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Estado:");
 
-        jCheckBox1.setBackground(new java.awt.Color(31, 75, 128));
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Activo");
+        jcbEstado.setBackground(new java.awt.Color(31, 75, 128));
+        jcbEstado.setForeground(new java.awt.Color(255, 255, 255));
+        jcbEstado.setText("Activo");
 
-        jtID.setBackground(new java.awt.Color(31, 75, 128));
-        jtID.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jtID.setForeground(new java.awt.Color(255, 255, 255));
+        jtfID.setBackground(new java.awt.Color(31, 75, 128));
+        jtfID.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jtfID.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtNombre.setBackground(new java.awt.Color(31, 75, 128));
-        jtNombre.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jtNombre.setForeground(new java.awt.Color(255, 255, 255));
+        jtfNombre.setBackground(new java.awt.Color(31, 75, 128));
+        jtfNombre.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jtfNombre.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTextField3.setBackground(new java.awt.Color(31, 75, 128));
-        jTextField3.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setText("jTextField3");
+        jtfDNI.setBackground(new java.awt.Color(31, 75, 128));
+        jtfDNI.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jtfDNI.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTextField4.setBackground(new java.awt.Color(31, 75, 128));
-        jTextField4.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField4.setText("jTextField4");
+        jtfDomicilio.setBackground(new java.awt.Color(31, 75, 128));
+        jtfDomicilio.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jtfDomicilio.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTextField5.setBackground(new java.awt.Color(31, 75, 128));
-        jTextField5.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField5.setText("jTextField5");
+        jtfTelefono.setBackground(new java.awt.Color(31, 75, 128));
+        jtfTelefono.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jtfTelefono.setForeground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(13, 17, 23));
 
@@ -185,7 +182,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(25, 25, 25)
                 .addComponent(jbBuscar)
                 .addGap(18, 18, 18)
                 .addComponent(jbNuevo)
@@ -195,13 +192,13 @@ public class PacientesForm extends javax.swing.JFrame {
                 .addComponent(jbEliminar)
                 .addGap(18, 18, 18)
                 .addComponent(jbSalir)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(31, 75, 128));
 
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Paciente(int idPaciente, int dni, String nombre, String domicilio, String telefono, boolean estado)");
+        jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
+        jlMensajeSB.setText("Paciente(int idPaciente, int dni, String nombre, String domicilio, String telefono, boolean estado)");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -209,14 +206,14 @@ public class PacientesForm extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addComponent(jlMensajeSB, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel10)
+                .addComponent(jlMensajeSB)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -237,12 +234,12 @@ public class PacientesForm extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtID)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jtfDomicilio, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfID)
+                    .addComponent(jtfDNI)
+                    .addComponent(jtfTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(jcbEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
@@ -256,29 +253,32 @@ public class PacientesForm extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jLabel9)))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                            .addComponent(jcbEstado)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -344,9 +344,7 @@ public class PacientesForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -358,15 +356,17 @@ public class PacientesForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JTextField jtID;
-    private javax.swing.JTextField jtNombre;
+    private javax.swing.JCheckBox jcbEstado;
+    private javax.swing.JLabel jlMensajeSB;
+    private javax.swing.JTextField jtfDNI;
+    private javax.swing.JTextField jtfDomicilio;
+    private javax.swing.JTextField jtfID;
+    private javax.swing.JTextField jtfNombre;
+    private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
 }
