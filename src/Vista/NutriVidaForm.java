@@ -104,12 +104,12 @@ public class NutriVidaForm extends javax.swing.JFrame {
 
         jLabel8.setBackground(new java.awt.Color(80, 80, 80));
         jLabel8.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(80, 80, 80));
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Texto descriptivo para ivitar a");
 
         jLabel9.setBackground(new java.awt.Color(80, 80, 80));
         jLabel9.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(80, 80, 80));
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("Administrar Pacientes.");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
