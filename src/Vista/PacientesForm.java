@@ -5,20 +5,40 @@
  */
 package Vista;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
 /**
  *
  * @author javier
  */
 public class PacientesForm extends javax.swing.JFrame {
 
+    // Creación de los bordes que utilizaremos en los TextFileds
+    Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
+    Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
+    Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
+
     /**
      * Creates new form PacientesForm
      */
     public PacientesForm() {
         initComponents();
-        
+
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
+
+        // Set borders todos subrayados en amarillo a excepción del ID que es
+        // blanco y de solo 1 pixel de grosor para indicar que no es editable
+        jtfID.setBorder(text_border_disable);
+        jtfNombre.setBorder(text_border);
+        jtfDNI.setBorder(text_border);
+        jtfDomicilio.setBorder(text_border);
+        jtfTelefono.setBorder(text_border);
+        
+        // Posiciono el foco en el nombre al iniciar el form
+        jtfNombre.requestFocus();
     }
 
     /**
@@ -56,6 +76,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jlMensajeSB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestión de Pacientes");
 
         jPanel1.setBackground(new java.awt.Color(21, 65, 118));
 
@@ -114,27 +135,28 @@ public class PacientesForm extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Estado:");
 
-        jcbEstado.setBackground(new java.awt.Color(31, 75, 128));
+        jcbEstado.setBackground(new java.awt.Color(21, 65, 118));
         jcbEstado.setForeground(new java.awt.Color(255, 255, 255));
         jcbEstado.setText("Activo");
 
-        jtfID.setBackground(new java.awt.Color(31, 75, 128));
+        jtfID.setEditable(false);
+        jtfID.setBackground(new java.awt.Color(21, 65, 118));
         jtfID.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jtfID.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtfNombre.setBackground(new java.awt.Color(31, 75, 128));
+        jtfNombre.setBackground(new java.awt.Color(21, 65, 118));
         jtfNombre.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jtfNombre.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtfDNI.setBackground(new java.awt.Color(31, 75, 128));
+        jtfDNI.setBackground(new java.awt.Color(21, 65, 118));
         jtfDNI.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jtfDNI.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtfDomicilio.setBackground(new java.awt.Color(31, 75, 128));
+        jtfDomicilio.setBackground(new java.awt.Color(21, 65, 118));
         jtfDomicilio.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jtfDomicilio.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtfTelefono.setBackground(new java.awt.Color(31, 75, 128));
+        jtfTelefono.setBackground(new java.awt.Color(21, 65, 118));
         jtfTelefono.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jtfTelefono.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -300,7 +322,7 @@ public class PacientesForm extends javax.swing.JFrame {
         // Por ahora solo cierro este form. Ampliar para ocultar el form actual
         // y mostrar el form del menu en su lugar
 //        this.dispose();
-        
+
         // Instancio el form de pacientes y lo hago visible mientras oculto el
         // form con el menu
         NutriVidaForm nutvidForm = new NutriVidaForm();
@@ -369,4 +391,26 @@ public class PacientesForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
+
+    public void MensajeSB(int color, String mensaje) {
+
+        // Los valores pueden variar de 0 a 255
+        if (color == 1) {
+            // Si el color es igual a 1 entonces es = a verde
+            // En este caso Red = 0, Green = 153, Blue = 102.
+            jlMensajeSB.setForeground(new Color(255, 255, 255));
+        } else if (color == 2) {
+            // Si el color es igual a 2 entonces es = a rojo
+            // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
+            jlMensajeSB.setForeground(new Color(255, 50, 0));
+        } else if (color == 3) {
+            // Usado al iniciar el Form para que no se vea el texto dummy 31, 75, 128
+            jlMensajeSB.setForeground(new Color(31, 75, 128));
+        }
+        // Aquí cargo el texto del mensaje en el Label
+        // Si el texto del mensaje esta vacio entonces no muestro texto en
+        // el Label pero limpio el texto anterior que pueda haber quedado
+        jlMensajeSB.setText(mensaje);
+    }
+
 }
