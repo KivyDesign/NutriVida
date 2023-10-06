@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2023 a las 01:36:00
+-- Tiempo de generación: 06-10-2023 a las 23:40:17
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -92,6 +92,19 @@ CREATE TABLE `dietacomida` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `historial`
+--
+
+CREATE TABLE `historial` (
+  `IdHistorial` int(11) NOT NULL,
+  `idPaciente` int(11) NOT NULL,
+  `peso` double NOT NULL,
+  `fechaConsulta` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `paciente`
 --
 
@@ -146,6 +159,13 @@ ALTER TABLE `dietacomida`
   ADD KEY `idComida` (`idComida`);
 
 --
+-- Indices de la tabla `historial`
+--
+ALTER TABLE `historial`
+  ADD PRIMARY KEY (`IdHistorial`),
+  ADD KEY `idPaciente` (`idPaciente`);
+
+--
 -- Indices de la tabla `paciente`
 --
 ALTER TABLE `paciente`
@@ -175,6 +195,12 @@ ALTER TABLE `dietacomida`
   MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `historial`
+--
+ALTER TABLE `historial`
+  MODIFY `IdHistorial` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
@@ -196,6 +222,12 @@ ALTER TABLE `dieta`
 ALTER TABLE `dietacomida`
   ADD CONSTRAINT `dietacomida_ibfk_1` FOREIGN KEY (`idDieta`) REFERENCES `dieta` (`idDieta`),
   ADD CONSTRAINT `dietacomida_ibfk_2` FOREIGN KEY (`idComida`) REFERENCES `comida` (`idComida`);
+
+--
+-- Filtros para la tabla `historial`
+--
+ALTER TABLE `historial`
+  ADD CONSTRAINT `historial_ibfk_1` FOREIGN KEY (`idPaciente`) REFERENCES `paciente` (`idPaciente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
