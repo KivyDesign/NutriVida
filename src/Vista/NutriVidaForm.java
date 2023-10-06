@@ -16,7 +16,7 @@ public class NutriVidaForm extends javax.swing.JFrame {
      */
     public NutriVidaForm() {
         initComponents();
-        
+
         // Display the menu form in the center of the screen
         this.setLocationRelativeTo(null);
     }
@@ -42,7 +42,7 @@ public class NutriVidaForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jbPacientes = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -96,7 +96,12 @@ public class NutriVidaForm extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(13, 17, 23));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 52, 59)));
 
-        jButton1.setText("Pacientes");
+        jbPacientes.setText("Pacientes");
+        jbPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPacientesActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -128,7 +133,7 @@ public class NutriVidaForm extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(jbPacientes)
                         .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
@@ -136,7 +141,7 @@ public class NutriVidaForm extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jbPacientes)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
@@ -226,6 +231,14 @@ public class NutriVidaForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPacientesActionPerformed
+        // Instancio el form de pacientes y lo hago visible mientras oculto el
+        // form con el menu
+        PacientesForm paciForm = new PacientesForm();
+        paciForm.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jbPacientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -262,7 +275,6 @@ public class NutriVidaForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -278,5 +290,6 @@ public class NutriVidaForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton jbPacientes;
     // End of variables declaration//GEN-END:variables
 }
