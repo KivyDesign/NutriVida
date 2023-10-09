@@ -41,7 +41,6 @@ public class DietasForm extends javax.swing.JFrame {
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
 
-       
         //busco dieta cuyo id esta asociado al id paciente de PacientesForm
         Dieta dieta = dietadata.buscarDietaporIdPaciente(numId.nroId);
         //si no es nula cargo formularioPacientesForm numId = new PacientesForm();
@@ -460,7 +459,7 @@ public class DietasForm extends javax.swing.JFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
             MensajeSB(2, "Falta completar Fechas");
-        }else if(jDateChooser1.getDate().compareTo(jDateChooser2.getDate())<=0){
+        } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
             MensajeSB(2, "la fecha inicial debe ser menor que la final");
         } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
@@ -506,8 +505,8 @@ public class DietasForm extends javax.swing.JFrame {
         jtfNombre.setText("");
         jtfPesoInicial.setText("");
         jtfPesoFinal.setText("");
-        jDateChooser1=null;
-        jDateChooser2=null;
+        jDateChooser1 = null;
+        jDateChooser2 = null;
         jtfID.setBorder(text_border_disable);
         jtfNombre.setBorder(text_border);
 //            jtfPaciente.setBorder(text_border);
@@ -517,10 +516,10 @@ public class DietasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeguimientoActionPerformed
-  HistorialView historialView = new HistorialView();
+        HistorialView historialView = new HistorialView();
         historialView.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_jbSeguimientoActionPerformed
 
     /**
