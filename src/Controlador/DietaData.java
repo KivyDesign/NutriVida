@@ -82,7 +82,7 @@ public class DietaData {
         PreparedStatement ps = null;
         PacienteData pacData = new PacienteData();
         try {
-            String sql = "SELECT idDieta, nombre, idPaciente, pesoInicial, pesoFinal, fechaInicial, fechaFinal, estado FROM dieta WHERE idPaciente = ?";
+            String sql = "SELECT idDieta, nombre, idPaciente, pesoInicial, pesoFinal, fechaInicial, fechaFinal, estado FROM dieta WHERE estado=1 AND idPaciente = ?";
             ps = con.prepareStatement(sql);
             ps.setInt(1, idPaciente);
             ResultSet rs = ps.executeQuery();
