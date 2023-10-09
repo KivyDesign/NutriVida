@@ -160,6 +160,19 @@ public class CaloriasData {
         return calorias;
     }
 
+    /*
+     Estructura de la tabla calorias
+     int idCalorias
+     int idGrupoAlimenticio
+     String nombre
+     int calorias
+     int proteinas
+     int grasa
+     int carbohidratos
+     int fibra
+     int colesterol
+     Boolean estado
+     */
     public ArrayList<Calorias> listarCalorias() {
         ArrayList<Calorias> calorias = new ArrayList<>();
 
@@ -176,8 +189,64 @@ public class CaloriasData {
                 caloria.setIdCalorias(rs.getInt("idCalorias"));
                 caloria.setIdGrupoAlimenticio(rs.getInt("idGrupoAlimenticio"));
                 caloria.setNombre(rs.getString("nombre"));
-                
+                caloria.setCalorias(rs.getInt("calorias"));
+                caloria.setProteinas(rs.getInt("proteinas"));
+                caloria.setGrasa(rs.getInt("grasa"));
+                caloria.setCarbohidratos(rs.getInt("carbohidratos"));
+                caloria.setFibra(rs.getInt("fibra"));
+                caloria.setColesterol(rs.getInt("colesterol"));
+                caloria.setEstado(rs.getBoolean("estado"));
+
+                calorias.add(caloria);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "listarCalorias = Error al acceder a la tabla Calorias: " + ex.getMessage());
+        }
+        // Retorno el Array calorias con los valores de la consulta
+        return calorias;
+    }
+    
+    /*
+     Estructura de la tabla calorias
+     int idCalorias
+     int idGrupoAlimenticio
+     String nombre
+     int calorias
+     int proteinas
+     int grasa
+     int carbohidratos
+     int fibra
+     int colesterol
+     Boolean estado
+     */
+    public ArrayList<Calorias> listarCaloriasPorGrupoalimenticio(int idGrupoAlimenticio) {
+        ArrayList<Calorias> calorias = new ArrayList<>();
+
+        try {
+            // La consulta funciona en MySQL
+            String sql = "SELECT * FROM calorias WHERE idGrupoAlimenticio = ? AND estado = 1 ORDER BY nombre";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, idGrupoAlimenticio);
+            
+            ResultSet rs = ps.executeQuery();
+
+            // Recorro el ResultSet y lo cargo en el Array calorias
+            while (rs.next()) {
+                Calorias caloria = new Calorias();
+
                 caloria.setIdCalorias(rs.getInt("idCalorias"));
+                caloria.setIdGrupoAlimenticio(rs.getInt("idGrupoAlimenticio"));
+                caloria.setNombre(rs.getString("nombre"));
+                caloria.setCalorias(rs.getInt("calorias"));
+                caloria.setProteinas(rs.getInt("proteinas"));
+                caloria.setGrasa(rs.getInt("grasa"));
+                caloria.setCarbohidratos(rs.getInt("carbohidratos"));
+                caloria.setFibra(rs.getInt("fibra"));
+                caloria.setColesterol(rs.getInt("colesterol"));
+                caloria.setEstado(rs.getBoolean("estado"));
 
                 calorias.add(caloria);
             }
