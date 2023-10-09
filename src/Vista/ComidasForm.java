@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Controlador.ComidaData;
+import Modelo.Comida;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
@@ -15,17 +17,19 @@ import javax.swing.border.Border;
  */
 public class ComidasForm extends javax.swing.JFrame {
 
+    private ComidaData comData;
     // Creación de los bordes que utilizaremos en los TextFileds
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
-    
+
     /**
      * Creates new form ComidasForm
      */
     public ComidasForm() {
         initComponents();
-        
+        comData = new ComidaData();
+
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
 
@@ -35,9 +39,10 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfNombre.setBorder(text_border);
         jtfDetalle.setBorder(text_border);
         jtfCalorias.setBorder(text_border);
-        
+
         // Posiciono el foco en el nombre al iniciar el form
         jtfNombre.requestFocus();
+
     }
 
     /**
@@ -58,7 +63,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jbSalir = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jlID = new javax.swing.JLabel();
@@ -127,7 +132,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jlMensajeSB)
                 .addGap(15, 15, 15))
         );
@@ -147,9 +152,14 @@ public class ComidasForm extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/1-32x32.png"))); // NOI18N
         jButton1.setText(" Buscar");
 
-        jButton2.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/2-32x32.png"))); // NOI18N
-        jButton2.setText(" Nuevo");
+        jbNuevo.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/2-32x32.png"))); // NOI18N
+        jbNuevo.setText(" Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/3-32x32.png"))); // NOI18N
@@ -168,7 +178,7 @@ public class ComidasForm extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(62, Short.MAX_VALUE))
@@ -179,7 +189,7 @@ public class ComidasForm extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jbNuevo)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
@@ -313,6 +323,24 @@ public class ComidasForm extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+            jtfNombre.requestFocus();
+            jtfNombre.selectAll();
+        } else if (PruebaDeCaracteres(jtfDetalle.getText()) == false) {
+            jtfDetalle.requestFocus();
+            jtfDetalle.selectAll();
+        } else {
+            try{
+            Comida comida = new Comida(jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jtfCalorias.getText()), true);
+            comData.guardarComida(comida);
+            } catch (NumberFormatException e) {
+                MensajeSB(2, "El campo Calorías debe llenarse con un número");
+                jtfCalorias.requestFocus();
+                jtfCalorias.selectAll();
+        }
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -350,7 +378,6 @@ public class ComidasForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -359,6 +386,7 @@ public class ComidasForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private javax.swing.JCheckBox jcbEstado;
     private javax.swing.JLabel jlCalorias;
@@ -373,7 +401,7 @@ public class ComidasForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNombre;
     // End of variables declaration//GEN-END:variables
 
-public void MensajeSB(int color, String mensaje) {
+    public void MensajeSB(int color, String mensaje) {
 
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
@@ -392,5 +420,23 @@ public void MensajeSB(int color, String mensaje) {
         // Si el texto del mensaje esta vacio entonces no muestro texto en
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
+    }
+
+    public boolean PruebaDeCaracteres(String texto) {
+        // Busco si los caracteres ingresados son letras
+        int b = 0;
+        int i = 0;
+        for (i = 0; i < texto.length(); i++) {
+            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') && texto.charAt(i) != ' ') {
+                b++;
+            }
+        }
+        if (b > 0 || texto.isEmpty()) {
+            MensajeSB(2, "Los campos Nombre y Detalle deben completarse con letras");
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }
