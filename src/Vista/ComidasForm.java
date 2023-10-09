@@ -6,8 +6,12 @@
 package Vista;
 
 import Controlador.ComidaData;
+import Controlador.Conexion;
 import Modelo.Comida;
 import java.awt.Color;
+import java.sql.Connection;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
@@ -29,6 +33,20 @@ public class ComidasForm extends javax.swing.JFrame {
     public ComidasForm() {
         initComponents();
         comData = new ComidaData();
+
+        // =====================================================================
+        // Realizo la coneccion a la DB
+        Connection con = Conexion.getConexion();
+
+        // Si la conexion fue exitosa lo informo como conectado con un (sout)
+        // para no tener ese molesto dialogo de conexion
+        if (con != null) {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Conectado");
+            jpConexion.setBackground(new Color(0, 153, 102));
+        } else {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Error");
+            jpConexion.setBackground(new Color(255, 50, 0));
+        }
 
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
@@ -58,14 +76,15 @@ public class ComidasForm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jpConexion = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jlMensajeSB = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jbSalir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
         jlID = new javax.swing.JLabel();
         jlNombre = new javax.swing.JLabel();
         jcbEstado = new javax.swing.JCheckBox();
@@ -92,12 +111,28 @@ public class ComidasForm extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("Bienvenido Nuevamente");
 
+        jpConexion.setBackground(new java.awt.Color(21, 65, 118));
+        jpConexion.setPreferredSize(new java.awt.Dimension(16, 100));
+
+        javax.swing.GroupLayout jpConexionLayout = new javax.swing.GroupLayout(jpConexion);
+        jpConexion.setLayout(jpConexionLayout);
+        jpConexionLayout.setHorizontalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        jpConexionLayout.setVerticalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 85, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
+                .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
@@ -105,11 +140,16 @@ public class ComidasForm extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -148,9 +188,14 @@ public class ComidasForm extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/1-32x32.png"))); // NOI18N
-        jButton1.setText(" Buscar");
+        jbBuscar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/1-32x32.png"))); // NOI18N
+        jbBuscar.setText(" Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbNuevo.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/2-32x32.png"))); // NOI18N
@@ -161,13 +206,23 @@ public class ComidasForm extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/3-32x32.png"))); // NOI18N
-        jButton3.setText(" Guardar");
+        jbGuardar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/3-32x32.png"))); // NOI18N
+        jbGuardar.setText(" Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/4-32x32.png"))); // NOI18N
-        jButton4.setText(" Eliminar");
+        jbEliminar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/4-32x32.png"))); // NOI18N
+        jbEliminar.setText(" Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -176,24 +231,24 @@ public class ComidasForm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jButton1)
+                .addComponent(jbBuscar)
                 .addGap(18, 18, 18)
                 .addComponent(jbNuevo)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(jbGuardar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(jbEliminar)
                 .addGap(18, 18, 18)
                 .addComponent(jbSalir)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -262,7 +317,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     .addComponent(jtfNombre)
                     .addComponent(jtfDetalle)
                     .addComponent(jtfCalorias, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
         );
@@ -312,10 +367,6 @@ public class ComidasForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        // Por ahora solo cierro este form. Ampliar para ocultar el form actual
-        // y mostrar el form del menu en su lugar
-//        this.dispose();
-
         // Instancio el form de menu y lo hago visible mientras oculto el
         // form con comidas
         NutriVidaForm nutvidForm = new NutriVidaForm();
@@ -325,22 +376,79 @@ public class ComidasForm extends javax.swing.JFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+            jtfNombre.setBorder(text_border_rojo);
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
         } else if (PruebaDeCaracteres(jtfDetalle.getText()) == false) {
+            jtfDetalle.setBorder(text_border_rojo);
             jtfDetalle.requestFocus();
             jtfDetalle.selectAll();
         } else {
             try {
-                Comida comida = new Comida(jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jtfCalorias.getText()), true);
+                Comida comida = new Comida(jtfNombre.getText(),
+                        jtfDetalle.getText(),
+                        Integer.parseInt(jtfCalorias.getText()),
+                        true);
                 comData.guardarComida(comida);
             } catch (NumberFormatException e) {
                 MensajeSB(2, "El campo Calorías debe llenarse con un número");
+                jtfCalorias.setBorder(text_border_rojo);
                 jtfCalorias.requestFocus();
                 jtfCalorias.selectAll();
             }
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // buscarComidaPorNombre
+        try {
+            // Busco comida por nombre
+            Comida comida = comData.buscarComidaPorNombre(jtfNombre.getText());
+            // Busco si comida no esta vacio
+            if (comida != null) {
+                jtfID.setText(comida.getIdComida() + "");
+                jtfNombre.setText(comida.getNombre());
+                jtfDetalle.setText(comida.getDetalle());
+                jtfCalorias.setText(comida.getCalorias() + "");
+                jcbEstado.setEnabled(comida.isEstado());
+                
+                if (comida.isEstado() == true) {
+                    jcbEstado.setSelected(true);
+                    jbGuardar.setEnabled(true);
+                    jbEliminar.setEnabled(true);
+                    jbNuevo.setEnabled(false);
+                    MensajeSB(1, "Comida encontrada");
+                } else {
+                    MensajeSB(2, "El nombre no es de una Comida activa");
+                }
+            } else {
+                MensajeSB(2, "El nombre no es de una Comida activa");
+                jtfNombre.requestFocus();
+                jtfNombre.selectAll();
+            }
+        } catch (NumberFormatException e) {
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        try {
+            Comida com = comData.buscarComidaPorNombre(jtfNombre.getText());
+            if (com != null) {
+                comData.eliminarComida(com.getIdComida());
+                jcbEstado.setSelected(false);
+                MensajeSB(1, "Comida eliminada con exito! Busque por Nombre o cargue una nueva Comida");
+                LimpiarCampos();
+                jbNuevo.setEnabled(true);
+            } else {
+                MensajeSB(2, "La Comida no Existe");
+            }
+        } catch (NumberFormatException e) {
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,15 +486,15 @@ public class ComidasForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private javax.swing.JCheckBox jcbEstado;
@@ -396,6 +504,7 @@ public class ComidasForm extends javax.swing.JFrame {
     private javax.swing.JLabel jlID;
     private javax.swing.JLabel jlMensajeSB;
     private javax.swing.JLabel jlNombre;
+    private javax.swing.JPanel jpConexion;
     private javax.swing.JTextField jtfCalorias;
     private javax.swing.JTextField jtfDetalle;
     private javax.swing.JTextField jtfID;
@@ -439,5 +548,15 @@ public class ComidasForm extends javax.swing.JFrame {
             return true;
         }
 
+    }
+    
+    public void LimpiarCampos() {
+        jtfID.setText("");
+        jtfNombre.setText("");
+        jtfDetalle.setText("");
+        jtfCalorias.setText("");
+        jcbEstado.setSelected(false);
+        jbGuardar.setEnabled(false);
+        jbEliminar.setEnabled(false);
     }
 }
