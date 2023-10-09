@@ -331,13 +331,14 @@ public class ComidasForm extends javax.swing.JFrame {
             jtfDetalle.requestFocus();
             jtfDetalle.selectAll();
         } else {
-            try{
-            Comida comida = new Comida(jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jtfCalorias.getText()), true);
-            comData.guardarComida(comida);
+            try {
+                Comida comida = new Comida(jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jtfCalorias.getText()), true);
+                comData.guardarComida(comida);
             } catch (NumberFormatException e) {
                 MensajeSB(2, "El campo Calorías debe llenarse con un número");
                 jtfCalorias.requestFocus();
                 jtfCalorias.selectAll();
+            }
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 

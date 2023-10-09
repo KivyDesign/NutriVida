@@ -1,0 +1,609 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Vista;
+
+import Controlador.CaloriasData;
+import Controlador.Conexion;
+import Modelo.Calorias;
+import java.awt.Color;
+import java.sql.Connection;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author javier
+ */
+public class CaloriasForm extends javax.swing.JFrame {
+
+    // Declaro los atributos para acceder a los metodos que necesito
+    // Para caloria
+    private CaloriasData calData;
+
+    // Para el modelo de la tabla
+    private DefaultTableModel modelo;
+    
+    private ArrayList<Calorias> listarCalorias;
+    
+    private int seleccionFilaEnLaTabla;
+    
+    private int idGrupoAlimenticio = 1;
+
+    /**
+     * Creates new form CaloriasForm
+     */
+    public CaloriasForm() {
+        initComponents();
+
+        // Aqui los conecto a los metodos
+        modelo = (DefaultTableModel) jtCalorias.getModel();
+        calData = new CaloriasData();
+        listarCalorias = calData.listarCalorias();
+
+        // =====================================================================
+        // Realizo la coneccion a la DB
+        Connection con = Conexion.getConexion();
+
+        // Si la conexion fue exitosa lo informo como conectado con un (sout)
+        // para no tener ese molesto dialogo de conexion
+        if (con != null) {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Conectado");
+            jpConexion.setBackground(new Color(0, 153, 102));
+        } else {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Error");
+            jpConexion.setBackground(new Color(255, 50, 0));
+        }
+
+        // Centro la ventana en la pantalla
+        this.setLocationRelativeTo(this);
+
+        // =====================================================================
+        // Prueba de concepto StatusBar ----------------------------------------
+        mensajeSB(3, "Mensaje inicial");
+        // ---------------------------------------------------------------------
+
+        // Cargar calorias en el ComboBox
+        cargarCaloriasEnComboBox();
+
+        // Armo la cabecera de la tabla
+        armarCabeceraDeLaTabla();
+
+        // Cargar calorias en la tabla
+        idGrupoAlimenticio = 1;
+        cargarTabla(idGrupoAlimenticio);
+    }
+    
+    public void cargarCaloriasEnComboBox() {
+        // Remuevo todos los items del comboBox
+        jcbCargarGrupoAlimenticio.removeAllItems();
+
+        // Creo la lista de Grupo Alimenticio y voy agregando cada item en el ComboBox
+        jcbCargarGrupoAlimenticio.addItem(1 + " - " + "Aceites y grasas");
+        jcbCargarGrupoAlimenticio.addItem(2 + " - " + "Azúcares y dulces");
+        jcbCargarGrupoAlimenticio.addItem(3 + " - " + "Bebidas");
+        jcbCargarGrupoAlimenticio.addItem(4 + " - " + "Carnes, aves y embutidos");
+        jcbCargarGrupoAlimenticio.addItem(5 + " - " + "Cereales");
+        jcbCargarGrupoAlimenticio.addItem(6 + " - " + "Frutas");
+        jcbCargarGrupoAlimenticio.addItem(7 + " - " + "Frutos secos");
+        jcbCargarGrupoAlimenticio.addItem(8 + " - " + "Huevos");
+        jcbCargarGrupoAlimenticio.addItem(9 + " - " + "Lácteos y derivados");
+        jcbCargarGrupoAlimenticio.addItem(10 + " - " + "Legumbres");
+        jcbCargarGrupoAlimenticio.addItem(11 + " - " + "Pastelería");
+        jcbCargarGrupoAlimenticio.addItem(12 + " - " + "Pescados, mariscos y crustáceos");
+        jcbCargarGrupoAlimenticio.addItem(13 + " - " + "Salsas y condimentos");
+        jcbCargarGrupoAlimenticio.addItem(14 + " - " + "Verduras y hortalizas");
+    }
+    
+    public void armarCabeceraDeLaTabla() {
+        // =====================================================================
+        // Creación del metodo para modificar las caracteristicas de la Tabla
+        // =====================================================================
+
+        // Al modelo le agregamos las siguientes columnas:
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Calorías");
+        modelo.addColumn("Proteinas");
+        modelo.addColumn("Grasa");
+        modelo.addColumn("Carbohidratos");
+        modelo.addColumn("Fibra");
+        modelo.addColumn("Colesterol");
+
+        // Y a nuestra Tabla le seteamos el modelo
+        jtCalorias.setModel(modelo);
+
+        // Ajusto el tamaño de las columnas de la tabla
+        jtCalorias.getColumnModel().getColumn(0).setPreferredWidth(20);
+        jtCalorias.getColumnModel().getColumn(1).setPreferredWidth(250);
+        jtCalorias.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jtCalorias.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jtCalorias.getColumnModel().getColumn(4).setPreferredWidth(50);
+        jtCalorias.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jtCalorias.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jtCalorias.getColumnModel().getColumn(7).setPreferredWidth(50);
+    }
+    
+    public void cargarTabla(int idGrupoAlimenticio) {
+        borrarFilasTabla();
+        calData.listarCaloriasPorGrupoalimenticio(idGrupoAlimenticio).forEach(calorias -> {
+            modelo.addRow(new Object[]{
+                //                calorias.getIdCalorias(),
+                calorias.getIdGrupoAlimenticio(),
+                calorias.getNombre(),
+                calorias.getCalorias(),
+                calorias.getProteinas(),
+                calorias.getGrasa(),
+                calorias.getCarbohidratos(),
+                calorias.getFibra(),
+                calorias.getColesterol()
+//                calorias.getEstado()
+            });
+        });
+    }
+
+    public void cargarCalorias() {
+        // ---------------------------------------------------------------------
+        // Busco el ID en la cadena de texto
+        // https://es.stackoverflow.com/questions/123704/c%C3%B3mo-extraer-parte-de-una-cadena-seg%C3%BAn-un-patr%C3%B3n
+        // 
+//        System.out.println("String seleccionada: " + jcbCargarGrupoAlimenticio.getSelectedItem());
+
+        // En tu código sería:
+        //     String cadena = JTextField.getText();
+        // Pero como ejemplo, lo asignamos a:
+        String cadena = jcbCargarGrupoAlimenticio.getSelectedItem().toString();
+
+        // Compilamos el regex y el matcher al texto, ignorando mayúsculas/minúsculas (esto es estándar)
+        Pattern pattern = Pattern.compile("([0-9]+) - ", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(cadena);
+
+        // Ahora sí, vemos si coincide el patrón con el texto
+        if (matcher.find()) {
+            // Coincidió => obtener el valor del grupo 1
+            String idGrupoAlimenticio = matcher.group(1);
+//            System.out.println("idGrupoAlimenticio: " + idGrupoAlimenticio);
+            // Aqui intento buscar y cargar los datos segun lo que se seleccione
+            // en el ComboBox
+            cargarTabla(Integer.parseInt(idGrupoAlimenticio));
+        } else {
+            // No coincidió
+            System.out.println("No encontre el idGrupoAlimenticio");
+        }
+    }
+    
+    public void cargarCaloriaTF() {
+//        // Aqui según lo que encuentre, llamo al metodo con el DNI para que
+//        // busque y actualice los TextFields
+//        
+//        // Busco la caloria por el DNI
+//        Calorias caloria = calData.buscarCaloriaPorDni(Integer.parseInt(jtfDNI.getText()));
+//
+//        // Busco si el caloria no esta vacio
+//        jtfApellido.setText(caloria.getApellido());
+//        jtfNombre.setText(caloria.getNombre());
+//        jdcFechaNacimiento.setDate(Date.from(caloria.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+//        if (caloria.isEstado() == true) {
+//            jrbEstado.setSelected(true);
+//            // Existen otras formas tanto de colocar el texto en un RadioButton
+//            // como de configurar si este estará seleccionado por defecto
+//            // o el color del texto
+//            jrbEstado.setText("Activo");
+//            jrbEstado.setForeground(Color.white);
+//        } else if (caloria.isEstado() == false) {
+//            jrbEstado.setSelected(false);
+//            jrbEstado.setText("Inactivo");
+//            jrbEstado.setForeground(Color.gray);
+//        }
+//        seleccionarItemComboBox(Integer.parseInt(jtfDNI.getText()));
+//        
+//        // Prueba de concepto StatusBar ----------------------------------------
+//        mensajeSB(1, "El DNI del Caloria se ha podido cargar con exito");
+//        // ---------------------------------------------------------------------
+    }
+    
+    public void cargarCampos(int obtengoID) {
+//        // Busco la caloria por el Grupo alimenticio que es el ID que recibi
+//        // y cargo la tabla
+//        Calorias calorias = calData.buscarCaloriasPorId(obtengoID);
+//
+//        // Busco si la caloria no esta vacio
+//        if (calorias != null) {
+//            jtfDNI.setText(String.valueOf(calorias.getDni()));
+//            jtfApellido.setText(calorias.getApellido());
+//            jtfNombre.setText(calorias.getNombre());
+//            jdcFechaNacimiento.setDate(Date.from(calorias.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+//            if (calorias.isEstado() == true) {
+//                jrbEstado.setSelected(true);
+//                // Existen otras formas tanto de colocar el texto en un
+//                // RadioButton como de configurar si este estará
+//                // seleccionado por defecto o el color del texto
+//                jrbEstado.setText("Activo");
+//                jrbEstado.setForeground(Color.white);
+//            } else if (calorias.isEstado() == false) {
+//                jrbEstado.setSelected(false);
+//                jrbEstado.setText("Inactivo");
+//                jrbEstado.setForeground(Color.gray);
+//            }
+//        }
+    }
+
+    public void borrarFilasTabla() {
+        // Con este metodo puedo borrar una fila especifica al recorrer el modelo
+        // Controlar que no este vacio o cargarlo desde el comienzo
+        if (modelo != null) {
+            int a = modelo.getRowCount() - 1;
+            
+            if (modelo.getRowCount() > 0) {
+                for (int i = a; i >= 0; i--) {
+                    modelo.removeRow(i);
+                }
+            }
+        }
+    }
+    
+    public void mensajeSB(int color, String mensaje) {
+        // Los valores pueden variar de 0 a 255
+        if (color == 1) {
+            // Si el color es igual a 1 entonces es = a verde
+            // En este caso Red = 0, Green = 153, Blue = 102.
+            jlMensajeSB.setForeground(new Color(0, 153, 102));
+        } else if (color == 2) {
+            // Si el color es igual a 2 entonces es = a rojo
+            // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
+            jlMensajeSB.setForeground(new Color(255, 50, 0));
+        } else if (color == 3) {
+            // Usado al iniciar el Form para que no se vea el texto dummy 45,65,88
+            jlMensajeSB.setForeground(new Color(45, 65, 88));
+        }
+        // Aquí cargo el texto del mensaje en el Label
+        // Si el texto del mensaje esta vacio entonces no muestro texto en
+        // el Label pero limpio el texto anterior que pueda haber quedado
+        jlMensajeSB.setText(mensaje);
+    }
+    
+    public void seleccionarItemComboBox(int DNI) {
+//        // Aqui recibo un DNI, lo busco en la lista de calorias agregados al
+//        // ComboBox y averigua su numero de item para marcarlo como
+//        // seleccionado
+//        System.out.println("DNI: " + DNI);
+//
+//        // Cuantos items hay en el ComboBox?
+////        int itemsEnElComboBox = jcbCargarGrupoAlimenticio.getItemCount();
+////        System.out.println("Items en el ComboBox: " + itemsEnElComboBox);
+//        // Recorro la lista de calorias y voy leyendo cada item en el ComboBox
+//        calData.listarCalorias().forEach(item -> {
+//            if (DNI == item.getDni()) {
+////                int obtengoID = item.getIdCaloria();
+////                System.out.println(item.getIdCaloria());
+//                // Aqui intento buscar y cargar los datos segun lo que se
+//                // seleccione en el ComboBox
+////                cargarCampos(obtengoID);
+//
+//                // ERROR: getSelectedIndex() solo devuelve la opcion que este
+//                // seleccionada
+//                seleccionFilaEnLaTabla = jcbCargarGrupoAlimenticio.getSelectedIndex();
+////                return;
+//            }
+//        });
+//
+//        // Pero como ejemplo, lo asignamos a:
+//        jcbCargarGrupoAlimenticio.setSelectedIndex(seleccionFilaEnLaTabla);
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jpConexion = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jlMensajeSB = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtCalorias = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jcbCargarGrupoAlimenticio = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(21, 65, 118));
+
+        jPanel2.setBackground(new java.awt.Color(31, 75, 128));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Gestión de Calorías");
+
+        jLabel2.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel2.setText("Bienvenido Nuevamente");
+
+        jpConexion.setBackground(new java.awt.Color(21, 65, 118));
+        jpConexion.setPreferredSize(new java.awt.Dimension(16, 100));
+
+        javax.swing.GroupLayout jpConexionLayout = new javax.swing.GroupLayout(jpConexion);
+        jpConexion.setLayout(jpConexionLayout);
+        jpConexionLayout.setHorizontalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        jpConexionLayout.setVerticalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo-header.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jpConexion, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)))
+                .addContainerGap())
+        );
+
+        jPanel3.setBackground(new java.awt.Color(31, 75, 128));
+        jPanel3.setPreferredSize(new java.awt.Dimension(100, 48));
+
+        jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
+        jlMensajeSB.setText("Mensaje inicial");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlMensajeSB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlMensajeSB)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBackground(new java.awt.Color(31, 75, 128));
+        jPanel5.setPreferredSize(new java.awt.Dimension(8, 40));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        jtCalorias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jtCalorias);
+
+        jTable2.setBackground(new java.awt.Color(21, 65, 118));
+        jTable2.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jTable2.setForeground(new java.awt.Color(255, 255, 255));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Grupo Alimenticio", "Nombre", "Calorias"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jcbCargarGrupoAlimenticio.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jcbCargarGrupoAlimenticio.setForeground(new java.awt.Color(255, 255, 255));
+        jcbCargarGrupoAlimenticio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aceites y grasas", "Azúcares y dulces", "Bebidas", "Carnes, aves y embutidos", "Cereales", "Frutas", "Frutos secos", "Huevos", "Lácteos y derivados", "Legumbres", "Pastelería", "Pescados, mariscos y crustáceos", "Salsas y condimentos", "Verduras y hortalizas" }));
+        jcbCargarGrupoAlimenticio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbCargarGrupoAlimenticioItemStateChanged(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Seleccione el Grupo Alimenticio de su interes");
+
+        jPanel6.setBackground(new java.awt.Color(31, 75, 128));
+        jPanel6.setPreferredSize(new java.awt.Dimension(8, 20));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jcbCargarGrupoAlimenticio, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel6)))
+                        .addGap(0, 119, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbCargarGrupoAlimenticio)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbCargarGrupoAlimenticioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCargarGrupoAlimenticioItemStateChanged
+        // Verifico que no sea null para evitar conflictos en la carga del Form
+        if (jcbCargarGrupoAlimenticio.getSelectedItem() != null) {
+            cargarCalorias();
+        }
+    }//GEN-LAST:event_jcbCargarGrupoAlimenticioItemStateChanged
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CaloriasForm().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JComboBox<String> jcbCargarGrupoAlimenticio;
+    private javax.swing.JLabel jlMensajeSB;
+    private javax.swing.JPanel jpConexion;
+    private javax.swing.JTable jtCalorias;
+    // End of variables declaration//GEN-END:variables
+
+}
