@@ -5,7 +5,13 @@
  */
 package Vista;
 
+import Controlador.DietaData;
+import Controlador.PacienteData;
+import Modelo.Dieta;
 import java.awt.Color;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
@@ -19,26 +25,59 @@ public class DietasForm extends javax.swing.JFrame {
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
-    
+    private DietaData dietadata;
+    private PacienteData pacienteData;
+    private PacientesForm numId;
+
     /**
      * Creates new form DietasForm
      */
     public DietasForm() {
         initComponents();
-        
+        dietadata = new DietaData();
+        pacienteData = new PacienteData();
+        //creo objeto clase PacientesForm
+        numId = new PacientesForm();
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
 
-        // Set borders todos subrayados en amarillo a excepción del ID que es
-        // blanco y de solo 1 pixel de grosor para indicar que no es editable
-        jtfID.setBorder(text_border_disable);
-        jtfNombre.setBorder(text_border);
-        jtfPaciente.setBorder(text_border);
-        jtfPesoInicial.setBorder(text_border);
-        jtfPesoFinal.setBorder(text_border);
-        
-        // Posiciono el foco en el nombre al iniciar el form
-        jtfNombre.requestFocus();
+       
+        //busco dieta cuyo id esta asociado al id paciente de PacientesForm
+        Dieta dieta = dietadata.buscarDietaporIdPaciente(numId.nroId);
+        //si no es nula cargo formularioPacientesForm numId = new PacientesForm();
+
+        if (dieta
+                != null) {
+            jbNuevo.setEnabled(false);
+            jtfID.setText(dieta.getIdDieta() + "");
+            jtfID.setEnabled(false);
+            jtfNombre.setText(dieta.getNombre());
+            jtfPaciente.setText(dieta.getPaciente().getNombre());
+            jtfPaciente.setEnabled(false);
+            jtfPesoInicial.setText(dieta.getPesoInicial() + "");
+            jtfPesoFinal.setText(dieta.getPesoFinal() + "");
+            jDateChooser1.setDate(Date.from(dieta.getFechaInicial().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            jDateChooser2.setDate(Date.from(dieta.getFechaFinal().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            jCheckBox1.setSelected(dieta.isEstado());
+            jCheckBox1.setEnabled(false);
+        } else {
+
+            jbEliminar.setEnabled(false);
+            jbGuardar.setEnabled(false);
+            jbSeguimiento.setEnabled(false);
+            jbGuardar.setEnabled(false);
+            jtfID.setEnabled(false);
+            jtfPaciente.setText(numId.nombreP);
+            jtfPaciente.setEditable(false);
+            // Set borders todos subrayados en amarillo a excepción del ID que es
+            // blanco y de solo 1 pixel de grosor para indicar que no es editable
+            jtfID.setBorder(text_border_disable);
+            jtfNombre.setBorder(text_border);
+//            jtfPaciente.setBorder(text_border);
+            jtfPesoInicial.setBorder(text_border);
+            jtfPesoFinal.setBorder(text_border);
+        }
+
     }
 
     /**
@@ -66,7 +105,7 @@ public class DietasForm extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jbSalir = new javax.swing.JButton();
-        jbBuscar = new javax.swing.JButton();
+        jbSeguimiento = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
@@ -87,7 +126,7 @@ public class DietasForm extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Gestión de Dietas");
+        jLabel1.setText("Dieta Personal");
 
         jLabel2.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
@@ -135,7 +174,7 @@ public class DietasForm extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jlMensajeSB)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
@@ -181,21 +220,41 @@ public class DietasForm extends javax.swing.JFrame {
             }
         });
 
-        jbBuscar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/1-32x32.png"))); // NOI18N
-        jbBuscar.setText(" Buscar");
+        jbSeguimiento.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jbSeguimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/1-32x32.png"))); // NOI18N
+        jbSeguimiento.setText("Seguimiento");
+        jbSeguimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSeguimientoActionPerformed(evt);
+            }
+        });
 
         jbNuevo.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/2-32x32.png"))); // NOI18N
         jbNuevo.setText(" Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/3-32x32.png"))); // NOI18N
         jbGuardar.setText(" Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/4-32x32.png"))); // NOI18N
         jbEliminar.setText(" Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -204,18 +263,18 @@ public class DietasForm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbSeguimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(jbGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jbBuscar)
+                .addComponent(jbSeguimiento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbNuevo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -366,6 +425,104 @@ public class DietasForm extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
+            MensajeSB(2, "Falta completar Fechas");
+        } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+            jtfNombre.requestFocus();
+            jtfNombre.selectAll();
+            // Posiciono el foco en el nombre al iniciar el form
+        } else {
+            try {
+                if (Double.parseDouble(jtfPesoInicial.getText()) <= 0.00
+                        || Double.parseDouble(jtfPesoInicial.getText()) >= 500.00
+                        || Double.parseDouble(jtfPesoFinal.getText()) <= 0.00
+                        || Double.parseDouble(jtfPesoFinal.getText()) >= 500.00) {
+                    MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
+                } else {
+
+                    Dieta dieta = new Dieta(jtfNombre.getText(), pacienteData.buscarPacientePorId(numId.nroId), Double.parseDouble(jtfPesoInicial.getText()),
+                            Double.parseDouble(jtfPesoFinal.getText()),
+                            jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                            jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                            true);
+                    dietadata.guardarDieta(dieta);
+                    MensajeSB(1, "Dieta guardada con exito");
+                }
+            } catch (NumberFormatException ex) {
+                MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
+            }
+        }
+
+
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
+            MensajeSB(2, "Falta completar Fechas");
+        }else if(jDateChooser1.getDate().compareTo(jDateChooser2.getDate())<=0){
+            MensajeSB(2, "la fecha inicial debe ser menor que la final");
+        } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+            jtfNombre.requestFocus();
+            jtfNombre.selectAll();
+            // Posiciono el foco en el nombre al iniciar el form
+        } else {
+            try {
+                if (Double.parseDouble(jtfPesoInicial.getText()) <= 0.00
+                        || Double.parseDouble(jtfPesoInicial.getText()) >= 500.00
+                        || Double.parseDouble(jtfPesoFinal.getText()) <= 0.00
+                        || Double.parseDouble(jtfPesoFinal.getText()) >= 500.00) {
+                    MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
+                } else {
+                    jtfPaciente.setText(numId.nombreP);
+                    jtfPaciente.setEditable(false);
+                    Dieta dieta = new Dieta(Integer.parseInt(jtfID.getText()), jtfNombre.getText(), pacienteData.buscarPacientePorId(numId.nroId), Double.parseDouble(jtfPesoInicial.getText()),
+                            Double.parseDouble(jtfPesoFinal.getText()),
+                            jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                            jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                            true);
+                    dietadata.modificarDieta(dieta);
+                    MensajeSB(1, "Modificacion guardada con exito");
+                }
+            } catch (NumberFormatException ex) {
+                MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
+            }
+        }
+
+
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        dietadata.eliminarDietaPorId(Integer.parseInt(jtfID.getText()));
+        MensajeSB(1, "Dieta eliminada con exito");
+        jbEliminar.setEnabled(false);
+        jbGuardar.setEnabled(false);
+        jbSeguimiento.setEnabled(false);
+        jbGuardar.setEnabled(false);
+        jtfID.setEnabled(false);
+        jtfPaciente.setText(numId.nombreP);
+        jtfPaciente.setEditable(false);
+        jtfID.setText("");
+        jtfNombre.setText("");
+        jtfPesoInicial.setText("");
+        jtfPesoFinal.setText("");
+        jDateChooser1=null;
+        jDateChooser2=null;
+        jtfID.setBorder(text_border_disable);
+        jtfNombre.setBorder(text_border);
+//            jtfPaciente.setBorder(text_border);
+        jtfPesoInicial.setBorder(text_border);
+        jtfPesoFinal.setBorder(text_border);
+        jbNuevo.setEnabled(true);
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeguimientoActionPerformed
+  HistorialView historialView = new HistorialView();
+        historialView.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_jbSeguimientoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -380,16 +537,24 @@ public class DietasForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DietasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DietasForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DietasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DietasForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DietasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DietasForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DietasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DietasForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -419,11 +584,11 @@ public class DietasForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JButton jbSeguimiento;
     private javax.swing.JLabel jlMensajeSB;
     private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfNombre;
@@ -452,4 +617,22 @@ public class DietasForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
+
+    public boolean PruebaDeCaracteres(String texto) {
+        // Busco si los caracteres ingresados son letras
+        int b = 0;
+        int i = 0;
+        for (i = 0; i < texto.length(); i++) {
+            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') && texto.charAt(i) != ' ') {
+                b++;
+            }
+        }
+        if (b > 0 || texto.isEmpty()) {
+            MensajeSB(2, "Los campos Nombre de Dieta debe completarse con letras");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

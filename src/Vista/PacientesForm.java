@@ -5,7 +5,11 @@
  */
 package Vista;
 
+import Controlador.PacienteData;
+import Modelo.Paciente;
 import java.awt.Color;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
@@ -19,13 +23,14 @@ public class PacientesForm extends javax.swing.JFrame {
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
+    private PacienteData pacData;
 
     /**
      * Creates new form PacientesForm
      */
     public PacientesForm() {
         initComponents();
-
+        pacData = new PacienteData();
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
 
@@ -36,10 +41,13 @@ public class PacientesForm extends javax.swing.JFrame {
         jtfDNI.setBorder(text_border);
         jtfDomicilio.setBorder(text_border);
         jtfTelefono.setBorder(text_border);
-        
+
         // Posiciono el foco en el nombre al iniciar el form
         jtfNombre.requestFocus();
+        jbDietaPersonal.setSelected(false);
     }
+    public static int nroId = -1;
+    public static String nombreP = "";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +82,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jbSalir = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jlMensajeSB = new javax.swing.JLabel();
+        jbDietaPersonal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Pacientes");
@@ -166,6 +175,11 @@ public class PacientesForm extends javax.swing.JFrame {
         jbBuscar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/1-32x32.png"))); // NOI18N
         jbBuscar.setText(" Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbNuevo.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/2-32x32.png"))); // NOI18N
@@ -238,8 +252,15 @@ public class PacientesForm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jlMensajeSB)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jbDietaPersonal.setText("Area Personal");
+        jbDietaPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDietaPersonalActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -250,20 +271,23 @@ public class PacientesForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jtfDomicilio, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfDNI)
-                    .addComponent(jtfTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                    .addComponent(jtfID, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcbEstado, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jtfDomicilio, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfDNI)
+                            .addComponent(jtfTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                            .addComponent(jtfID, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbEstado, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(jbDietaPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
@@ -272,8 +296,12 @@ public class PacientesForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 16, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -298,11 +326,9 @@ public class PacientesForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbEstado)
                             .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbDietaPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -332,9 +358,53 @@ public class PacientesForm extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jbDietaPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDietaPersonalActionPerformed
+        nroId = Integer.parseInt(jtfID.getText());
+        nombreP = jtfNombre.getText();
+        DietasForm dietForm = new DietasForm();
+        dietForm.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_jbDietaPersonalActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        try {
+            if (jtfDNI.getText().length() != 8) {
+                MensajeSB(2, "Debe ser un DNI valido 8 Digitos");
+                jtfDNI.requestFocus();
+                jtfDNI.selectAll();
+            } else {
+                // Busco alumno por DNI
+                Paciente paciente = pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText()));
+                // Busco si el alumno no esta vacio
+                if (paciente != null) {
+                    jtfID.setText(paciente.getIdPaciente() + "");
+                    jtfDomicilio.setText(paciente.getDomicilio());
+                    jtfNombre.setText(paciente.getNombre());
+                    jtfTelefono.setText(paciente.getTelefono());
+                    if (paciente.isEstado() == true) {
+                        jcbEstado.setSelected(true);
+                        jbGuardar.setEnabled(true);
+                        jbEliminar.setEnabled(true);
+                        jbNuevo.setEnabled(false);
+                        MensajeSB(1, "Paciente encontrado");
+                        jbDietaPersonal.setSelected(true);
+                    } else {
+                        MensajeSB(2, "El DNI no es de un Paciente activo");
+                    }
+                } else {
+                    MensajeSB(2, "El DNI no es de un Paciente activo");
+                    jtfDNI.requestFocus();
+                    jtfDNI.selectAll();
+                }
+            }
+        } catch (NumberFormatException e) {
+            MensajeSB(2, "El DNI debe ser un número");
+            jtfDNI.requestFocus();
+            jtfDNI.selectAll();
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -357,6 +427,7 @@ public class PacientesForm extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PacientesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -381,6 +452,7 @@ public class PacientesForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbDietaPersonal;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
@@ -414,5 +486,5 @@ public class PacientesForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-
+    
 }

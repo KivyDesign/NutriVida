@@ -187,7 +187,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Dietas"/>
+                <Property name="text" type="java.lang.String" value="Dieta Personal"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -228,7 +228,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Component id="jlMensajeSB" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="11" max="32767" attributes="0"/>
+                      <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -348,13 +348,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jbSeguimiento" max="32767" attributes="0"/>
+                          <Component id="jbNuevo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jbGuardar" alignment="0" max="32767" attributes="0"/>
                           <Component id="jbEliminar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jbGuardar" max="32767" attributes="0"/>
                           <Component id="jbSalir" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jbNuevo" max="32767" attributes="0"/>
-                          <Component id="jbBuscar" min="-2" pref="127" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="46" max="32767" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -362,7 +362,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbSeguimiento" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jbNuevo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -391,7 +391,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalirActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbBuscar">
+            <Component class="javax.swing.JButton" name="jbSeguimiento">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins" size="14" style="0"/>
@@ -399,8 +399,11 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Imagenes/1-32x32.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value=" Buscar"/>
+                <Property name="text" type="java.lang.String" value="Seguimiento"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSeguimientoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbNuevo">
               <Properties>
@@ -412,6 +415,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value=" Nuevo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbNuevoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbGuardar">
               <Properties>
@@ -423,6 +429,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value=" Guardar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbGuardarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbEliminar">
               <Properties>
@@ -434,6 +443,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value=" Eliminar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEliminarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
