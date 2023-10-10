@@ -8,6 +8,7 @@ package Vista;
 import Controlador.PacienteData;
 import Modelo.Paciente;
 import java.awt.Color;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.BorderFactory;
@@ -184,6 +185,11 @@ public class PacientesForm extends javax.swing.JFrame {
         jbNuevo.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/2-32x32.png"))); // NOI18N
         jbNuevo.setText(" Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/3-32x32.png"))); // NOI18N
@@ -404,6 +410,37 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfDNI.selectAll();
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+        try {
+                
+
+                Paciente paciente = new Paciente(
+                        Integer.parseInt(jtfNombre.getText()),
+                        jtfDNI.getText(),
+                        jtfDomicilio.getText(),
+                        jtfTelefono.getText(),
+                        
+                
+                        true);
+
+                // Primero busco si existe para no agregarlo repetido y lo
+                // inserto al paciente
+                pacData.guardarPaciente(paciente);
+                // Si lo agregue con exito no es null y se lo informo al DataEntry
+                if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
+                    MensajeSB(1, "Paciente agregado con exito! Busque por DNI o cargue un nuevo Paciente");
+                    LimpiarCampos();
+                } else {
+                    MensajeSB(2, "ERROR: El paciente no se pudo agregar");
+                }
+            } catch (NumberFormatException e) {
+                MensajeSB(2, "El DNI debe ser un número");
+                jtfDNI.requestFocus();
+                jtfDNI.selectAll();
+            }
+    }//GEN-LAST:event_jbNuevoActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -485,6 +522,16 @@ public class PacientesForm extends javax.swing.JFrame {
         // Si el texto del mensaje esta vacio entonces no muestro texto en
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
+    }
+     public void LimpiarCampos() {
+        jtfDNI.setText("");
+        jtfNombre.setText("");
+        jtfDomicilio.setText("");
+        jtfTelefono.setText("");
+        jcbEstado.setSelected(false);
+        jtfID.setText("");
+        jbGuardar.setEnabled(false);
+        jbEliminar.setEnabled(false);
     }
     
 }
