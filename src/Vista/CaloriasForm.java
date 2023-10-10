@@ -318,7 +318,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCalorias = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jtCaloriasSeleccion = new javax.swing.JTable();
         jcbCargarGrupoAlimenticio = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -432,12 +432,17 @@ public class CaloriasForm extends javax.swing.JFrame {
 
             }
         ));
+        jtCalorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtCaloriasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtCalorias);
 
-        jTable2.setBackground(new java.awt.Color(21, 65, 118));
-        jTable2.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jTable2.setForeground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jtCaloriasSeleccion.setBackground(new java.awt.Color(21, 65, 118));
+        jtCaloriasSeleccion.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jtCaloriasSeleccion.setForeground(new java.awt.Color(255, 255, 255));
+        jtCaloriasSeleccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -457,7 +462,7 @@ public class CaloriasForm extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jtCaloriasSeleccion);
 
         jcbCargarGrupoAlimenticio.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jcbCargarGrupoAlimenticio.setForeground(new java.awt.Color(255, 255, 255));
@@ -552,6 +557,29 @@ public class CaloriasForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jcbCargarGrupoAlimenticioItemStateChanged
 
+    private void jtCaloriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCaloriasMouseClicked
+        // Obtenemos el número de fila seleccionada al realizar un click en la tabla
+        seleccionFilaEnLaTabla = jtCalorias.rowAtPoint(evt.getPoint());
+        System.out.println("Seleccion Fila En La Tabla: " + seleccionFilaEnLaTabla);
+
+        // Lo convierto de Object a int
+        int valorID = (Integer) jtCalorias.getValueAt(seleccionFilaEnLaTabla, 0);
+        System.out.println("Valor ID: " + valorID);
+
+        // Aqui intento buscar y cargar los datos segun lo que se seleccione
+        // en la tabla
+        cargarCampos(valorID);
+
+        // Tratare de hacer que se deseleccione la fila de la tabla o en el
+        // mejor de los casos que quede resaltada la fila que corresponda
+        // segun cambien los datos con el ComboBox o el boton Buscar
+//        jtCalorias.setSelectionForeground(Color.black);
+//        jtCalorias.setSelectionBackground(Color.white);
+
+        // Pero como ejemplo, lo asignamos a: jtCaloriasSeleccion
+//        jcbCargarAlumnos.setSelectedIndex(seleccionFilaEnLaTabla);
+    }//GEN-LAST:event_jtCaloriasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -599,11 +627,11 @@ public class CaloriasForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JComboBox<String> jcbCargarGrupoAlimenticio;
     private javax.swing.JLabel jlMensajeSB;
     private javax.swing.JPanel jpConexion;
     private javax.swing.JTable jtCalorias;
+    private javax.swing.JTable jtCaloriasSeleccion;
     // End of variables declaration//GEN-END:variables
 
 }
