@@ -28,6 +28,10 @@ public class Paciente {
         this.estado = estado;
     }
 
+    public Paciente(int parseInt, String text, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdPaciente() {
         return idPaciente;
     }

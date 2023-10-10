@@ -430,14 +430,22 @@ public class DietasForm extends javax.swing.JFrame {
         } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
+            jtfNombre.setBorder(text_border_rojo);
             // Posiciono el foco en el nombre al iniciar el form
         } else {
             try {
                 if (Double.parseDouble(jtfPesoInicial.getText()) <= 0.00
-                        || Double.parseDouble(jtfPesoInicial.getText()) >= 500.00
-                        || Double.parseDouble(jtfPesoFinal.getText()) <= 0.00
+                        || Double.parseDouble(jtfPesoInicial.getText()) >= 500.00) {
+                    MensajeSB(2, "El peso inicial debe comprenderse entre 0 y 500");
+                    jtfPesoInicial.requestFocus();
+                    jtfPesoInicial.selectAll();
+                    jtfPesoInicial.setBorder(text_border_rojo);
+                } else if (Double.parseDouble(jtfPesoFinal.getText()) <= 0.00
                         || Double.parseDouble(jtfPesoFinal.getText()) >= 500.00) {
-                    MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
+                    MensajeSB(2, "El peso final debe comprenderse entre 0 y 500");
+                    jtfPesoFinal.requestFocus();
+                    jtfPesoFinal.selectAll();
+                    jtfPesoFinal.setBorder(text_border_rojo);
                 } else {
 
                     Dieta dieta = new Dieta(jtfNombre.getText(), pacienteData.buscarPacientePorId(numId.nroId), Double.parseDouble(jtfPesoInicial.getText()),
@@ -501,12 +509,12 @@ public class DietasForm extends javax.swing.JFrame {
         jtfID.setEnabled(false);
         jtfPaciente.setText(numId.nombreP);
         jtfPaciente.setEditable(false);
-        jtfID.setText("");
-        jtfNombre.setText("");
-        jtfPesoInicial.setText("");
-        jtfPesoFinal.setText("");
-        jDateChooser1 = null;
-        jDateChooser2 = null;
+        jtfID.setText(null);
+        jtfNombre.setText(null);
+        jtfPesoInicial.setText(null);
+        jtfPesoFinal.setText(null);
+        jDateChooser1.setCalendar(null);
+        jDateChooser2.setCalendar(null);
         jtfID.setBorder(text_border_disable);
         jtfNombre.setBorder(text_border);
 //            jtfPaciente.setBorder(text_border);
