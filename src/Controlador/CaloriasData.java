@@ -160,19 +160,6 @@ public class CaloriasData {
         return calorias;
     }
 
-    /*
-     Estructura de la tabla calorias
-     int idCalorias
-     int idGrupoAlimenticio
-     String nombre
-     int calorias
-     int proteinas
-     int grasa
-     int carbohidratos
-     int fibra
-     int colesterol
-     Boolean estado
-     */
     public ArrayList<Calorias> listarCalorias() {
         ArrayList<Calorias> calorias = new ArrayList<>();
 

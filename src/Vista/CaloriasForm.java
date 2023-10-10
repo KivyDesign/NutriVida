@@ -232,30 +232,16 @@ public class CaloriasForm extends javax.swing.JFrame {
 //        // ---------------------------------------------------------------------
     }
     
-    public void cargarCampos(int obtengoID) {
-//        // Busco la caloria por el Grupo alimenticio que es el ID que recibi
-//        // y cargo la tabla
-//        Calorias calorias = calData.buscarCaloriasPorId(obtengoID);
-//
-//        // Busco si la caloria no esta vacio
-//        if (calorias != null) {
+    public void cargarCamposjtCaloriasSeleccion(int obtengoID) {
+        // Busco la caloria por el Grupo alimenticio que es el ID que recibi
+        // y cargo la tabla
+        Calorias calorias = calData.buscarCaloriasPorId(obtengoID);
+
+        // Verifico si caloria no esta vacio
+        if (calorias != null) {
 //            jtfDNI.setText(String.valueOf(calorias.getDni()));
-//            jtfApellido.setText(calorias.getApellido());
 //            jtfNombre.setText(calorias.getNombre());
-//            jdcFechaNacimiento.setDate(Date.from(calorias.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-//            if (calorias.isEstado() == true) {
-//                jrbEstado.setSelected(true);
-//                // Existen otras formas tanto de colocar el texto en un
-//                // RadioButton como de configurar si este estará
-//                // seleccionado por defecto o el color del texto
-//                jrbEstado.setText("Activo");
-//                jrbEstado.setForeground(Color.white);
-//            } else if (calorias.isEstado() == false) {
-//                jrbEstado.setSelected(false);
-//                jrbEstado.setText("Inactivo");
-//                jrbEstado.setForeground(Color.gray);
-//            }
-//        }
+        }
     }
 
     public void borrarFilasTabla() {
@@ -522,6 +508,11 @@ public class CaloriasForm extends javax.swing.JFrame {
         );
 
         jbSeleccionar.setText("Seleccionar");
+        jbSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSeleccionarActionPerformed(evt);
+            }
+        });
 
         jbLimpiarSeleccion.setText("Limpiar Selección");
         jbLimpiarSeleccion.addActionListener(new java.awt.event.ActionListener() {
@@ -632,7 +623,7 @@ public class CaloriasForm extends javax.swing.JFrame {
 
         // Aquí intento buscar y cargar los datos según lo que se seleccione
         // en la tabla
-        cargarCampos(valorID);
+        cargarCamposjtCaloriasSeleccion(valorID);
 
         // Tratare de hacer que se deseleccione la fila de la tabla o en el
         // mejor de los casos que quede resaltada la fila que corresponda
@@ -647,6 +638,10 @@ public class CaloriasForm extends javax.swing.JFrame {
     private void jbLimpiarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarSeleccionActionPerformed
         borrarFilasTablaGrupoSeleccionado();
     }//GEN-LAST:event_jbLimpiarSeleccionActionPerformed
+
+    private void jbSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeleccionarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
