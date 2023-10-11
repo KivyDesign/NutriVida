@@ -30,13 +30,13 @@ public class CaloriasForm extends javax.swing.JFrame {
     // Para el modelo de la tabla
     private DefaultTableModel modelo;
     private DefaultTableModel modeloGrupoAlimenticio;
-    
+
     private ArrayList<Calorias> listarCalorias;
-    
+
     private int seleccionFilaEnLaTabla;
-    
+
     private int idGrupoAlimenticio = 1;
-    
+
     private int totalDeCalorias = 0;
 
     /**
@@ -86,7 +86,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         idGrupoAlimenticio = 1;
         cargarTabla(idGrupoAlimenticio);
     }
-    
+
     public void cargarCaloriasEnComboBox() {
         // Remuevo todos los items del comboBox
         jcbCargarGrupoAlimenticio.removeAllItems();
@@ -107,7 +107,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         jcbCargarGrupoAlimenticio.addItem(13 + " - " + "Salsas y condimentos");
         jcbCargarGrupoAlimenticio.addItem(14 + " - " + "Verduras y hortalizas");
     }
-    
+
     public void armarCabeceraDeLaTabla() {
         // =====================================================================
         // Creación del metodo para modificar las caracteristicas de la Tabla
@@ -136,7 +136,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         jtCalorias.getColumnModel().getColumn(6).setPreferredWidth(50);
         jtCalorias.getColumnModel().getColumn(7).setPreferredWidth(50);
     }
-    
+
     public void armarCabeceraDeLaTablaGrupoAlimenticio() {
         // =====================================================================
         // Creación del metodo para modificar las caracteristicas de la Tabla
@@ -165,7 +165,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         jtCaloriasSeleccion.getColumnModel().getColumn(6).setPreferredWidth(50);
         jtCaloriasSeleccion.getColumnModel().getColumn(7).setPreferredWidth(50);
     }
-    
+
     public void cargarTabla(int idGrupoAlimenticio) {
         borrarFilasTabla();
         calData.listarCaloriasPorGrupoalimenticio(idGrupoAlimenticio).forEach(calorias -> {
@@ -213,7 +213,7 @@ public class CaloriasForm extends javax.swing.JFrame {
             System.out.println("No encontre el idGrupoAlimenticio");
         }
     }
-    
+
     public void cargarCaloriaTF() {
 //        // Aqui según lo que encuentre, llamo al metodo con el DNI para que
 //        // busque y actualice los TextFields
@@ -243,7 +243,7 @@ public class CaloriasForm extends javax.swing.JFrame {
 //        mensajeSB(1, "El DNI del Caloria se ha podido cargar con exito");
 //        // ---------------------------------------------------------------------
     }
-    
+
     public void cargarCamposjtCaloriasSeleccion(int obtengoID) {
 //        // Busco la caloria por el Grupo alimenticio que es el ID que recibi
 //        // y cargo la tabla
@@ -261,7 +261,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         // Controlar que no este vacio o cargarlo desde el comienzo
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
-            
+
             if (modelo.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modelo.removeRow(i);
@@ -269,13 +269,13 @@ public class CaloriasForm extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void borrarFilasTablaGrupoSeleccionado() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
         // Controlar que no este vacio o cargarlo desde el comienzo
         if (modeloGrupoAlimenticio != null) {
             int a = modeloGrupoAlimenticio.getRowCount() - 1;
-            
+
             if (modeloGrupoAlimenticio.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modeloGrupoAlimenticio.removeRow(i);
@@ -283,7 +283,7 @@ public class CaloriasForm extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void mensajeSB(int color, String mensaje) {
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
@@ -303,7 +303,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-    
+
     public void seleccionarItemComboBox(int DNI) {
 //        // Aqui recibo un DNI, lo busco en la lista de calorias agregados al
 //        // ComboBox y averigua su numero de item para marcarlo como
@@ -332,7 +332,7 @@ public class CaloriasForm extends javax.swing.JFrame {
 //        // Pero como ejemplo, lo asignamos a:
 //        jcbCargarGrupoAlimenticio.setSelectedIndex(seleccionFilaEnLaTabla);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -658,7 +658,6 @@ public class CaloriasForm extends javax.swing.JFrame {
         // según cambien los datos con el ComboBox o el botón Buscar
 //        jtCalorias.setSelectionForeground(Color.black);
 //        jtCalorias.setSelectionBackground(Color.white);
-
         // Pero como ejemplo, lo asignamos a: jtCaloriasSeleccion
 //        jcbCargarAlumnos.setSelectedIndex(seleccionFilaEnLaTabla);
     }//GEN-LAST:event_jtCaloriasMouseClicked
@@ -681,21 +680,21 @@ public class CaloriasForm extends javax.swing.JFrame {
             carbohidrados = jtCalorias.getValueAt(pos, 5).toString();
             fibra = jtCalorias.getValueAt(pos, 6).toString();
             colesterol = jtCalorias.getValueAt(pos, 7).toString();
-            
+
             String datos[] = {ID, nombre, calorias, proteinas, grasa, carbohidrados, fibra, colesterol};
-            
+
+            // Valido primero que no pueda ingresarse 2 veces el mismo alimento
             Boolean resultado = validarTabla(nombre);
-//            System.out.println(nombre);
             if (resultado) {
                 mensajeSB(1, "No puede agregarse 2 veces el mismo alimento");
             } else {
 //                DefaultTableModel modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
                 modeloGrupoAlimenticio.addRow(datos);
+
+                // Actualizo el total de calorios
+                totalDeCalorias = totalDeCalorias + Integer.parseInt(calorias.toString());
+                jlTotalCalorias.setText(String.valueOf(totalDeCalorias));
             }
-//            System.out.println(resultado);
-            
-            totalDeCalorias = totalDeCalorias + Integer.parseInt(calorias.toString());
-            jlTotalCalorias.setText(String.valueOf(totalDeCalorias));
         } else {
             System.out.println("Error: Debe seleccionar un registro");
         }
@@ -761,10 +760,10 @@ public class CaloriasForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private Boolean validarTabla(String nombre) {
+        // Valido que no se pueda ingresar 2 veces el mismo alimento
         DefaultTableModel modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
         for (int i = 0; i < modeloGrupoAlimenticio.getRowCount(); i++) {
             String name = modeloGrupoAlimenticio.getValueAt(i, 1).toString();
-//            System.out.println("   ---> " + name);
             if (name.equalsIgnoreCase(nombre)) {
                 return true;
             }
