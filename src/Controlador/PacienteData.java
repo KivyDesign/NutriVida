@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class PacienteData {
@@ -60,7 +62,7 @@ public class PacienteData {
             ps.setString(3, paciente.getDomicilio());
             ps.setString(4, paciente.getTelefono());
             ps.setInt(5, paciente.getIdPaciente());
-            ps.setDouble(6,paciente.getPesoActual());
+            ps.setDouble(6, paciente.getPesoActual());
             ps.executeUpdate();
 
             ps.close();
@@ -112,7 +114,7 @@ public class PacienteData {
                 paciente.setNombre(rs.getString("nombre"));
                 paciente.setDomicilio(rs.getString("domicilio"));
                 paciente.setTelefono(rs.getString("telefono"));
-                 paciente.setPesoActual(rs.getDouble("pesoActual"));
+                paciente.setPesoActual(rs.getDouble("pesoActual"));
                 paciente.setEstado(rs.getBoolean("estado"));
             }
 
@@ -122,6 +124,19 @@ public class PacienteData {
         }
         return paciente;
     }
-    
-    
+
+    public void modificarPesoActual(int idPaciente, double pesoActual) {
+        try {
+            String sql = "UPDATE paciente SET pesoActual = ? WHERE idPaciente = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setDouble(1, pesoActual);
+            ps.setInt(2, idPaciente);
+            ps.executeUpdate();
+            
+            ps.close();
+        } catch (SQLException ex) {JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
+        }
+    }
+
 }

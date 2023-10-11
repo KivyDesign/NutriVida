@@ -360,7 +360,7 @@ public class HistorialView extends javax.swing.JFrame {
             } else {
                 Historial hist = new Historial(pacData.buscarPacientePorId(historiaDieta.IdPac),
                         Double.parseDouble(jtPesoRegistrado.getText()), ahora);
-                historialData.guardarHistorial(hist);
+                historialData.guardarHistorial(hist);pacData.modificarPesoActual(historiaDieta.IdPac, Double.parseDouble(jtPesoRegistrado.getText()));
                 MensajeSB(1, "Consulta guardada con exito");
             }
         } catch (NumberFormatException ex) {
