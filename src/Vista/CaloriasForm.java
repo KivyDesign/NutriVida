@@ -685,12 +685,14 @@ public class CaloriasForm extends javax.swing.JFrame {
             String datos[] = {ID, nombre, calorias, proteinas, grasa, carbohidrados, fibra, colesterol};
             
             Boolean resultado = validarTabla(nombre);
+            System.out.println(nombre);
             if (resultado) {
                 mensajeSB(1, "No puede agregarse 2 veces el mismo alimento");
             } else {
-                DefaultTableModel modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
+//                DefaultTableModel modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
                 modeloGrupoAlimenticio.addRow(datos);
             }
+            System.out.println(resultado);
             
             totalDeCalorias = totalDeCalorias + Integer.parseInt(calorias.toString());
             jlTotalCalorias.setText(String.valueOf(totalDeCalorias));
@@ -761,7 +763,8 @@ public class CaloriasForm extends javax.swing.JFrame {
     private Boolean validarTabla(String nombre) {
         DefaultTableModel modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
         for (int i = 0; i < modeloGrupoAlimenticio.getRowCount(); i++) {
-            String name = modeloGrupoAlimenticio.getValueAt(i, 0).toString();
+            String name = modeloGrupoAlimenticio.getValueAt(i, 1).toString();
+            System.out.println("   ---> " + name);
             if (name.equalsIgnoreCase(nombre)) {
                 return true;
             }
