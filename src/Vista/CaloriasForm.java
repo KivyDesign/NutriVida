@@ -36,6 +36,8 @@ public class CaloriasForm extends javax.swing.JFrame {
     private int seleccionFilaEnLaTabla;
     
     private int idGrupoAlimenticio = 1;
+    
+    private int totalDeCalorias = 0;
 
     /**
      * Creates new form CaloriasForm
@@ -359,6 +361,8 @@ public class CaloriasForm extends javax.swing.JFrame {
         jbSeleccionar = new javax.swing.JButton();
         jbLimpiarSeleccion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jlTotalCalorias = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -517,6 +521,7 @@ public class CaloriasForm extends javax.swing.JFrame {
             .addGap(0, 31, Short.MAX_VALUE)
         );
 
+        jbSeleccionar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbSeleccionar.setText("Seleccionar");
         jbSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -524,6 +529,7 @@ public class CaloriasForm extends javax.swing.JFrame {
             }
         });
 
+        jbLimpiarSeleccion.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbLimpiarSeleccion.setText("Limpiar Selección");
         jbLimpiarSeleccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -535,15 +541,19 @@ public class CaloriasForm extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Total de Calorias:");
 
+        jlTotalCalorias.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
+        jlTotalCalorias.setForeground(new java.awt.Color(255, 255, 255));
+        jlTotalCalorias.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlTotalCalorias.setText("0.00");
+
+        jButton1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jButton1.setText("Cargar Calorias");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -570,6 +580,14 @@ public class CaloriasForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jLabel3)
+                .addGap(53, 53, 53)
+                .addComponent(jlTotalCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,11 +608,14 @@ public class CaloriasForm extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jlTotalCalorias)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(13, 13, 13))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -644,6 +665,8 @@ public class CaloriasForm extends javax.swing.JFrame {
 
     private void jbLimpiarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarSeleccionActionPerformed
         borrarFilasTablaGrupoSeleccionado();
+        totalDeCalorias = 0;
+        jlTotalCalorias.setText(String.valueOf(totalDeCalorias));
     }//GEN-LAST:event_jbLimpiarSeleccionActionPerformed
 
     private void jbSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeleccionarActionPerformed
@@ -663,6 +686,9 @@ public class CaloriasForm extends javax.swing.JFrame {
             
             DefaultTableModel modeloProducto = (DefaultTableModel) jtCaloriasSeleccion.getModel();
             modeloProducto.addRow(datos);
+            
+            totalDeCalorias = totalDeCalorias + Integer.parseInt(calorias.toString());
+            jlTotalCalorias.setText(String.valueOf(totalDeCalorias));
         } else {
             System.out.println("Error: Debe seleccionar un registro");
         }
@@ -704,6 +730,7 @@ public class CaloriasForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -720,6 +747,7 @@ public class CaloriasForm extends javax.swing.JFrame {
     private javax.swing.JButton jbSeleccionar;
     private javax.swing.JComboBox<String> jcbCargarGrupoAlimenticio;
     private javax.swing.JLabel jlMensajeSB;
+    private javax.swing.JLabel jlTotalCalorias;
     private javax.swing.JPanel jpConexion;
     private javax.swing.JTable jtCalorias;
     private javax.swing.JTable jtCaloriasSeleccion;
