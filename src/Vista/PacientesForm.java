@@ -84,6 +84,8 @@ public class PacientesForm extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jlMensajeSB = new javax.swing.JLabel();
         jbDietaPersonal = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jtfPesoActual = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Pacientes");
@@ -140,6 +142,8 @@ public class PacientesForm extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Teléfono:");
+        jLabel8.setMaximumSize(new java.awt.Dimension(66, 17));
+        jLabel8.setMinimumSize(new java.awt.Dimension(66, 17));
 
         jLabel9.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -274,6 +278,19 @@ public class PacientesForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Peso Actual:");
+        jLabel3.setMaximumSize(new java.awt.Dimension(66, 17));
+        jLabel3.setMinimumSize(new java.awt.Dimension(66, 17));
+        jLabel3.setPreferredSize(new java.awt.Dimension(66, 19));
+
+        jtfPesoActual.setBackground(new java.awt.Color(21, 65, 118));
+        jtfPesoActual.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
+        jtfPesoActual.setForeground(new java.awt.Color(255, 255, 255));
+        jtfPesoActual.setMinimumSize(new java.awt.Dimension(6, 25));
+        jtfPesoActual.setPreferredSize(new java.awt.Dimension(6, 25));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -281,16 +298,18 @@ public class PacientesForm extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jtfDomicilio, javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +317,8 @@ public class PacientesForm extends javax.swing.JFrame {
                             .addComponent(jtfDNI)
                             .addComponent(jtfTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                             .addComponent(jtfID, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbEstado, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(jcbEstado, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfPesoActual, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)))
                     .addComponent(jbDietaPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,12 +328,12 @@ public class PacientesForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 16, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -333,12 +353,16 @@ public class PacientesForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcbEstado)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfPesoActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jcbEstado))
+                        .addGap(18, 18, 18)
                         .addComponent(jbDietaPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -423,14 +447,20 @@ public class PacientesForm extends javax.swing.JFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
+        if (jtfDNI.getText().length() != 8){
+            MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
+            jtfDNI.requestFocus();
+            jtfDNI.selectAll();
+            
+        }
         try {
 
             Paciente paciente = new Paciente(
-                    
                     Integer.parseInt(jtfDNI.getText()),
                     jtfNombre.getText(),
                     jtfDomicilio.getText(),
                     jtfTelefono.getText(),
+                    Double.parseDouble(jtfPesoActual.getText()),
                     true);
 
             // Primero busco si existe para no agregarlo repetido y lo
@@ -454,26 +484,27 @@ public class PacientesForm extends javax.swing.JFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-       // Desabilito RadioButon porque el sistema utiliza borrado lógico
+        // Desabilito RadioButon porque el sistema utiliza borrado lógico
         jcbEstado.setEnabled(false);
-         try {
-                        Paciente paciente = pacData.buscarPacientePorId(Integer.parseInt(jtfID.getText()));
+        try {
+            Paciente paciente = pacData.buscarPacientePorId(Integer.parseInt(jtfID.getText()));
             if (jtfDNI.getText().length() != 8) {
                 MensajeSB(2, "Debe ser un DNI valido 8 Digitos");
                 jtfDNI.requestFocus();
                 jtfDNI.selectAll();
-         }else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+            } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
                 jtfNombre.requestFocus();
                 jtfNombre.selectAll();
-       
-         }
-        } catch (Exception e) {
-            
-        }
-        }
- {
 
-            
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    {
+
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     public static void main(String args[]) {
@@ -512,6 +543,7 @@ public class PacientesForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -534,6 +566,7 @@ public class PacientesForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtfDomicilio;
     private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfNombre;
+    private javax.swing.JTextField jtfPesoActual;
     private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
 
@@ -568,8 +601,8 @@ public class PacientesForm extends javax.swing.JFrame {
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
-    
-        public boolean PruebaDeCaracteres(String texto) {
+
+    public boolean PruebaDeCaracteres(String texto) {
         // Busco si los caracteres ingresados son letras
         int b = 0;
         int i = 0;
