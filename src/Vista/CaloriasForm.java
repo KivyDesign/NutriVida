@@ -141,9 +141,14 @@ public class CaloriasForm extends javax.swing.JFrame {
         // =====================================================================
 
         // Al modelo le agregamos las siguientes columnas:
-        modeloGrupoAlimenticio.addColumn("Grupo Alimenticio");
+        modeloGrupoAlimenticio.addColumn("ID");
         modeloGrupoAlimenticio.addColumn("Nombre");
         modeloGrupoAlimenticio.addColumn("Calorías");
+        modeloGrupoAlimenticio.addColumn("Proteinas");
+        modeloGrupoAlimenticio.addColumn("Grasa");
+        modeloGrupoAlimenticio.addColumn("Carbohidratos");
+        modeloGrupoAlimenticio.addColumn("Fibra");
+        modeloGrupoAlimenticio.addColumn("Colesterol");
 
         // Y a nuestra Tabla le seteamos el modelo
         jtCaloriasSeleccion.setModel(modeloGrupoAlimenticio);
@@ -152,6 +157,11 @@ public class CaloriasForm extends javax.swing.JFrame {
         jtCaloriasSeleccion.getColumnModel().getColumn(0).setPreferredWidth(20);
         jtCaloriasSeleccion.getColumnModel().getColumn(1).setPreferredWidth(250);
         jtCaloriasSeleccion.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jtCaloriasSeleccion.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jtCaloriasSeleccion.getColumnModel().getColumn(4).setPreferredWidth(50);
+        jtCaloriasSeleccion.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jtCaloriasSeleccion.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jtCaloriasSeleccion.getColumnModel().getColumn(7).setPreferredWidth(50);
     }
     
     public void cargarTabla(int idGrupoAlimenticio) {
@@ -233,15 +243,15 @@ public class CaloriasForm extends javax.swing.JFrame {
     }
     
     public void cargarCamposjtCaloriasSeleccion(int obtengoID) {
-        // Busco la caloria por el Grupo alimenticio que es el ID que recibi
-        // y cargo la tabla
-        Calorias calorias = calData.buscarCaloriasPorId(obtengoID);
-
-        // Verifico si caloria no esta vacio
-        if (calorias != null) {
-//            jtfDNI.setText(String.valueOf(calorias.getDni()));
-//            jtfNombre.setText(calorias.getNombre());
-        }
+//        // Busco la caloria por el Grupo alimenticio que es el ID que recibi
+//        // y cargo la tabla
+//        Calorias calorias = calData.buscarCaloriasPorId(obtengoID);
+//
+//        // Verifico si caloria no esta vacio
+//        if (calorias != null) {
+////            jtfDNI.setText(String.valueOf(calorias.getDni()));
+////            jtfNombre.setText(calorias.getNombre());
+//        }
     }
 
     public void borrarFilasTabla() {
@@ -320,7 +330,7 @@ public class CaloriasForm extends javax.swing.JFrame {
 //        // Pero como ejemplo, lo asignamos a:
 //        jcbCargarGrupoAlimenticio.setSelectedIndex(seleccionFilaEnLaTabla);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -541,26 +551,25 @@ public class CaloriasForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jcbCargarGrupoAlimenticio, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(4, 4, 4)
-                                        .addComponent(jLabel6))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 119, Short.MAX_VALUE))))
+                                .addComponent(jcbCargarGrupoAlimenticio, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel6)
+                                .addGap(0, 119, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
+                        .addGap(45, 45, 45)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
                         .addComponent(jbSeleccionar)
                         .addGap(102, 102, 102)
                         .addComponent(jbLimpiarSeleccion)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,20 +583,18 @@ public class CaloriasForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbSeleccionar)
-                    .addComponent(jbLimpiarSeleccion))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbSeleccionar)
+                        .addComponent(jbLimpiarSeleccion))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(38, 38, 38)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -598,7 +605,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -640,7 +647,25 @@ public class CaloriasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbLimpiarSeleccionActionPerformed
 
     private void jbSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeleccionarActionPerformed
-        // TODO add your handling code here:
+        int pos = jtCalorias.getSelectedRow();
+        if (pos != -1) {
+            String ID, nombre, calorias, proteinas, grasa, carbohidrados, fibra, colesterol;
+            ID = jtCalorias.getValueAt(pos, 0).toString();
+            nombre = jtCalorias.getValueAt(pos, 1).toString();
+            calorias = jtCalorias.getValueAt(pos, 2).toString();
+            proteinas = jtCalorias.getValueAt(pos, 3).toString();
+            grasa = jtCalorias.getValueAt(pos, 4).toString();
+            carbohidrados = jtCalorias.getValueAt(pos, 5).toString();
+            fibra = jtCalorias.getValueAt(pos, 6).toString();
+            colesterol = jtCalorias.getValueAt(pos, 7).toString();
+            
+            String datos[] = {ID, nombre, calorias, proteinas, grasa, carbohidrados, fibra, colesterol};
+            
+            DefaultTableModel modeloProducto = (DefaultTableModel) jtCaloriasSeleccion.getModel();
+            modeloProducto.addRow(datos);
+        } else {
+            System.out.println("Error: Debe seleccionar un registro");
+        }
     }//GEN-LAST:event_jbSeleccionarActionPerformed
 
     /**
