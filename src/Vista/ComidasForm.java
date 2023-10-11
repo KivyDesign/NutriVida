@@ -59,7 +59,8 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfNombre.setBorder(text_border);
         jtfDetalle.setBorder(text_border);
         jtfCalorias.setBorder(text_border);
-        focusListener();
+        focusListenerNombre();
+        focusListenerDetalle();
         // Posiciono el foco en el nombre al iniciar el form
         jtfNombre.requestFocus();
 
@@ -97,6 +98,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfNombre = new javax.swing.JTextField();
         jtfDetalle = new javax.swing.JTextField();
         jtfCalorias = new javax.swing.JTextField();
+        jbLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,7 +176,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlMensajeSB)
                 .addGap(15, 15, 15))
         );
@@ -298,30 +300,42 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfCalorias.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jtfCalorias.setForeground(new java.awt.Color(255, 255, 255));
 
+        jbLimpiar.setText("Limpiar Campos");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlID, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlDetalle, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlCalorias, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlEstado, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jcbEstado)
-                    .addComponent(jtfID)
-                    .addComponent(jtfNombre)
-                    .addComponent(jtfDetalle)
-                    .addComponent(jtfCalorias, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlID, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlDetalle, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlCalorias, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlEstado, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbEstado)
+                            .addComponent(jtfID)
+                            .addComponent(jtfNombre)
+                            .addComponent(jtfDetalle)
+                            .addComponent(jtfCalorias, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,7 +362,9 @@ public class ComidasForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbEstado)
-                            .addComponent(jlEstado)))
+                            .addComponent(jlEstado))
+                        .addGap(18, 18, 18)
+                        .addComponent(jbLimpiar))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -463,6 +479,10 @@ public class ComidasForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        LimpiarCampos();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -508,6 +528,7 @@ public class ComidasForm extends javax.swing.JFrame {
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private javax.swing.JCheckBox jcbEstado;
@@ -573,10 +594,12 @@ public class ComidasForm extends javax.swing.JFrame {
         jbEliminar.setEnabled(false);
     }
 
-    public void focusListener() {
+    public void focusListenerNombre() {
         jtfNombre.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
+                jbBuscar.setEnabled(false);
+                jbNuevo.setEnabled(false);
                 jbGuardar.setEnabled(false);
                 jbEliminar.setEnabled(false);
             }
@@ -598,12 +621,46 @@ public class ComidasForm extends javax.swing.JFrame {
                     jcbEstado.setEnabled(false);
                     jtfDetalle.setDisabledTextColor(Color.white);
                     jtfCalorias.setDisabledTextColor(Color.white);
-                }else{
+                } else {
                     jtfNombre.setBorder(text_border_disable);
                     jcbEstado.setEnabled(true);
+                    jbBuscar.setEnabled(true);
+
                 }
 
             }
         });
     }
+    
+    public void focusListenerDetalle() {
+        jtfDetalle.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent fe) {
+                jbNuevo.setEnabled(false);
+                jbGuardar.setEnabled(false);
+                jbEliminar.setEnabled(false);
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) {
+                if (jtfDetalle.getText().equalsIgnoreCase("")) {
+                    jtfDetalle.setBorder(text_border);
+                    jtfDetalle.requestFocus();
+                    MensajeSB(2, "El campo Detalle debe llenarse");
+                    jcbEstado.setEnabled(false);
+                    jtfNombre.setDisabledTextColor(Color.white);
+                    jtfCalorias.setDisabledTextColor(Color.white);
+                
+                } else {
+                    jtfNombre.setBorder(text_border_disable);
+                    jcbEstado.setEnabled(true);
+                    jbBuscar.setEnabled(true);
+                    
+                }
+
+            }
+        });
+    }
+    
+    
 }
