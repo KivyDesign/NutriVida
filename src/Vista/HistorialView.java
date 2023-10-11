@@ -26,7 +26,8 @@ public class HistorialView extends javax.swing.JFrame {
     private LocalDate ahora;
     private PacienteData pacData;
     private HistorialData historialData;
-    private DefaultTableModel modelo;
+    private DefaultTableModel modelo = new DefaultTableModel();
+    ;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
@@ -38,7 +39,11 @@ public class HistorialView extends javax.swing.JFrame {
         historiaDieta = new DietasForm();
         pacData = new PacienteData();
         historialData = new HistorialData();
-        modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
         //traigo de DietasForm
         jlPaciente.setText(historiaDieta.nombrePac);
         jlPesoIni.setText(historiaDieta.pesoIni);
