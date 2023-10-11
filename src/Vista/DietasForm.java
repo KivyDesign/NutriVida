@@ -78,6 +78,10 @@ public class DietasForm extends javax.swing.JFrame {
         }
 
     }
+    public static String nombrePac = "";
+    public static String pesoIni = "";
+    public static String pesoFin = "";
+    public static int IdPac;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,7 +107,7 @@ public class DietasForm extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jbSalir = new javax.swing.JButton();
+        jbVolver = new javax.swing.JButton();
         jbSeguimiento = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
@@ -157,7 +161,7 @@ public class DietasForm extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("idDieta, nombre, paciente, pesoInicial, pesoFinal, fechaInicial, fechaFinal, estado");
+        jlMensajeSB.setText("Puede modificar o eliminar dieta");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -210,12 +214,12 @@ public class DietasForm extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(31, 75, 128));
 
-        jbSalir.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/5-32x32.png"))); // NOI18N
-        jbSalir.setText(" Salir");
-        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+        jbVolver.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jbVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/6-32x32.png"))); // NOI18N
+        jbVolver.setText("Volver");
+        jbVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalirActionPerformed(evt);
+                jbVolverActionPerformed(evt);
             }
         });
 
@@ -266,7 +270,7 @@ public class DietasForm extends javax.swing.JFrame {
                     .addComponent(jbNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -281,7 +285,7 @@ public class DietasForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSalir)
+                .addComponent(jbVolver)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -412,17 +416,17 @@ public class DietasForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+    private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
         // Por ahora solo cierro este form. Ampliar para ocultar el form actual
         // y mostrar el form del menu en su lugar
 //        this.dispose();
 
         // Instancio el form de menu y lo hago visible mientras oculto el
         // form con dietas
-        NutriVidaForm nutvidForm = new NutriVidaForm();
-        nutvidForm.setVisible(true);
+        PacientesForm pacientesForm = new PacientesForm();
+        pacientesForm.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jbSalirActionPerformed
+    }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
@@ -501,7 +505,7 @@ public class DietasForm extends javax.swing.JFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         dietadata.eliminarDietaPorId(Integer.parseInt(jtfID.getText()));
-        MensajeSB(1, "Dieta eliminada con exito");
+        MensajeSB(1, "Dieta eliminada con exito. Ahora puede asignar una nueva");
         jbEliminar.setEnabled(false);
         jbGuardar.setEnabled(false);
         jbSeguimiento.setEnabled(false);
@@ -524,6 +528,10 @@ public class DietasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeguimientoActionPerformed
+        nombrePac = jtfPaciente.getText();
+        pesoIni = jtfPesoInicial.getText();
+        pesoFin = jtfPesoFinal.getText();
+        IdPac=numId.nroId;
         HistorialView historialView = new HistorialView();
         historialView.setVisible(true);
         this.setVisible(false);
@@ -594,8 +602,8 @@ public class DietasForm extends javax.swing.JFrame {
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
-    private javax.swing.JButton jbSalir;
     private javax.swing.JButton jbSeguimiento;
+    private javax.swing.JButton jbVolver;
     private javax.swing.JLabel jlMensajeSB;
     private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfNombre;

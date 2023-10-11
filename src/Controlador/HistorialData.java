@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class HistorialData {
@@ -84,4 +85,25 @@ public class HistorialData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Historial");
         }
     }
-}
+
+    public ArrayList<Historial> obtenerHistorialXId(int idPaciente) {
+        ArrayList<Historial> listaHistorial = new ArrayList<>();
+
+        try {
+            String sql = "SELECT idHistorial FROM historial  WHERE idPaciente = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, idPaciente);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listaHistorial.add(buscarHistorialPorId(rs.getInt("idHistorial")));
+            }    ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla historial " + ex.getMessage());
+        }
+
+        return listaHistorial;
+    }
+        }

@@ -261,6 +261,7 @@ public class PacientesForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jbDietaPersonal.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jbDietaPersonal.setText("Area Personal");
         jbDietaPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -395,7 +396,7 @@ public class PacientesForm extends javax.swing.JFrame {
                         jbEliminar.setEnabled(true);
                         jbNuevo.setEnabled(false);
                         MensajeSB(1, "Paciente encontrado");
-                        jbDietaPersonal.setEnabled(false);
+                        jbDietaPersonal.setEnabled(true);
                     } else {
                         MensajeSB(2, "El DNI no es de un Paciente activo");
                         jtfDNI.setBorder(text_border_rojo);
