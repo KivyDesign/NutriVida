@@ -420,8 +420,9 @@ public class PacientesForm extends javax.swing.JFrame {
         try {
 
             Paciente paciente = new Paciente(
-                    Integer.parseInt(jtfNombre.getText()),
-                    jtfDNI.getText(),
+                    
+                    Integer.parseInt(jtfDNI.getText()),
+                    jtfNombre.getText(),
                     jtfDomicilio.getText(),
                     jtfTelefono.getText(),
                     true);
