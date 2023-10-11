@@ -194,6 +194,11 @@ public class PacientesForm extends javax.swing.JFrame {
         jbGuardar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/3-32x32.png"))); // NOI18N
         jbGuardar.setText(" Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/4-32x32.png"))); // NOI18N
@@ -447,6 +452,30 @@ public class PacientesForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+       // Desabilito RadioButon porque el sistema utiliza borrado lógico
+        jcbEstado.setEnabled(false);
+         try {
+                        Paciente paciente = pacData.buscarPacientePorId(Integer.parseInt(jtfID.getText()));
+            if (jtfDNI.getText().length() != 8) {
+                MensajeSB(2, "Debe ser un DNI valido 8 Digitos");
+                jtfDNI.requestFocus();
+                jtfDNI.selectAll();
+         }else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+                jtfNombre.requestFocus();
+                jtfNombre.selectAll();
+       
+         }
+        } catch (Exception e) {
+            
+        }
+        }
+ {
+
+            
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -538,6 +567,24 @@ public class PacientesForm extends javax.swing.JFrame {
         jtfID.setText("");
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
+    }
+    
+        public boolean PruebaDeCaracteres(String texto) {
+        // Busco si los caracteres ingresados son letras
+        int b = 0;
+        int i = 0;
+        for (i = 0; i < texto.length(); i++) {
+            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') && texto.charAt(i) != ' ') {
+                b++;
+            }
+        }
+        if (b > 0 || texto.isEmpty()) {
+            MensajeSB(2, "Los campos Nombre y Apellido deben completarse con letras");
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
 }
