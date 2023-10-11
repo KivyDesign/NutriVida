@@ -270,8 +270,9 @@ public class PacientesForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jbDietaPersonal.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jbDietaPersonal.setText("Area Personal");
+        jbDietaPersonal.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jbDietaPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/8-32x32.png"))); // NOI18N
+        jbDietaPersonal.setText(" Area Personal");
         jbDietaPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbDietaPersonalActionPerformed(evt);
@@ -288,8 +289,6 @@ public class PacientesForm extends javax.swing.JFrame {
         jtfPesoActual.setBackground(new java.awt.Color(21, 65, 118));
         jtfPesoActual.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         jtfPesoActual.setForeground(new java.awt.Color(255, 255, 255));
-        jtfPesoActual.setMinimumSize(new java.awt.Dimension(6, 25));
-        jtfPesoActual.setPreferredSize(new java.awt.Dimension(6, 25));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
