@@ -18,14 +18,15 @@ public class PacienteData {
     }
 
     public void guardarPaciente(Paciente paciente) {
-        String sql = "INSERT INTO paciente(dni, nombre, domicilio, telefono, estado) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO paciente(dni, nombre, domicilio, telefono,pesoActual, estado) VALUES(?, ?, ?,?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, paciente.getDni());
             ps.setString(2, paciente.getNombre());
             ps.setString(3, paciente.getDomicilio());
             ps.setString(4, paciente.getTelefono());
-            ps.setBoolean(5, paciente.isEstado());
+            ps.setDouble(5, paciente.getPesoActual());
+            ps.setBoolean(6, paciente.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -52,13 +53,14 @@ public class PacienteData {
 
     public void modificarPaciente(Paciente paciente) {
         try {
-            String sql = "UPDATE paciente SET dni = ?, nombre = ?, domicilio = ?, telefono = ? WHERE idPaciente = ?";
+            String sql = "UPDATE paciente SET dni = ?, nombre = ?, domicilio = ?, telefono = ?,pesoActual=? WHERE idPaciente = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, paciente.getDni());
             ps.setString(2, paciente.getNombre());
             ps.setString(3, paciente.getDomicilio());
             ps.setString(4, paciente.getTelefono());
             ps.setInt(5, paciente.getIdPaciente());
+            ps.setDouble(6,paciente.getPesoActual());
             ps.executeUpdate();
 
             ps.close();
@@ -71,7 +73,7 @@ public class PacienteData {
         Paciente paciente = null;
         PreparedStatement ps = null;
         try {
-            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono, estado FROM paciente WHERE dni = ?";
+            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono,pesoActual, estado FROM paciente WHERE dni = ?";
 
             ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
@@ -83,6 +85,7 @@ public class PacienteData {
                 paciente.setNombre(rs.getString("nombre"));
                 paciente.setDomicilio(rs.getString("domicilio"));
                 paciente.setTelefono(rs.getString("telefono"));
+                paciente.setPesoActual(rs.getDouble("pesoActual"));
                 paciente.setEstado(rs.getBoolean("estado"));
             }
 
@@ -97,7 +100,7 @@ public class PacienteData {
         Paciente paciente = null;
         PreparedStatement ps = null;
         try {
-            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono, estado FROM paciente WHERE idPaciente = ?";
+            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono,pesoActual, estado FROM paciente WHERE idPaciente = ?";
 
             ps = con.prepareStatement(sql);
             ps.setInt(1, idPaciente);
@@ -109,6 +112,7 @@ public class PacienteData {
                 paciente.setNombre(rs.getString("nombre"));
                 paciente.setDomicilio(rs.getString("domicilio"));
                 paciente.setTelefono(rs.getString("telefono"));
+                 paciente.setPesoActual(rs.getDouble("pesoActual"));
                 paciente.setEstado(rs.getBoolean("estado"));
             }
 

@@ -6,30 +6,41 @@ public class Paciente {
     private String nombre;
     private String domicilio;
     private String telefono;
+    private double pesoActual;
     private boolean estado;
 
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, int dni, String nombre, String domicilio, String telefono, boolean estado) {
+    public Paciente(int dni, String nombre, String domicilio, String telefono, double pesoActual, boolean estado) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.pesoActual = pesoActual;
+        this.estado = estado;
+    }
+
+    public Paciente(int idPaciente, int dni, String nombre, String domicilio, String telefono, double pesoActual) {
         this.idPaciente = idPaciente;
         this.dni = dni;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
-        this.estado = estado;
+        this.pesoActual = pesoActual;
     }
 
-    public Paciente(int dni, String nombre, String domicilio, String telefono, boolean estado) {
-        this.dni = dni;
-        this.nombre = nombre;
-        this.domicilio = domicilio;
-        this.telefono = telefono;
-        this.estado = estado;
+    
+//    public Paciente(int parseInt, String text, boolean b) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+    public double getPesoActual() {
+        return pesoActual;
     }
 
-    public Paciente(int parseInt, String text, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPesoActual(double pesoActual) {
+        this.pesoActual = pesoActual;
     }
 
     public int getIdPaciente() {

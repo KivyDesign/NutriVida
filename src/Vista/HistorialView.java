@@ -27,7 +27,6 @@ public class HistorialView extends javax.swing.JFrame {
     private PacienteData pacData;
     private HistorialData historialData;
     private DefaultTableModel modelo = new DefaultTableModel();
-    ;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
