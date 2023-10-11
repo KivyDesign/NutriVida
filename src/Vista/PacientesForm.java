@@ -446,12 +446,28 @@ public class PacientesForm extends javax.swing.JFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
-        if (jtfDNI.getText().length() != 8){
+        if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+            jtfNombre.requestFocus();
+            jtfNombre.selectAll();
+
+        } else if (jtfDNI.getText().length() != 8) {
             MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
             jtfDNI.requestFocus();
             jtfDNI.selectAll();
-            
-        }
+        } else if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
+            MensajeSB(2, "El DNI ya esta utilizado en otro alumno");
+            jtfDNI.requestFocus();
+            jtfDNI.selectAll();
+        } else if (jtfDomicilio.getText().isEmpty()) {
+            MensajeSB(2, "Debe Agregar un domicilio");
+            jtfDomicilio.requestFocus();
+            jtfDomicilio.selectAll();
+        } else if (jtfPesoActual.getText().isEmpty()) {
+            MensajeSB(2, "Debe Agregar un peso valido");
+            jtfPesoActual.requestFocus();
+            jtfPesoActual.selectAll();
+        }else{
+
         try {
 
             Paciente paciente = new Paciente(
@@ -480,7 +496,7 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfDNI.setBorder(text_border_rojo);
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
-
+    }
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
         // Desabilito RadioButon porque el sistema utiliza borrado lógico
@@ -600,23 +616,30 @@ public class PacientesForm extends javax.swing.JFrame {
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
-
+    
     public boolean PruebaDeCaracteres(String texto) {
-        // Busco si los caracteres ingresados son letras
-        int b = 0;
-        int i = 0;
-        for (i = 0; i < texto.length(); i++) {
-            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') && texto.charAt(i) != ' ') {
-                b++;
-            }
-        }
-        if (b > 0 || texto.isEmpty()) {
-            MensajeSB(2, "Los campos Nombre y Apellido deben completarse con letras");
+    // Verifico si el texto contiene solo letras y espacios
+    for (int i = 0; i < texto.length(); i++) {
+        char c = texto.charAt(i);
+        if (!(Character.isLetter(c) || c == ' ')) {
+            MensajeSB(2, "El campo Nombre deben completarse con letras y espacios");
             return false;
-        } else {
-            return true;
         }
-
     }
+
+    // Verifico si el texto está vacío
+    if (texto.isEmpty()) {
+        MensajeSB(2, "El campo Nombre no puede estar vacío");
+        return false;
+    }
+
+    // Verificar si el texto comienza o termina con un espacio
+    if (texto.startsWith(" ") || texto.endsWith(" ")) {
+        MensajeSB(2, "El campo Nombre no puede comenzar o terminar con un espacio");
+        return false;
+    }
+
+    return true;
+}
 
 }
