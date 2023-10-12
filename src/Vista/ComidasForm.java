@@ -662,7 +662,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     jtfCalorias.setDisabledTextColor(Color.white);
                 
                 } else {
-                    jtfNombre.setBorder(text_border_disable);
+                    jtfDetalle.setBorder(text_border_disable);
                     jcbEstado.setEnabled(true);
                     jbBuscar.setEnabled(true);
                     
