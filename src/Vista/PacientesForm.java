@@ -450,7 +450,6 @@ public class PacientesForm extends javax.swing.JFrame {
         if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
-            jtfNombre.setBorder(text_border);
 
         } else if (jtfDNI.getText().length() != 8) {
             MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
@@ -467,40 +466,58 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfDomicilio.requestFocus();
             jtfDomicilio.selectAll();
             jtfDomicilio.setBorder(text_border_rojo);
+        } else if (jtfTelefono.getText().isEmpty()) {
+            MensajeSB(2, "Debe Agregar un Telefono");
+            jtfTelefono.requestFocus();
+            jtfTelefono.selectAll();
+            jtfTelefono.setBorder(text_border_rojo);
         } else if (jtfPesoActual.getText().isEmpty()) {
             MensajeSB(2, "Debe Agregar un peso valido");
             jtfPesoActual.requestFocus();
             jtfPesoActual.selectAll();
             jtfPesoActual.setBorder(text_border_rojo);
-        }else{
+        } else {
 
-        try {
+            try {
 
-            Paciente paciente = new Paciente(
-                    Integer.parseInt(jtfDNI.getText()),
-                    jtfNombre.getText(),
-                    jtfDomicilio.getText(),
-                    jtfTelefono.getText(),
-                    Double.parseDouble(jtfPesoActual.getText()),
-                    true);
+                Paciente paciente = new Paciente(
+                        Integer.parseInt(jtfDNI.getText()),
+                        jtfNombre.getText(),
+                        jtfDomicilio.getText(),
+                        jtfTelefono.getText(),
+                        Double.parseDouble(jtfPesoActual.getText()),
+                        true);
 
-            // Primero busco si existe para no agregarlo repetido y lo
-            // inserto al paciente
-            pacData.guardarPaciente(paciente);
-            // Si lo agregue con exito no es null y se lo informo al DataEntry
-            if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
-                MensajeSB(1, "Paciente agregado con exito! Busque por DNI o cargue un nuevo Paciente");
-                LimpiarCampos();
-            } else {
-                MensajeSB(2, "ERROR: El paciente no se pudo agregar");
+                // Primero busco si existe para no agregarlo repetido y lo
+                // inserto al paciente
+                pacData.guardarPaciente(paciente);
+                // Si lo agregue con exito no es null y se lo informo al DataEntry
+                if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
+                    MensajeSB(1, "Paciente agregado con exito! Busque por DNI o cargue un nuevo Paciente");
+                    LimpiarCampos();
+                    jbDietaPersonal.setEnabled(false);
+                    // Set borders todos subrayados en amarillo a excepción del ID que es
+                    // blanco y de solo 1 pixel de grosor para indicar que no es editable
+                    jtfID.setBorder(text_border_disable);
+                    jtfNombre.setBorder(text_border);
+                    jtfDNI.setBorder(text_border);
+                    jtfDomicilio.setBorder(text_border);
+                    jtfTelefono.setBorder(text_border);
+                    jtfPesoActual.setBorder(text_border);
+
+                    // Posiciono el foco en el nombre al iniciar el form
+                    jtfNombre.requestFocus();
+
+                } else {
+                    MensajeSB(2, "ERROR: El paciente no se pudo agregar");
+                }
+            } catch (NumberFormatException e) {
+                MensajeSB(2, "El peso debe ser un número");
+                jtfPesoActual.requestFocus();
+                jtfPesoActual.selectAll();
+                jtfPesoActual.setBorder(text_border_rojo);
+                jtfPesoActual.setBorder(text_border_rojo);
             }
-        } catch (NumberFormatException e) {
-            MensajeSB(2, "El peso debe ser un número");
-            jtfDNI.requestFocus();
-            jtfDNI.selectAll();
-            jtfDNI.setBorder(text_border_rojo);
-            jtfDNI.setBorder(text_border_rojo);
-        }
     }//GEN-LAST:event_jbNuevoActionPerformed
     }
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -617,38 +634,39 @@ public class PacientesForm extends javax.swing.JFrame {
         jtfNombre.setText("");
         jtfDomicilio.setText("");
         jtfTelefono.setText("");
+        jtfPesoActual.setText("");
         jcbEstado.setSelected(false);
         jtfID.setText("");
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
-    
+
     public boolean PruebaDeCaracteres(String texto) {
-    // Verifico si el texto contiene solo letras y espacios
-    for (int i = 0; i < texto.length(); i++) {
-        char c = texto.charAt(i);
-        if (!(Character.isLetter(c) || c == ' ')) {
-            MensajeSB(2, "El campo Nombre deben completarse con letras y espacios");
-            jtfNombre.requestFocus();
-            jtfNombre.selectAll();
-            jtfNombre.setBorder(text_border_rojo);
+        // Verifico si el texto contiene solo letras y espacios
+        for (int i = 0; i < texto.length(); i++) {
+            char c = texto.charAt(i);
+            if (!(Character.isLetter(c) || c == ' ')) {
+                MensajeSB(2, "El campo Nombre deben completarse con letras y espacios");
+                jtfNombre.requestFocus();
+                jtfNombre.selectAll();
+                jtfNombre.setBorder(text_border_rojo);
+                return false;
+            }
+        }
+
+        // Verifico si el texto está vacío
+        if (texto.isEmpty()) {
+            MensajeSB(2, "El campo Nombre no puede estar vacío");
             return false;
         }
-    }
 
-    // Verifico si el texto está vacío
-    if (texto.isEmpty()) {
-        MensajeSB(2, "El campo Nombre no puede estar vacío");
-        return false;
-    }
+        // Verificar si el texto comienza o termina con un espacio
+        if (texto.startsWith(" ") || texto.endsWith(" ")) {
+            MensajeSB(2, "El campo Nombre no puede comenzar o terminar con un espacio");
+            return false;
+        }
 
-    // Verificar si el texto comienza o termina con un espacio
-    if (texto.startsWith(" ") || texto.endsWith(" ")) {
-        MensajeSB(2, "El campo Nombre no puede comenzar o terminar con un espacio");
-        return false;
+        return true;
     }
-
-    return true;
-}
 
 }
