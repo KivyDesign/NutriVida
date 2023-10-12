@@ -780,7 +780,7 @@ public class CaloriasForm extends javax.swing.JFrame {
     private javax.swing.JButton jbSeleccionar;
     private javax.swing.JComboBox<String> jcbCargarGrupoAlimenticio;
     private javax.swing.JLabel jlMensajeSB;
-    private javax.swing.JLabel jlTotalCalorias;
+    public static javax.swing.JLabel jlTotalCalorias;
     private javax.swing.JPanel jpConexion;
     private javax.swing.JTable jtCalorias;
     private javax.swing.JTable jtCaloriasSeleccion;
