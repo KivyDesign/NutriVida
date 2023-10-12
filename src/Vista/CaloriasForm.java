@@ -454,7 +454,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         jlTotalCalorias.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jlTotalCalorias.setForeground(new java.awt.Color(255, 255, 255));
         jlTotalCalorias.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlTotalCalorias.setText("0.00");
+        jlTotalCalorias.setText("0");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);

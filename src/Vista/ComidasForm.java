@@ -12,8 +12,6 @@ import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.Connection;
-import java.time.ZoneId;
-import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
@@ -337,11 +335,9 @@ public class ComidasForm extends javax.swing.JFrame {
                                 .addComponent(jButton1))
                             .addComponent(jtfDetalle)
                             .addComponent(jtfNombre)
-                            .addComponent(jtfID))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(215, 215, 215)))
+                            .addComponent(jtfID)))
+                    .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
         );
@@ -372,7 +368,7 @@ public class ComidasForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbEstado)
                             .addComponent(jlEstado))
-                        .addGap(18, 18, 18)
+                        .addGap(15, 15, 15)
                         .addComponent(jbLimpiar))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
@@ -641,7 +637,7 @@ public class ComidasForm extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void focusListenerDetalle() {
         jtfDetalle.addFocusListener(new FocusListener() {
             @Override
@@ -660,17 +656,16 @@ public class ComidasForm extends javax.swing.JFrame {
                     jcbEstado.setEnabled(false);
                     jtfNombre.setDisabledTextColor(Color.white);
                     jtfCalorias.setDisabledTextColor(Color.white);
-                
+
                 } else {
                     jtfDetalle.setBorder(text_border_disable);
                     jcbEstado.setEnabled(true);
                     jbBuscar.setEnabled(true);
-                    
+
                 }
 
             }
         });
     }
-    
-    
+
 }
