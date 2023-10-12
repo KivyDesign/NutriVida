@@ -48,7 +48,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jlID" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="jlNombre" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -68,13 +68,10 @@
                               <Component id="jtfNombre" alignment="0" max="32767" attributes="0"/>
                               <Component id="jtfID" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="40" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jbLimpiar" min="-2" pref="155" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jbLimpiar" min="-2" pref="155" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
               </Group>
@@ -112,7 +109,7 @@
                               <Component id="jcbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jlEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Component id="jbLimpiar" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel4" alignment="0" min="-2" max="-2" attributes="0"/>
