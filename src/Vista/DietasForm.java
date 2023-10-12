@@ -60,12 +60,13 @@ public class DietasForm extends javax.swing.JFrame {
             jCheckBox1.setSelected(dieta.isEstado());
             jCheckBox1.setEnabled(false);
         } else {
-
+            
             jbEliminar.setEnabled(false);
             jbGuardar.setEnabled(false);
             jbSeguimiento.setEnabled(false);
             jbGuardar.setEnabled(false);
             jtfID.setEnabled(false);
+            jbDetalleDieta.setEnabled(false);
             jtfPaciente.setText(numId.nombreP);
             jtfPaciente.setEditable(false);
             // Set borders todos subrayados en amarillo a excepción del ID que es
@@ -76,7 +77,7 @@ public class DietasForm extends javax.swing.JFrame {
             jtfPesoInicial.setBorder(text_border);
             jtfPesoFinal.setBorder(text_border);
         }
-
+        
     }
     public static String nombrePac = "";
     public static String pesoIni = "";
@@ -112,7 +113,7 @@ public class DietasForm extends javax.swing.JFrame {
         jbNuevo = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbDetalleDieta = new javax.swing.JButton();
         jtfID = new javax.swing.JTextField();
         jtfNombre = new javax.swing.JTextField();
         jtfPaciente = new javax.swing.JTextField();
@@ -260,9 +261,14 @@ public class DietasForm extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/7-32x32.png"))); // NOI18N
-        jButton1.setText(" Detalle Dieta");
+        jbDetalleDieta.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jbDetalleDieta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/7-32x32.png"))); // NOI18N
+        jbDetalleDieta.setText(" Detalle Dieta");
+        jbDetalleDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDetalleDietaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -271,7 +277,7 @@ public class DietasForm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbDetalleDieta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbSeguimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -283,7 +289,7 @@ public class DietasForm extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbDetalleDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbSeguimiento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -461,7 +467,7 @@ public class DietasForm extends javax.swing.JFrame {
                     jtfPesoFinal.selectAll();
                     jtfPesoFinal.setBorder(text_border_rojo);
                 } else {
-
+                    
                     Dieta dieta = new Dieta(jtfNombre.getText(), pacienteData.buscarPacientePorId(numId.nroId), Double.parseDouble(jtfPesoInicial.getText()),
                             Double.parseDouble(jtfPesoFinal.getText()),
                             jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
@@ -474,7 +480,7 @@ public class DietasForm extends javax.swing.JFrame {
                 MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
             }
         }
-
+        
 
     }//GEN-LAST:event_jbNuevoActionPerformed
 
@@ -509,7 +515,7 @@ public class DietasForm extends javax.swing.JFrame {
                 MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
             }
         }
-
+        
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -541,12 +547,18 @@ public class DietasForm extends javax.swing.JFrame {
         nombrePac = jtfPaciente.getText();
         pesoIni = jtfPesoInicial.getText();
         pesoFin = jtfPesoFinal.getText();
-        IdPac=numId.nroId;
+        IdPac = numId.nroId;
         HistorialView historialView = new HistorialView();
         historialView.setVisible(true);
         this.setVisible(false);
 
     }//GEN-LAST:event_jbSeguimientoActionPerformed
+
+    private void jbDetalleDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetalleDietaActionPerformed
+        DetalleDieta detalleDieta = new DetalleDieta();
+        detalleDieta.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jbDetalleDietaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -562,21 +574,21 @@ public class DietasForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(DietasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(DietasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(DietasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DietasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -592,7 +604,6 @@ public class DietasForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
@@ -610,6 +621,7 @@ public class DietasForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JButton jbDetalleDieta;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
@@ -643,7 +655,7 @@ public class DietasForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-
+    
     public boolean PruebaDeCaracteres(String texto) {
         // Busco si los caracteres ingresados son letras
         int b = 0;
@@ -660,5 +672,5 @@ public class DietasForm extends javax.swing.JFrame {
             return true;
         }
     }
-
+    
 }
