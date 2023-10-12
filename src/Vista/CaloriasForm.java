@@ -38,6 +38,7 @@ public class CaloriasForm extends javax.swing.JFrame {
     private int idGrupoAlimenticio = 1;
 
     private int totalDeCalorias = 0;
+    private int limitoCincoRegistros = 0;
 
     /**
      * Creates new form CaloriasForm
@@ -665,6 +666,7 @@ public class CaloriasForm extends javax.swing.JFrame {
     private void jbLimpiarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarSeleccionActionPerformed
         borrarFilasTablaGrupoSeleccionado();
         totalDeCalorias = 0;
+        limitoCincoRegistros = 0;
         jlTotalCalorias.setText(String.valueOf(totalDeCalorias));
     }//GEN-LAST:event_jbLimpiarSeleccionActionPerformed
 
@@ -686,17 +688,22 @@ public class CaloriasForm extends javax.swing.JFrame {
             // Valido primero que no pueda ingresarse 2 veces el mismo alimento
             Boolean resultado = validarTabla(nombre);
             if (resultado) {
-                mensajeSB(1, "No puede agregarse 2 veces el mismo alimento");
+                mensajeSB(2, "Error: No puede agregarse 2 veces el mismo alimento");
             } else {
-//                DefaultTableModel modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
-                modeloGrupoAlimenticio.addRow(datos);
+                if (limitoCincoRegistros < 5) {
+                    // DefaultTableModel modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
+                    modeloGrupoAlimenticio.addRow(datos);
 
-                // Actualizo el total de calorios
-                totalDeCalorias = totalDeCalorias + Integer.parseInt(calorias.toString());
-                jlTotalCalorias.setText(String.valueOf(totalDeCalorias));
+                    // Actualizo el total de calorios
+                    totalDeCalorias = totalDeCalorias + Integer.parseInt(calorias.toString());
+                    jlTotalCalorias.setText(String.valueOf(totalDeCalorias));
+                    limitoCincoRegistros++;
+                } else {
+                    mensajeSB(2, "Error: Solo puede ingresar hasta 5 alimentos");
+                }
             }
         } else {
-            System.out.println("Error: Debe seleccionar un registro");
+            mensajeSB(2, "Error: Debe seleccionar un alimento para sumarlo a la lista");
         }
     }//GEN-LAST:event_jbSeleccionarActionPerformed
 
