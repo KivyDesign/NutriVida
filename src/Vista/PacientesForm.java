@@ -42,6 +42,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jtfDNI.setBorder(text_border);
         jtfDomicilio.setBorder(text_border);
         jtfTelefono.setBorder(text_border);
+        jtfPesoActual.setBorder(text_border);
 
         // Posiciono el foco en el nombre al iniciar el form
         jtfNombre.requestFocus();
@@ -449,23 +450,28 @@ public class PacientesForm extends javax.swing.JFrame {
         if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
+            jtfNombre.setBorder(text_border);
 
         } else if (jtfDNI.getText().length() != 8) {
             MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
             jtfDNI.requestFocus();
             jtfDNI.selectAll();
+            jtfDNI.setBorder(text_border_rojo);
         } else if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
             MensajeSB(2, "El DNI ya esta utilizado en otro alumno");
             jtfDNI.requestFocus();
             jtfDNI.selectAll();
+            jtfDNI.setBorder(text_border_rojo);
         } else if (jtfDomicilio.getText().isEmpty()) {
             MensajeSB(2, "Debe Agregar un domicilio");
             jtfDomicilio.requestFocus();
             jtfDomicilio.selectAll();
+            jtfDomicilio.setBorder(text_border_rojo);
         } else if (jtfPesoActual.getText().isEmpty()) {
             MensajeSB(2, "Debe Agregar un peso valido");
             jtfPesoActual.requestFocus();
             jtfPesoActual.selectAll();
+            jtfPesoActual.setBorder(text_border_rojo);
         }else{
 
         try {
@@ -489,7 +495,7 @@ public class PacientesForm extends javax.swing.JFrame {
                 MensajeSB(2, "ERROR: El paciente no se pudo agregar");
             }
         } catch (NumberFormatException e) {
-            MensajeSB(2, "El DNI debe ser un número");
+            MensajeSB(2, "El peso debe ser un número");
             jtfDNI.requestFocus();
             jtfDNI.selectAll();
             jtfDNI.setBorder(text_border_rojo);
@@ -623,6 +629,9 @@ public class PacientesForm extends javax.swing.JFrame {
         char c = texto.charAt(i);
         if (!(Character.isLetter(c) || c == ' ')) {
             MensajeSB(2, "El campo Nombre deben completarse con letras y espacios");
+            jtfNombre.requestFocus();
+            jtfNombre.selectAll();
+            jtfNombre.setBorder(text_border_rojo);
             return false;
         }
     }
