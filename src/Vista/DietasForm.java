@@ -325,8 +325,12 @@ public class DietasForm extends javax.swing.JFrame {
         jtfPesoFinal.setForeground(new java.awt.Color(255, 255, 255));
 
         jDateChooser1.setBackground(new java.awt.Color(21, 65, 118));
+        jDateChooser1.setMaxSelectableDate(new java.util.Date(1735704116000L));
+        jDateChooser1.setMinSelectableDate(new java.util.Date(1672545716000L));
 
         jDateChooser2.setBackground(new java.awt.Color(21, 65, 118));
+        jDateChooser2.setMaxSelectableDate(new java.util.Date(1735704116000L));
+        jDateChooser2.setMinSelectableDate(new java.util.Date(1672545716000L));
 
         jCheckBox1.setBackground(new java.awt.Color(21, 65, 118));
         jCheckBox1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
