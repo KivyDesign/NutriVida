@@ -501,6 +501,7 @@ public class ComidasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbCalcularCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularCaloriasActionPerformed
+        // Aquí cargo las calorías en el Form de Gestión de Calorías
         CaloriasForm.jlTotalCalorias.setText(jtfCalorias.getText());
     }//GEN-LAST:event_jbCalcularCaloriasActionPerformed
 
