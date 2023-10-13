@@ -8,6 +8,7 @@ package Vista;
 import Controlador.CaloriasData;
 import Controlador.Conexion;
 import Modelo.Calorias;
+import static Vista.ComidasForm.jtfCalorias;
 import java.awt.Color;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -697,7 +698,7 @@ public class CaloriasForm extends javax.swing.JFrame {
                     // DefaultTableModel modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
                     modeloGrupoAlimenticio.addRow(datos);
 
-                    // Actualizo el total de calorios
+                    // Actualizo el total de calorías
                     totalDeCalorias = totalDeCalorias + Integer.parseInt(calorias.toString());
                     jlTotalCalorias.setText(String.valueOf(totalDeCalorias));
                     limitoCincoRegistros++;
@@ -711,12 +712,12 @@ public class CaloriasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSeleccionarActionPerformed
 
     private void jbCargarCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarCaloriasActionPerformed
-        // Aquí cargo las calorias en el Form de Gestión de Comidas
-        
+        // Aquí cargo las calorías en el Form de Gestión de Comidas
+        ComidasForm.jtfCalorias.setText(jlTotalCalorias.getText());
     }//GEN-LAST:event_jbCargarCaloriasActionPerformed
 
     private Boolean validarTabla(String nombre) {
-        // Valido que no se pueda ingresar 2 veces el mismo alimento
+        // Válido que no se pueda ingresar 2 veces el mismo alimento
         DefaultTableModel modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
         for (int i = 0; i < modeloGrupoAlimenticio.getRowCount(); i++) {
             String name = modeloGrupoAlimenticio.getValueAt(i, 1).toString();

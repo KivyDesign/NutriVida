@@ -42,9 +42,11 @@ public class ComidasForm extends javax.swing.JFrame {
         // para no tener ese molesto dialogo de conexion
         if (con != null) {
             this.setTitle("Sistema de Gestión NutriVida - Estado: Conectado");
+            // Configuro de color verde el panel del titulo principal
             jpConexion.setBackground(new Color(0, 153, 102));
         } else {
             this.setTitle("Sistema de Gestión NutriVida - Estado: Error");
+            // Configuro de color rojo el panel del titulo principal
             jpConexion.setBackground(new Color(255, 50, 0));
         }
 
@@ -60,9 +62,13 @@ public class ComidasForm extends javax.swing.JFrame {
         focusListenerNombre();
         focusListenerDetalle();
         focusListenerCalorias();
+
         // Posiciono el foco en el nombre al iniciar el form
         jtfNombre.requestFocus();
 
+        // Configuro el form calorias para recibir los datos del textField calorias
+        CaloriasForm recibir = new CaloriasForm();
+        recibir.setVisible(true);
     }
 
     /**
@@ -98,7 +104,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfDetalle = new javax.swing.JTextField();
         jtfCalorias = new javax.swing.JTextField();
         jbLimpiar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbCalcularCalorias = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -308,15 +314,20 @@ public class ComidasForm extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jButton1.setText("Calcular Calorias");
+        jbCalcularCalorias.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jbCalcularCalorias.setText("Calcular Calorias");
+        jbCalcularCalorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCalcularCaloriasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -333,7 +344,7 @@ public class ComidasForm extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jtfCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1))
+                                .addComponent(jbCalcularCalorias))
                             .addComponent(jtfDetalle)
                             .addComponent(jtfNombre)
                             .addComponent(jtfID)))
@@ -364,7 +375,7 @@ public class ComidasForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlCalorias)
-                            .addComponent(jButton1))
+                            .addComponent(jbCalcularCalorias))
                         .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbEstado)
@@ -489,6 +500,10 @@ public class ComidasForm extends javax.swing.JFrame {
         LimpiarCampos();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
+    private void jbCalcularCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularCaloriasActionPerformed
+        CaloriasForm.jlTotalCalorias.setText(jtfCalorias.getText());
+    }//GEN-LAST:event_jbCalcularCaloriasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -525,7 +540,6 @@ public class ComidasForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -533,6 +547,7 @@ public class ComidasForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbCalcularCalorias;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
@@ -546,7 +561,7 @@ public class ComidasForm extends javax.swing.JFrame {
     private javax.swing.JLabel jlMensajeSB;
     private javax.swing.JLabel jlNombre;
     private javax.swing.JPanel jpConexion;
-    private javax.swing.JTextField jtfCalorias;
+    public static javax.swing.JTextField jtfCalorias;
     private javax.swing.JTextField jtfDetalle;
     private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfNombre;
