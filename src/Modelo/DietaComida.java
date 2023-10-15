@@ -66,10 +66,12 @@ public class DietaComida {
         this.horario = horario;
     }
 
-    
     @Override
     public String toString() {
-        return "DietaComida{" + "idDietaComida=" + idDietaComida + ", comida=" + comida + ", dieta=" + dieta + '}';
+        return "DietaComida{" + "idDietaComida=" + idDietaComida + ", comida=" + comida + ", dieta=" + dieta + ", porcion=" + porcion + ", horario=" + horario + '}';
     }
+
+    
+   
 
 }

@@ -60,7 +60,7 @@ public class DietasForm extends javax.swing.JFrame {
             jCheckBox1.setSelected(dieta.isEstado());
             jCheckBox1.setEnabled(false);
         } else {
-            
+
             jbEliminar.setEnabled(false);
             jbGuardar.setEnabled(false);
             jbSeguimiento.setEnabled(false);
@@ -77,12 +77,13 @@ public class DietasForm extends javax.swing.JFrame {
             jtfPesoInicial.setBorder(text_border);
             jtfPesoFinal.setBorder(text_border);
         }
-        
+
     }
     public static String nombrePac = "";
     public static String pesoIni = "";
     public static String pesoFin = "";
     public static int IdPac;
+    public static int idDieta;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -471,7 +472,7 @@ public class DietasForm extends javax.swing.JFrame {
                     jtfPesoFinal.selectAll();
                     jtfPesoFinal.setBorder(text_border_rojo);
                 } else {
-                    
+
                     Dieta dieta = new Dieta(jtfNombre.getText(), pacienteData.buscarPacientePorId(numId.nroId), Double.parseDouble(jtfPesoInicial.getText()),
                             Double.parseDouble(jtfPesoFinal.getText()),
                             jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
@@ -484,7 +485,7 @@ public class DietasForm extends javax.swing.JFrame {
                 MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
             }
         }
-        
+
 
     }//GEN-LAST:event_jbNuevoActionPerformed
 
@@ -519,7 +520,7 @@ public class DietasForm extends javax.swing.JFrame {
                 MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
             }
         }
-        
+
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -562,6 +563,7 @@ public class DietasForm extends javax.swing.JFrame {
         DetalleDieta detalleDieta = new DetalleDieta();
         detalleDieta.setVisible(true);
         this.setVisible(false);
+        idDieta = Integer.parseInt(jtfID.getText());
     }//GEN-LAST:event_jbDetalleDietaActionPerformed
 
     /**
@@ -578,21 +580,21 @@ public class DietasForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(DietasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(DietasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(DietasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DietasForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -659,7 +661,7 @@ public class DietasForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-    
+
     public boolean PruebaDeCaracteres(String texto) {
         // Busco si los caracteres ingresados son letras
         int b = 0;
@@ -676,5 +678,5 @@ public class DietasForm extends javax.swing.JFrame {
             return true;
         }
     }
-    
+
 }

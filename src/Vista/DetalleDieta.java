@@ -5,17 +5,33 @@
  */
 package Vista;
 
+import Controlador.ComidaData;
+import Controlador.DietaComidaData;
+import Modelo.Comida;
+import Modelo.DietaComida;
+import Modelo.Horario;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author german
  */
 public class DetalleDieta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DetalleDieta
-     */
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private ComidaData comData;
+    private DietaComidaData dietaComidaData;
+    private DietasForm dietasForm;
+
     public DetalleDieta() {
         initComponents();
+        modelo = new DefaultTableModel();
+        comData = new ComidaData();
+        dietaComidaData = new DietaComidaData();
+        dietasForm = new DietasForm();
+        armarCabecera();
+        cargarContenido(dietasForm.idDieta);
     }
 
     /**
@@ -46,7 +62,7 @@ public class DetalleDieta extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTcontenido = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -165,7 +181,12 @@ public class DetalleDieta extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Comida");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DESAYUNO", "ALMUERZO", "MERIENDA", "CANA", "SNACK" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,35 +196,7 @@ public class DetalleDieta extends javax.swing.JFrame {
         jTextField1.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Codigo", "Comida", "Porcion", "Horario"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, true, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTcontenido);
 
         jLabel7.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -293,7 +286,7 @@ public class DetalleDieta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
- DietasForm dietasForm = new DietasForm();
+        DietasForm dietasForm = new DietasForm();
         dietasForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jbVolverActionPerformed
@@ -301,6 +294,10 @@ public class DetalleDieta extends javax.swing.JFrame {
     private void jbComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComidasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbComidasActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,7 +349,7 @@ public class DetalleDieta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTcontenido;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbComidas;
@@ -360,4 +357,32 @@ public class DetalleDieta extends javax.swing.JFrame {
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbVolver;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera() {
+        modelo.addColumn("Código");
+        modelo.addColumn("Comida");
+        modelo.addColumn("Porción");
+        modelo.addColumn("Horario");
+
+        jTcontenido.setModel(modelo);
+        jTcontenido.getColumnModel().getColumn(0).setPreferredWidth(70);
+        jTcontenido.getColumnModel().getColumn(1).setPreferredWidth(220);
+        jTcontenido.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTcontenido.getColumnModel().getColumn(3).setPreferredWidth(100);
+    }
+
+    private void cargarContenido(int idDieta) {
+
+        ArrayList<DietaComida> dietaComida = (ArrayList<DietaComida>) dietaComidaData.listarDietaComidas(idDieta);
+
+        if (dietaComida != null) {
+            for (DietaComida cont : dietaComida) {
+                modelo.addRow(new Object[]{
+                    cont.getIdDietaComida(),
+                    cont.getComida().getNombre(),
+                    cont.getHorario(),
+                    cont.getPorcion()});
+            }
+        }else System.out.println("error dieta comida null");
+    }
 }
