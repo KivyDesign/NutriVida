@@ -97,8 +97,8 @@ public class DietaComidaData {
                 dietaComida.setIdDietaComida(rs.getInt("idDietaComida"));
                 dietaComida.setComida(comidaData.buscarComidaPorId(rs.getInt("idComida")));
                 dietaComida.setDieta(dietaData.buscarDietaPorId(rs.getInt("idDieta")));
-                dietaComida.setPorcion(rs.getInt("porcion"));
                 dietaComida.setHorario(Horario.valueOf(rs.getString("horario")));
+                dietaComida.setPorcion(rs.getInt("porcion"));
 
                 dietas.add(dietaComida);
             }

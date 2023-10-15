@@ -80,10 +80,9 @@ public class TestGerman {
 //            System.out.println("comida calorias requeridas " + comida.getNombre());
 //        }
 // prueba dietaComida listarDietaComidas
-ComidaData comidaData=new ComidaData();
-        DietaComidaData dietaComidaData=new DietaComidaData();
-        
+        ComidaData comidaData = new ComidaData();
+        DietaComidaData dietaComidaData = new DietaComidaData();
+
         System.out.println(dietaComidaData.listarDietaComidas(1));
-        }
+    }
 }
-    
