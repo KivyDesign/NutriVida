@@ -71,7 +71,4 @@ public class DietaComida {
         return "DietaComida{" + "idDietaComida=" + idDietaComida + ", comida=" + comida + ", dieta=" + dieta + ", porcion=" + porcion + ", horario=" + horario + '}';
     }
 
-    
-   
-
 }

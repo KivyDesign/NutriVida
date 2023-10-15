@@ -1,6 +1,7 @@
 package Modelo;
 
 public class Comida {
+
     private int idComida;
     private String nombre;
     private String detalle;
@@ -67,7 +68,7 @@ public class Comida {
 
     @Override
     public String toString() {
-        return "Comida{" + "idComida=" + idComida + ", nombre=" + nombre + ", detalle=" + detalle + ", calorias=" + calorias + ", estado=" + estado + '}';
+        return idComida + " - " + nombre + ", Calorias= " + calorias;
     }
-    
+
 }
