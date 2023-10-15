@@ -30,8 +30,10 @@ public class DetalleDieta extends javax.swing.JFrame {
         comData = new ComidaData();
         dietaComidaData = new DietaComidaData();
         dietasForm = new DietasForm();
+        jLNombre.setText(dietasForm.nombreDiet);
         armarCabecera();
         cargarContenido(dietasForm.idDieta);
+        cargarComidas();
     }
 
     /**
@@ -48,14 +50,14 @@ public class DetalleDieta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLNombre = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jbAgregar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbComidas = new javax.swing.JButton();
         jbVolver = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCComidas = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -108,14 +110,19 @@ public class DetalleDieta extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText(" Nombre: ");
 
-        jLabel3.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("jLabel3");
+        jLNombre.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLNombre.setForeground(new java.awt.Color(255, 255, 255));
+        jLNombre.setText("jLabel3");
 
         jPanel4.setBackground(new java.awt.Color(31, 75, 128));
 
         jbAgregar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbAgregar.setText("Agregar");
+        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbEliminar.setText("Eliminar");
@@ -171,7 +178,7 @@ public class DetalleDieta extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCComidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -218,9 +225,9 @@ public class DetalleDieta extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jCComidas, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(85, 85, 85)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,7 +249,7 @@ public class DetalleDieta extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLNombre))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -256,7 +263,7 @@ public class DetalleDieta extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCComidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(37, 37, 37)
                                 .addComponent(jLabel6))
@@ -299,6 +306,10 @@ public class DetalleDieta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+
+    }//GEN-LAST:event_jbAgregarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -335,11 +346,11 @@ public class DetalleDieta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCComidas;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLNombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -372,17 +383,42 @@ public class DetalleDieta extends javax.swing.JFrame {
     }
 
     private void cargarContenido(int idDieta) {
-
+        borrarFilasTabla();
         ArrayList<DietaComida> dietaComida = (ArrayList<DietaComida>) dietaComidaData.listarDietaComidas(idDieta);
-
         if (dietaComida != null) {
             for (DietaComida cont : dietaComida) {
                 modelo.addRow(new Object[]{
                     cont.getIdDietaComida(),
                     cont.getComida().getNombre(),
-                    cont.getHorario(),
-                    cont.getPorcion()});
+                    cont.getPorcion(),
+                    cont.getHorario()});
             }
-        }else System.out.println("error dieta comida null");
+        } else {
+            System.out.println("error dieta comida null");
+        }
+    }
+
+    public void borrarFilasTabla() {
+        // Con este metodo puedo borrar una fila especifica al recorrer el modelo
+        // Controlar que no este vacio o cargarlo desde el comienzo
+        if (modelo != null) {
+            int a = modelo.getRowCount() - 1;
+
+            if (modelo.getRowCount() > 0) {
+                for (int i = a; i >= 0; i--) {
+                    modelo.removeRow(i);
+                }
+            }
+        }
+    }
+
+    private void cargarComidas() {
+        // Limpio el ComboBox
+        jCComidas.removeAllItems();
+
+        // Cargamos las comidas en el ComboBox
+        for (Comida listar : comData.listarComidas()) {
+            jCComidas.addItem(listar.getNombre());
+        }
     }
 }

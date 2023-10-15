@@ -137,4 +137,22 @@ public class ComidaData {
         // Retorno el Array alumnos con los valores de la consulta
         return comidas;
     }
+
+    public ArrayList<Comida> listarComidas() {
+        ArrayList<Comida> listaComidas = new ArrayList<>();
+        try {
+            String sql = "SELECT idComida FROM Comida WHERE estado = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            // Recorro el ResultSet y lo cargo en el Array dietas
+            while (rs.next()) {
+                listaComidas.add(buscarComidaPorId(rs.getInt("idComida")));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Comida " + ex.getMessage());
+        }
+        return listaComidas;
+    }
 }

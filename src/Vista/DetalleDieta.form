@@ -58,10 +58,10 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" min="-2" pref="108" max="-2" attributes="0"/>
+                                          <Component id="jLNombre" min="-2" pref="108" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jLabel5" alignment="0" min="-2" pref="68" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" min="-2" pref="252" max="-2" attributes="0"/>
+                                      <Component id="jCComidas" min="-2" pref="252" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -92,7 +92,7 @@
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -109,7 +109,7 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCComidas" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -201,7 +201,7 @@
             <Property name="text" type="java.lang.String" value=" Nombre: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="jLNombre">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Poppins" size="14" style="0"/>
@@ -261,6 +261,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAgregarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbEliminar">
               <Properties>
@@ -308,7 +311,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="jCComidas">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">

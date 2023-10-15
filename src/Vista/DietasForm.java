@@ -84,6 +84,7 @@ public class DietasForm extends javax.swing.JFrame {
     public static String pesoFin = "";
     public static int IdPac;
     public static int idDieta;
+    public static String nombreDiet = "";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -560,10 +561,12 @@ public class DietasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSeguimientoActionPerformed
 
     private void jbDetalleDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetalleDietaActionPerformed
+
+        idDieta = Integer.parseInt(jtfID.getText());
+        nombreDiet = jtfNombre.getText();
         DetalleDieta detalleDieta = new DetalleDieta();
         detalleDieta.setVisible(true);
         this.setVisible(false);
-        idDieta = Integer.parseInt(jtfID.getText());
     }//GEN-LAST:event_jbDetalleDietaActionPerformed
 
     /**
