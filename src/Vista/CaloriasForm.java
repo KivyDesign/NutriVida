@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author javier
  */
 public class CaloriasForm extends javax.swing.JFrame {
-
+    
     // Declaro los atributos para acceder a los metodos que necesito
     // Para caloria
     private CaloriasData calData;
@@ -38,6 +38,8 @@ public class CaloriasForm extends javax.swing.JFrame {
 
     private int totalDeCalorias = 0;
     private int limitoCincoRegistros = 0;
+    
+    private ComidasForm enviar;
 
     /**
      * Creates new form CaloriasForm
@@ -714,6 +716,8 @@ public class CaloriasForm extends javax.swing.JFrame {
     private void jbCargarCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarCaloriasActionPerformed
         // Aquí cargo las calorías en el Form de Gestión de Comidas
         ComidasForm.jtfCalorias.setText(jlTotalCalorias.getText());
+        enviar.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jbCargarCaloriasActionPerformed
 
     private Boolean validarTabla(String nombre) {
