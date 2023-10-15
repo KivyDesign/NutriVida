@@ -331,9 +331,7 @@ public class DetalleDieta extends javax.swing.JFrame {
                         dietaData.buscarDietaPorId(dietasForm.idDieta),
                         Integer.parseInt(jtPorcion.getText()),
                         (Horario) jcHorario.getSelectedItem()));
-                cargarContenido();
-                jtPorcion.setText(null);
-
+                cargarContenido();jtPorcion.setText(null);
             }
         } catch (NumberFormatException e) {
             MensajeSB(2, "La porcion debe ser un entero entre 1 y 1000");

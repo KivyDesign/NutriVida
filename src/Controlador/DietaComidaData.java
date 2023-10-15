@@ -86,7 +86,7 @@ public class DietaComidaData {
         ArrayList<DietaComida> dietas = new ArrayList<>();
 
         try {
-            String sql = "SELECT idDietaComida,idComida,idDieta,horario,porcion FROM dietaComida WHERE idDieta = ?";
+            String sql = "SELECT idDietaComida,idComida,idDieta,horario,porcion FROM dietaComida WHERE idDieta = ? order by horario";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idDieta);
             ResultSet rs = ps.executeQuery();
