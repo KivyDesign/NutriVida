@@ -48,7 +48,7 @@ public class PacientesForm extends javax.swing.JFrame {
 
         // Posiciono el foco en el nombre al iniciar el form
         jtfNombre.requestFocus();
-        
+
     }
     public static int nroId = -1;
     public static String nombreP = "";
@@ -431,6 +431,7 @@ public class PacientesForm extends javax.swing.JFrame {
                         jbDietaPersonal.setEnabled(true);
                     } else {
                         MensajeSB(2, "El DNI no es de un Paciente activo");
+                        jbGuardar.setEnabled(true);
                         jtfDNI.setBorder(text_border_rojo);
                     }
                 } else {
@@ -453,7 +454,7 @@ public class PacientesForm extends javax.swing.JFrame {
         if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
-            
+
         } else if (jtfDNI.getText().length() != 8) {
             MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
             jtfDNI.requestFocus();
@@ -486,9 +487,9 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfPesoActual.selectAll();
             jtfPesoActual.setBorder(text_border_rojo);
         } else {
-            
+
             try {
-                
+
                 Paciente paciente = new Paciente(
                         Integer.parseInt(jtfDNI.getText()),
                         jtfNombre.getText(),
@@ -500,7 +501,8 @@ public class PacientesForm extends javax.swing.JFrame {
                 // Primero busco si existe para no agregarlo repetido y lo
                 // inserto al paciente
                 pacData.guardarPaciente(paciente);
-                jtfID.setText(paciente.getIdPaciente()+"");
+                jtfID.setText(paciente.getIdPaciente() + "");
+                jcbEstado.setSelected(true);
                 // Si lo agregue con exito no es null y se lo informo al DataEntry
                 if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
                     MensajeSB(1, "Paciente agregado con exito! Busque por DNI o cargue un nuevo Paciente");
@@ -521,7 +523,7 @@ public class PacientesForm extends javax.swing.JFrame {
 
                     // Posiciono el foco en el nombre al iniciar el form
                     jtfNombre.requestFocus();
-                    
+
                 } else {
                     MensajeSB(2, "ERROR: El paciente no se pudo agregar");
                 }
@@ -541,7 +543,7 @@ public class PacientesForm extends javax.swing.JFrame {
             if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
                 jtfNombre.requestFocus();
                 jtfNombre.selectAll();
-                
+
             } else if (jtfDNI.getText().length() != 8) {
                 MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
                 jtfDNI.requestFocus();
@@ -578,15 +580,15 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfPesoActual.requestFocus();
             jtfPesoActual.selectAll();
             jtfPesoActual.setBorder(text_border_rojo);
-            
+
         }
     }
-    
+
     {
-        
+
 
     }//GEN-LAST:event_jbGuardarActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -670,7 +672,7 @@ public class PacientesForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-    
+
     public void LimpiarCampos() {
         jtfDNI.setText("");
         jtfNombre.setText("");
@@ -682,7 +684,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
-    
+
     public boolean PruebaDeCaracteres(String texto) {
         // Verifico si el texto contiene solo letras y espacios
         for (int i = 0; i < texto.length(); i++) {
@@ -710,11 +712,11 @@ public class PacientesForm extends javax.swing.JFrame {
             MensajeSB(2, "El campo Nombre no puede comenzar o terminar con un espacio");
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
-            
+
             return false;
         }
-        
+
         return true;
     }
-    
+
 }
