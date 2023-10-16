@@ -481,6 +481,10 @@ public class DietasForm extends javax.swing.JFrame {
                             true);
                     dietadata.guardarDieta(dieta);
                     MensajeSB(1, "Dieta guardada con exito");
+                    jbNuevo.setEnabled(false);
+                    jbEliminar.setEnabled(true);
+                    jbGuardar.setEnabled(true);
+                    jbSeguimiento.setEnabled(true);jbDetalleDieta.setEnabled(true);
                 }
             } catch (NumberFormatException ex) {
                 MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
