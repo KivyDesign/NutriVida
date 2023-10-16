@@ -411,7 +411,7 @@ public class NutriVidaForm extends javax.swing.JFrame {
     private void jbDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDietasActionPerformed
         // Instancio el form de pacientes y lo hago visible mientras oculto el
         // form con el menu
-        DietasForm dietForm = new DietasForm();
+        ControlDietasForm dietForm = new ControlDietasForm();
         dietForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jbDietasActionPerformed
