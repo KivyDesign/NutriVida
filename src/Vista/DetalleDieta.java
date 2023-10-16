@@ -25,19 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DetalleDieta extends javax.swing.JFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel() {
-
-        // Clase Interna Anónima
-        public boolean isCellEditable(int fila, int columna) {
-
-            // Si retorno true las celdas son todas editables, con false
-            // ninguna celda es editable
-//            if (columna == 1) {
-//                return true;
-//            }
-            return false;
-        }
-    };
+    private DefaultTableModel modelo;
     private ComidaData comData;
     private DietaComidaData dietaComidaData;
     private DietasForm dietasForm;
@@ -46,7 +34,17 @@ public class DetalleDieta extends javax.swing.JFrame {
 
     public DetalleDieta() {
         initComponents();
-        modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel() {
+            // Clase Interna Anónima
+            public boolean isCellEditable(int fila, int columna) {
+                // Si retorno true las celdas son todas editables, con false
+//             ninguna celda es editable
+                if (columna == 1) {
+                    return true;
+                }
+                return false;
+            }
+        };
         comData = new ComidaData();
         dietaComidaData = new DietaComidaData();
         dietasForm = new DietasForm();
@@ -126,7 +124,7 @@ public class DetalleDieta extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("Agregue nueva comida,modifique cantidad, si desea eliminar coloque 0");
+        jlMensajeSB.setText("Agregue nueva comida,modifique cantidad, si desea eliminar coloque cantidad 0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -353,7 +351,7 @@ public class DetalleDieta extends javax.swing.JFrame {
                 jtPorcion.requestFocus();
                 jtPorcion.selectAll();
             } else {
-                //armo nueva dietaComida
+                //armo y guardo nueva dietaComida
                 dietaComidaData.guardarDietaComida(new DietaComida(
                         (Comida) jCComidas.getSelectedItem(),
                         dietaData.buscarDietaPorId(dietasForm.idDieta),
@@ -382,9 +380,9 @@ public class DetalleDieta extends javax.swing.JFrame {
                         Integer.parseInt(jTcontenido.getValueAt(fila, 1).toString()));
                 MensajeSB(1, "Unidades/gramos Actualizadas");
             }
-            jbModificar.setEnabled(false);
-            cargarContenido();
     }//GEN-LAST:event_jbModificarActionPerformed
+        jbModificar.setEnabled(false);
+        cargarContenido();
     }
 
     /**
@@ -554,12 +552,14 @@ public class DetalleDieta extends javax.swing.JFrame {
                         jbModificar.setEnabled(true);
                     }
                 } else {
-                    MensajeSB(1, "El valor ingresado no es válido(0-10)");
+                    MensajeSB(2, "El valor debe ser un entero entre 0 y 1000");
                     jTcontenido.setValueAt(nuevaPorcion, fila, columna);
+                    jbModificar.setEnabled(false);
                 }
             } catch (NumberFormatException e) {
-                MensajeSB(1, "El valor ingresado no es válido");
+                MensajeSB(2, "El valor debe ser un entero entre 0 y 1000");
                 jTcontenido.setValueAt(nuevaPorcion, fila, columna);
+                jbModificar.setEnabled(false);
             }
         }
     }

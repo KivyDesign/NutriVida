@@ -360,8 +360,10 @@ public class HistorialView extends javax.swing.JFrame {
             } else {
                 Historial hist = new Historial(pacData.buscarPacientePorId(historiaDieta.IdPac),
                         Double.parseDouble(jtPesoRegistrado.getText()), ahora);
-                historialData.guardarHistorial(hist);pacData.modificarPesoActual(historiaDieta.IdPac, Double.parseDouble(jtPesoRegistrado.getText()));
+                historialData.guardarHistorial(hist);
+                pacData.modificarPesoActual(historiaDieta.IdPac, Double.parseDouble(jtPesoRegistrado.getText()));
                 MensajeSB(1, "Consulta guardada con exito");
+                cargarHistorial(historiaDieta.IdPac);
             }
         } catch (NumberFormatException ex) {
             MensajeSB(2, "El peso debe ser un número entre 0 y 500");
