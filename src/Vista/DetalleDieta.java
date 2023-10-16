@@ -13,6 +13,10 @@ import Modelo.DietaComida;
 import Modelo.Horario;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,11 +25,24 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DetalleDieta extends javax.swing.JFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel() {
+
+        // Clase Interna Anónima
+        public boolean isCellEditable(int fila, int columna) {
+
+            // Si retorno true las celdas son todas editables, con false
+            // ninguna celda es editable
+//            if (columna == 1) {
+//                return true;
+//            }
+            return false;
+        }
+    };
     private ComidaData comData;
     private DietaComidaData dietaComidaData;
     private DietasForm dietasForm;
     private DietaData dietaData;
+    private int nuevaPorcion;
 
     public DetalleDieta() {
         initComponents();
@@ -39,6 +56,13 @@ public class DetalleDieta extends javax.swing.JFrame {
         cargarContenido();
         cargarComidas();
         cargarHorarios();
+//        listSelectionListener();
+
+        // Al modelo de la jTable le agrego un ListModelListener que me permite
+        // operar sobre los cambios realizados en una celda
+        anadeListenerAlModelo();
+
+        jbModificar.setEnabled(false);
     }
 
     /**
@@ -59,7 +83,6 @@ public class DetalleDieta extends javax.swing.JFrame {
         jLNombre = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jbAgregar = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
         jbComidas = new javax.swing.JButton();
         jbVolver = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
@@ -103,7 +126,7 @@ public class DetalleDieta extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("Agregue nueva comida o modifique el contenido");
+        jlMensajeSB.setText("Agregue nueva comida,modifique cantidad, si desea eliminar coloque 0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -111,7 +134,7 @@ public class DetalleDieta extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jlMensajeSB)
+                .addComponent(jlMensajeSB, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -140,9 +163,6 @@ public class DetalleDieta extends javax.swing.JFrame {
             }
         });
 
-        jbEliminar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jbEliminar.setText("Eliminar");
-
         jbComidas.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbComidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/6-32x32_1.png"))); // NOI18N
         jbComidas.setText(" Comidas");
@@ -163,6 +183,11 @@ public class DetalleDieta extends javax.swing.JFrame {
 
         jbModificar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -172,7 +197,6 @@ public class DetalleDieta extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbAgregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbComidas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbVolver, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,15 +207,13 @@ public class DetalleDieta extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbComidas, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jLabel4.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
@@ -216,6 +238,14 @@ public class DetalleDieta extends javax.swing.JFrame {
         jtPorcion.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jtPorcion.setForeground(new java.awt.Color(255, 255, 255));
 
+        jTcontenido.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane1.setViewportView(jTcontenido);
 
         jLabel7.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
@@ -232,7 +262,7 @@ public class DetalleDieta extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -250,7 +280,7 @@ public class DetalleDieta extends javax.swing.JFrame {
                                 .addGap(85, 85, 85)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jcHorario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -267,11 +297,8 @@ public class DetalleDieta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCComidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,8 +310,9 @@ public class DetalleDieta extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addComponent(jLabel7)
                         .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -331,7 +359,8 @@ public class DetalleDieta extends javax.swing.JFrame {
                         dietaData.buscarDietaPorId(dietasForm.idDieta),
                         Integer.parseInt(jtPorcion.getText()),
                         (Horario) jcHorario.getSelectedItem()));
-                cargarContenido();jtPorcion.setText(null);
+                cargarContenido();
+                jtPorcion.setText(null);
             }
         } catch (NumberFormatException e) {
             MensajeSB(2, "La porcion debe ser un entero entre 1 y 1000");
@@ -341,6 +370,22 @@ public class DetalleDieta extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jbAgregarActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        int filas = jTcontenido.getRowCount();
+        for (int fila = 0; fila < filas; fila++) {
+            if (Integer.parseInt(jTcontenido.getValueAt(fila, 1).toString()) == 0) {
+                dietaComidaData.eliminarDietaComida(Integer.parseInt(jTcontenido.getValueAt(fila, 0).toString()));
+                MensajeSB(1, "Comida eliminada exitosamente");
+            } else {
+                dietaComidaData.modificarPorcion(Integer.parseInt(jTcontenido.getValueAt(fila, 0).toString()),
+                        Integer.parseInt(jTcontenido.getValueAt(fila, 1).toString()));
+                MensajeSB(1, "Unidades/gramos Actualizadas");
+            }
+            jbModificar.setEnabled(false);
+            cargarContenido();
+    }//GEN-LAST:event_jbModificarActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -394,7 +439,6 @@ public class DetalleDieta extends javax.swing.JFrame {
     private javax.swing.JTable jTcontenido;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbComidas;
-    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbVolver;
     private javax.swing.JComboBox<Horario> jcHorario;
@@ -404,15 +448,15 @@ public class DetalleDieta extends javax.swing.JFrame {
 
     private void armarCabecera() {
         modelo.addColumn("Código");
+        modelo.addColumn("Unid./gramos");
         modelo.addColumn("Comida");
-        modelo.addColumn("Porción");
         modelo.addColumn("Horario");
 
         jTcontenido.setModel(modelo);
         jTcontenido.getColumnModel().getColumn(0).setPreferredWidth(70);
-        jTcontenido.getColumnModel().getColumn(1).setPreferredWidth(220);
+        jTcontenido.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTcontenido.getColumnModel().getColumn(2).setPreferredWidth(220);
         jTcontenido.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTcontenido.getColumnModel().getColumn(3).setPreferredWidth(100);
     }
 
     private void cargarContenido() {
@@ -422,8 +466,8 @@ public class DetalleDieta extends javax.swing.JFrame {
             for (DietaComida cont : dietaComida) {
                 modelo.addRow(new Object[]{
                     cont.getIdDietaComida(),
-                    cont.getComida().getNombre(),
                     cont.getPorcion(),
+                    cont.getComida().getNombre(),
                     cont.getHorario()});
             }
         } else {
@@ -478,6 +522,62 @@ public class DetalleDieta extends javax.swing.JFrame {
         jcHorario.addItem(Horario.CENA);
         jcHorario.addItem(Horario.SNACK);
 
+    }
+
+    public void anadeListenerAlModelo() {
+        jTcontenido.getModel().addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent evento) {
+                cambioPorcion(evento);
+            }
+        });
+    }
+
+    public void cambioPorcion(TableModelEvent evento) {
+        // Solo se trata el evento UPDATE, correspondiente al cambio de valor
+        // de una celda.
+        if (evento.getType() == TableModelEvent.UPDATE) {
+
+            // Se obtiene el modelo de la tabla y la fila/columna que han cambiado.
+            int fila = evento.getFirstRow();
+            int columna = evento.getColumn();
+            int c = 0;
+
+            try {
+                Object nueva = jTcontenido.getValueAt(fila, columna);
+                int pars = Integer.parseInt(nueva.toString());
+                if (pars >= 0 && pars <= 1000) {
+                    c++;
+                    nuevaPorcion = pars;
+                    if (c == 1) {
+                        jbModificar.setEnabled(true);
+                    }
+                } else {
+                    MensajeSB(1, "El valor ingresado no es válido(0-10)");
+                    jTcontenido.setValueAt(nuevaPorcion, fila, columna);
+                }
+            } catch (NumberFormatException e) {
+                MensajeSB(1, "El valor ingresado no es válido");
+                jTcontenido.setValueAt(nuevaPorcion, fila, columna);
+            }
+        }
+    }
+
+    public void listSelectionListener() {
+        jTcontenido.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent evento) {
+                int filaSeleccionada = jTcontenido.getSelectedRow();
+                int columnaSeleccionada = jTcontenido.getSelectedColumn();
+
+                if (jTcontenido.isCellEditable(filaSeleccionada, columnaSeleccionada) && filaSeleccionada >= 0 && columnaSeleccionada >= 0) {
+                    Object valor = jTcontenido.getValueAt(filaSeleccionada, columnaSeleccionada);
+                    nuevaPorcion = Integer.parseInt(valor.toString());
+                }
+            }
+        });
     }
 
 }

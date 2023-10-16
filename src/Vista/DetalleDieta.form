@@ -52,7 +52,7 @@
                       <Component id="jPanel3" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel7" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
@@ -73,7 +73,7 @@
                                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel4" min="-2" pref="68" max="-2" attributes="0"/>
-                                      <Component id="jcHorario" min="-2" pref="91" max="-2" attributes="0"/>
+                                      <Component id="jcHorario" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -99,13 +99,9 @@
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace type="separate" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jCComidas" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jcHorario" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -119,9 +115,10 @@
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="127" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jPanel4" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -180,7 +177,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="jlMensajeSB" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlMensajeSB" min="-2" pref="585" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -204,7 +201,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Agregue nueva comida o modifique el contenido"/>
+                <Property name="text" type="java.lang.String" value="Agregue nueva comida,modifique cantidad, si desea eliminar coloque 0"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -245,7 +242,6 @@
                       <EmptySpace pref="19" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jbAgregar" alignment="1" min="-2" pref="153" max="-2" attributes="0"/>
-                          <Component id="jbEliminar" alignment="1" min="-2" pref="153" max="-2" attributes="0"/>
                           <Component id="jbComidas" alignment="1" min="-2" pref="153" max="-2" attributes="0"/>
                           <Component id="jbVolver" alignment="1" min="-2" pref="153" max="-2" attributes="0"/>
                           <Component id="jbModificar" alignment="1" min="-2" pref="153" max="-2" attributes="0"/>
@@ -259,15 +255,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="jbAgregar" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbModificar" min="-2" pref="35" max="-2" attributes="0"/>
-                      <EmptySpace pref="9" max="32767" attributes="0"/>
-                      <Component id="jbEliminar" min="-2" pref="37" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbComidas" min="-2" pref="37" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbVolver" min="-2" pref="35" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace pref="25" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -283,14 +277,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAgregarActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="jbEliminar">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Poppins" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Eliminar"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jbComidas">
               <Properties>
@@ -327,6 +313,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbModificarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -408,6 +397,9 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="jTcontenido">
               <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="0" rowCount="0"/>
+                </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">

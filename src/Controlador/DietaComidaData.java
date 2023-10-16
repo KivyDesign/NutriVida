@@ -71,7 +71,7 @@ public class DietaComidaData {
 
     public void eliminarDietaComida(int idDietaComida) {
         try {
-            String sql = "DELETE * FROM dietacomida WHERE idDietaComida = ?";
+            String sql = "DELETE FROM dietacomida WHERE idDietaComida = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idDietaComida);
             ps.executeUpdate();
@@ -108,5 +108,17 @@ public class DietaComidaData {
         }
         // Retorno el Array dietaComida con los valores de la consulta
         return dietas;
+    }
+    public void modificarPorcion(int idDietaComida,int porcion){
+        try{
+        String sql= "UPDATE dietacomida SET  porcion = ? WHERE idDietaComida = ?";
+       PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, porcion);
+            ps.setInt(2, idDietaComida);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla DietaComida");
+        } 
     }
 }
