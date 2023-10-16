@@ -453,6 +453,8 @@ public class DietasForm extends javax.swing.JFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
             MensajeSB(2, "Falta completar Fechas");
+            } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
+            MensajeSB(2, "la fecha inicial debe ser menor que la final");
         } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
@@ -480,11 +482,13 @@ public class DietasForm extends javax.swing.JFrame {
                             jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                             true);
                     dietadata.guardarDieta(dieta);
+                    jtfID.setText(dieta.getIdDieta()+"");
                     MensajeSB(1, "Dieta guardada con exito");
                     jbNuevo.setEnabled(false);
                     jbEliminar.setEnabled(true);
                     jbGuardar.setEnabled(true);
-                    jbSeguimiento.setEnabled(true);jbDetalleDieta.setEnabled(true);
+                    jbSeguimiento.setEnabled(true);
+                    jbDetalleDieta.setEnabled(true);
                 }
             } catch (NumberFormatException ex) {
                 MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
@@ -551,6 +555,7 @@ public class DietasForm extends javax.swing.JFrame {
         jtfPesoInicial.setBorder(text_border);
         jtfPesoFinal.setBorder(text_border);
         jbNuevo.setEnabled(true);
+        jbDetalleDieta.setEnabled(false);
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeguimientoActionPerformed
