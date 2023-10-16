@@ -26,7 +26,7 @@ public class ComidasForm extends javax.swing.JFrame {
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
-    
+
     private CaloriasForm recibir;
 
     /**
@@ -699,23 +699,38 @@ public class ComidasForm extends javax.swing.JFrame {
             @Override
             public void focusLost(FocusEvent fe) {
 //NO ESTA TERMINADOOO!!!
-                try {
-                    if (Integer.parseInt(jtfCalorias.getText()) < 0 || Integer.parseInt(jtfCalorias.getText()) > 5000) {
-                        jtfCalorias.setBorder(text_border_rojo);
-                        jtfCalorias.requestFocus();
-                        jtfCalorias.selectAll();
-                        MensajeSB(2, "El campo Calorias está fuera de rango(0-5000)");
-                    }
-                } catch (NumberFormatException ex) {
-                    MensajeSB(2, "El campo Calorias debe llenarse con números");
-                }
+//                try {
+//                    if (Integer.parseInt(jtfCalorias.getText()) < 0 || Integer.parseInt(jtfCalorias.getText()) > 5000) {
+//                        jtfCalorias.setBorder(text_border_rojo);
+//                        jtfCalorias.requestFocus();
+//                        jtfCalorias.selectAll();
+//                        MensajeSB(2, "El campo Calorias está fuera de rango(0-5000)");
+//                    }
+//                } catch (NumberFormatException ex) {
+//                    MensajeSB(2, "El campo Calorias debe llenarse con números");
+//                }
 
                 if (jtfCalorias.getText().equalsIgnoreCase("")) {
                     jtfCalorias.setBorder(text_border);
                     jtfCalorias.requestFocus();
                     MensajeSB(2, "El campo Calorias debe llenarse");
                 } else {
-                    jtfCalorias.setBorder(text_border_disable);
+                    try {
+                        if (Integer.parseInt(jtfCalorias.getText()) < 0 || Integer.parseInt(jtfCalorias.getText()) > 5000) {
+                            jtfCalorias.setBorder(text_border_rojo);
+                            jtfCalorias.requestFocus();
+                            jtfCalorias.selectAll();
+                            MensajeSB(2, "El campo Calorias está fuera de rango(0-5000)");
+                        } else {
+                            jtfCalorias.setBorder(text_border_disable);
+                        }
+                    } catch (NumberFormatException ex) {
+                        MensajeSB(2, "El campo Calorias debe llenarse con números");
+                        jtfCalorias.setBorder(text_border_rojo);
+                        jtfCalorias.requestFocus();
+                        jtfCalorias.selectAll();
+                    }
+
                 }
             }
         });
