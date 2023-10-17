@@ -39,7 +39,8 @@ public class CaloriasForm extends javax.swing.JFrame {
     private int totalDeCalorias = 0;
     private int limitoCincoRegistros = 0;
     
-    private ComidasForm caloriasR2;
+    public static String caloriasR2 = "";
+    private ComidasForm caloriasR1;
 
     /**
      * Creates new form CaloriasForm
@@ -47,8 +48,8 @@ public class CaloriasForm extends javax.swing.JFrame {
     public CaloriasForm() {
         initComponents();
         
-        caloriasR2 = new ComidasForm();
-        jlTotalCalorias.setText(caloriasR2.caloriasR);
+        caloriasR1 = new ComidasForm();
+        jlTotalCalorias.setText(caloriasR1.caloriasR);
 
         // Aqui los conecto a los metodos
         modelo = (DefaultTableModel) jtCalorias.getModel();
