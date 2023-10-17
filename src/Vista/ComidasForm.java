@@ -61,8 +61,12 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfNombre.setBorder(text_border);
         jtfDetalle.setBorder(text_border);
         jtfCalorias.setBorder(text_border);
-        focusListenerNombre();
-
+        jtfNombre.addFocusListener(fl1);
+        jtfDetalle.addFocusListener(fl2);
+        jtfCalorias.addFocusListener(fl3);
+//        focusListenerNombre();
+//        focusListenerDetalle();
+//        focusListenerCalorias();
         // Posiciono el foco en el nombre al iniciar el form
         jtfNombre.requestFocus();
 
@@ -627,13 +631,13 @@ public class ComidasForm extends javax.swing.JFrame {
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
-
-    public void focusListenerNombre() {
-        jtfNombre.addFocusListener(new FocusListener() {
+//ACA ARRANCA
+    
+        FocusListener fl1 = new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                jtfDetalle.removeFocusListener(this);
-                jtfCalorias.removeFocusListener(this);
+                jtfDetalle.removeFocusListener(fl2);
+                jtfCalorias.removeFocusListener(fl3);
                 jbBuscar.setEnabled(false);
                 jbNuevo.setEnabled(false);
                 jbGuardar.setEnabled(false);
@@ -660,19 +664,20 @@ public class ComidasForm extends javax.swing.JFrame {
                     jtfCalorias.setEnabled(true);
                     jcbEstado.setEnabled(true);
                     jbBuscar.setEnabled(true);
-                    focusListenerDetalle();
-                    focusListenerCalorias();
+                    jtfDetalle.addFocusListener(fl2);
+                    jtfCalorias.addFocusListener(fl3);
+                    jtfNombre.removeFocusListener(this);
+                    
                 }
             }
-        });
-    }
+        };
+    
 
-    public void focusListenerDetalle() {
-        jtfDetalle.addFocusListener(new FocusListener() {
+        FocusListener fl2 = new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                jtfNombre.removeFocusListener(this);
-                jtfCalorias.removeFocusListener(this);
+                jtfNombre.removeFocusListener(fl1);
+                jtfCalorias.removeFocusListener(fl3);
                 jbNuevo.setEnabled(false);
                 jbGuardar.setEnabled(false);
                 jbEliminar.setEnabled(false);
@@ -696,20 +701,19 @@ public class ComidasForm extends javax.swing.JFrame {
                         jtfDetalle.setBorder(text_border_disable);
                         jcbEstado.setEnabled(true);
                         jbBuscar.setEnabled(true);
-                        focusListenerNombre();
-                        focusListenerCalorias();
+                        jtfNombre.addFocusListener(fl1);
+                        jtfCalorias.addFocusListener(fl3);
+                        jtfDetalle.removeFocusListener(fl2);
                     }
                 }
             }
-        });
-    }
+        };
 
-    public void focusListenerCalorias() {
-        jtfCalorias.addFocusListener(new FocusListener() {
+        FocusListener fl3 = new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                jtfNombre.removeFocusListener(this);
-                jtfDetalle.removeFocusListener(this);
+                jtfNombre.removeFocusListener(fl1);
+                jtfDetalle.removeFocusListener(fl2);
             }
 
             @Override
@@ -727,8 +731,9 @@ public class ComidasForm extends javax.swing.JFrame {
                             MensajeSB(2, "El campo Calorias está fuera de rango(0-5000)");
                         } else {
                             jtfCalorias.setBorder(text_border_disable);
-                            focusListenerNombre();
-                            focusListenerDetalle();
+                            jtfNombre.addFocusListener(fl1);
+                        jtfDetalle.addFocusListener(fl2);
+                        jtfCalorias.removeFocusListener(fl3);
                         }
                     } catch (NumberFormatException ex) {
                         MensajeSB(2, "El campo Calorias debe llenarse con números");
@@ -738,7 +743,6 @@ public class ComidasForm extends javax.swing.JFrame {
                     }
                 }
             }
-        });
-    }
+        };
 
 }
