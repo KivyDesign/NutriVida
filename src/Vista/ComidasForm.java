@@ -28,7 +28,7 @@ public class ComidasForm extends javax.swing.JFrame {
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
 
     private CaloriasForm recibir;
-
+    private boolean e=true;
     /**
      * Creates new form ComidasForm
      */
@@ -61,6 +61,10 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfNombre.setBorder(text_border);
         jtfDetalle.setBorder(text_border);
         jtfCalorias.setBorder(text_border);
+        jbBuscar.setEnabled(false);
+        jbNuevo.setEnabled(false);
+        jbGuardar.setEnabled(false);
+        jbEliminar.setEnabled(false);
         jtfNombre.addFocusListener(fl1);
         jtfDetalle.addFocusListener(fl2);
         jtfCalorias.addFocusListener(fl3);
@@ -476,6 +480,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     jbGuardar.setEnabled(true);
                     jbEliminar.setEnabled(true);
                     jbNuevo.setEnabled(false);
+                    e=false;
                     MensajeSB(1, "Comida encontrada");
                 } else {
                     MensajeSB(2, "El nombre no es de una Comida activa");
@@ -630,7 +635,21 @@ public class ComidasForm extends javax.swing.JFrame {
         jcbEstado.setSelected(false);
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
+        jbBuscar.setEnabled(false);
+        jbNuevo.setEnabled(false);
+        e=true;
     }
+    
+    public void estadojbNuevo(){
+        if(e==true){
+        if((jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty() || jtfCalorias.getText().isEmpty())){
+            jbNuevo.setEnabled(false);
+        }else{
+            jbNuevo.setEnabled(true);
+        }
+        }
+    }
+    
 //ACA ARRANCA
     
         FocusListener fl1 = new FocusListener() {
@@ -638,13 +657,10 @@ public class ComidasForm extends javax.swing.JFrame {
             public void focusGained(FocusEvent fe) {
                 jtfDetalle.removeFocusListener(fl2);
                 jtfCalorias.removeFocusListener(fl3);
-                jbBuscar.setEnabled(false);
-                jbNuevo.setEnabled(false);
-                jbGuardar.setEnabled(false);
-                jbEliminar.setEnabled(false);
-//                jtfDetalle.setEnabled(false);
-//                jtfCalorias.setEnabled(false);
-//                jcbEstado.setEnabled(false);
+//                jbBuscar.setEnabled(false);
+//                jbNuevo.setEnabled(false);
+//                jbGuardar.setEnabled(false);
+//                jbEliminar.setEnabled(false);
             }
 
             @Override
@@ -660,10 +676,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     MensajeSB(2, "El campo Nombre debe llenarse solo con letras");
                 } else {
                     jtfNombre.setBorder(text_border_disable);
-                    jtfDetalle.setEnabled(true);
-                    jtfCalorias.setEnabled(true);
-                    jcbEstado.setEnabled(true);
-                    jbBuscar.setEnabled(true);
+                    estadojbNuevo();
                     jtfDetalle.addFocusListener(fl2);
                     jtfCalorias.addFocusListener(fl3);
                     jtfNombre.removeFocusListener(this);
@@ -678,9 +691,6 @@ public class ComidasForm extends javax.swing.JFrame {
             public void focusGained(FocusEvent fe) {
                 jtfNombre.removeFocusListener(fl1);
                 jtfCalorias.removeFocusListener(fl3);
-                jbNuevo.setEnabled(false);
-                jbGuardar.setEnabled(false);
-                jbEliminar.setEnabled(false);
             }
 
             @Override
@@ -699,8 +709,7 @@ public class ComidasForm extends javax.swing.JFrame {
                         jtfCalorias.setDisabledTextColor(Color.white);
                     } else {
                         jtfDetalle.setBorder(text_border_disable);
-                        jcbEstado.setEnabled(true);
-                        jbBuscar.setEnabled(true);
+                        estadojbNuevo();
                         jtfNombre.addFocusListener(fl1);
                         jtfCalorias.addFocusListener(fl3);
                         jtfDetalle.removeFocusListener(fl2);
@@ -731,6 +740,7 @@ public class ComidasForm extends javax.swing.JFrame {
                             MensajeSB(2, "El campo Calorias está fuera de rango(0-5000)");
                         } else {
                             jtfCalorias.setBorder(text_border_disable);
+                            estadojbNuevo();
                             jtfNombre.addFocusListener(fl1);
                         jtfDetalle.addFocusListener(fl2);
                         jtfCalorias.removeFocusListener(fl3);
