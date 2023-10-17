@@ -27,8 +27,10 @@ public class ComidasForm extends javax.swing.JFrame {
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
 
-    private CaloriasForm recibir;
-    private boolean e=true;
+//    private CaloriasForm recibir;
+    private boolean e = true;
+    
+    public static String caloriasR = "";
     /**
      * Creates new form ComidasForm
      */
@@ -75,8 +77,8 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfNombre.requestFocus();
 
         // Configuro el form calorias para recibir los datos del textField calorias
-        recibir = new CaloriasForm();
-//        recibir.setVisible(true);
+//        recibir = new CaloriasForm();
+////        recibir.setVisible(true);
     }
 
     /**
@@ -516,8 +518,13 @@ public class ComidasForm extends javax.swing.JFrame {
 
     private void jbCalcularCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularCaloriasActionPerformed
         // Aquí cargo las calorías en el Form de Gestión de Calorías
-        CaloriasForm.jlTotalCalorias.setText(jtfCalorias.getText());
-        recibir.setVisible(true);
+//        CaloriasForm.jlTotalCalorias.setText(jtfCalorias.getText());
+//        recibir.setVisible(true);
+//        this.setVisible(false);
+
+        caloriasR = jtfCalorias.getText();
+        CaloriasForm caloForm = new CaloriasForm();
+        caloForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jbCalcularCaloriasActionPerformed
 
