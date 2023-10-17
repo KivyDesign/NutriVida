@@ -88,7 +88,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("Lista de pacientes con dietas terminadas o vigentes con su fecha de finalización");
+        jlMensajeSB.setText("Lista de pacientes Activos con dietas terminadas o vigentes con su fecha de finalización");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -96,7 +96,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jlMensajeSB, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlMensajeSB, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -244,7 +244,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
         borrarFilasTabla();
         cargarDietas();
         jBVolver.setEnabled(false);
-        MensajeSB(1, "Listado de pacientes con dietas terminadas o vigentes con su fecha de finalización");
+        MensajeSB(1, "Listado de pacientes Activos con dietas terminadas o vigentes con su fecha de finalización");
     }//GEN-LAST:event_jBVolverActionPerformed
 
     /**
