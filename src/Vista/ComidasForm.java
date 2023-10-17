@@ -40,7 +40,7 @@ public class ComidasForm extends javax.swing.JFrame {
         
         caloriasB1 = new CaloriasForm();
         
-        jtfCalorias.setText(caloriasB1.caloriasB);
+//        jtfCalorias.setText(caloriasB1.caloriasB);
         
         comData = new ComidaData();
 

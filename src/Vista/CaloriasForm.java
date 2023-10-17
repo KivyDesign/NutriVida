@@ -39,7 +39,7 @@ public class CaloriasForm extends javax.swing.JFrame {
     private int totalDeCalorias = 0;
     private int limitoCincoRegistros = 0;
     
-    public static String caloriasB = "";
+//    public static String caloriasB = "";
     private ComidasForm caloriasA1;
 
     /**
@@ -723,10 +723,10 @@ public class CaloriasForm extends javax.swing.JFrame {
 //        enviar.setVisible(true);
 //        this.setVisible(false);
 
-        caloriasB = jlTotalCalorias.getText();
-        ComidasForm comiForm = new ComidasForm();
-        comiForm.setVisible(true);
-        this.setVisible(false);
+//        caloriasB = jlTotalCalorias.getText();
+//        ComidasForm comiForm = new ComidasForm();
+//        comiForm.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_jbCargarCaloriasActionPerformed
 
     private Boolean validarTabla(String nombre) {
