@@ -140,16 +140,16 @@ public class DietaData {
 
             ResultSet rs = ps.executeQuery();
 
-            // Recorro el ResultSet y lo cargo en el Array alumnos
+            // Recorro el ResultSet y lo cargo en el Array dietas
             while (rs.next()) {
 
                 dietas.add(buscarDietaPorId(rs.getInt("idDieta")));
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "listarAlumnos = Error al acceder a la tabla Alumno: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta " + ex.getMessage());
         }
-        // Retorno el Array alumnos con los valores de la consulta
+        // Retorno el Array dietas con los valores de la consulta
         return dietas;
     }
 }

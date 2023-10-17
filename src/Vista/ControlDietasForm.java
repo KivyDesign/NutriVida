@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import Controlador.DietaData;
+import Modelo.Dieta;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 public class ControlDietasForm extends javax.swing.JFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
+    private DietaData dietaData;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public ControlDietasForm() {
         initComponents();
@@ -22,7 +28,10 @@ public class ControlDietasForm extends javax.swing.JFrame {
                 return false;
             }
         };
+        dietaData = new DietaData();
         armarCabecera();
+        cargarDietas();
+        jBVolver.setEnabled(false);
     }
 
     /**
@@ -41,10 +50,9 @@ public class ControlDietasForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTDieta = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBVolver = new javax.swing.JButton();
+        jBSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jbSalir = new javax.swing.JButton();
         jBTerminadasNLogradas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,13 +110,23 @@ public class ControlDietasForm extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(31, 75, 128));
 
-        jButton2.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/6-32x32.png"))); // NOI18N
-        jButton2.setText(" Volver");
+        jBVolver.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jBVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/6-32x32.png"))); // NOI18N
+        jBVolver.setText(" Volver");
+        jBVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVolverActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/5-32x32.png"))); // NOI18N
-        jButton3.setText(" Salir");
+        jBSalir.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/5-32x32.png"))); // NOI18N
+        jBSalir.setText(" Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -117,27 +135,23 @@ public class ControlDietasForm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBVolver, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(jBSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Dietas terminadas y vigentes");
-
-        jbSalir.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/5-32x32.png"))); // NOI18N
-        jbSalir.setText("Salir");
 
         jBTerminadasNLogradas.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jBTerminadasNLogradas.setText("Terminadas sin lograr");
@@ -166,11 +180,6 @@ public class ControlDietasForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jbSalir)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,11 +197,6 @@ public class ControlDietasForm extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jbSalir)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -212,8 +216,20 @@ public class ControlDietasForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTerminadasNLogradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTerminadasNLogradasActionPerformed
-        armarCabecera2();
+        borrarFilasTabla();
+        jBVolver.setEnabled(true);
     }//GEN-LAST:event_jBTerminadasNLogradasActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        NutriVidaForm nutvidForm = new NutriVidaForm();
+        nutvidForm.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverActionPerformed
+        cargarDietas();
+        jBVolver.setEnabled(false);
+    }//GEN-LAST:event_jBVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,9 +267,9 @@ public class ControlDietasForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBSalir;
     private javax.swing.JButton jBTerminadasNLogradas;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jBVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -262,31 +278,49 @@ public class ControlDietasForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTDieta;
-    private javax.swing.JButton jbSalir;
     // End of variables declaration//GEN-END:variables
 private void armarCabecera() {
         modelo.addColumn("ID");
         modelo.addColumn("Nombre Paciente");
-        modelo.addColumn("Estado");
-        modelo.addColumn("Fecha Culminacion");
+        modelo.addColumn("P. buscado");
+        modelo.addColumn("P. llegado");
+        modelo.addColumn("Fecha Final");
 
         jTDieta.setModel(modelo);
-        jTDieta.getColumnModel().getColumn(0).setPreferredWidth(70);
+        jTDieta.getColumnModel().getColumn(0).setPreferredWidth(50);
         jTDieta.getColumnModel().getColumn(1).setPreferredWidth(220);
         jTDieta.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTDieta.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTDieta.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTDieta.getColumnModel().getColumn(4).setPreferredWidth(120);
     }
 
-    private void armarCabecera2() {
-        modelo.addColumn("ID");
-        modelo.addColumn("Nombre Paciente");
-        modelo.addColumn("Peso buscado");
-        modelo.addColumn("Peso llegado");
+    private void cargarDietas() {
 
-        jTDieta.setModel(modelo);
-        jTDieta.getColumnModel().getColumn(0).setPreferredWidth(70);
-        jTDieta.getColumnModel().getColumn(1).setPreferredWidth(220);
-        jTDieta.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTDieta.getColumnModel().getColumn(2).setPreferredWidth(100);
+        ArrayList<Dieta> dietas = (ArrayList<Dieta>) dietaData.listarDietas();
+
+        if (dietas != null) {
+            for (Dieta dieta : dietas) {
+                modelo.addRow(new Object[]{
+                    dieta.getPaciente().getIdPaciente(),
+                    dieta.getPaciente().getNombre(),
+                    dieta.getPesoFinal(),
+                    dieta.getPaciente().getPesoActual(),
+                    dieta.getFechaFinal().format(formatter),});
+            }
+        }
+    }
+
+    public void borrarFilasTabla() {
+        // Con este metodo puedo borrar una fila especifica al recorrer el modelo
+        // Controlar que no este vacio o cargarlo desde el comienzo
+        if (modelo != null) {
+            int a = modelo.getRowCount() - 1;
+
+            if (modelo.getRowCount() > 0) {
+                for (int i = a; i >= 0; i--) {
+                    modelo.removeRow(i);
+                }
+            }
+        }
     }
 }
