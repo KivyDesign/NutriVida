@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.DietaData;
 import Modelo.Dieta;
+import java.awt.Color;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -47,6 +48,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jlMensajeSB = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTDieta = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -84,15 +86,25 @@ public class ControlDietasForm extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(31, 75, 128));
 
+        jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
+        jlMensajeSB.setText("Lista de pacientes con dietas terminadas o vigentes con su fecha de finalización");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jlMensajeSB, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jlMensajeSB)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTDieta.setModel(new javax.swing.table.DefaultTableModel(
@@ -217,7 +229,9 @@ public class ControlDietasForm extends javax.swing.JFrame {
 
     private void jBTerminadasNLogradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTerminadasNLogradasActionPerformed
         borrarFilasTabla();
+        cargarDietasNoCumplidas();
         jBVolver.setEnabled(true);
+        MensajeSB(1, "Listado de dietas finalizadas que no se llego al peso requerido");
     }//GEN-LAST:event_jBTerminadasNLogradasActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -227,8 +241,10 @@ public class ControlDietasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverActionPerformed
+        borrarFilasTabla();
         cargarDietas();
         jBVolver.setEnabled(false);
+        MensajeSB(1, "Listado de pacientes con dietas terminadas o vigentes con su fecha de finalización");
     }//GEN-LAST:event_jBVolverActionPerformed
 
     /**
@@ -278,6 +294,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTDieta;
+    private javax.swing.JLabel jlMensajeSB;
     // End of variables declaration//GEN-END:variables
 private void armarCabecera() {
         modelo.addColumn("ID");
@@ -322,5 +339,35 @@ private void armarCabecera() {
                 }
             }
         }
+    }
+
+    private void cargarDietasNoCumplidas() {
+
+        ArrayList<Dieta> dietas = (ArrayList<Dieta>) dietaData.listarDietasNoCumplidas();
+
+        if (dietas != null) {
+            for (Dieta dieta : dietas) {
+                modelo.addRow(new Object[]{
+                    dieta.getPaciente().getIdPaciente(),
+                    dieta.getPaciente().getNombre(),
+                    dieta.getPesoFinal(),
+                    dieta.getPaciente().getPesoActual(),
+                    dieta.getFechaFinal().format(formatter),});
+            }
+        }
+    }
+
+    public void MensajeSB(int color, String mensaje) {
+
+        if (color == 1) {
+            jlMensajeSB.setForeground(new Color(255, 255, 255));
+        } else if (color == 2) {
+            jlMensajeSB.setForeground(new Color(255, 50, 0));
+        } else if (color == 3) {
+
+            jlMensajeSB.setForeground(new Color(31, 75, 128));
+        }
+
+        jlMensajeSB.setText(mensaje);
     }
 }
