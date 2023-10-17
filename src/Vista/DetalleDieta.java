@@ -458,7 +458,6 @@ public class DetalleDieta extends javax.swing.JFrame {
     }
 
     private void cargarContenido() {
-        borrarFilasTabla();
         ArrayList<DietaComida> dietaComida = (ArrayList<DietaComida>) dietaComidaData.listarDietaComidas(dietasForm.idDieta);
         if (dietaComida != null) {
             for (DietaComida cont : dietaComida) {
@@ -473,19 +472,7 @@ public class DetalleDieta extends javax.swing.JFrame {
         }
     }
 
-    public void borrarFilasTabla() {
-        // Con este metodo puedo borrar una fila especifica al recorrer el modelo
-        // Controlar que no este vacio o cargarlo desde el comienzo
-        if (modelo != null) {
-            int a = modelo.getRowCount() - 1;
-
-            if (modelo.getRowCount() > 0) {
-                for (int i = a; i >= 0; i--) {
-                    modelo.removeRow(i);
-                }
-            }
-        }
-    }
+ 
 
     private void cargarComidas() {
         // Limpio el ComboBox
