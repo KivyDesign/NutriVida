@@ -30,17 +30,16 @@ public class ComidasForm extends javax.swing.JFrame {
 //    private CaloriasForm recibir;
     private boolean e = true;
     
-    public static String caloriasR = "";
-    private CaloriasForm caloriasR2;
-    
+    public static String caloriasA = "";
+//    private CaloriasForm caloriasB1;
     /**
      * Creates new form ComidasForm
      */
     public ComidasForm() {
         initComponents();
         
-        caloriasR2 = new CaloriasForm();
-        jtfCalorias.setText(caloriasR2.caloriasR2);
+//        caloriasB1 = new CaloriasForm();
+//        jtfCalorias.setText(caloriasB1.caloriasB);
         
         comData = new ComidaData();
 
@@ -528,7 +527,7 @@ public class ComidasForm extends javax.swing.JFrame {
 ////        recibir.setVisible(true);
 ////        this.setVisible(false);
 
-        caloriasR = jtfCalorias.getText();
+        caloriasA = jtfCalorias.getText();
         CaloriasForm caloForm = new CaloriasForm();
         caloForm.setVisible(true);
         this.setVisible(false);

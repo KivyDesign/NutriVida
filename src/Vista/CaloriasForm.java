@@ -39,8 +39,8 @@ public class CaloriasForm extends javax.swing.JFrame {
     private int totalDeCalorias = 0;
     private int limitoCincoRegistros = 0;
     
-    public static String caloriasR2 = "";
-    private ComidasForm caloriasR1;
+//    public static String caloriasB = "";
+    private ComidasForm caloriasA1;
 
     /**
      * Creates new form CaloriasForm
@@ -48,8 +48,8 @@ public class CaloriasForm extends javax.swing.JFrame {
     public CaloriasForm() {
         initComponents();
         
-        caloriasR1 = new ComidasForm();
-        jlTotalCalorias.setText(caloriasR1.caloriasR);
+        caloriasA1 = new ComidasForm();
+        jlTotalCalorias.setText(caloriasA1.caloriasA);
 
         // Aqui los conecto a los metodos
         modelo = (DefaultTableModel) jtCalorias.getModel();
@@ -721,6 +721,11 @@ public class CaloriasForm extends javax.swing.JFrame {
         // Aquí cargo las calorías en el Form de Gestión de Comidas
 //        ComidasForm.jtfCalorias.setText(jlTotalCalorias.getText());
 //        enviar.setVisible(true);
+//        this.setVisible(false);
+
+//        caloriasB = jlTotalCalorias.getText();
+//        ComidasForm comiForm = new ComidasForm();
+//        comiForm.setVisible(true);
 //        this.setVisible(false);
     }//GEN-LAST:event_jbCargarCaloriasActionPerformed
 
