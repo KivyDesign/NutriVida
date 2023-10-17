@@ -50,6 +50,7 @@ public class DetalleDieta extends javax.swing.JFrame {
         dietasForm = new DietasForm();
         dietaData = new DietaData();
         jLNombre.setText(dietasForm.nombreDiet);
+        borrarFilasTabla();
         armarCabecera();
         cargarContenido();
         cargarComidas();
@@ -357,8 +358,9 @@ public class DetalleDieta extends javax.swing.JFrame {
                         dietaData.buscarDietaPorId(dietasForm.idDieta),
                         Integer.parseInt(jtPorcion.getText()),
                         (Horario) jcHorario.getSelectedItem()));
+                borrarFilasTabla();
                 cargarContenido();
-                jtPorcion.setText(null);
+                jtPorcion.setText(null);MensajeSB(1, "Comida agregada a Dieta exitosamente");
             }
         } catch (NumberFormatException e) {
             MensajeSB(2, "La porcion debe ser un entero entre 1 y 1000");
@@ -381,7 +383,7 @@ public class DetalleDieta extends javax.swing.JFrame {
                 MensajeSB(1, "Unidades/gramos Actualizadas");
             }
     }//GEN-LAST:event_jbModificarActionPerformed
-        jbModificar.setEnabled(false);
+        jbModificar.setEnabled(false);borrarFilasTabla();
         cargarContenido();
     }
 
@@ -566,5 +568,17 @@ public class DetalleDieta extends javax.swing.JFrame {
             }
         });
     }
+public void borrarFilasTabla() {
+        // Con este metodo puedo borrar una fila especifica al recorrer el modelo
+        // Controlar que no este vacio o cargarlo desde el comienzo
+        if (modelo != null) {
+            int a = modelo.getRowCount() - 1;
 
+            if (modelo.getRowCount() > 0) {
+                for (int i = a; i >= 0; i--) {
+                    modelo.removeRow(i);
+                }
+            }
+        }
+    }
 }
