@@ -31,15 +31,16 @@ public class ComidasForm extends javax.swing.JFrame {
     private boolean e = true;
     
     public static String caloriasA = "";
-//    private CaloriasForm caloriasB1;
+    private CaloriasForm caloriasB1;
     /**
      * Creates new form ComidasForm
      */
     public ComidasForm() {
         initComponents();
         
-//        caloriasB1 = new CaloriasForm();
-//        jtfCalorias.setText(caloriasB1.caloriasB);
+        caloriasB1 = new CaloriasForm();
+        
+        jtfCalorias.setText(caloriasB1.caloriasB);
         
         comData = new ComidaData();
 
