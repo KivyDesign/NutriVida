@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-10-2023 a las 23:51:27
+-- Tiempo de generación: 18-10-2023 a las 01:51:49
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -373,7 +373,7 @@ CREATE TABLE `comida` (
 INSERT INTO `comida` (`idComida`, `nombre`, `detalle`, `cantCalorias`, `estado`) VALUES
 (1, 'Frutilla', 'Es una fruta', 33, 1),
 (2, 'Lenteja', 'legumbres', 116, 1),
-(3, 'Banana', 'Fruta', 89, 1),
+(3, 'Banana', 'Fruta', 89, 0),
 (4, 'Atún', 'Pescado', 130, 0),
 (5, 'Zanahoria', 'Verdura', 37, 1);
 
@@ -399,11 +399,19 @@ CREATE TABLE `dieta` (
 --
 
 INSERT INTO `dieta` (`idDieta`, `nombre`, `idPaciente`, `pesoInicial`, `pesoFinal`, `fechaInicial`, `fechaFinal`, `estado`) VALUES
-(1, 'Intensiva', 2, 140.5, 94.7, '2023-08-23', '2023-12-23', 1),
+(1, 'Intensiva', 2, 140.5, 94.7, '2023-08-23', '2023-10-16', 1),
 (2, 'Masiva', 3, 150.52, 98, '2023-08-23', '2023-12-23', 1),
 (3, 'Liviana', 4, 150.52, 98, '2023-08-23', '2023-12-23', 1),
 (4, 'Normal', 5, 150.52, 98, '2023-08-23', '2023-12-23', 1),
-(19, 'ultrarrapida', 6, 120, 80, '2023-06-01', '2023-11-21', 1);
+(19, 'ultrarrapida', 6, 120, 80, '2023-06-01', '2023-11-21', 1),
+(24, 'Cuidado Personal', 11, 120, 85, '2023-08-08', '2023-11-21', 1),
+(25, 'Leve Aumento', 17, 56, 62, '2023-08-14', '2023-11-22', 0),
+(26, 'Incremento secuencial', 17, 56, 62, '2023-08-07', '2023-10-31', 0),
+(27, 'engorde', 17, 56, 62, '2023-10-02', '2023-06-08', 0),
+(28, 'aumento relativo', 17, 56, 62, '2023-10-02', '2023-11-28', 1),
+(29, 'Ligera', 1, 89, 78.5, '2023-07-21', '2023-10-25', 1),
+(30, 'Rapida', 13, 85.36, 60, '2023-08-22', '2023-10-16', 1),
+(31, 'progresiva', 12, 150.8, 125, '2023-08-23', '2023-10-13', 1);
 
 -- --------------------------------------------------------
 
@@ -416,8 +424,23 @@ CREATE TABLE `dietacomida` (
   `idComida` int(11) NOT NULL,
   `idDieta` int(11) NOT NULL,
   `horario` enum('DESAYUNO','ALMUERZO','MERIENDA','CENA','SNACK') NOT NULL,
-  `porcion` double NOT NULL
+  `porcion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `dietacomida`
+--
+
+INSERT INTO `dietacomida` (`idDietaComida`, `idComida`, `idDieta`, `horario`, `porcion`) VALUES
+(21, 1, 28, 'MERIENDA', 25),
+(25, 1, 1, 'DESAYUNO', 4),
+(27, 2, 1, 'DESAYUNO', 220),
+(28, 5, 1, 'MERIENDA', 3),
+(29, 1, 1, 'ALMUERZO', 12),
+(31, 1, 1, 'ALMUERZO', 5),
+(32, 1, 1, 'DESAYUNO', 4),
+(33, 1, 1, 'CENA', 8),
+(34, 1, 1, 'SNACK', 12);
 
 -- --------------------------------------------------------
 
@@ -442,7 +465,25 @@ INSERT INTO `historial` (`IdHistorial`, `idPaciente`, `peso`, `fechaConsulta`) V
 (4, 6, 105.32, '2023-08-14'),
 (5, 6, 101.6, '2023-09-18'),
 (6, 6, 98.7, '2023-10-11'),
-(7, 6, 97.8, '2023-10-11');
+(7, 6, 97.8, '2023-10-11'),
+(8, 6, 97.8, '2023-10-11'),
+(9, 6, 96.2, '2023-10-16'),
+(10, 6, 95.2, '2023-10-16'),
+(11, 11, 119.5, '2023-10-16'),
+(12, 1, 80.5, '2023-10-16'),
+(13, 1, 84.3, '2023-08-21'),
+(14, 1, 84.3, '2023-08-21'),
+(15, 2, 140.5, '2023-08-23'),
+(16, 1, 84.3, '2023-09-21'),
+(19, 2, 132.85, '2023-09-21'),
+(22, 1, 82.15, '2023-09-15'),
+(23, 2, 125.3, '2023-10-16'),
+(24, 13, 85, '2023-08-22'),
+(25, 3, 150.82, '2023-08-23'),
+(26, 3, 125.05, '2023-10-16'),
+(27, 12, 150.8, '2023-08-23'),
+(28, 2, 94.05, '2023-10-17'),
+(29, 2, 95, '2023-10-17');
 
 -- --------------------------------------------------------
 
@@ -465,16 +506,24 @@ CREATE TABLE `paciente` (
 --
 
 INSERT INTO `paciente` (`idPaciente`, `dni`, `nombre`, `domicilio`, `telefono`, `pesoActual`, `estado`) VALUES
-(1, 22221111, 'Gomez Pablo', '2332 Colon', '456-123', 0, 1),
-(2, 11113333, 'Pabla Gomes', 'Union 562', '123-564', 0, 1),
-(3, 11114444, 'Paola Guzman', 'Pellegrini 456', '423-456', 0, 1),
-(4, 11115555, 'Paulo Salas', 'Campos 458', '123-456', 0, 1),
-(5, 11116666, 'Paula Diaz', 'Belgrano 123', '456-456', 0, 1),
-(6, 11117777, 'Pedro Perez', 'Talleres 789', '123-456', 0, 1),
-(7, 11118888, 'Adrian Gil', 'Maipu 471', '123-741', 0, 1),
-(8, 11119999, 'Adriana Ramos', 'Mitre 1447', '415-456', 0, 1),
-(9, 11110000, 'Carlos Robledo', 'Pasco 1587', '478-456', 0, 1),
-(10, 11111111, 'Carla Funes', 'Sarmiento 569', '100-456', 0, 1);
+(1, 22221111, 'Gomez Pablo', '2332 Colon', '456-123', 80.5, 1),
+(2, 11113333, 'Pabla Gomes', 'Union 562', '123-564', 95, 1),
+(3, 11114444, 'Paola Guzman', 'Pellegrini 456', '423-456', 125.05, 1),
+(4, 11115555, 'Paulo Salas', 'Campos 458', '123-456', 72.4, 1),
+(5, 11116666, 'Paula Diaz', 'Belgrano 123', '456-456', 60.8, 1),
+(6, 11117777, 'Pedro Perez', 'Talleres 789', '123-456', 95.2, 1),
+(7, 11118888, 'Adrian Gil', 'Maipu 471', '123-741', 88.63, 1),
+(8, 11119999, 'Adriana Ramos', 'Mitre 1447', '415-456', 55.35, 1),
+(9, 11110000, 'Carlos Robledo', 'Pasco 1587', '478-456', 97.8, 1),
+(10, 11111111, 'Carla Funes', 'Sarmiento 569', '100-456', 75.8, 1),
+(11, 22225555, 'Francisco Peralta', 'aas', '123-456', 119.5, 1),
+(12, 22223333, 'Pascual Funes', 'Chubut 3450', '123-789', 1500, 1),
+(13, 11112222, 'Daniela Paso', 'Ayacucho 345', '456-123', 85, 1),
+(14, 22224444, 'Horacio Larreta', 'Mitre 578', '111-234', 80, 1),
+(15, 22226666, 'Roberto Calvo', 'Colon 2390', '777-8888', 90.5, 1),
+(16, 22227777, 'Silvia Dorrego', 'Pasco 3456', '00', 69, 1),
+(17, 22228888, 'Dora La Exploradora', 'Vera 490', '555-6666', 56, 0),
+(18, 22229999, 'Victor Paz', 'San Luis 2332', '266-512', 85.3, 1);
 
 --
 -- Índices para tablas volcadas
@@ -535,25 +584,25 @@ ALTER TABLE `comida`
 -- AUTO_INCREMENT de la tabla `dieta`
 --
 ALTER TABLE `dieta`
-  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `dietacomida`
 --
 ALTER TABLE `dietacomida`
-  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `IdHistorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `IdHistorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas
