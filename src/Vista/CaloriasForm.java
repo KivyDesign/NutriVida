@@ -8,7 +8,7 @@ package Vista;
 import Controlador.CaloriasData;
 import Controlador.Conexion;
 import Modelo.Calorias;
-import static Vista.ComidasForm.jtfCalorias;
+//import static Vista.ComidasForm.jtfCalorias;
 import java.awt.Color;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -39,13 +39,16 @@ public class CaloriasForm extends javax.swing.JFrame {
     private int totalDeCalorias = 0;
     private int limitoCincoRegistros = 0;
     
-    private ComidasForm enviar;
+    private ComidasForm caloriasR2;
 
     /**
      * Creates new form CaloriasForm
      */
     public CaloriasForm() {
         initComponents();
+        
+        caloriasR2 = new ComidasForm();
+        jlTotalCalorias.setText(caloriasR2.caloriasR);
 
         // Aqui los conecto a los metodos
         modelo = (DefaultTableModel) jtCalorias.getModel();
@@ -715,9 +718,9 @@ public class CaloriasForm extends javax.swing.JFrame {
 
     private void jbCargarCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarCaloriasActionPerformed
         // Aquí cargo las calorías en el Form de Gestión de Comidas
-        ComidasForm.jtfCalorias.setText(jlTotalCalorias.getText());
-        enviar.setVisible(true);
-        this.setVisible(false);
+//        ComidasForm.jtfCalorias.setText(jlTotalCalorias.getText());
+//        enviar.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_jbCargarCaloriasActionPerformed
 
     private Boolean validarTabla(String nombre) {
