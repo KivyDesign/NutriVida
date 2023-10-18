@@ -95,7 +95,7 @@ public class ComidaData {
         Comida comida = null;
         PreparedStatement ps = null;
         try {
-            String sql = "SELECT idComida, nombre, detalle, cantCalorias, estado FROM comida WHERE nombre = ? AND estado = 1";
+            String sql = "SELECT idComida, nombre, detalle, cantCalorias, estado FROM comida WHERE nombre = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
             ResultSet rs = ps.executeQuery();
