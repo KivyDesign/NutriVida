@@ -210,6 +210,11 @@ public class PacientesForm extends javax.swing.JFrame {
         jbEliminar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/4-32x32.png"))); // NOI18N
         jbEliminar.setText(" Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/5-32x32.png"))); // NOI18N
@@ -588,6 +593,28 @@ public class PacientesForm extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+         try {
+            Paciente paciente = pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText()));
+            if (paciente != null) {
+                pacData.eliminarPaciente(paciente.getIdPaciente());
+                jcbEstado.setSelected(false);
+                MensajeSB(1, "El paciente fue eliminado con exito! Busque por DNI o cargue un nuevo Paciente");
+                LimpiarCampos();
+                jbNuevo.setEnabled(true);
+             } else {
+                MensajeSB(2, "El paciente no Existe");   
+            }            
+        } catch (NumberFormatException e) {
+             MensajeSB(2, "El DNI debe ser un número");
+            jtfDNI.requestFocus();
+            jtfDNI.selectAll();
+            jtfDNI.setBorder(text_border_rojo);
+
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
