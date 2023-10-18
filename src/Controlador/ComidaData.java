@@ -53,12 +53,13 @@ public class ComidaData {
 
     public void modificarComida(Comida comida) {
         try {
-            String sql = "UPDATE comida SET nombre = ?, detalle = ?, cantCalorias = ? WHERE idComida = ?";
+            String sql = "UPDATE comida SET nombre = ?, detalle = ?, cantCalorias = ?, estado = ? WHERE idComida = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, comida.getNombre());
             ps.setString(2, comida.getDetalle());
             ps.setInt(3, comida.getCalorias());
-            ps.setInt(4, comida.getIdComida());
+            ps.setBoolean(4, comida.isEstado());
+            ps.setInt(5, comida.getIdComida());
             ps.executeUpdate();
 
             ps.close();
