@@ -431,46 +431,43 @@ public class ComidasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-//        if (jtfNombre.getText().equalsIgnoreCase("")) {
-//            jtfNombre.setBorder(text_border);
-//            jtfDetalle.requestFocus();
-//            jtfDetalle.selectAll();
-//            MensajeSB(2, "El campo Nombre debe llenarse");
-//        } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
-//            jtfNombre.setBorder(text_border_rojo);
-//            jtfNombre.requestFocus();
-//            jtfNombre.selectAll();
-//        } else if (PruebaDeCaracteres(jtfNombre.getText())) {
-//            jtfNombre.setBorder(text_border_disable);
-//        } else if (jtfDetalle.getText().equalsIgnoreCase("")) {
-//            jtfDetalle.setBorder(text_border);
-//            jtfDetalle.requestFocus();
-//            jtfDetalle.selectAll();
-//            MensajeSB(2, "El campo Detalle debe llenarse");
-//        } else {
-//            jtfDetalle.setBorder(text_border_disable);
-//        }
-//        if (jtfNombre.getBorder() == text_border_disable && jtfDetalle.getBorder() == text_border_disable) {
+        if (jtfNombre.getText().equalsIgnoreCase("")) {
+            jtfNombre.setBorder(text_border);
+            jtfDetalle.requestFocus();
+            jtfDetalle.selectAll();
+            MensajeSB(2, "El campo Nombre debe llenarse");
+        } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+            jtfNombre.setBorder(text_border_rojo);
+            jtfNombre.requestFocus();
+            jtfNombre.selectAll();
+        } else if (PruebaDeCaracteres(jtfNombre.getText())) {
+            jtfNombre.setBorder(text_border_disable);
+        } else if (jtfDetalle.getText().equalsIgnoreCase("")) {
+            jtfDetalle.setBorder(text_border);
+            jtfDetalle.requestFocus();
+            jtfDetalle.selectAll();
+            MensajeSB(2, "El campo Detalle debe llenarse");
+        } else {
+            jtfDetalle.setBorder(text_border_disable);
+        }
+        if (jtfNombre.getBorder() == text_border_disable && jtfDetalle.getBorder() == text_border_disable) {
             try {
                 Comida comida = new Comida(jtfNombre.getText(),
                         jtfDetalle.getText(),
                         Integer.parseInt(jtfCalorias.getText()),
                         true);
                 comData.guardarComida(comida);
-                MensajeSB(1,"Comida creada");
             } catch (NumberFormatException ex) {
                 MensajeSB(2, "El campo Calorías debe llenarse con un número");
                 jtfCalorias.setBorder(text_border_rojo);
                 jtfCalorias.requestFocus();
                 jtfCalorias.selectAll();
             }
-//        }
+        }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        Comida comida = new Comida(Integer.parseInt(jtfID.getText()),jtfNombre.getText(),jtfDetalle.getText(),Integer.parseInt(jtfCalorias.getText()),jcbEstado.isSelected());
-        comData.modificarComida(comida);
-        MensajeSB(1,"Comida guardada");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
