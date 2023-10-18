@@ -431,26 +431,6 @@ public class ComidasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        //        if (jtfNombre.getText().equalsIgnoreCase("")) {
-//            jtfNombre.setBorder(text_border);
-//            jtfDetalle.requestFocus();
-//            jtfDetalle.selectAll();
-//            MensajeSB(2, "El campo Nombre debe llenarse");
-//        } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
-//            jtfNombre.setBorder(text_border_rojo);
-//            jtfNombre.requestFocus();
-//            jtfNombre.selectAll();
-//        } else if (PruebaDeCaracteres(jtfNombre.getText())) {
-//            jtfNombre.setBorder(text_border_disable);
-//        } else if (jtfDetalle.getText().equalsIgnoreCase("")) {
-//            jtfDetalle.setBorder(text_border);
-//            jtfDetalle.requestFocus();
-//            jtfDetalle.selectAll();
-//            MensajeSB(2, "El campo Detalle debe llenarse");
-//        } else {
-//            jtfDetalle.setBorder(text_border_disable);
-//        }
-//        if (jtfNombre.getBorder() == text_border_disable && jtfDetalle.getBorder() == text_border_disable) {
             try {
                 Comida comida = new Comida(jtfNombre.getText(),
                         jtfDetalle.getText(),
