@@ -564,7 +564,7 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfDomicilio.requestFocus();
                 jtfDomicilio.selectAll();
                 jtfDomicilio.setBorder(text_border_rojo);
-            } else if (jtfTelefono.getText().isEmpty()) {
+            } else if (jtfTelefono.getText().isEmpty()) {       
                 MensajeSB(2, "Debe Agregar un Telefono");
                 jtfTelefono.requestFocus();
                 jtfTelefono.selectAll();
