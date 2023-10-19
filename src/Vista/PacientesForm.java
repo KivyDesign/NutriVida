@@ -658,7 +658,7 @@ public class PacientesForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-PacientesForm paciForm = new PacientesForm();
+        PacientesForm paciForm = new PacientesForm();
         paciForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -28,7 +28,8 @@ public class DietasForm extends javax.swing.JFrame {
     private DietaData dietadata;
     private PacienteData pacienteData;
     private PacientesForm numId;
-private LocalDate ahora;
+    private LocalDate ahora;
+
     /**
      * Creates new form DietasForm
      */
@@ -40,7 +41,7 @@ private LocalDate ahora;
         numId = new PacientesForm();
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
-        ahora=LocalDate.now();
+        ahora = LocalDate.now();
 
         //busco dieta cuyo id esta asociado al id paciente de PacientesForm
         Dieta dieta = dietadata.buscarDietaporIdPaciente(numId.nroId);
@@ -58,8 +59,9 @@ private LocalDate ahora;
             jtfPesoFinal.setText(dieta.getPesoFinal() + "");
             jDateChooser1.setDate(Date.from(dieta.getFechaInicial().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             jDateChooser2.setDate(Date.from(dieta.getFechaFinal().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-            if (dieta.getFechaFinal().compareTo(ahora)<=0) {MensajeSB(2, "La fecha de culminacion de la dieta se venció");
-                
+            if (dieta.getFechaFinal().compareTo(ahora) <= 0) {
+                MensajeSB(2, "La fecha de culminacion de la dieta se venció");
+
             }
             jCheckBox1.setSelected(dieta.isEstado());
             jCheckBox1.setEnabled(false);

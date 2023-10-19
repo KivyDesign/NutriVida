@@ -297,7 +297,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
     private javax.swing.JLabel jlMensajeSB;
     // End of variables declaration//GEN-END:variables
 private void armarCabecera() {
-       // modelo.addColumn("ID");
+        // modelo.addColumn("ID");
         modelo.addColumn("Nombre Paciente");
         modelo.addColumn("D.N.I.");
         modelo.addColumn("P. buscado");
@@ -305,7 +305,7 @@ private void armarCabecera() {
         modelo.addColumn("Fecha Final");
 
         jTDieta.setModel(modelo);
-      // jTDieta.getColumnModel().getColumn(0).setPreferredWidth(50);
+        // jTDieta.getColumnModel().getColumn(0).setPreferredWidth(50);
         jTDieta.getColumnModel().getColumn(0).setPreferredWidth(220);
         jTDieta.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTDieta.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -320,7 +320,7 @@ private void armarCabecera() {
         if (dietas != null) {
             for (Dieta dieta : dietas) {
                 modelo.addRow(new Object[]{
-                 //   dieta.getPaciente().getIdPaciente(),
+                    //   dieta.getPaciente().getIdPaciente(),
                     dieta.getPaciente().getNombre(),
                     dieta.getPaciente().getDni(),
                     dieta.getPesoFinal(),
@@ -351,7 +351,7 @@ private void armarCabecera() {
         if (dietas != null) {
             for (Dieta dieta : dietas) {
                 modelo.addRow(new Object[]{
-                //    dieta.getPaciente().getIdPaciente(),
+                    //    dieta.getPaciente().getIdPaciente(),
                     dieta.getPaciente().getNombre(),
                     dieta.getPaciente().getDni(),
                     dieta.getPesoFinal(),
