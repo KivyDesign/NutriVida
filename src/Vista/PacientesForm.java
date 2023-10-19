@@ -231,6 +231,7 @@ public class PacientesForm extends javax.swing.JFrame {
         });
 
         jButton1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/10-30x30.png"))); // NOI18N
         jButton1.setText(" Limpiar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -484,6 +485,9 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfNombre.selectAll();
             jtfNombre.setBorder(text_border_rojo);
 
+
+            jtfNombre.setBorder(text_border_rojo);
+            
         } else if (jtfDNI.getText().length() != 8) {
             MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
             jtfDNI.requestFocus();
