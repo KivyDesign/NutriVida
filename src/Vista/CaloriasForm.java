@@ -22,8 +22,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CaloriasForm extends javax.swing.JFrame {
     
+    // Declaraciones privadas de objetos utilizados para intercambiar ----------
+    // información entre formularios
+    private Calorias caloria;
+    // -------------------------------------------------------------------------
+    
     // Declaro los atributos para acceder a los metodos que necesito
-    // Para caloria
+    // para caloria
     private CaloriasData calData;
 
     // Para el modelo de la tabla
@@ -39,18 +44,10 @@ public class CaloriasForm extends javax.swing.JFrame {
     private int totalDeCalorias = 0;
     private int limitoCincoRegistros = 0;
     
-//    public static String caloriasB = "";
-//    private ComidasForm caloriasA1;
-
-    /**
-     * Creates new form CaloriasForm
-     */
-    public CaloriasForm() {
+    // Recibo por el constructor el objeto c de tipo Calorias ------------------
+    public CaloriasForm(Calorias  c) {
         initComponents();
         
-//        caloriasA1 = new ComidasForm();
-//        jlTotalCalorias.setText(caloriasA1.caloriasA);
-
         // Aqui los conecto a los metodos
         modelo = (DefaultTableModel) jtCalorias.getModel();
         modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
@@ -89,7 +86,31 @@ public class CaloriasForm extends javax.swing.JFrame {
         // Cargar calorias en la tabla
         idGrupoAlimenticio = 1;
         cargarTabla(idGrupoAlimenticio);
+        
+        // =====================================================================
+        // Centro el form en la pantalla
+        this.setLocationRelativeTo(this);
+        
+        // Lo asigno al objeto c a caloria -------------------------------------
+        this.caloria = c;
+        
+        // Muestro los datos que recibo del form principal
+        mostrarDatos();
+        // ---------------------------------------------------------------------
     }
+    
+    // -------------------------------------------------------------------------
+    private void mostrarDatos() {
+        // Y le cargo los datos que estan en los textFields de la ComidasForm
+        jlTotalCalorias.setText(caloria.getCalorias() + "");
+    }
+
+    // Declaro al metodo getCalorias como publico para poder accederlo desde
+    // el form principal y que retorne el objeto de tipo caloria
+    public Calorias getCaloria() {
+        return caloria;
+    }
+    // -------------------------------------------------------------------------
 
     public void cargarCaloriasEnComboBox() {
         // Remuevo todos los items del comboBox
@@ -368,7 +389,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jbCargarCalorias = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(21, 65, 118));
 
@@ -419,7 +440,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jpConexion, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -581,7 +602,7 @@ public class CaloriasForm extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jcbCargarGrupoAlimenticio, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
+                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
                             .addComponent(jScrollPane2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(170, 170, 170)
@@ -598,7 +619,7 @@ public class CaloriasForm extends javax.swing.JFrame {
                 .addGap(104, 104, 104)
                 .addComponent(jbCargarCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -718,15 +739,21 @@ public class CaloriasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSeleccionarActionPerformed
 
     private void jbCargarCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarCaloriasActionPerformed
-        // Aquí cargo las calorías en el Form de Gestión de Comidas
-//        ComidasForm.jtfCalorias.setText(jlTotalCalorias.getText());
-//        enviar.setVisible(true);
-//        this.setVisible(false);
+        // Aquí cargo las calorías en el Form de Gestión de Comidas ------------
+        //
+        // Instancio el objeto caloria de tipo Calorias y le cargo los datos
+        // del label jlTotalCalorias de CaloriasForm
+//        System.out.println(jlTotalCalorias.getText());
+//        System.out.println(Integer.parseInt(jlTotalCalorias.getText()));
+        caloria = new Calorias(
+                Integer.parseInt(jlTotalCalorias.getText())
+        );
+        System.out.println(caloria.getCalorias());
 
-//        caloriasB = jlTotalCalorias.getText();
-//        ComidasForm comiForm = new ComidasForm();
-//        comiForm.setVisible(true);
-//        this.setVisible(false);
+        // PRECAUCIÓN: Cierro el form secundario solo ocultandolo, no es un
+        // EXIT_ON_CLOSE que destruiría la información del form
+        this.dispose();
+        // ---------------------------------------------------------------------
     }//GEN-LAST:event_jbCargarCaloriasActionPerformed
 
     private Boolean validarTabla(String nombre) {
@@ -741,40 +768,40 @@ public class CaloriasForm extends javax.swing.JFrame {
         return false;
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CaloriasForm().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CaloriasForm().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
