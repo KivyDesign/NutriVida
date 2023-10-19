@@ -168,7 +168,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Lista de pacientes Activos con dietas terminadas o vigentes con su fecha de finalizaci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Figuran solo pacientes Activos, ordenadas por fecha de finalizacion"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -88,7 +88,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("Lista de pacientes Activos con dietas terminadas o vigentes con su fecha de finalización");
+        jlMensajeSB.setText("Figuran solo pacientes Activos, ordenadas por fecha de finalizacion");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -244,7 +244,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
         borrarFilasTabla();
         cargarDietas();
         jBVolver.setEnabled(false);
-        MensajeSB(1, "Listado de pacientes Activos con dietas terminadas o vigentes con su fecha de finalización");
+        MensajeSB(1, "Figuran solo Pacientes Activos, ordenados por fecha de finalización");
     }//GEN-LAST:event_jBVolverActionPerformed
 
     /**
@@ -297,15 +297,17 @@ public class ControlDietasForm extends javax.swing.JFrame {
     private javax.swing.JLabel jlMensajeSB;
     // End of variables declaration//GEN-END:variables
 private void armarCabecera() {
-        modelo.addColumn("ID");
+       // modelo.addColumn("ID");
         modelo.addColumn("Nombre Paciente");
+        modelo.addColumn("D.N.I.");
         modelo.addColumn("P. buscado");
         modelo.addColumn("P. llegado");
         modelo.addColumn("Fecha Final");
 
         jTDieta.setModel(modelo);
-        jTDieta.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jTDieta.getColumnModel().getColumn(1).setPreferredWidth(220);
+      // jTDieta.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTDieta.getColumnModel().getColumn(0).setPreferredWidth(220);
+        jTDieta.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTDieta.getColumnModel().getColumn(2).setPreferredWidth(100);
         jTDieta.getColumnModel().getColumn(3).setPreferredWidth(100);
         jTDieta.getColumnModel().getColumn(4).setPreferredWidth(120);
@@ -318,8 +320,9 @@ private void armarCabecera() {
         if (dietas != null) {
             for (Dieta dieta : dietas) {
                 modelo.addRow(new Object[]{
-                    dieta.getPaciente().getIdPaciente(),
+                 //   dieta.getPaciente().getIdPaciente(),
                     dieta.getPaciente().getNombre(),
+                    dieta.getPaciente().getDni(),
                     dieta.getPesoFinal(),
                     dieta.getPaciente().getPesoActual(),
                     dieta.getFechaFinal().format(formatter),});
@@ -348,8 +351,9 @@ private void armarCabecera() {
         if (dietas != null) {
             for (Dieta dieta : dietas) {
                 modelo.addRow(new Object[]{
-                    dieta.getPaciente().getIdPaciente(),
+                //    dieta.getPaciente().getIdPaciente(),
                     dieta.getPaciente().getNombre(),
+                    dieta.getPaciente().getDni(),
                     dieta.getPesoFinal(),
                     dieta.getPaciente().getPesoActual(),
                     dieta.getFechaFinal().format(formatter),});

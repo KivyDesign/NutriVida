@@ -28,7 +28,7 @@ public class DietasForm extends javax.swing.JFrame {
     private DietaData dietadata;
     private PacienteData pacienteData;
     private PacientesForm numId;
-
+private LocalDate ahora;
     /**
      * Creates new form DietasForm
      */
@@ -40,6 +40,7 @@ public class DietasForm extends javax.swing.JFrame {
         numId = new PacientesForm();
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
+        ahora=LocalDate.now();
 
         //busco dieta cuyo id esta asociado al id paciente de PacientesForm
         Dieta dieta = dietadata.buscarDietaporIdPaciente(numId.nroId);
@@ -57,6 +58,9 @@ public class DietasForm extends javax.swing.JFrame {
             jtfPesoFinal.setText(dieta.getPesoFinal() + "");
             jDateChooser1.setDate(Date.from(dieta.getFechaInicial().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             jDateChooser2.setDate(Date.from(dieta.getFechaFinal().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            if (dieta.getFechaFinal().compareTo(ahora)<=0) {MensajeSB(2, "La fecha de culminacion de la dieta se venció");
+                
+            }
             jCheckBox1.setSelected(dieta.isEstado());
             jCheckBox1.setEnabled(false);
         } else {
@@ -69,6 +73,7 @@ public class DietasForm extends javax.swing.JFrame {
             jbDetalleDieta.setEnabled(false);
             jtfPaciente.setText(numId.nombreP);
             jtfPaciente.setEditable(false);
+            jCheckBox1.setEnabled(false);
             // Set borders todos subrayados en amarillo a excepción del ID que es
             // blanco y de solo 1 pixel de grosor para indicar que no es editable
             jtfID.setBorder(text_border_disable);
@@ -76,6 +81,7 @@ public class DietasForm extends javax.swing.JFrame {
 //            jtfPaciente.setBorder(text_border);
             jtfPesoInicial.setBorder(text_border);
             jtfPesoFinal.setBorder(text_border);
+            MensajeSB(7, "No se encontro dieta para este Paciente cree una nueva");
         }
 
     }
@@ -453,7 +459,7 @@ public class DietasForm extends javax.swing.JFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
             MensajeSB(2, "Falta completar Fechas");
-            } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
+        } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
             MensajeSB(2, "la fecha inicial debe ser menor que la final");
         } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
@@ -482,8 +488,9 @@ public class DietasForm extends javax.swing.JFrame {
                             jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                             true);
                     dietadata.guardarDieta(dieta);
-                    jtfID.setText(dieta.getIdDieta()+"");
+                    jtfID.setText(dieta.getIdDieta() + "");
                     MensajeSB(1, "Dieta guardada con exito");
+                    jCheckBox1.setSelected(true);
                     jbNuevo.setEnabled(false);
                     jbEliminar.setEnabled(true);
                     jbGuardar.setEnabled(true);
