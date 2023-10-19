@@ -6,7 +6,9 @@
 package Vista;
 
 import Controlador.PacienteData;
+import Modelo.Comida;
 import Modelo.Paciente;
+import static Vista.ComidasForm.jtfCalorias;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -564,7 +566,7 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfDomicilio.requestFocus();
                 jtfDomicilio.selectAll();
                 jtfDomicilio.setBorder(text_border_rojo);
-            } else if (jtfTelefono.getText().isEmpty()) {       
+            } else if (jtfTelefono.getText().isEmpty()) {
                 MensajeSB(2, "Debe Agregar un Telefono");
                 jtfTelefono.requestFocus();
                 jtfTelefono.selectAll();
@@ -579,6 +581,16 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfPesoActual.requestFocus();
                 jtfPesoActual.selectAll();
                 jtfPesoActual.setBorder(text_border_rojo);
+            } else {
+                Paciente paciente = new Paciente(
+                        Integer.parseInt(jtfDNI.getText()),
+                        jtfNombre.getText(),
+                        jtfDomicilio.getText(),
+                        jtfTelefono.getText(),
+                        Double.parseDouble(jtfPesoActual.getText()),
+                        jcbEstado.isSelected());
+                pacData.modificarPaciente(paciente);
+                MensajeSB(1, "Paciente Guardado");
             }
         } catch (NumberFormatException e) {
             MensajeSB(2, "El peso debe ser un número");
@@ -596,7 +608,7 @@ public class PacientesForm extends javax.swing.JFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             Paciente paciente = pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText()));
             if (paciente != null) {
                 pacData.eliminarPaciente(paciente.getIdPaciente());
@@ -604,11 +616,11 @@ public class PacientesForm extends javax.swing.JFrame {
                 MensajeSB(1, "El paciente fue eliminado con exito! Busque por DNI o cargue un nuevo Paciente");
                 LimpiarCampos();
                 jbNuevo.setEnabled(true);
-             } else {
-                MensajeSB(2, "El paciente no Existe");   
-            }            
+            } else {
+                MensajeSB(2, "El paciente no Existe");
+            }
         } catch (NumberFormatException e) {
-             MensajeSB(2, "El DNI debe ser un número");
+            MensajeSB(2, "El DNI debe ser un número");
             jtfDNI.requestFocus();
             jtfDNI.selectAll();
             jtfDNI.setBorder(text_border_rojo);
