@@ -626,17 +626,10 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfPesoActual.requestFocus();
             jtfPesoActual.selectAll();
             jtfPesoActual.setBorder(text_border_rojo);
-
         }
-    }
-
-    {
-
-
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        // TODO add your handling code here:
         try {
             Paciente paciente = pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText()));
             if (paciente != null) {
