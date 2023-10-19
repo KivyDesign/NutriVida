@@ -90,9 +90,12 @@
                               <Component id="jcbEstado" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jbCalcularCalorias" max="32767" attributes="0"/>
-                              <Component id="jlCaloriasTXT" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jbCalcularCalorias" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="jlCaloriasTXT" min="-2" pref="109" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -304,10 +307,7 @@
                               <Component id="jbNuevo" max="32767" attributes="0"/>
                               <Component id="jbBuscar" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jbSalir" min="-2" pref="124" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jbSalir" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jbLimpiar" max="32767" attributes="0"/>
