@@ -724,6 +724,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jbBuscar.setEnabled(false);
         jbNuevo.setEnabled(false);
         e = true;
+        MensajeSB(1,"");
     }
 
     public void estadojbNuevo() {
