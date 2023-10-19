@@ -34,6 +34,7 @@ public class HistorialView extends javax.swing.JFrame {
 
     public HistorialView() {
         initComponents();
+        this.setLocationRelativeTo(null);
         //creo un DietasForm
         historiaDieta = new DietasForm();
         pacData = new PacienteData();

@@ -55,14 +55,15 @@ public class PacienteData {
 
     public void modificarPaciente(Paciente paciente) {
         try {
-            String sql = "UPDATE paciente SET dni = ?, nombre = ?, domicilio = ?, telefono = ?,pesoActual=? WHERE idPaciente = ?";
+            String sql = "UPDATE paciente SET dni = ?, nombre = ?, domicilio = ?, telefono = ?,pesoActual=?,estado=? WHERE idPaciente = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, paciente.getDni());
             ps.setString(2, paciente.getNombre());
             ps.setString(3, paciente.getDomicilio());
             ps.setString(4, paciente.getTelefono());
-            ps.setInt(5, paciente.getIdPaciente());
-            ps.setDouble(6, paciente.getPesoActual());
+            ps.setDouble(5, paciente.getPesoActual());
+            ps.setBoolean(6, paciente.isEstado());
+            ps.setInt(7, paciente.getIdPaciente());
             ps.executeUpdate();
 
             ps.close();
@@ -129,13 +130,14 @@ public class PacienteData {
         try {
             String sql = "UPDATE paciente SET pesoActual = ? WHERE idPaciente = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ps.setDouble(1, pesoActual);
             ps.setInt(2, idPaciente);
             ps.executeUpdate();
-            
+
             ps.close();
-        } catch (SQLException ex) {JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
         }
     }
 
