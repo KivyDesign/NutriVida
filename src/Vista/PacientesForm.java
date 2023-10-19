@@ -15,6 +15,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import jdk.nashorn.internal.ir.BreakNode;
 
 /**
  *
@@ -50,7 +51,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jtfPesoActual.setBorder(text_border);
 
         // Posiciono el foco en el nombre al iniciar el form
-        jtfNombre.requestFocus();
+        jtfDNI.requestFocus();
 
     }
     public static int nroId = -1;
@@ -565,19 +566,17 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfDNI.requestFocus();
                 jtfDNI.selectAll();
                 jtfDNI.setBorder(text_border_rojo);
-            } else if (!jtfDNI.getText().equals(paraDniDuplicado)) {
-                if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
-                    MensajeSB(2, "Este DNI pertece a otro paciente,debe primero cambiar el otro DNI/Paciente para proceder");
-                    jtfDNI.setBorder(text_border_rojo);
-                }
+            } else if (!jtfDNI.getText().equals(paraDniDuplicado)
+                    && pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
+
+                MensajeSB(2, "Este DNI pertece a otro paciente,debe primero cambiar el otro DNI/Paciente para proceder");
+                jtfDNI.setBorder(text_border_rojo);
+
 //        } else if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
                 //            MensajeSB(2, "El DNI ya esta utilizado en otro paciente");
                 //            jtfDNI.requestFocus();
                 //            jtfDNI.selectAll();
                 //            jtfDNI.setBorder(text_border_rojo);
-                {
-
-                }
             } else if (jtfDomicilio.getText().isEmpty()) {
                 MensajeSB(2, "Debe Agregar un domicilio");
                 jtfDomicilio.requestFocus();
