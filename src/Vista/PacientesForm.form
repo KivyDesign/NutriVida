@@ -465,6 +465,9 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins" size="14" style="0"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagenes/10-30x30.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value=" Limpiar"/>
               </Properties>
               <Events>
