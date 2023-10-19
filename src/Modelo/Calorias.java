@@ -16,6 +16,7 @@ public class Calorias {
     }
     
     public Calorias(int calorias) {
+        this.calorias = calorias;
     }
 
     public Calorias(int idGrupoAlimenticio, String nombre, int calorias, int proteinas, int grasa, int carbohidratos, int fibra, int colesterol, Boolean estado) {

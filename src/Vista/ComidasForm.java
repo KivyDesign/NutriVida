@@ -578,6 +578,8 @@ public class ComidasForm extends javax.swing.JFrame {
         caloriaX = new Calorias(
                 Integer.parseInt(jlCaloriasTXT.getText())
         );
+        System.out.println(caloriaX.getCalorias());
+        System.out.println(jlCaloriasTXT.getText());
 
         // Si la CaloriasForm ya existe, la mostramos
         if (caloriasForm != null) {
