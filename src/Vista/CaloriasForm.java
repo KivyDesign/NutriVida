@@ -24,7 +24,7 @@ public class CaloriasForm extends javax.swing.JFrame {
     
     // Declaraciones privadas de objetos utilizados para intercambiar ----------
     // información entre formularios
-    private Calorias caloria;
+    private Calorias caloriaX;
     // -------------------------------------------------------------------------
     
     // Declaro los atributos para acceder a los metodos que necesito
@@ -92,7 +92,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         
         // Lo asigno al objeto c a caloria -------------------------------------
-        this.caloria = c;
+        this.caloriaX = c;
         
         // Muestro los datos que recibo del form principal
         mostrarDatos();
@@ -102,13 +102,14 @@ public class CaloriasForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
     private void mostrarDatos() {
         // Y le cargo los datos que estan en los textFields de la ComidasForm
-        jlTotalCalorias.setText(caloria.getCalorias() + "");
+        jlTotalCalorias.setText(caloriaX.getCalorias() + "");
+//        System.out.println(caloriaX.toString());
     }
 
     // Declaro al metodo getCalorias como publico para poder accederlo desde
     // el form principal y que retorne el objeto de tipo caloria
-    public Calorias getCaloria() {
-        return caloria;
+    public Calorias getCaloriaX() {
+        return caloriaX;
     }
     // -------------------------------------------------------------------------
 
@@ -745,10 +746,10 @@ public class CaloriasForm extends javax.swing.JFrame {
         // del label jlTotalCalorias de CaloriasForm
 //        System.out.println(jlTotalCalorias.getText());
 //        System.out.println(Integer.parseInt(jlTotalCalorias.getText()));
-        caloria = new Calorias(
+        caloriaX = new Calorias(
                 Integer.parseInt(jlTotalCalorias.getText())
         );
-        System.out.println(caloria.getCalorias());
+        System.out.println(caloriaX.getCalorias());
 
         // PRECAUCIÓN: Cierro el form secundario solo ocultandolo, no es un
         // EXIT_ON_CLOSE que destruiría la información del form
