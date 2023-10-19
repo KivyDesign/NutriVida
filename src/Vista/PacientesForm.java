@@ -482,11 +482,11 @@ public class PacientesForm extends javax.swing.JFrame {
         if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
-
+<<<<<<< Updated upstream
             jtfNombre.setBorder(text_border_rojo);
-
+=======
             
-
+>>>>>>> Stashed changes
         } else if (jtfDNI.getText().length() != 8) {
             MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
             jtfDNI.requestFocus();
