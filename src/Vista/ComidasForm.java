@@ -25,7 +25,7 @@ public class ComidasForm extends javax.swing.JFrame {
     // Declaraciones privadas de objetos utilizados para intercambiar ----------
     // información entre formularios
     private CaloriasForm caloriasForm;
-    private Calorias caloria;
+    private Calorias caloriaX;
     // -------------------------------------------------------------------------
     
     private ComidaData comData;
@@ -83,7 +83,7 @@ public class ComidasForm extends javax.swing.JFrame {
     public void TraerDatos() {
         if (caloriasForm != null) {
             // Instancio el objeto c de tipo Calorias
-            Calorias c = caloriasForm.getCaloria();
+            Calorias c = caloriasForm.getCaloriaX();
 
             // Y le cargo los datos que estan en los textFields de la CaloriasForm
             jlCaloriasTXT.setText(c.getCalorias() + "");
@@ -575,7 +575,7 @@ public class ComidasForm extends javax.swing.JFrame {
         //
         // Instancio el objeto persona de tipo Calorias y le cargo los datos
         // de los textFields de ComidasForm
-        caloria = new Calorias(
+        caloriaX = new Calorias(
                 Integer.parseInt(jlCaloriasTXT.getText())
         );
 
@@ -584,8 +584,8 @@ public class ComidasForm extends javax.swing.JFrame {
             caloriasForm.setVisible(true);
         } else {
             // Si no existe, la instanciamos y le pasamos los datos a traves
-            // del objeto de tipo caloria
-            caloriasForm = new CaloriasForm(caloria);
+            // del objeto de tipo caloriaX
+            caloriasForm = new CaloriasForm(caloriaX);
             // Y luego la mostramos
             caloriasForm.setVisible(true);
         }
