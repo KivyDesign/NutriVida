@@ -431,18 +431,24 @@ public class PacientesForm extends javax.swing.JFrame {
                     jtfPesoActual.setText(paciente.getPesoActual() + "");
                     if (paciente.isEstado() == true) {
                         jcbEstado.setSelected(true);
+                        jcbEstado.setEnabled(false);
                         jbGuardar.setEnabled(true);
                         jbEliminar.setEnabled(true);
                         jbNuevo.setEnabled(false);
+                        jtfDNI.setBorder(text_border);
                         MensajeSB(1, "Paciente encontrado");
                         jbDietaPersonal.setEnabled(true);
                     } else {
-                        MensajeSB(2, "El DNI no es de un Paciente activo");
+                        MensajeSB(2, "El DNI es de un Paciente eliminado. Si desea activar cambie estado y guarde");
                         jbGuardar.setEnabled(true);
+                        jcbEstado.setEnabled(true);
+                        jbNuevo.setEnabled(false);
+                        jbEliminar.setEnabled(false);
+                        jbBuscar.setEnabled(false);
                         jtfDNI.setBorder(text_border_rojo);
                     }
                 } else {
-                    MensajeSB(2, "El DNI no es de un Paciente activo");
+                    MensajeSB(2, "El DNI no es de un Paciente registrado");
                     jtfDNI.requestFocus();
                     jtfDNI.selectAll();
                     jtfDNI.setBorder(text_border_rojo);
@@ -549,7 +555,7 @@ public class PacientesForm extends javax.swing.JFrame {
         try {
             if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
                 jtfNombre.requestFocus();
-                jtfNombre.selectAll(); 
+                jtfNombre.selectAll();
                 jtfNombre.setBorder(text_border_rojo);
 
             } else if (jtfDNI.getText().length() != 8) {
@@ -593,6 +599,7 @@ public class PacientesForm extends javax.swing.JFrame {
                         jcbEstado.isSelected());
                 pacData.modificarPaciente(paciente);
                 MensajeSB(1, "Paciente Guardado");
+                jtfDNI.setBorder(text_border);
             }
         } catch (NumberFormatException e) {
             MensajeSB(2, "El peso debe ser un número");

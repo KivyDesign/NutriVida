@@ -55,14 +55,15 @@ public class PacienteData {
 
     public void modificarPaciente(Paciente paciente) {
         try {
-            String sql = "UPDATE paciente SET dni = ?, nombre = ?, domicilio = ?, telefono = ?,pesoActual=? WHERE idPaciente = ?";
+            String sql = "UPDATE paciente SET dni = ?, nombre = ?, domicilio = ?, telefono = ?,pesoActual=?,estado=? WHERE idPaciente = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, paciente.getDni());
             ps.setString(2, paciente.getNombre());
             ps.setString(3, paciente.getDomicilio());
             ps.setString(4, paciente.getTelefono());
             ps.setDouble(5, paciente.getPesoActual());
-            ps.setInt(6, paciente.getIdPaciente());
+            ps.setBoolean(6, paciente.isEstado());
+            ps.setInt(7, paciente.getIdPaciente());
             ps.executeUpdate();
 
             ps.close();
