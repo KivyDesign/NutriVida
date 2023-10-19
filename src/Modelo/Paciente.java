@@ -21,14 +21,17 @@ public class Paciente {
         this.estado = estado;
     }
 
-    public Paciente(int idPaciente, int dni, String nombre, String domicilio, String telefono, double pesoActual) {
+    public Paciente(int idPaciente, int dni, String nombre, String domicilio, String telefono, double pesoActual, boolean estado) {
         this.idPaciente = idPaciente;
         this.dni = dni;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.pesoActual = pesoActual;
+        this.estado = estado;
     }
+
+   
 
     
 //    public Paciente(int parseInt, String text, boolean b) {
