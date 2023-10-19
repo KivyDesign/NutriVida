@@ -158,7 +158,7 @@ public class DietaData {
         ArrayList<Dieta> dietas = new ArrayList<>();
 
         try {
-            String sql = "SELECT idDieta FROM dieta d,paciente p WHERE p.idPaciente=d.idPaciente and pesoFinal < pesoActual and fechafinal <= ? and d.estado=1 and p.estado=1 order by d.fechaFinal";
+            String sql = "SELECT idDieta FROM dieta d,paciente p WHERE p.idPaciente=d.idPaciente and pesoFinal < pesoActual and fechafinal <= ? and d.estado=1 and p.estado=1 order by fechaFinal";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(LocalDate.now()));
             ResultSet rs = ps.executeQuery();

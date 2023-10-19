@@ -364,6 +364,7 @@ public class HistorialView extends javax.swing.JFrame {
                 historialData.guardarHistorial(hist);
                 pacData.modificarPesoActual(historiaDieta.IdPac, Double.parseDouble(jtPesoRegistrado.getText()));
                 MensajeSB(1, "Consulta guardada con exito");
+                borrarFilasTabla();
                 cargarHistorial(historiaDieta.IdPac);
             }
         } catch (NumberFormatException ex) {
@@ -474,5 +475,19 @@ public void MensajeSB(int color, String mensaje) {
         modelo.addColumn("Peso registrado");
 
         jtHistorial.setModel(modelo);
+    }
+
+    public void borrarFilasTabla() {
+        // Con este metodo puedo borrar una fila especifica al recorrer el modelo
+        // Controlar que no este vacio o cargarlo desde el comienzo
+        if (modelo != null) {
+            int a = modelo.getRowCount() - 1;
+
+            if (modelo.getRowCount() > 0) {
+                for (int i = a; i >= 0; i--) {
+                    modelo.removeRow(i);
+                }
+            }
+        }
     }
 }
