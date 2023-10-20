@@ -637,6 +637,11 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfPesoActual.setBorder(text_border);
             }
         } catch (NumberFormatException e) {
+            jtfNombre.setBorder(text_border);
+            jtfDNI.setBorder(text_border);
+            jtfDomicilio.setBorder(text_border);
+            jtfTelefono.setBorder(text_border);
+            jtfPesoActual.setBorder(text_border);
             MensajeSB(2, "El peso debe ser un número");
             jtfPesoActual.requestFocus();
             jtfPesoActual.selectAll();
