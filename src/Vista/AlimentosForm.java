@@ -21,8 +21,6 @@ public class AlimentosForm extends javax.swing.JFrame {
 
     private ComidaData comData;
     private DefaultTableModel modelo = new DefaultTableModel();
-    int l1 = 0;
-    int l2 = Integer.MAX_VALUE;
 
     /**
      * Creates new form AlimentosForm
@@ -229,7 +227,8 @@ public class AlimentosForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfLimiteMinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfLimiteMinKeyReleased
-
+        int l1 = 0;
+        int l2 = Integer.MAX_VALUE;
         try {
             if (!jtfLimiteMin.getText().isEmpty()) {
                 l1 = Integer.parseInt(jtfLimiteMin.getText());
@@ -251,7 +250,8 @@ public class AlimentosForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfLimiteMinKeyReleased
 
     private void jtfLimiteMaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfLimiteMaxKeyReleased
-
+        int l1 = 0;
+        int l2 = Integer.MAX_VALUE;
         try {
             if (!jtfLimiteMin.getText().isEmpty()) {
                 l1 = Integer.parseInt(jtfLimiteMin.getText());
