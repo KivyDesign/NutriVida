@@ -6,7 +6,9 @@
 package Vista;
 
 import Controlador.ComidaData;
+import Controlador.Conexion;
 import Modelo.Comida;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +26,8 @@ public class AlimentosForm extends javax.swing.JFrame {
      */
     public AlimentosForm() {
         initComponents();
+        comData = new ComidaData();
+        Connection con = Conexion.getConexion();
         armarCabeceraDeLaTabla();
         cargarComidas();
     }
@@ -260,6 +264,17 @@ public class AlimentosForm extends javax.swing.JFrame {
     private javax.swing.JTextField jtfLimiteSuperior;
     // End of variables declaration//GEN-END:variables
 
+    public void borrarFilasTabla() {
+        if (modelo != null) {
+            int a = modelo.getRowCount() - 1;
+
+            if (modelo.getRowCount() > 0) {
+                for (int i = a; i >= 0; i--) {
+                    modelo.removeRow(i);
+                }
+            }
+        }
+    }
     public void armarCabeceraDeLaTabla() {
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
@@ -275,13 +290,19 @@ public class AlimentosForm extends javax.swing.JFrame {
     }
 
     public void cargarComidas() {
-      //  try {
-            ArrayList<Comida> lista = comData.listarComidas();
-            for (Comida comida : lista) {
-                System.out.println("hola");
-                System.out.println(comida.toString());
+        borrarFilasTabla();
+        
+        ArrayList<Comida> lista = comData.listarComidas();
+        for (Comida comida : lista) {
+            Object[] objComida = new Object[]{comida.getIdComida(),comida.getNombre(),comida.getDetalle(),comida.getCalorias()};
+            modelo.addRow(objComida);
+        }
+        System.out.println("listo");
+//            for (Comida comida : lista) {
+//                System.out.println("hola");
+//                System.out.println(comida.toString());
 //                modelo.addRow((Object[]) (Object) comida);
-            }
+//            }
 //        } catch (NullPointerException e) {
 //            System.out.println("no hay nada aca");
 //        }
