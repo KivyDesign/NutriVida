@@ -820,11 +820,11 @@ public class ComidasForm extends javax.swing.JFrame {
                 MensajeSB(2, "El campo Calorias debe llenarse");
             } else {
                 try {
-                    if (Integer.parseInt(jtfCalorias.getText()) < 0 || Integer.parseInt(jtfCalorias.getText()) > 5000) {
+                    if (Integer.parseInt(jtfCalorias.getText()) < 0 || Integer.parseInt(jtfCalorias.getText()) > 20000) {
                         jtfCalorias.setBorder(text_border_rojo);
                         jtfCalorias.requestFocus();
                         jtfCalorias.selectAll();
-                        MensajeSB(2, "El campo Calorias está fuera de rango(0-5000)");
+                        MensajeSB(2, "El campo Calorias está fuera de rango(0-20000)");
                     } else {
                         jtfCalorias.setBorder(text_border_disable);
 //                            estadojbNuevo();
