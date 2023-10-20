@@ -5,17 +5,27 @@
  */
 package Vista;
 
+import Controlador.ComidaData;
+import Modelo.Comida;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author javier
  */
 public class AlimentosForm extends javax.swing.JFrame {
 
+    private ComidaData comData;
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form AlimentosForm
      */
     public AlimentosForm() {
         initComponents();
+        armarCabeceraDeLaTabla();
+        cargarComidas();
     }
 
     /**
@@ -36,7 +46,7 @@ public class AlimentosForm extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtComidas = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jtfLimiteInferior = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -102,7 +112,7 @@ public class AlimentosForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(31, 75, 128));
@@ -126,10 +136,10 @@ public class AlimentosForm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtComidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -140,7 +150,7 @@ public class AlimentosForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtComidas);
 
         jLabel5.setText("Calorias entre:");
 
@@ -245,8 +255,36 @@ public class AlimentosForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jtComidas;
     private javax.swing.JTextField jtfLimiteInferior;
     private javax.swing.JTextField jtfLimiteSuperior;
     // End of variables declaration//GEN-END:variables
+
+    public void armarCabeceraDeLaTabla() {
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Detalle");
+        modelo.addColumn("Calorías");
+
+        jtComidas.setModel(modelo);
+
+        jtComidas.getColumnModel().getColumn(0).setPreferredWidth(10);
+        jtComidas.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jtComidas.getColumnModel().getColumn(2).setPreferredWidth(150);
+        jtComidas.getColumnModel().getColumn(3).setPreferredWidth(50);
+    }
+
+    public void cargarComidas() {
+      //  try {
+            ArrayList<Comida> lista = comData.listarComidas();
+            for (Comida comida : lista) {
+                System.out.println("hola");
+                System.out.println(comida.toString());
+//                modelo.addRow((Object[]) (Object) comida);
+            }
+//        } catch (NullPointerException e) {
+//            System.out.println("no hay nada aca");
+//        }
+
+    }
 }
