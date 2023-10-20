@@ -51,7 +51,7 @@ public class AlimentosForm extends javax.swing.JFrame {
         
         MensajeSB(1, "Ingrese un Limite Mínimo y Máximo de Calorías para el filtrado de Comidas");
         armarCabeceraDeLaTabla();
-//        cargarComidas();
+        cargarComidas();
     }
 
     /**

@@ -120,7 +120,7 @@ public class ComidaData {
         ArrayList<Comida> comidas = new ArrayList<>();
 
         try {
-            String sql = "SELECT idComida FROM comida WHERE estado = 1 and cantCalorias>=? and cantCalorias<=?";
+            String sql = "SELECT idComida FROM comida WHERE estado = 1 and cantCalorias >= ? and cantCalorias <= ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, calMin);
             ps.setInt(2, calMax);
@@ -133,7 +133,7 @@ public class ComidaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "listarAlumnos = Error al acceder a la tabla Alumno: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "listarComidasCalorias = Error al acceder a la tabla comida: " + ex.getMessage());
         }
         // Retorno el Array alumnos con los valores de la consulta
         return comidas;
@@ -142,7 +142,7 @@ public class ComidaData {
     public ArrayList<Comida> listarComidas() {
         ArrayList<Comida> listaComidas = new ArrayList<>();
         try {
-            String sql = "SELECT idComida FROM Comida WHERE estado = 1";
+            String sql = "SELECT idComida FROM comida WHERE estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
