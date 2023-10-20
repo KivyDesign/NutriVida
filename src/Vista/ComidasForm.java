@@ -66,6 +66,11 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfNombre.setBorder(text_border);
         jtfDetalle.setBorder(text_border);
         jtfCalorias.setBorder(text_border);
+        
+        jlEstado.setEnabled(false);
+        jcbEstado.setEnabled(false);
+        jcbEstado.setForeground(Color.GRAY);
+        
         jbBuscar.setEnabled(false);
         jbNuevo.setEnabled(false);
         jbGuardar.setEnabled(false);
@@ -720,7 +725,8 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfNombre.setText("");
         jtfDetalle.setText("");
         jtfCalorias.setText("");
-        jcbEstado.setSelected(false);
+//        jcbEstado.setSelected(false);
+        jcbEstado.setEnabled(false);
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
         jbBuscar.setEnabled(false);
