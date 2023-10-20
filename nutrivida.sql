@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2023 a las 01:51:49
+-- Tiempo de generación: 21-10-2023 a las 00:14:54
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -373,7 +373,7 @@ CREATE TABLE `comida` (
 INSERT INTO `comida` (`idComida`, `nombre`, `detalle`, `cantCalorias`, `estado`) VALUES
 (1, 'Frutilla', 'Es una fruta', 33, 1),
 (2, 'Lenteja', 'legumbres', 116, 1),
-(3, 'Banana', 'Fruta', 89, 0),
+(3, 'Banana', 'Fruta', 89, 1),
 (4, 'Atún', 'Pescado', 130, 0),
 (5, 'Zanahoria', 'Verdura', 37, 1);
 
@@ -411,7 +411,14 @@ INSERT INTO `dieta` (`idDieta`, `nombre`, `idPaciente`, `pesoInicial`, `pesoFina
 (28, 'aumento relativo', 17, 56, 62, '2023-10-02', '2023-11-28', 1),
 (29, 'Ligera', 1, 89, 78.5, '2023-07-21', '2023-10-25', 1),
 (30, 'Rapida', 13, 85.36, 60, '2023-08-22', '2023-10-16', 1),
-(31, 'progresiva', 12, 150.8, 125, '2023-08-23', '2023-10-13', 1);
+(31, 'progresiva', 12, 150.8, 125, '2023-08-23', '2023-10-13', 0),
+(32, 'Perdedora', 14, 80, 68, '2023-09-04', '2023-12-22', 1),
+(33, 'CuidadoIntensivo', 19, 89.7, 79, '2023-09-11', '2023-09-20', 1),
+(34, 'Liviana', 9, 97.8, 90, '2023-08-15', '2023-11-14', 1),
+(35, 'Media', 7, 60.8, 48.5, '2023-09-12', '2023-12-20', 1),
+(36, 'liviana', 8, 55.35, 50, '2023-09-13', '2023-11-24', 1),
+(37, 'menor', 16, 69, 58.5, '2023-09-12', '2023-12-18', 1),
+(38, 'super', 18, 85.3, 79, '2023-09-12', '2023-11-14', 1);
 
 -- --------------------------------------------------------
 
@@ -440,7 +447,8 @@ INSERT INTO `dietacomida` (`idDietaComida`, `idComida`, `idDieta`, `horario`, `p
 (31, 1, 1, 'ALMUERZO', 5),
 (32, 1, 1, 'DESAYUNO', 4),
 (33, 1, 1, 'CENA', 8),
-(34, 1, 1, 'SNACK', 12);
+(34, 1, 1, 'SNACK', 12),
+(35, 2, 30, 'CENA', 200);
 
 -- --------------------------------------------------------
 
@@ -469,7 +477,6 @@ INSERT INTO `historial` (`IdHistorial`, `idPaciente`, `peso`, `fechaConsulta`) V
 (8, 6, 97.8, '2023-10-11'),
 (9, 6, 96.2, '2023-10-16'),
 (10, 6, 95.2, '2023-10-16'),
-(11, 11, 119.5, '2023-10-16'),
 (12, 1, 80.5, '2023-10-16'),
 (13, 1, 84.3, '2023-08-21'),
 (14, 1, 84.3, '2023-08-21'),
@@ -483,7 +490,25 @@ INSERT INTO `historial` (`IdHistorial`, `idPaciente`, `peso`, `fechaConsulta`) V
 (26, 3, 125.05, '2023-10-16'),
 (27, 12, 150.8, '2023-08-23'),
 (28, 2, 94.05, '2023-10-17'),
-(29, 2, 95, '2023-10-17');
+(29, 2, 95, '2023-10-17'),
+(30, 13, 80.7, '2023-09-22'),
+(31, 19, 80.3, '2023-10-19'),
+(32, 19, 97.8, '2023-08-15'),
+(33, 11, 120, '2023-08-08'),
+(34, 3, 141.5, '2023-09-24'),
+(35, 4, 150.52, '2023-08-23'),
+(36, 5, 150.52, '2023-08-23'),
+(37, 7, 60.8, '2023-09-12'),
+(38, 8, 55.35, '2023-09-13'),
+(39, 8, 52.9, '2023-10-19'),
+(40, 13, 75.2, '2023-10-19'),
+(41, 2, 93.5, '2023-10-19'),
+(42, 1, 80.2, '2023-10-19'),
+(43, 3, 132.58, '2023-10-19'),
+(44, 16, 69, '2023-09-12'),
+(45, 16, 65.4, '2023-10-19'),
+(46, 18, 85.3, '2023-09-12'),
+(47, 18, 82.5, '2023-10-20');
 
 -- --------------------------------------------------------
 
@@ -506,24 +531,26 @@ CREATE TABLE `paciente` (
 --
 
 INSERT INTO `paciente` (`idPaciente`, `dni`, `nombre`, `domicilio`, `telefono`, `pesoActual`, `estado`) VALUES
-(1, 22221111, 'Gomez Pablo', '2332 Colon', '456-123', 80.5, 1),
-(2, 11113333, 'Pabla Gomes', 'Union 562', '123-564', 95, 1),
-(3, 11114444, 'Paola Guzman', 'Pellegrini 456', '423-456', 125.05, 1),
+(1, 22221111, 'Gomez Pablo', '2332 Colon', '456-123', 80.2, 1),
+(2, 11113333, 'Pabla Gomes', 'Union 562', '123-564', 93.5, 1),
+(3, 11114444, 'Paola Guzman', 'Pellegrini 456', '423-456', 132.58, 1),
 (4, 11115555, 'Paulo Salas', 'Campos 458', '123-456', 72.4, 1),
 (5, 11116666, 'Paula Diaz', 'Belgrano 123', '456-456', 60.8, 1),
 (6, 11117777, 'Pedro Perez', 'Talleres 789', '123-456', 95.2, 1),
 (7, 11118888, 'Adrian Gil', 'Maipu 471', '123-741', 88.63, 1),
-(8, 11119999, 'Adriana Ramos', 'Mitre 1447', '415-456', 55.35, 1),
+(8, 11119999, 'Adriana Ramos', 'Mitre 1447', '415-456', 52.9, 1),
 (9, 11110000, 'Carlos Robledo', 'Pasco 1587', '478-456', 97.8, 1),
 (10, 11111111, 'Carla Funes', 'Sarmiento 569', '100-456', 75.8, 1),
-(11, 22225555, 'Francisco Peralta', 'aas', '123-456', 119.5, 1),
-(12, 22223333, 'Pascual Funes', 'Chubut 3450', '123-789', 1500, 1),
-(13, 11112222, 'Daniela Paso', 'Ayacucho 345', '456-123', 85, 1),
+(11, 22225555, 'Francisco Peralta', 'Las Heras 1809', '123-4567', 119.5, 1),
+(12, 22223333, 'Pascual Funes', 'Chubut 3450', '123-789', 148.5, 1),
+(13, 11112222, 'Daniela Paso', 'Ayacucho', '123-335', 75.2, 1),
 (14, 22224444, 'Horacio Larreta', 'Mitre 578', '111-234', 80, 1),
 (15, 22226666, 'Roberto Calvo', 'Colon 2390', '777-8888', 90.5, 1),
-(16, 22227777, 'Silvia Dorrego', 'Pasco 3456', '00', 69, 1),
+(16, 22227777, 'Silvia Dorrego', 'Pasco 3456', '00', 65.4, 1),
 (17, 22228888, 'Dora La Exploradora', 'Vera 490', '555-6666', 56, 0),
-(18, 22229999, 'Victor Paz', 'San Luis 2332', '266-512', 85.3, 1);
+(18, 22229999, 'Victor Paz', 'San Luis 2332', '266-512', 82.5, 1),
+(19, 88887777, 'Paco Perez', 'La paz 35', '456-123', 80.3, 1),
+(20, 33330000, 'Marco Ruben', 'Gascon 562', '123-789', 74, 1);
 
 --
 -- Índices para tablas volcadas
@@ -584,25 +611,25 @@ ALTER TABLE `comida`
 -- AUTO_INCREMENT de la tabla `dieta`
 --
 ALTER TABLE `dieta`
-  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `dietacomida`
 --
 ALTER TABLE `dietacomida`
-  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `IdHistorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `IdHistorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas

@@ -479,55 +479,55 @@ public class PacientesForm extends javax.swing.JFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
-        if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
-            jtfNombre.requestFocus();
-            jtfNombre.selectAll();
-            jtfNombre.setBorder(text_border_rojo);            
-        } else if (jtfDNI.getText().length() != 8) {
-            jtfNombre.setBorder(text_border);
-            MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
-            jtfDNI.requestFocus();
-            jtfDNI.selectAll();
-            jtfDNI.setBorder(text_border_rojo);
-        } else if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
-            MensajeSB(2, "El DNI ya esta utilizado en otro paciente");
-            jtfDNI.requestFocus();
-            jtfDNI.selectAll();
-            jtfDNI.setBorder(text_border_rojo);
-        } else if (jtfDomicilio.getText().isEmpty()) {
-            jtfNombre.setBorder(text_border);
-            jtfDNI.setBorder(text_border);
-            MensajeSB(2, "Debe Agregar un domicilio");
-            jtfDomicilio.requestFocus();
-            jtfDomicilio.selectAll();
-            jtfDomicilio.setBorder(text_border_rojo);
-        } else if (jtfTelefono.getText().isEmpty()) {
-            jtfNombre.setBorder(text_border);
-            jtfDNI.setBorder(text_border);
-            jtfDomicilio.setBorder(text_border);
-            MensajeSB(2, "Debe Agregar un Telefono");
-            jtfTelefono.requestFocus();
-            jtfTelefono.selectAll();
-            jtfTelefono.setBorder(text_border_rojo);
-        } else if (!jtfTelefono.getText().matches("[0-9-]+")) {
-            MensajeSB(2, "El telefono tiene que tener solo numeros y guiones medios (-)");
-            jtfTelefono.requestFocus();
-            jtfTelefono.selectAll();
-            jtfTelefono.setBorder(text_border_rojo);
-        } else if (jtfPesoActual.getText().isEmpty() || Double.parseDouble(jtfPesoActual.getText()) < 1
-                || Double.parseDouble(jtfPesoActual.getText()) > 501) {
-            jtfNombre.setBorder(text_border);
-            jtfDNI.setBorder(text_border);
-            jtfDomicilio.setBorder(text_border);
-            jtfTelefono.setBorder(text_border);
-            MensajeSB(2, "Debe Agregar un peso valido entre 1 y 500");
-            jtfPesoActual.requestFocus();
-            jtfPesoActual.selectAll();
-            jtfPesoActual.setBorder(text_border_rojo);
-        } else {
-            
-            try {
-                
+
+        try {
+            if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+                jtfNombre.requestFocus();
+                jtfNombre.selectAll();
+                jtfNombre.setBorder(text_border_rojo);
+            } else if (jtfDNI.getText().length() != 8) {
+                jtfNombre.setBorder(text_border);
+                MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
+                jtfDNI.requestFocus();
+                jtfDNI.selectAll();
+                jtfDNI.setBorder(text_border_rojo);
+            } else if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
+                MensajeSB(2, "El DNI ya esta utilizado en otro paciente");
+                jtfDNI.requestFocus();
+                jtfDNI.selectAll();
+                jtfDNI.setBorder(text_border_rojo);
+            } else if (jtfDomicilio.getText().isEmpty()) {
+                jtfNombre.setBorder(text_border);
+                jtfDNI.setBorder(text_border);
+                MensajeSB(2, "Debe Agregar un domicilio");
+                jtfDomicilio.requestFocus();
+                jtfDomicilio.selectAll();
+                jtfDomicilio.setBorder(text_border_rojo);
+            } else if (jtfTelefono.getText().isEmpty()) {
+                jtfNombre.setBorder(text_border);
+                jtfDNI.setBorder(text_border);
+                jtfDomicilio.setBorder(text_border);
+                MensajeSB(2, "Debe Agregar un Telefono");
+                jtfTelefono.requestFocus();
+                jtfTelefono.selectAll();
+                jtfTelefono.setBorder(text_border_rojo);
+            } else if (!jtfTelefono.getText().matches("[0-9-]+")) {
+                MensajeSB(2, "El telefono tiene que tener solo numeros y guiones medios (-)");
+                jtfTelefono.requestFocus();
+                jtfTelefono.selectAll();
+                jtfTelefono.setBorder(text_border_rojo);
+            } else if (jtfPesoActual.getText().isEmpty() || Double.parseDouble(jtfPesoActual.getText()) < 1
+                    || Double.parseDouble(jtfPesoActual.getText()) > 501) {
+                jtfNombre.setBorder(text_border);
+                jtfDNI.setBorder(text_border);
+                jtfDomicilio.setBorder(text_border);
+                jtfTelefono.setBorder(text_border);
+                MensajeSB(2, "Debe Agregar un peso valido entre 1 y 500");
+                jtfPesoActual.requestFocus();
+                jtfPesoActual.selectAll();
+                jtfPesoActual.setBorder(text_border_rojo);
+            } else {
+
                 Paciente paciente = new Paciente(
                         Integer.parseInt(jtfDNI.getText()),
                         jtfNombre.getText(),
@@ -561,16 +561,16 @@ public class PacientesForm extends javax.swing.JFrame {
 
                     // Posiciono el foco en el nombre al iniciar el form
                     jtfNombre.requestFocus();
-                    
+
                 } else {
                     MensajeSB(2, "ERROR: El paciente no se pudo agregar");
                 }
-            } catch (NumberFormatException e) {
-                MensajeSB(2, "El peso debe ser un número");
-                jtfPesoActual.requestFocus();
-                jtfPesoActual.selectAll();
-                jtfPesoActual.setBorder(text_border_rojo);
             }
+        } catch (NumberFormatException e) {
+            MensajeSB(2, "El peso debe ser un número");
+            jtfPesoActual.requestFocus();
+            jtfPesoActual.selectAll();
+            jtfPesoActual.setBorder(text_border_rojo);
     }//GEN-LAST:event_jbNuevoActionPerformed
     }
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -582,7 +582,7 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfNombre.requestFocus();
                 jtfNombre.selectAll();
                 jtfNombre.setBorder(text_border_rojo);
-                
+
             } else if (jtfDNI.getText().length() != 8) {
                 MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
                 jtfDNI.requestFocus();
@@ -590,7 +590,7 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfDNI.setBorder(text_border_rojo);
             } else if (!jtfDNI.getText().equals(paraDniDuplicado)
                     && pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
-                
+
                 MensajeSB(2, "Este DNI pertece a otro paciente,debe primero cambiar el otro DNI/Paciente para proceder");
                 jtfDNI.setBorder(text_border_rojo);
 
@@ -630,11 +630,11 @@ public class PacientesForm extends javax.swing.JFrame {
                         jcbEstado.isSelected());
                 pacData.modificarPaciente(paciente);
                 MensajeSB(1, "Paciente Guardado");
-                    jtfNombre.setBorder(text_border);
-                    jtfDNI.setBorder(text_border);
-                    jtfDomicilio.setBorder(text_border);
-                    jtfTelefono.setBorder(text_border);
-                    jtfPesoActual.setBorder(text_border);
+                jtfNombre.setBorder(text_border);
+                jtfDNI.setBorder(text_border);
+                jtfDomicilio.setBorder(text_border);
+                jtfTelefono.setBorder(text_border);
+                jtfPesoActual.setBorder(text_border);
             }
         } catch (NumberFormatException e) {
             MensajeSB(2, "El peso debe ser un número");
@@ -661,7 +661,7 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfDNI.requestFocus();
             jtfDNI.selectAll();
             jtfDNI.setBorder(text_border_rojo);
-            
+
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
@@ -670,7 +670,7 @@ public class PacientesForm extends javax.swing.JFrame {
         paciForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -755,7 +755,7 @@ public class PacientesForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-    
+
     public void LimpiarCampos() {
         jtfDNI.setText("");
         jtfNombre.setText("");
@@ -767,7 +767,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
-    
+
     public boolean PruebaDeCaracteres(String texto) {
         // Verifico si el texto contiene solo letras y espacios
         for (int i = 0; i < texto.length(); i++) {
@@ -795,11 +795,11 @@ public class PacientesForm extends javax.swing.JFrame {
             MensajeSB(2, "El campo Nombre no puede comenzar o terminar con un espacio");
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
-            
+
             return false;
         }
-        
+
         return true;
     }
-    
+
 }
