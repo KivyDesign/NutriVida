@@ -483,12 +483,9 @@ public class PacientesForm extends javax.swing.JFrame {
         if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
-            jtfNombre.setBorder(text_border_rojo);
-
-
-            jtfNombre.setBorder(text_border_rojo);
-            
+            jtfNombre.setBorder(text_border_rojo);            
         } else if (jtfDNI.getText().length() != 8) {
+            jtfNombre.setBorder(text_border);
             MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
             jtfDNI.requestFocus();
             jtfDNI.selectAll();
@@ -499,11 +496,16 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfDNI.selectAll();
             jtfDNI.setBorder(text_border_rojo);
         } else if (jtfDomicilio.getText().isEmpty()) {
+            jtfNombre.setBorder(text_border);
+            jtfDNI.setBorder(text_border);
             MensajeSB(2, "Debe Agregar un domicilio");
             jtfDomicilio.requestFocus();
             jtfDomicilio.selectAll();
             jtfDomicilio.setBorder(text_border_rojo);
         } else if (jtfTelefono.getText().isEmpty()) {
+            jtfNombre.setBorder(text_border);
+            jtfDNI.setBorder(text_border);
+            jtfDomicilio.setBorder(text_border);
             MensajeSB(2, "Debe Agregar un Telefono");
             jtfTelefono.requestFocus();
             jtfTelefono.selectAll();
@@ -515,6 +517,10 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfTelefono.setBorder(text_border_rojo);
         } else if (jtfPesoActual.getText().isEmpty() || Double.parseDouble(jtfPesoActual.getText()) < 1
                 || Double.parseDouble(jtfPesoActual.getText()) > 501) {
+            jtfNombre.setBorder(text_border);
+            jtfDNI.setBorder(text_border);
+            jtfDomicilio.setBorder(text_border);
+            jtfTelefono.setBorder(text_border);
             MensajeSB(2, "Debe Agregar un peso valido entre 1 y 500");
             jtfPesoActual.requestFocus();
             jtfPesoActual.selectAll();
@@ -625,7 +631,11 @@ public class PacientesForm extends javax.swing.JFrame {
                         jcbEstado.isSelected());
                 pacData.modificarPaciente(paciente);
                 MensajeSB(1, "Paciente Guardado");
-                jtfDNI.setBorder(text_border);
+                    jtfNombre.setBorder(text_border);
+                    jtfDNI.setBorder(text_border);
+                    jtfDomicilio.setBorder(text_border);
+                    jtfTelefono.setBorder(text_border);
+                    jtfPesoActual.setBorder(text_border);
             }
         } catch (NumberFormatException e) {
             MensajeSB(2, "El peso debe ser un número");
