@@ -450,6 +450,9 @@ public class PacientesForm extends javax.swing.JFrame {
                         jbEliminar.setEnabled(true);
                         jbNuevo.setEnabled(false);
                         jtfDNI.setBorder(text_border);
+                        jtfNombre.setBorder(text_border);
+                        jtfDomicilio.setBorder(text_border);
+                        jtfTelefono.setBorder(text_border);
                         MensajeSB(1, "Paciente encontrado");
                         jbBuscar.setEnabled(false);
                         jbDietaPersonal.setEnabled(true);
@@ -464,6 +467,7 @@ public class PacientesForm extends javax.swing.JFrame {
                     }
                 } else {
                     MensajeSB(2, "El DNI no es de un Paciente registrado");
+                    jbNuevo.setEnabled(false);
                     jtfDNI.requestFocus();
                     jtfDNI.selectAll();
                     jtfDNI.setBorder(text_border_rojo);
@@ -478,7 +482,6 @@ public class PacientesForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        // TODO add your handling code here:
 
         try {
             if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
@@ -552,15 +555,15 @@ public class PacientesForm extends javax.swing.JFrame {
                     jbBuscar.setEnabled(false);
                     // Set borders todos subrayados en amarillo a excepción del ID que es
                     // blanco y de solo 1 pixel de grosor para indicar que no es editable
-                    jtfID.setBorder(text_border_disable);
-                    jtfNombre.setBorder(text_border);
+//                    jtfID.setBorder(text_border_disable);
+//                    jtfNombre.setBorder(text_border);
                     jtfDNI.setBorder(text_border);
-                    jtfDomicilio.setBorder(text_border);
-                    jtfTelefono.setBorder(text_border);
+//                    jtfDomicilio.setBorder(text_border);
+//                    jtfTelefono.setBorder(text_border);
                     jtfPesoActual.setBorder(text_border);
-
-                    // Posiciono el foco en el nombre al iniciar el form
-                    jtfNombre.requestFocus();
+//
+//                    // Posiciono el foco en el nombre al iniciar el form
+//                    jtfNombre.requestFocus();
 
                 } else {
                     MensajeSB(2, "ERROR: El paciente no se pudo agregar");
