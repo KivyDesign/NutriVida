@@ -27,11 +27,31 @@ public class AlimentosForm extends javax.swing.JFrame {
      */
     public AlimentosForm() {
         initComponents();
+        
         comData = new ComidaData();
+        
+        // =====================================================================
+        // Realizo la coneccion a la DB
         Connection con = Conexion.getConexion();
+
+        // Si la conexion fue exitosa lo informo como conectado con un (sout)
+        // para no tener ese molesto dialogo de conexion
+        if (con != null) {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Conectado");
+            // Configuro de color verde el panel del titulo principal
+            jpConexion.setBackground(new Color(0, 153, 102));
+        } else {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Error");
+            // Configuro de color rojo el panel del titulo principal
+            jpConexion.setBackground(new Color(255, 50, 0));
+        }
+
+        // Display the pacientes form in the center of the screen
+        this.setLocationRelativeTo(null);
+        
         MensajeSB(1, "Ingrese un Limite Mínimo y Máximo de Calorías para el filtrado de Comidas");
         armarCabeceraDeLaTabla();
-        cargarComidas();
+//        cargarComidas();
     }
 
     /**
@@ -45,7 +65,7 @@ public class AlimentosForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jpConexion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -64,17 +84,17 @@ public class AlimentosForm extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(31, 75, 128));
 
-        jPanel3.setBackground(new java.awt.Color(21, 65, 118));
-        jPanel3.setPreferredSize(new java.awt.Dimension(16, 100));
+        jpConexion.setBackground(new java.awt.Color(21, 65, 118));
+        jpConexion.setPreferredSize(new java.awt.Dimension(16, 100));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jpConexionLayout = new javax.swing.GroupLayout(jpConexion);
+        jpConexion.setLayout(jpConexionLayout);
+        jpConexionLayout.setHorizontalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 16, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpConexionLayout.setVerticalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 85, Short.MAX_VALUE)
         );
 
@@ -94,7 +114,7 @@ public class AlimentosForm extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -117,7 +137,7 @@ public class AlimentosForm extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -142,7 +162,7 @@ public class AlimentosForm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlMensajeSB)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jtComidas.setModel(new javax.swing.table.DefaultTableModel(
@@ -158,6 +178,8 @@ public class AlimentosForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtComidas);
 
+        jLabel5.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Calorias entre:");
 
         jtfLimiteMin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -166,6 +188,8 @@ public class AlimentosForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("y:");
 
         jtfLimiteMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -243,7 +267,6 @@ public class AlimentosForm extends javax.swing.JFrame {
                 Object[] objComida = new Object[]{comida.getIdComida(), comida.getNombre(), comida.getDetalle(), comida.getCalorias()};
                 modelo.addRow(objComida);
             }
-
         } catch (NumberFormatException ex) {
             MensajeSB(2, "El Limite Mínimo debe completarse solo con números");
         }
@@ -266,7 +289,6 @@ public class AlimentosForm extends javax.swing.JFrame {
                 Object[] objComida = new Object[]{comida.getIdComida(), comida.getNombre(), comida.getDetalle(), comida.getCalorias()};
                 modelo.addRow(objComida);
             }
-
         } catch (NumberFormatException ex) {
             MensajeSB(2, "El Limite Maximo debe completarse solo con números");
         }
@@ -315,10 +337,10 @@ public class AlimentosForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlMensajeSB;
+    private javax.swing.JPanel jpConexion;
     private javax.swing.JTable jtComidas;
     private javax.swing.JTextField jtfLimiteMax;
     private javax.swing.JTextField jtfLimiteMin;
