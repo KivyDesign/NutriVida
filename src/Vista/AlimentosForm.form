@@ -51,11 +51,11 @@
                           <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jtfLimiteInferior" min="-2" pref="82" max="-2" attributes="0"/>
+                          <Component id="jtfLimiteMin" min="-2" pref="82" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jtfLimiteSuperior" min="-2" pref="82" max="-2" attributes="0"/>
+                          <Component id="jtfLimiteMax" min="-2" pref="82" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
@@ -72,8 +72,8 @@
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtfLimiteInferior" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfLimiteSuperior" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfLimiteMin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfLimiteMax" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -205,7 +205,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlMensajeSB" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -214,14 +214,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlMensajeSB" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="jlMensajeSB">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins" size="14" style="0"/>
@@ -260,14 +260,20 @@
             <Property name="text" type="java.lang.String" value="Calorias entre:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfLimiteInferior">
+        <Component class="javax.swing.JTextField" name="jtfLimiteMin">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfLimiteMinKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="text" type="java.lang.String" value="y:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfLimiteSuperior">
+        <Component class="javax.swing.JTextField" name="jtfLimiteMax">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfLimiteMaxKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
