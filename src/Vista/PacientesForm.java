@@ -494,6 +494,11 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfDNI.requestFocus();
                 jtfDNI.selectAll();
                 jtfDNI.setBorder(text_border_rojo);
+            } else if (!jtfDNI.getText().matches("[0-9]+")) {
+                MensajeSB(2, "El DNI tiene que tener solo numeros ");
+                jtfDNI.requestFocus();
+                jtfDNI.selectAll();
+                jtfDNI.setBorder(text_border_rojo);
             } else if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
                 MensajeSB(2, "El DNI ya esta utilizado en otro paciente");
                 jtfDNI.requestFocus();
