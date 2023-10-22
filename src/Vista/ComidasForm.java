@@ -488,19 +488,25 @@ public class ComidasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        try {
+//        try {
             Comida comida = new Comida(jtfNombre.getText(),
                     jtfDetalle.getText(),
                     Integer.parseInt(jtfCalorias.getText()),
                     true);
-            comData.guardarComida(comida);
-            MensajeSB(1, "Comida creada");
-        } catch (NumberFormatException ex) {
-            MensajeSB(2, "El campo Calorías debe llenarse con un número");
-            jtfCalorias.setBorder(text_border_rojo);
-            jtfCalorias.requestFocus();
-            jtfCalorias.selectAll();
-        }
+            if(comData.buscarComidaPorNombre(comida.getNombre())==null){
+                comData.guardarComida(comida);
+                LimpiarCampos();
+                MensajeSB(1, "Comida creada");
+            }else{
+                MensajeSB(2,"ERROR: la comida ingresada ya existe");
+            }
+            
+//        } catch (NumberFormatException ex) {
+//            MensajeSB(2, "El campo Calorías debe llenarse con un número");
+//            jtfCalorias.setBorder(text_border_rojo);
+//            jtfCalorias.requestFocus();
+//            jtfCalorias.selectAll();
+//        }
 //        }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
@@ -521,7 +527,7 @@ public class ComidasForm extends javax.swing.JFrame {
                 jtfNombre.setText(comida.getNombre());
                 jtfDetalle.setText(comida.getDetalle());
                 jtfCalorias.setText(comida.getCalorias() + "");
-                jcbEstado.setEnabled(comida.isEstado());
+                jcbEstado.setSelected(comida.isEstado());
 
                 // Aquí cargo calorias en el label -----------------------------
                 jlCaloriasTXT.setText(comida.getCalorias() + "");
@@ -539,18 +545,17 @@ public class ComidasForm extends javax.swing.JFrame {
 //--------------------------------------------
                     MensajeSB(1, "Comida encontrada");
                 } else {
-                    MensajeSB(2, "El nombre no es de una Comida activa");
+                    MensajeSB(2, "La comida ingresada se encuentra dada de baja. Para activarla complete el campo Estado y pulse Guardar");
                     jcbEstado.setEnabled(true);
                     jlEstado.setEnabled(true);
                     jcbEstado.setForeground(Color.WHITE);
 
                     jbGuardar.setEnabled(true);
-                    jbEliminar.setEnabled(true);
                     jbNuevo.setEnabled(false);
                     e = false;
                 }
             } else {
-                MensajeSB(2, "El nombre no es de una Comida activa");
+                MensajeSB(2, "La comida no existe en la base de datos");
                 jtfNombre.requestFocus();
                 jtfNombre.selectAll();
             }
@@ -564,11 +569,10 @@ public class ComidasForm extends javax.swing.JFrame {
             if (com != null) {
                 comData.eliminarComida(com.getIdComida());
                 jcbEstado.setSelected(false);
-                MensajeSB(1, "Comida eliminada con exito! Busque por Nombre o cargue una nueva Comida");
                 LimpiarCampos();
-                jbNuevo.setEnabled(true);
+                MensajeSB(1, "Comida eliminada con éxito! Busque por Nombre o cargue una nueva Comida");
             } else {
-                MensajeSB(2, "La Comida no Existe");
+                MensajeSB(2, "La Comida no existe");
             }
         } catch (NumberFormatException ex) {
         }
@@ -729,6 +733,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfDetalle.setText("");
         jtfCalorias.setText("");
 //        jcbEstado.setSelected(false);
+        jcbEstado.setSelected(false);
         jcbEstado.setEnabled(false);
         jlEstado.setEnabled(false);
         jcbEstado.setForeground(Color.GRAY);
