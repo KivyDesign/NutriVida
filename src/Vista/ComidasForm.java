@@ -27,7 +27,7 @@ public class ComidasForm extends javax.swing.JFrame {
     private CaloriasForm caloriasForm;
     private Calorias caloriaX;
     // -------------------------------------------------------------------------
-    
+
     private ComidaData comData;
     // Creación de los bordes que utilizaremos en los TextFileds
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
@@ -66,11 +66,11 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfNombre.setBorder(text_border);
         jtfDetalle.setBorder(text_border);
         jtfCalorias.setBorder(text_border);
-        
+
         jlEstado.setEnabled(false);
         jcbEstado.setEnabled(false);
         jcbEstado.setForeground(Color.GRAY);
-        
+
         jbBuscar.setEnabled(false);
         jbNuevo.setEnabled(false);
         jbGuardar.setEnabled(false);
@@ -84,7 +84,7 @@ public class ComidasForm extends javax.swing.JFrame {
         // Posiciono el foco en el nombre al iniciar el form
         jtfNombre.requestFocus();
     }
-    
+
     public void TraerDatos() {
         if (caloriasForm != null) {
             // Instancio el objeto c de tipo Calorias
@@ -522,18 +522,18 @@ public class ComidasForm extends javax.swing.JFrame {
                 jtfDetalle.setText(comida.getDetalle());
                 jtfCalorias.setText(comida.getCalorias() + "");
                 jcbEstado.setEnabled(comida.isEstado());
-                
+
                 // Aquí cargo calorias en el label -----------------------------
                 jlCaloriasTXT.setText(comida.getCalorias() + "");
                 // -------------------------------------------------------------
 
                 if (comida.isEstado() == true) {
-                    jcbEstado.setSelected(true);
+                    jcbEstado.setEnabled(false);
                     jbGuardar.setEnabled(true);
                     jbEliminar.setEnabled(true);
                     jbNuevo.setEnabled(false);
                     e = false;
- // CUANDO AGREGO ESTE FOCUSLISTEENER YA NO TENGO EL PROBLEMA QUE APARECE CUANDO
+                    // CUANDO AGREGO ESTE FOCUSLISTEENER YA NO TENGO EL PROBLEMA QUE APARECE CUANDO
 // LE DOY BUSCAR Y PONGO UN NOMBRE INCORRECTO:                   
                     jtfNombre.addFocusListener(fl1);
 //--------------------------------------------
@@ -541,6 +541,9 @@ public class ComidasForm extends javax.swing.JFrame {
                 } else {
                     MensajeSB(2, "El nombre no es de una Comida activa");
                     jcbEstado.setEnabled(true);
+                    jlEstado.setEnabled(true);
+                    jcbEstado.setForeground(Color.WHITE);
+
                     jbGuardar.setEnabled(true);
                     jbEliminar.setEnabled(true);
                     jbNuevo.setEnabled(false);
@@ -727,12 +730,15 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfCalorias.setText("");
 //        jcbEstado.setSelected(false);
         jcbEstado.setEnabled(false);
+        jlEstado.setEnabled(false);
+        jcbEstado.setForeground(Color.GRAY);
+        
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
         jbBuscar.setEnabled(false);
         jbNuevo.setEnabled(false);
         e = true;
-        MensajeSB(1,"");
+        MensajeSB(1, "");
     }
 
     public void estadojbNuevo() {
