@@ -18,9 +18,13 @@ import javax.swing.table.DefaultTableModel;
  * @author javier
  */
 public class AlimentosForm extends javax.swing.JFrame {
-
+    
     private ComidaData comData;
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
 
     /**
      * Creates new form AlimentosForm
@@ -29,7 +33,7 @@ public class AlimentosForm extends javax.swing.JFrame {
         initComponents();
         
         comData = new ComidaData();
-        
+
         // =====================================================================
         // Realizo la coneccion a la DB
         Connection con = Conexion.getConexion();
@@ -51,6 +55,7 @@ public class AlimentosForm extends javax.swing.JFrame {
         
         MensajeSB(1, "Ingrese un Limite Mínimo y Máximo de Calorías para el filtrado de Comidas");
         armarCabeceraDeLaTabla();
+        jtComidas.getTableHeader().setReorderingAllowed(false);
         cargarComidas();
     }
 
@@ -267,6 +272,9 @@ public class AlimentosForm extends javax.swing.JFrame {
                 Object[] objComida = new Object[]{comida.getIdComida(), comida.getNombre(), comida.getDetalle(), comida.getCalorias()};
                 modelo.addRow(objComida);
             }
+            if (l1 == 0 && l2 == Integer.MAX_VALUE) {
+                MensajeSB(1, "Ingrese un Limite Mínimo y Máximo de Calorías para el filtrado de Comidas");
+            }
         } catch (NumberFormatException ex) {
             MensajeSB(2, "El Limite Mínimo debe completarse solo con números");
         }
@@ -288,6 +296,9 @@ public class AlimentosForm extends javax.swing.JFrame {
             for (Comida comida : lista) {
                 Object[] objComida = new Object[]{comida.getIdComida(), comida.getNombre(), comida.getDetalle(), comida.getCalorias()};
                 modelo.addRow(objComida);
+            }
+            if (l1 == 0 && l2 == Integer.MAX_VALUE) {
+                MensajeSB(1, "Ingrese un Limite Mínimo y Máximo de Calorías para el filtrado de Comidas");
             }
         } catch (NumberFormatException ex) {
             MensajeSB(2, "El Limite Maximo debe completarse solo con números");
@@ -366,11 +377,11 @@ public class AlimentosForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-
+    
     public void borrarFilasTabla() {
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
-
+            
             if (modelo.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modelo.removeRow(i);
@@ -378,24 +389,24 @@ public class AlimentosForm extends javax.swing.JFrame {
             }
         }
     }
-
+    
     public void armarCabeceraDeLaTabla() {
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Detalle");
         modelo.addColumn("Calorías");
-
+        
         jtComidas.setModel(modelo);
-
+        
         jtComidas.getColumnModel().getColumn(0).setPreferredWidth(10);
         jtComidas.getColumnModel().getColumn(1).setPreferredWidth(50);
         jtComidas.getColumnModel().getColumn(2).setPreferredWidth(150);
         jtComidas.getColumnModel().getColumn(3).setPreferredWidth(50);
     }
-
+    
     public void cargarComidas() {
         borrarFilasTabla();
-
+        
         ArrayList<Comida> lista = comData.listarComidas();
         for (Comida comida : lista) {
             Object[] objComida = new Object[]{comida.getIdComida(), comida.getNombre(), comida.getDetalle(), comida.getCalorias()};
