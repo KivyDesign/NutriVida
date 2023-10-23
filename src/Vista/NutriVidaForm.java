@@ -1,19 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
-/**
- *
- * @author javier
- */
 public class NutriVidaForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NutriVidaForm
-     */
     public NutriVidaForm() {
         initComponents();
 
@@ -88,7 +76,7 @@ public class NutriVidaForm extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(80, 80, 80));
         jLabel6.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("Basado en su habilidad como nutricionista");
+        jLabel6.setText("Basado en su habilidad como Nutricionista");
 
         jPanel3.setBackground(new java.awt.Color(13, 17, 23));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 52, 59)));
@@ -164,12 +152,12 @@ public class NutriVidaForm extends javax.swing.JFrame {
         jLabel12.setBackground(new java.awt.Color(80, 80, 80));
         jLabel12.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel12.setText("Texto descriptivo para ivitar a");
+        jLabel12.setText("Funcionalidad ABMC completa que le");
 
         jLabel13.setBackground(new java.awt.Color(80, 80, 80));
         jLabel13.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel13.setText("Administrar Comidas.");
+        jLabel13.setText("ayudara ha Administrar sus Comidas.");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
