@@ -96,7 +96,7 @@ public class ComidaData {
         Comida comida = null;
         PreparedStatement ps = null;
         try {
-            String sql = "SELECT idComida, nombre, detalle, cantCalorias, estado FROM comida WHERE nombre = ?";
+            String sql = "SELECT idComida, nombre, detalle, cantCalorias, estado FROM comida WHERE nombre = ? ORDER BY cantCalorias";
             ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
             ResultSet rs = ps.executeQuery();
