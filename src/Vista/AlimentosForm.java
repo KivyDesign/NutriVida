@@ -151,7 +151,7 @@ public class AlimentosForm extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("Texto de ejemplo");
+        jlMensajeSB.setText("Mensaje inicial");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -235,7 +235,7 @@ public class AlimentosForm extends javax.swing.JFrame {
                     .addComponent(jtfLimiteMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
