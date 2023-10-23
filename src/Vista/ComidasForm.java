@@ -404,8 +404,12 @@ public class ComidasForm extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(31, 75, 128));
 
+        jLabel4.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Desde este acceso puede listar las comidas");
 
+        jLabel5.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("rango de calorias");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/8-32x32.png"))); // NOI18N
