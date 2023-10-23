@@ -685,6 +685,7 @@ public class PacientesForm extends javax.swing.JFrame {
                         jcbEstado.isSelected());
                 pacData.modificarPaciente(paciente);
                 MensajeSB(1, "Paciente Guardado");
+                jbDietaPersonal.setEnabled(true);
                 jtfNombre.setBorder(text_border);
                 jtfDNI.setBorder(text_border);
                 jtfDomicilio.setBorder(text_border);
