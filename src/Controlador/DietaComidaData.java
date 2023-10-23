@@ -121,4 +121,28 @@ public class DietaComidaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla DietaComida");
         } 
     }
+    
+    public DietaComida buscarDietaComidaPorId(int idComida) {
+        DietaComida dietacomida = null;
+        PreparedStatement ps = null;
+        try {
+            String sql = "SELECT idDietaComida, idComida, idDieta, horario, porcion FROM dietacomida WHERE idComida = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idComida);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                dietacomida = new DietaComida();
+                dietacomida.setIdDietaComida(rs.getInt("idDietaComida"));
+                dietacomida.setComida(comidaData.buscarComidaPorId(rs.getInt("idComida")));
+                dietacomida.setDieta(dietaData.buscarDietaPorId(rs.getInt("idDieta")));
+                dietacomida.setHorario(Horario.valueOf(rs.getString("horario")));
+                dietacomida.setPorcion(rs.getInt("porcion"));
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla DietaComida");
+        }
+        return dietacomida;
+}
 }

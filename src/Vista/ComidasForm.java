@@ -7,8 +7,10 @@ package Vista;
 
 import Controlador.ComidaData;
 import Controlador.Conexion;
+import Controlador.DietaComidaData;
 import Modelo.Calorias;
 import Modelo.Comida;
+import Modelo.DietaComida;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -29,6 +31,7 @@ public class ComidasForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------
 
     private ComidaData comData;
+    private DietaComidaData dietaCom;
     // Creación de los bordes que utilizaremos en los TextFileds
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
@@ -40,7 +43,7 @@ public class ComidasForm extends javax.swing.JFrame {
         initComponents();
 
         comData = new ComidaData();
-
+        dietaCom = new DietaComidaData();
         // =====================================================================
         // Realizo la coneccion a la DB
         Connection con = Conexion.getConexion();
@@ -561,10 +564,14 @@ public class ComidasForm extends javax.swing.JFrame {
         try {
             Comida com = comData.buscarComidaPorNombre(jtfNombre.getText());
             if (com != null) {
+                if(dietaCom.buscarDietaComidaPorId(com.getIdComida()) == null){
                 comData.eliminarComida(com.getIdComida());
                 jcbEstado.setSelected(false);
                 LimpiarCampos();
                 MensajeSB(1, "Comida eliminada con éxito! Busque por Nombre o cargue una nueva Comida");
+                }else{
+                    MensajeSB(2, "Error: la Comida se encuentra vinculada en la tabla DietaComida");
+                }
             } else {
                 MensajeSB(2, "La Comida no existe");
             }
