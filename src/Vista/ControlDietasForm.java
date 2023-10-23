@@ -219,13 +219,13 @@ public class ControlDietasForm extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(jBTerminadasNLogradas, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jBVolver)
                 .addGap(29, 29, 29)
                 .addComponent(jBSalir)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
