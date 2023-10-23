@@ -713,6 +713,8 @@ public class PacientesForm extends javax.swing.JFrame {
                 MensajeSB(1, "El paciente fue eliminado con exito! Busque por DNI o cargue un nuevo Paciente");
                 LimpiarCampos();
                 jbNuevo.setEnabled(true);
+                jbBuscar.setEnabled(true);
+                jbDietaPersonal.setEnabled(false);
             } else {
                 MensajeSB(2, "El paciente no Existe");
             }
