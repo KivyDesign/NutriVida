@@ -506,6 +506,7 @@ public class PacientesForm extends javax.swing.JFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
 
         try {
+            jtfNombre.setBorder(text_border);
             if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
                 jtfNombre.requestFocus();
                 jtfNombre.selectAll();
@@ -685,6 +686,7 @@ public class PacientesForm extends javax.swing.JFrame {
                         jcbEstado.isSelected());
                 pacData.modificarPaciente(paciente);
                 MensajeSB(1, "Paciente Guardado");
+                jbDietaPersonal.setEnabled(true);
                 jtfNombre.setBorder(text_border);
                 jtfDNI.setBorder(text_border);
                 jtfDomicilio.setBorder(text_border);
