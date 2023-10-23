@@ -6,16 +6,16 @@
 package Vista;
 
 import Controlador.PacienteData;
-import Modelo.Comida;
+//import Modelo.Comida;
 import Modelo.Paciente;
-import static Vista.ComidasForm.jtfCalorias;
+//import static Vista.ComidasForm.jtfCalorias;
 import java.awt.Color;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+//import java.time.LocalDate;
+//import java.time.ZoneId;
+//import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
-import jdk.nashorn.internal.ir.BreakNode;
+//import jdk.nashorn.internal.ir.BreakNode;
 
 /**
  *

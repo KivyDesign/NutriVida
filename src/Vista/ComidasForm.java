@@ -65,7 +65,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfID.setBorder(text_border_disable);
         jtfNombre.setBorder(text_border);
         jtfDetalle.setBorder(text_border);
-        jtfCalorias.setBorder(text_border);
+//        jtfCalorias.setBorder(text_border);
 
         jlEstado.setEnabled(false);
         jcbEstado.setEnabled(false);
@@ -77,7 +77,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jbEliminar.setEnabled(false);
         jtfNombre.addFocusListener(fl1);
         jtfDetalle.addFocusListener(fl2);
-        jtfCalorias.addFocusListener(fl3);
+//        jtfCalorias.addFocusListener(fl3);
 //        focusListenerNombre();
 //        focusListenerDetalle();
 //        focusListenerCalorias();
@@ -130,7 +130,6 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfID = new javax.swing.JTextField();
         jtfNombre = new javax.swing.JTextField();
         jtfDetalle = new javax.swing.JTextField();
-        jtfCalorias = new javax.swing.JTextField();
         jbCalcularCalorias = new javax.swing.JButton();
         jlCaloriasTXT = new javax.swing.JLabel();
 
@@ -384,15 +383,6 @@ public class ComidasForm extends javax.swing.JFrame {
             }
         });
 
-        jtfCalorias.setBackground(new java.awt.Color(21, 65, 118));
-        jtfCalorias.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jtfCalorias.setForeground(new java.awt.Color(255, 255, 255));
-        jtfCalorias.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtfCaloriasKeyReleased(evt);
-            }
-        });
-
         jbCalcularCalorias.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbCalcularCalorias.setText("Calcular Calorias");
         jbCalcularCalorias.addActionListener(new java.awt.event.ActionListener() {
@@ -426,14 +416,10 @@ public class ComidasForm extends javax.swing.JFrame {
                     .addComponent(jtfID, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbEstado))
+                            .addComponent(jcbEstado)
+                            .addComponent(jlCaloriasTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbCalcularCalorias)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jlCaloriasTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jbCalcularCalorias)))
                 .addGap(63, 63, 63)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(63, Short.MAX_VALUE))
@@ -459,14 +445,13 @@ public class ComidasForm extends javax.swing.JFrame {
                             .addComponent(jlDetalle))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlCalorias)
-                            .addComponent(jbCalcularCalorias))
+                            .addComponent(jbCalcularCalorias)
+                            .addComponent(jlCaloriasTXT))
                         .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbEstado)
-                            .addComponent(jlEstado)
-                            .addComponent(jlCaloriasTXT)))
+                            .addComponent(jlEstado)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -500,7 +485,7 @@ public class ComidasForm extends javax.swing.JFrame {
 //        try {
             Comida comida = new Comida(jtfNombre.getText(),
                     jtfDetalle.getText(),
-                    Integer.parseInt(jtfCalorias.getText()),
+                    Integer.parseInt(jlCaloriasTXT.getText()),
                     true);
             if(comData.buscarComidaPorNombre(comida.getNombre())==null){
                 comData.guardarComida(comida);
@@ -520,7 +505,7 @@ public class ComidasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        Comida comida = new Comida(Integer.parseInt(jtfID.getText()), jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jtfCalorias.getText()), jcbEstado.isSelected());
+        Comida comida = new Comida(Integer.parseInt(jtfID.getText()), jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jlCaloriasTXT.getText()), jcbEstado.isSelected());
         comData.modificarComida(comida);
         MensajeSB(1, "Comida guardada");
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -535,7 +520,7 @@ public class ComidasForm extends javax.swing.JFrame {
                 jtfID.setText(comida.getIdComida() + "");
                 jtfNombre.setText(comida.getNombre());
                 jtfDetalle.setText(comida.getDetalle());
-                jtfCalorias.setText(comida.getCalorias() + "");
+                jlCaloriasTXT.setText(comida.getCalorias() + "");
                 jcbEstado.setSelected(comida.isEstado());
 
                 // Aquí cargo calorias en el label -----------------------------
@@ -623,10 +608,6 @@ public class ComidasForm extends javax.swing.JFrame {
         habilitarBoton();
     }//GEN-LAST:event_jtfDetalleKeyReleased
 
-    private void jtfCaloriasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCaloriasKeyReleased
-        habilitarBoton();
-    }//GEN-LAST:event_jtfCaloriasKeyReleased
-
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         TraerDatos();
     }//GEN-LAST:event_formWindowGainedFocus
@@ -692,7 +673,6 @@ public class ComidasForm extends javax.swing.JFrame {
     private javax.swing.JLabel jlMensajeSB;
     private javax.swing.JLabel jlNombre;
     private javax.swing.JPanel jpConexion;
-    public static javax.swing.JTextField jtfCalorias;
     private javax.swing.JTextField jtfDetalle;
     private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfNombre;
@@ -741,7 +721,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jtfID.setText("");
         jtfNombre.setText("");
         jtfDetalle.setText("");
-        jtfCalorias.setText("");
+        jlCaloriasTXT.setText("0");
 //        jcbEstado.setSelected(false);
         jcbEstado.setSelected(false);
         jcbEstado.setEnabled(false);
@@ -758,7 +738,8 @@ public class ComidasForm extends javax.swing.JFrame {
 
     public void estadojbNuevo() {
         if (e == true) {
-            if ((jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty() || jtfCalorias.getText().isEmpty())) {
+//            if ((jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty() || jtfCalorias.getText().isEmpty())) {
+            if ((jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty())) {
                 jbNuevo.setEnabled(false);
             } else {
                 jbNuevo.setEnabled(true);
@@ -771,7 +752,7 @@ public class ComidasForm extends javax.swing.JFrame {
         @Override
         public void focusGained(FocusEvent fe) {
             jtfDetalle.removeFocusListener(fl2);
-            jtfCalorias.removeFocusListener(fl3);
+//            jtfCalorias.removeFocusListener(fl3);
 //                jbBuscar.setEnabled(false);
 //                jbNuevo.setEnabled(false);
 //                jbGuardar.setEnabled(false);
@@ -793,7 +774,7 @@ public class ComidasForm extends javax.swing.JFrame {
                 jtfNombre.setBorder(text_border_disable);
 //                    estadojbNuevo();
                 jtfDetalle.addFocusListener(fl2);
-                jtfCalorias.addFocusListener(fl3);
+//                jtfCalorias.addFocusListener(fl3);
                 jtfNombre.removeFocusListener(this);
 
             }
@@ -804,7 +785,7 @@ public class ComidasForm extends javax.swing.JFrame {
         @Override
         public void focusGained(FocusEvent fe) {
             jtfNombre.removeFocusListener(fl1);
-            jtfCalorias.removeFocusListener(fl3);
+//            jtfCalorias.removeFocusListener(fl3);
         }
 
         @Override
@@ -820,58 +801,59 @@ public class ComidasForm extends javax.swing.JFrame {
                     MensajeSB(2, "El campo Detalle debe llenarse");
                     jcbEstado.setEnabled(false);
                     jtfNombre.setDisabledTextColor(Color.white);
-                    jtfCalorias.setDisabledTextColor(Color.white);
+//                    jtfCalorias.setDisabledTextColor(Color.white);
                 } else {
                     jtfDetalle.setBorder(text_border_disable);
 //                        estadojbNuevo();
                     jtfNombre.addFocusListener(fl1);
-                    jtfCalorias.addFocusListener(fl3);
+//                    jtfCalorias.addFocusListener(fl3);
                     jtfDetalle.removeFocusListener(fl2);
                 }
             }
         }
     };
 
-    FocusListener fl3 = new FocusListener() {
-        @Override
-        public void focusGained(FocusEvent fe) {
-            jtfNombre.removeFocusListener(fl1);
-            jtfDetalle.removeFocusListener(fl2);
-        }
-
-        @Override
-        public void focusLost(FocusEvent fe) {
-            if (jtfCalorias.getText().equalsIgnoreCase("")) {
-                jtfCalorias.setBorder(text_border);
-                jtfCalorias.requestFocus();
-                MensajeSB(2, "El campo Calorias debe llenarse");
-            } else {
-                try {
-                    if (Integer.parseInt(jtfCalorias.getText()) < 0 || Integer.parseInt(jtfCalorias.getText()) > 20000) {
-                        jtfCalorias.setBorder(text_border_rojo);
-                        jtfCalorias.requestFocus();
-                        jtfCalorias.selectAll();
-                        MensajeSB(2, "El campo Calorias está fuera de rango(0-20000)");
-                    } else {
-                        jtfCalorias.setBorder(text_border_disable);
-//                            estadojbNuevo();
-                        jtfNombre.addFocusListener(fl1);
-                        jtfDetalle.addFocusListener(fl2);
-                        jtfCalorias.removeFocusListener(fl3);
-                    }
-                } catch (NumberFormatException ex) {
-                    MensajeSB(2, "El campo Calorias debe llenarse con números");
-                    jtfCalorias.setBorder(text_border_rojo);
-                    jtfCalorias.requestFocus();
-                    jtfCalorias.selectAll();
-                }
-            }
-        }
-    };
+//    FocusListener fl3 = new FocusListener() {
+//        @Override
+//        public void focusGained(FocusEvent fe) {
+//            jtfNombre.removeFocusListener(fl1);
+//            jtfDetalle.removeFocusListener(fl2);
+//        }
+//
+//        @Override
+//        public void focusLost(FocusEvent fe) {
+//            if (jtfCalorias.getText().equalsIgnoreCase("")) {
+//                jtfCalorias.setBorder(text_border);
+//                jtfCalorias.requestFocus();
+//                MensajeSB(2, "El campo Calorias debe llenarse");
+//            } else {
+//                try {
+//                    if (Integer.parseInt(jtfCalorias.getText()) < 0 || Integer.parseInt(jtfCalorias.getText()) > 20000) {
+//                        jtfCalorias.setBorder(text_border_rojo);
+//                        jtfCalorias.requestFocus();
+//                        jtfCalorias.selectAll();
+//                        MensajeSB(2, "El campo Calorias está fuera de rango(0-20000)");
+//                    } else {
+//                        jtfCalorias.setBorder(text_border_disable);
+////                            estadojbNuevo();
+//                        jtfNombre.addFocusListener(fl1);
+//                        jtfDetalle.addFocusListener(fl2);
+//                        jtfCalorias.removeFocusListener(fl3);
+//                    }
+//                } catch (NumberFormatException ex) {
+//                    MensajeSB(2, "El campo Calorias debe llenarse con números");
+//                    jtfCalorias.setBorder(text_border_rojo);
+//                    jtfCalorias.requestFocus();
+//                    jtfCalorias.selectAll();
+//                }
+//            }
+//        }
+//    };
 
     public void habilitarBoton() {
         if (e == true) {
-            if (jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty() || jtfCalorias.getText().isEmpty()) {
+//            if (jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty() || jtfCalorias.getText().isEmpty()) {
+            if (jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty()) {
                 jbNuevo.setEnabled(false);
             } else {
                 jbNuevo.setEnabled(true);
