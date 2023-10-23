@@ -1,26 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
+import Controlador.Conexion;
 import Controlador.PacienteData;
-//import Modelo.Comida;
 import Modelo.Paciente;
-//import static Vista.ComidasForm.jtfCalorias;
 import java.awt.Color;
-//import java.time.LocalDate;
-//import java.time.ZoneId;
-//import java.util.Date;
+import java.sql.Connection;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
-//import jdk.nashorn.internal.ir.BreakNode;
 
-/**
- *
- * @author javier
- */
 public class PacientesForm extends javax.swing.JFrame {
 
     // Creación de los bordes que utilizaremos en los TextFileds
@@ -30,11 +17,25 @@ public class PacientesForm extends javax.swing.JFrame {
     private PacienteData pacData;
     String paraDniDuplicado = "";
 
-    /**
-     * Creates new form PacientesForm
-     */
     public PacientesForm() {
         initComponents();
+
+        // =====================================================================
+        // Realizo la coneccion a la DB
+        Connection con = Conexion.getConexion();
+
+        // Si la conexion fue exitosa lo informo como conectado con un (sout)
+        // para no tener ese molesto dialogo de conexion
+        if (con != null) {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Conectado");
+            // Configuro de color verde el panel del titulo principal
+            jpConexion.setBackground(new Color(0, 153, 102));
+        } else {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Error");
+            // Configuro de color rojo el panel del titulo principal
+            jpConexion.setBackground(new Color(255, 50, 0));
+        }
+
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
         pacData = new PacienteData();
@@ -53,6 +54,7 @@ public class PacientesForm extends javax.swing.JFrame {
         // Posiciono el foco en el nombre al iniciar el form
         jtfDNI.requestFocus();
         jcbEstado.setEnabled(false);
+
     }
     public static int nroId = -1;
     public static String nombreP = "";
@@ -70,6 +72,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jpConexion = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -110,12 +113,28 @@ public class PacientesForm extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("Bienvenido Nuevamente");
 
+        jpConexion.setBackground(new java.awt.Color(21, 65, 118));
+        jpConexion.setPreferredSize(new java.awt.Dimension(16, 100));
+
+        javax.swing.GroupLayout jpConexionLayout = new javax.swing.GroupLayout(jpConexion);
+        jpConexion.setLayout(jpConexionLayout);
+        jpConexionLayout.setHorizontalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        jpConexionLayout.setVerticalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 85, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
+                .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
@@ -124,10 +143,13 @@ public class PacientesForm extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2))
+                    .addComponent(jpConexion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -257,7 +279,7 @@ public class PacientesForm extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(13, 13, 13)
                 .addComponent(jbBuscar)
                 .addGap(18, 18, 18)
                 .addComponent(jbNuevo)
@@ -266,7 +288,7 @@ public class PacientesForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jbEliminar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbSalir)
                 .addContainerGap())
@@ -351,7 +373,7 @@ public class PacientesForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -377,13 +399,13 @@ public class PacientesForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfPesoActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(jcbEstado))
                         .addGap(18, 18, 18)
-                        .addComponent(jbDietaPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))
+                        .addComponent(jbDietaPersonal)
+                        .addGap(57, 57, 57))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -599,6 +621,7 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfNombre.setBorder(text_border_rojo);
 
             } else if (jtfDNI.getText().length() != 8) {
+                jtfNombre.setBorder(text_border);
                 MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
                 jtfDNI.requestFocus();
                 jtfDNI.selectAll();
@@ -615,11 +638,23 @@ public class PacientesForm extends javax.swing.JFrame {
                 //            jtfDNI.selectAll();
                 //            jtfDNI.setBorder(text_border_rojo);
             } else if (jtfDomicilio.getText().isEmpty()) {
+                jtfNombre.setBorder(text_border);
+                jtfDNI.setBorder(text_border);
                 MensajeSB(2, "Debe Agregar un domicilio");
                 jtfDomicilio.requestFocus();
                 jtfDomicilio.selectAll();
                 jtfDomicilio.setBorder(text_border_rojo);
+            } else if (!jtfDomicilio.getText().matches("^[a-zA-Z0-9\\s]+$")) {
+                jtfNombre.setBorder(text_border);
+                jtfDNI.setBorder(text_border);
+                MensajeSB(2, "El domicilio solo puede contener letras y números, sin caracteres especiales");
+                jtfDomicilio.requestFocus();
+                jtfDomicilio.selectAll();
+                jtfDomicilio.setBorder(text_border_rojo);
             } else if (jtfTelefono.getText().isEmpty()) {
+                jtfNombre.setBorder(text_border);
+                jtfDNI.setBorder(text_border);
+                jtfDomicilio.setBorder(text_border);
                 MensajeSB(2, "Debe Agregar un Telefono");
                 jtfTelefono.requestFocus();
                 jtfTelefono.selectAll();
@@ -629,8 +664,13 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfTelefono.requestFocus();
                 jtfTelefono.selectAll();
                 jtfTelefono.setBorder(text_border_rojo);
-            } else if (jtfPesoActual.getText().isEmpty()) {
-                MensajeSB(2, "Debe Agregar un peso valido");
+            } else if (jtfPesoActual.getText().isEmpty() || Double.parseDouble(jtfPesoActual.getText()) < 1
+                    || Double.parseDouble(jtfPesoActual.getText()) > 501) {
+                jtfNombre.setBorder(text_border);
+                jtfDNI.setBorder(text_border);
+                jtfDomicilio.setBorder(text_border);
+                jtfTelefono.setBorder(text_border);
+                MensajeSB(2, "Debe Agregar un peso valido entre 1 y 500");
                 jtfPesoActual.requestFocus();
                 jtfPesoActual.selectAll();
                 jtfPesoActual.setBorder(text_border_rojo);
@@ -747,6 +787,7 @@ public class PacientesForm extends javax.swing.JFrame {
     private javax.swing.JButton jbSalir;
     private javax.swing.JCheckBox jcbEstado;
     private javax.swing.JLabel jlMensajeSB;
+    private javax.swing.JPanel jpConexion;
     private javax.swing.JTextField jtfDNI;
     private javax.swing.JTextField jtfDomicilio;
     private javax.swing.JTextField jtfID;
