@@ -511,6 +511,13 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfDomicilio.requestFocus();
                 jtfDomicilio.selectAll();
                 jtfDomicilio.setBorder(text_border_rojo);
+            } else if (!jtfDomicilio.getText().matches("^[a-zA-Z0-9\\s]+$")) {
+                jtfNombre.setBorder(text_border);
+                jtfDNI.setBorder(text_border);
+                MensajeSB(2, "El domicilio solo puede contener letras y números, sin caracteres especiales");
+                jtfDomicilio.requestFocus();
+                jtfDomicilio.selectAll();
+                jtfDomicilio.setBorder(text_border_rojo);
             } else if (jtfTelefono.getText().isEmpty()) {
                 jtfNombre.setBorder(text_border);
                 jtfDNI.setBorder(text_border);
