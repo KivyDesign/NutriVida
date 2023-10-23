@@ -164,8 +164,9 @@ public class DetalleDieta extends javax.swing.JFrame {
         });
 
         jbComidas.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jbComidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/6-32x32_1.png"))); // NOI18N
-        jbComidas.setText(" Comidas");
+        jbComidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/5-32x32.png"))); // NOI18N
+        jbComidas.setText("Salir");
+        jbComidas.setActionCommand(" Salir");
         jbComidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbComidasActionPerformed(evt);
@@ -339,7 +340,9 @@ public class DetalleDieta extends javax.swing.JFrame {
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComidasActionPerformed
-        // TODO add your handling code here:
+ NutriVidaForm nutvidForm = new NutriVidaForm();
+        nutvidForm.setVisible(true);
+        this.setVisible(false);  
     }//GEN-LAST:event_jbComidasActionPerformed
 
     private void jcHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcHorarioActionPerformed
