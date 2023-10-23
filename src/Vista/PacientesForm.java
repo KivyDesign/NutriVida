@@ -506,6 +506,7 @@ public class PacientesForm extends javax.swing.JFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
 
         try {
+            jtfNombre.setBorder(text_border);
             if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
                 jtfNombre.requestFocus();
                 jtfNombre.selectAll();
