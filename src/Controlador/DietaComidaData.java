@@ -23,7 +23,7 @@ public class DietaComidaData {
     }
 
     public void guardarDietaComida(DietaComida dietaComida) {
-        String sql = "INSERT INTO dietaComida (idComida,idDieta,horario,porcion) VALUES ( ?, ?, ? , ?)";
+        String sql = "INSERT INTO dietacomida (idComida, idDieta, horario, porcion) VALUES (?, ?, ? , ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, dietaComida.getComida().getIdComida());
@@ -86,7 +86,7 @@ public class DietaComidaData {
         ArrayList<DietaComida> dietas = new ArrayList<>();
 
         try {
-            String sql = "SELECT idDietaComida,idComida,idDieta,horario,porcion FROM dietaComida WHERE idDieta = ? order by horario";
+            String sql = "SELECT idDietaComida, idComida, idDieta, horario, porcion FROM dietacomida WHERE idDieta = ? order by horario";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idDieta);
             ResultSet rs = ps.executeQuery();
