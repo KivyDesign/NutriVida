@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author german
  */
 public class HistorialView extends javax.swing.JFrame {
-
+    
     private DietasForm historiaDieta;
     private LocalDate ahora;
     private PacienteData pacData;
@@ -31,7 +31,7 @@ public class HistorialView extends javax.swing.JFrame {
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
-
+    
     public HistorialView() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -50,7 +50,7 @@ public class HistorialView extends javax.swing.JFrame {
         jlPesoFin.setText(historiaDieta.pesoFin);
         //Para convertir fecha actual en String
         ahora = LocalDate.now();
-
+        
         String fechaFormato;
         fechaFormato = ahora.format(formatter);
         jlFechaActual.setText(fechaFormato);
@@ -350,25 +350,29 @@ public class HistorialView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-
+        
         try {
             if (Double.parseDouble(jtPesoRegistrado.getText()) <= 0.00
                     || Double.parseDouble(jtPesoRegistrado.getText()) >= 500.00) {
                 MensajeSB(2, "El peso comprenderse entre 0 y 500");
                 jtPesoRegistrado.requestFocus();
+                jtPesoRegistrado.setBorder(text_border_rojo);
                 jtPesoRegistrado.selectAll();
-
+                
             } else {
                 Historial hist = new Historial(pacData.buscarPacientePorId(historiaDieta.IdPac),
                         Double.parseDouble(jtPesoRegistrado.getText()), ahora);
                 historialData.guardarHistorial(hist);
                 pacData.modificarPesoActual(historiaDieta.IdPac, Double.parseDouble(jtPesoRegistrado.getText()));
                 MensajeSB(1, "Consulta guardada con exito");
+                jtPesoRegistrado.setBorder(text_border);
+                jbGuardar.setEnabled(false);
                 borrarFilasTabla();
                 cargarHistorial(historiaDieta.IdPac);
             }
         } catch (NumberFormatException ex) {
             MensajeSB(2, "El peso debe ser un número entre 0 y 500");
+            jtPesoRegistrado.setBorder(text_border_rojo);
             jtPesoRegistrado.requestFocus();
             jtPesoRegistrado.selectAll();
         }
@@ -454,11 +458,11 @@ public void MensajeSB(int color, String mensaje) {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-
+    
     private void cargarHistorial(int idPaciente) {
-
+        
         ArrayList<Historial> historial = (ArrayList<Historial>) historialData.obtenerHistorialXId(idPaciente);
-
+        
         if (historial != null) {
             for (Historial hist : historial) {
                 modelo.addRow(new Object[]{
@@ -468,21 +472,21 @@ public void MensajeSB(int color, String mensaje) {
             }
         }
     }
-
+    
     private void armarCabecera() {
         modelo.addColumn("N° de Consulta");
         modelo.addColumn("Fecha");
         modelo.addColumn("Peso registrado");
-
+        
         jtHistorial.setModel(modelo);
     }
-
+    
     public void borrarFilasTabla() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
         // Controlar que no este vacio o cargarlo desde el comienzo
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
-
+            
             if (modelo.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modelo.removeRow(i);

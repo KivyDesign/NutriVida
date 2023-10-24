@@ -24,14 +24,14 @@ import javax.swing.table.DefaultTableModel;
  * @author german
  */
 public class DetalleDieta extends javax.swing.JFrame {
-
+    
     private DefaultTableModel modelo;
     private ComidaData comData;
     private DietaComidaData dietaComidaData;
     private DietasForm dietasForm;
     private DietaData dietaData;
     private int nuevaPorcion;
-
+    
     public DetalleDieta() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -61,7 +61,7 @@ public class DetalleDieta extends javax.swing.JFrame {
         // Al modelo de la jTable le agrego un ListModelListener que me permite
         // operar sobre los cambios realizados en una celda
         anadeListenerAlModelo();
-
+        
         jbModificar.setEnabled(false);
     }
 
@@ -340,13 +340,13 @@ public class DetalleDieta extends javax.swing.JFrame {
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComidasActionPerformed
- NutriVidaForm nutvidForm = new NutriVidaForm();
+        NutriVidaForm nutvidForm = new NutriVidaForm();
         nutvidForm.setVisible(true);
-        this.setVisible(false);  
+        this.setVisible(false);        
     }//GEN-LAST:event_jbComidasActionPerformed
 
     private void jcHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcHorarioActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jcHorarioActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
@@ -372,7 +372,7 @@ public class DetalleDieta extends javax.swing.JFrame {
             jtPorcion.requestFocus();
             jtPorcion.selectAll();
         }
-
+        
 
     }//GEN-LAST:event_jbAgregarActionPerformed
 
@@ -389,6 +389,7 @@ public class DetalleDieta extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_jbModificarActionPerformed
         jbModificar.setEnabled(false);
+        jbAgregar.setEnabled(true);
         borrarFilasTabla();
         cargarContenido();
     }
@@ -457,14 +458,14 @@ public class DetalleDieta extends javax.swing.JFrame {
         modelo.addColumn("Unid./gramos");
         modelo.addColumn("Comida");
         modelo.addColumn("Horario");
-
+        
         jTcontenido.setModel(modelo);
         jTcontenido.getColumnModel().getColumn(0).setPreferredWidth(70);
         jTcontenido.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTcontenido.getColumnModel().getColumn(2).setPreferredWidth(220);
         jTcontenido.getColumnModel().getColumn(2).setPreferredWidth(100);
     }
-
+    
     private void cargarContenido() {
         ArrayList<DietaComida> dietaComida = (ArrayList<DietaComida>) dietaComidaData.listarDietaComidas(dietasForm.idDieta);
         if (dietaComida != null) {
@@ -479,7 +480,7 @@ public class DetalleDieta extends javax.swing.JFrame {
             System.out.println("error dieta comida null");
         }
     }
-
+    
     private void cargarComidas() {
         // Limpio el ComboBox
         jCComidas.removeAllItems();
@@ -489,21 +490,21 @@ public class DetalleDieta extends javax.swing.JFrame {
             jCComidas.addItem(listar);
         }
     }
-
+    
     public void MensajeSB(int color, String mensaje) {
-
+        
         if (color == 1) {
             jlMensajeSB.setForeground(new Color(255, 255, 255));
         } else if (color == 2) {
             jlMensajeSB.setForeground(new Color(255, 50, 0));
         } else if (color == 3) {
-
+            
             jlMensajeSB.setForeground(new Color(31, 75, 128));
         }
-
+        
         jlMensajeSB.setText(mensaje);
     }
-
+    
     public void cargarHorarios() {
         // Limpio el ComboBox
         jcHorario.removeAllItems();
@@ -512,19 +513,19 @@ public class DetalleDieta extends javax.swing.JFrame {
         jcHorario.addItem(Horario.MERIENDA);
         jcHorario.addItem(Horario.CENA);
         jcHorario.addItem(Horario.SNACK);
-
+        
     }
-
+    
     public void anadeListenerAlModelo() {
         jTcontenido.getModel().addTableModelListener(new TableModelListener() {
-
+            
             @Override
             public void tableChanged(TableModelEvent evento) {
                 cambioPorcion(evento);
             }
         });
     }
-
+    
     public void cambioPorcion(TableModelEvent evento) {
         // Solo se trata el evento UPDATE, correspondiente al cambio de valor
         // de una celda.
@@ -534,7 +535,7 @@ public class DetalleDieta extends javax.swing.JFrame {
             int fila = evento.getFirstRow();
             int columna = evento.getColumn();
             int c = 0;
-
+            
             try {
                 Object nueva = jTcontenido.getValueAt(fila, columna);
                 int pars = Integer.parseInt(nueva.toString());
@@ -542,6 +543,7 @@ public class DetalleDieta extends javax.swing.JFrame {
                     c++;
                     nuevaPorcion = pars;
                     if (c == 1) {
+                        jbAgregar.setEnabled(false);
                         jbModificar.setEnabled(true);
                     }
                 } else {
@@ -556,15 +558,15 @@ public class DetalleDieta extends javax.swing.JFrame {
             }
         }
     }
-
+    
     public void listSelectionListener() {
         jTcontenido.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
+            
             @Override
             public void valueChanged(ListSelectionEvent evento) {
                 int filaSeleccionada = jTcontenido.getSelectedRow();
                 int columnaSeleccionada = jTcontenido.getSelectedColumn();
-
+                
                 if (jTcontenido.isCellEditable(filaSeleccionada, columnaSeleccionada) && filaSeleccionada >= 0 && columnaSeleccionada >= 0) {
                     Object valor = jTcontenido.getValueAt(filaSeleccionada, columnaSeleccionada);
                     nuevaPorcion = Integer.parseInt(valor.toString());
@@ -572,13 +574,13 @@ public class DetalleDieta extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void borrarFilasTabla() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
         // Controlar que no este vacio o cargarlo desde el comienzo
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
-
+            
             if (modelo.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modelo.removeRow(i);

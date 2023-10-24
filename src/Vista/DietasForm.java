@@ -59,6 +59,9 @@ public class DietasForm extends javax.swing.JFrame {
             jtfPesoFinal.setText(dieta.getPesoFinal() + "");
             jDateChooser1.setDate(Date.from(dieta.getFechaInicial().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             jDateChooser2.setDate(Date.from(dieta.getFechaFinal().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            jtfNombre.setBorder(text_border);
+            jtfPesoInicial.setBorder(text_border);
+            jtfPesoFinal.setBorder(text_border);
             if (dieta.getFechaFinal().compareTo(ahora) <= 0) {
                 MensajeSB(2, "La fecha de culminacion de la dieta se venció");
 
@@ -80,7 +83,6 @@ public class DietasForm extends javax.swing.JFrame {
             // blanco y de solo 1 pixel de grosor para indicar que no es editable
             jtfID.setBorder(text_border_disable);
             jtfNombre.setBorder(text_border);
-//            jtfPaciente.setBorder(text_border);
             jtfPesoInicial.setBorder(text_border);
             jtfPesoFinal.setBorder(text_border);
             MensajeSB(7, "No se encontro dieta para este Paciente cree una nueva");
@@ -459,15 +461,10 @@ public class DietasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
-            MensajeSB(2, "Falta completar Fechas");
-        } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
-            MensajeSB(2, "la fecha inicial debe ser menor que la final");
-        } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+        if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
             jtfNombre.setBorder(text_border_rojo);
-            // Posiciono el foco en el nombre al iniciar el form
         } else {
             try {
                 if (Double.parseDouble(jtfPesoInicial.getText()) <= 0.00
@@ -476,12 +473,32 @@ public class DietasForm extends javax.swing.JFrame {
                     jtfPesoInicial.requestFocus();
                     jtfPesoInicial.selectAll();
                     jtfPesoInicial.setBorder(text_border_rojo);
+                    jtfNombre.setBorder(text_border);
                 } else if (Double.parseDouble(jtfPesoFinal.getText()) <= 0.00
                         || Double.parseDouble(jtfPesoFinal.getText()) >= 500.00) {
                     MensajeSB(2, "El peso final debe comprenderse entre 0 y 500");
                     jtfPesoFinal.requestFocus();
                     jtfPesoFinal.selectAll();
                     jtfPesoFinal.setBorder(text_border_rojo);
+                    jtfPesoInicial.setBorder(text_border);
+                    jtfNombre.setBorder(text_border);
+                } else if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
+                    MensajeSB(2, "Falta completar Fechas");
+                    jtfNombre.setBorder(text_border);
+                    jtfPesoInicial.setBorder(text_border);
+                    jtfPesoFinal.setBorder(text_border);
+                } else if ((jDateChooser2.getDate()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate().compareTo(ahora) <= 0) {
+                    MensajeSB(2, "La fecha de culminacion de la dieta debe ser posterior al día de hoy");
+                    jtfNombre.setBorder(text_border);
+                    jtfPesoInicial.setBorder(text_border);
+                    jtfPesoFinal.setBorder(text_border);
+                } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
+                    MensajeSB(2, "la fecha inicial del tratamiento debe ser menor que la final");
+                    jtfNombre.setBorder(text_border);
+                    jtfPesoInicial.setBorder(text_border);
+                    jtfPesoFinal.setBorder(text_border);
+
+                    // Posiciono el foco en el nombre al iniciar el form
                 } else {
 
                     Dieta dieta = new Dieta(jtfNombre.getText(), pacienteData.buscarPacientePorId(numId.nroId), Double.parseDouble(jtfPesoInicial.getText()),
@@ -500,7 +517,10 @@ public class DietasForm extends javax.swing.JFrame {
                     jbDetalleDieta.setEnabled(true);
                 }
             } catch (NumberFormatException ex) {
-                MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
+                MensajeSB(2, "los pesos deben ser números entre 0 y 500");
+                jtfNombre.setBorder(text_border);
+                jtfPesoInicial.setBorder(text_border);
+                jtfPesoFinal.setBorder(text_border);
             }
         }
 
@@ -508,21 +528,43 @@ public class DietasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
-            MensajeSB(2, "Falta completar Fechas");
-        } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
-            MensajeSB(2, "la fecha inicial debe ser menor que la final");
-        } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+        if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
-            // Posiciono el foco en el nombre al iniciar el form
+            jtfNombre.setBorder(text_border_rojo);
         } else {
             try {
                 if (Double.parseDouble(jtfPesoInicial.getText()) <= 0.00
-                        || Double.parseDouble(jtfPesoInicial.getText()) >= 500.00
-                        || Double.parseDouble(jtfPesoFinal.getText()) <= 0.00
+                        || Double.parseDouble(jtfPesoInicial.getText()) >= 500.00) {
+                    MensajeSB(2, "El peso inicial debe comprenderse entre 0 y 500");
+                    jtfPesoInicial.requestFocus();
+                    jtfPesoInicial.selectAll();
+                    jtfPesoInicial.setBorder(text_border_rojo);
+                    jtfNombre.setBorder(text_border);
+                } else if (Double.parseDouble(jtfPesoFinal.getText()) <= 0.00
                         || Double.parseDouble(jtfPesoFinal.getText()) >= 500.00) {
-                    MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
+                    MensajeSB(2, "El peso final debe comprenderse entre 0 y 500");
+                    jtfPesoFinal.requestFocus();
+                    jtfPesoFinal.selectAll();
+                    jtfPesoFinal.setBorder(text_border_rojo);
+                    jtfPesoInicial.setBorder(text_border);
+                    jtfNombre.setBorder(text_border);
+                } else if (jDateChooser1.getDate() == null || jDateChooser2.getDate() == null) {
+                    MensajeSB(2, "Falta completar Fechas");
+                    jtfNombre.setBorder(text_border);
+                    jtfPesoInicial.setBorder(text_border);
+                    jtfPesoFinal.setBorder(text_border);
+                } else if ((jDateChooser2.getDate()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate().compareTo(ahora) <= 0) {
+                    MensajeSB(2, "La fecha de culminacion de la dieta debe ser posterior al día de hoy");
+                    jtfNombre.setBorder(text_border);
+                    jtfPesoInicial.setBorder(text_border);
+                    jtfPesoFinal.setBorder(text_border);
+                } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
+                    MensajeSB(2, "la fecha inicial del tratamiento debe ser menor que la final");
+                    jtfNombre.setBorder(text_border);
+                    jtfPesoInicial.setBorder(text_border);
+                    jtfPesoFinal.setBorder(text_border);
+
                 } else {
                     jtfPaciente.setText(numId.nombreP);
                     jtfPaciente.setEditable(false);
@@ -536,6 +578,9 @@ public class DietasForm extends javax.swing.JFrame {
                 }
             } catch (NumberFormatException ex) {
                 MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
+                jtfNombre.setBorder(text_border);
+                jtfPesoInicial.setBorder(text_border);
+                jtfPesoFinal.setBorder(text_border);
             }
         }
 
