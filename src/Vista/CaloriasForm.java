@@ -456,7 +456,7 @@ public class CaloriasForm extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("Seleccione hasta 5 alimentos para calcular el total de calorias");
+        jlMensajeSB.setText("Seleccione hasta 5 alimentos para calcular el total de calorías");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

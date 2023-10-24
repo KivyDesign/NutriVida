@@ -264,7 +264,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Seleccione hasta 5 alimentos para calcular el total de calorias"/>
+                <Property name="text" type="java.lang.String" value="Seleccione hasta 5 alimentos para calcular el total de calor&#xed;as"/>
               </Properties>
             </Component>
           </SubComponents>

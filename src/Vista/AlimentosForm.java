@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 public class AlimentosForm extends javax.swing.JFrame {
 
     private ComidaData comData;
+    
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int fila, int columna) {
             return false;
@@ -141,7 +142,7 @@ public class AlimentosForm extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("Mensaje inicial");
+        jlMensajeSB.setText("Ingrese un Limite Mínimo y Máximo de Calorías para el filtrado de Comidas");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -175,7 +176,7 @@ public class AlimentosForm extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Calorias entre:");
+        jLabel5.setText("Calorías entre:");
 
         jtfLimiteMin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
