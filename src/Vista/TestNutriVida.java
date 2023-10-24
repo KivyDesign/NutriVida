@@ -2,10 +2,12 @@ package Vista;
 
 import Controlador.ComidaData;
 import Controlador.Conexion;
+import Controlador.DietaComidaData;
 import Controlador.DietaData;
 import Controlador.PacienteData;
 import Modelo.Comida;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class TestNutriVida {
 
@@ -60,6 +62,12 @@ public class TestNutriVida {
         for (Comida comida : comData.listarComidasCalorias(89, 130)) {
             System.out.println("comida calorias requeridas " + comida.getNombre());
         }
+        
+        ArrayList<Comida> lista = comData.listarComidas();
+          for (Comida comida : lista) {
+              System.out.println(comida.toString());
+          }
+          System.out.println("");
         
         /**
          * ---------------------------------------------------------------------
@@ -126,5 +134,17 @@ public class TestNutriVida {
 
         // Buscar dieta por paciente
 //        System.out.println(dietaData.buscarDietaporIdPaciente(3));
+
+        // Probar comidasCalorias
+//        ComidaData comData = new ComidaData();
+//        for (Comida comida : comData.listarComidasCalorias(89, 130)) {
+//            System.out.println("comida calorias requeridas " + comida.getNombre());
+//        }
+
+        // Prueba dietaComida listarDietaComidas
+        ComidaData comidaData = new ComidaData();
+        DietaComidaData dietaComidaData = new DietaComidaData();
+
+        System.out.println(dietaComidaData.listarDietaComidas(1));
     }
 }
