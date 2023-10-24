@@ -1,54 +1,63 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
+import Controlador.Conexion;
 import Controlador.DietaData;
 import Controlador.PacienteData;
 import Modelo.Dieta;
 import java.awt.Color;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
-/**
- *
- * @author javier
- */
 public class DietasForm extends javax.swing.JFrame {
 
     // Creación de los bordes que utilizaremos en los TextFileds
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
+
     private DietaData dietadata;
     private PacienteData pacienteData;
     private PacientesForm numId;
     private LocalDate ahora;
 
-    /**
-     * Creates new form DietasForm
-     */
     public DietasForm() {
         initComponents();
         dietadata = new DietaData();
         pacienteData = new PacienteData();
+
         //creo objeto clase PacientesForm
         numId = new PacientesForm();
+
+        // =====================================================================
+        // Realizo la coneccion a la DB
+        Connection con = Conexion.getConexion();
+
+        // Si la conexion fue exitosa lo informo como conectado con un (sout)
+        // para no tener ese molesto dialogo de conexion
+        if (con != null) {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Conectado");
+            // Configuro de color verde el panel del titulo principal
+            jpConexion.setBackground(new Color(0, 153, 102));
+        } else {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Error");
+            // Configuro de color rojo el panel del titulo principal
+            jpConexion.setBackground(new Color(255, 50, 0));
+        }
+
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
+
         ahora = LocalDate.now();
 
-        //busco dieta cuyo id esta asociado al id paciente de PacientesForm
+        // Busco dieta cuyo id esta asociado al id paciente de PacientesForm
         Dieta dieta = dietadata.buscarDietaporIdPaciente(numId.nroId);
-        //si no es nula cargo formularioPacientesForm numId = new PacientesForm();
+        // si no es nula cargo formularioPacientesForm numId = new PacientesForm();
 
-        if (dieta
-                != null) {
+        if (dieta != null) {
             jbNuevo.setEnabled(false);
             jtfID.setText(dieta.getIdDieta() + "");
             jtfID.setEnabled(false);
@@ -69,7 +78,6 @@ public class DietasForm extends javax.swing.JFrame {
             jCheckBox1.setSelected(dieta.isEstado());
             jCheckBox1.setEnabled(false);
         } else {
-
             jbEliminar.setEnabled(false);
             jbGuardar.setEnabled(false);
             jbSeguimiento.setEnabled(false);
@@ -109,6 +117,8 @@ public class DietasForm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jpConexion = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jlMensajeSB = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -149,25 +159,52 @@ public class DietasForm extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("Bienvenido Nuevamente");
 
+        jpConexion.setBackground(new java.awt.Color(21, 65, 118));
+        jpConexion.setPreferredSize(new java.awt.Dimension(16, 85));
+
+        javax.swing.GroupLayout jpConexionLayout = new javax.swing.GroupLayout(jpConexion);
+        jpConexion.setLayout(jpConexionLayout);
+        jpConexionLayout.setHorizontalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        jpConexionLayout.setVerticalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 85, Short.MAX_VALUE)
+        );
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo-header.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(7, 7, 7)
+                .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap())
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addComponent(jLabel11)
+                    .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(31, 75, 128));
@@ -191,7 +228,7 @@ public class DietasForm extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jlMensajeSB)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
@@ -355,8 +392,8 @@ public class DietasForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,17 +421,18 @@ public class DietasForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtfID)
                             .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -427,10 +465,8 @@ public class DietasForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCheckBox1)
                             .addComponent(jLabel10)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -451,8 +487,7 @@ public class DietasForm extends javax.swing.JFrame {
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
         // Por ahora solo cierro este form. Ampliar para ocultar el form actual
         // y mostrar el form del menu en su lugar
-//        this.dispose();
-
+        //
         // Instancio el form de menu y lo hago visible mientras oculto el
         // form con dietas
         PacientesForm pacientesForm = new PacientesForm();
@@ -500,7 +535,6 @@ public class DietasForm extends javax.swing.JFrame {
 
                     // Posiciono el foco en el nombre al iniciar el form
                 } else {
-
                     Dieta dieta = new Dieta(jtfNombre.getText(), pacienteData.buscarPacientePorId(numId.nroId), Double.parseDouble(jtfPesoInicial.getText()),
                             Double.parseDouble(jtfPesoFinal.getText()),
                             jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
@@ -523,8 +557,6 @@ public class DietasForm extends javax.swing.JFrame {
                 jtfPesoFinal.setBorder(text_border);
             }
         }
-
-
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -583,8 +615,6 @@ public class DietasForm extends javax.swing.JFrame {
                 jtfPesoFinal.setBorder(text_border);
             }
         }
-
-
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -605,7 +635,6 @@ public class DietasForm extends javax.swing.JFrame {
         jDateChooser2.setCalendar(null);
         jtfID.setBorder(text_border_disable);
         jtfNombre.setBorder(text_border);
-//            jtfPaciente.setBorder(text_border);
         jtfPesoInicial.setBorder(text_border);
         jtfPesoFinal.setBorder(text_border);
         jbNuevo.setEnabled(true);
@@ -620,11 +649,9 @@ public class DietasForm extends javax.swing.JFrame {
         HistorialView historialView = new HistorialView();
         historialView.setVisible(true);
         this.setVisible(false);
-
     }//GEN-LAST:event_jbSeguimientoActionPerformed
 
     private void jbDetalleDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetalleDietaActionPerformed
-
         idDieta = Integer.parseInt(jtfID.getText());
         nombreDiet = jtfNombre.getText();
         DetalleDieta detalleDieta = new DetalleDieta();
@@ -681,6 +708,7 @@ public class DietasForm extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -700,6 +728,7 @@ public class DietasForm extends javax.swing.JFrame {
     private javax.swing.JButton jbSeguimiento;
     private javax.swing.JButton jbVolver;
     private javax.swing.JLabel jlMensajeSB;
+    private javax.swing.JPanel jpConexion;
     private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfPaciente;
@@ -708,7 +737,6 @@ public class DietasForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void MensajeSB(int color, String mensaje) {
-
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
             // Si el color es igual a 1 entonces es = a verde
@@ -744,5 +772,4 @@ public class DietasForm extends javax.swing.JFrame {
             return true;
         }
     }
-
 }

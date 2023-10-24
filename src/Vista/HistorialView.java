@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
+import Controlador.Conexion;
 import Controlador.HistorialData;
 import Controlador.PacienteData;
 import Modelo.Historial;
 import java.awt.Color;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -16,12 +13,8 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author german
- */
 public class HistorialView extends javax.swing.JFrame {
-    
+
     private DietasForm historiaDieta;
     private LocalDate ahora;
     private PacienteData pacData;
@@ -31,10 +24,29 @@ public class HistorialView extends javax.swing.JFrame {
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
-    
+
     public HistorialView() {
         initComponents();
+
+        // =====================================================================
+        // Realizo la coneccion a la DB
+        Connection con = Conexion.getConexion();
+
+        // Si la conexion fue exitosa lo informo como conectado con un (sout)
+        // para no tener ese molesto dialogo de conexion
+        if (con != null) {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Conectado");
+            // Configuro de color verde el panel del titulo principal
+            jpConexion.setBackground(new Color(0, 153, 102));
+        } else {
+            this.setTitle("Sistema de Gestión NutriVida - Estado: Error");
+            // Configuro de color rojo el panel del titulo principal
+            jpConexion.setBackground(new Color(255, 50, 0));
+        }
+
+        // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
+
         //creo un DietasForm
         historiaDieta = new DietasForm();
         pacData = new PacienteData();
@@ -44,13 +56,15 @@ public class HistorialView extends javax.swing.JFrame {
                 return false;
             }
         };
-        //traigo de DietasForm
+
+        // Traigo de DietasForm
         jlPaciente.setText(historiaDieta.nombrePac);
         jlPesoIni.setText(historiaDieta.pesoIni);
         jlPesoFin.setText(historiaDieta.pesoFin);
-        //Para convertir fecha actual en String
+
+        // Para convertir fecha actual en String
         ahora = LocalDate.now();
-        
+
         String fechaFormato;
         fechaFormato = ahora.format(formatter);
         jlFechaActual.setText(fechaFormato);
@@ -73,9 +87,11 @@ public class HistorialView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jpConexion = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtHistorial = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -92,6 +108,8 @@ public class HistorialView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jtPesoRegistrado = new javax.swing.JTextField();
         jlFechaActual = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -106,21 +124,57 @@ public class HistorialView extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Historial Paciente");
 
+        jpConexion.setBackground(new java.awt.Color(21, 65, 118));
+        jpConexion.setPreferredSize(new java.awt.Dimension(16, 85));
+
+        javax.swing.GroupLayout jpConexionLayout = new javax.swing.GroupLayout(jpConexion);
+        jpConexion.setLayout(jpConexionLayout);
+        jpConexionLayout.setHorizontalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        jpConexionLayout.setVerticalGroup(
+            jpConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 85, Short.MAX_VALUE)
+        );
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo-header.png"))); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel9.setText("Bienvenido Nuevamente");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9))
+                    .addComponent(jpConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jtHistorial.setBackground(new java.awt.Color(31, 75, 128));
@@ -129,37 +183,33 @@ public class HistorialView extends javax.swing.JFrame {
         jtHistorial.setMinimumSize(new java.awt.Dimension(90, 160));
         jScrollPane1.setViewportView(jtHistorial);
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Consultas anteriores");
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText(" Paciente:");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Peso Inicial:");
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Peso Final:");
 
-        jlPaciente.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
+        jlPaciente.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jlPaciente.setForeground(new java.awt.Color(255, 255, 255));
         jlPaciente.setText("jLabel6");
 
-        jlPesoIni.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jlPesoIni.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jlPesoIni.setForeground(new java.awt.Color(255, 255, 255));
         jlPesoIni.setText("jLabel7");
 
-        jlPesoFin.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jlPesoFin.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jlPesoFin.setForeground(new java.awt.Color(255, 255, 255));
         jlPesoFin.setText("jLabel8");
 
         jPanel3.setBackground(new java.awt.Color(31, 75, 128));
 
-        jlMensajeSB.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
         jlMensajeSB.setText("Complete con peso actual del paciente");
 
@@ -168,16 +218,16 @@ public class HistorialView extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jlMensajeSB, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jlMensajeSB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jlMensajeSB)
-                .addContainerGap())
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(31, 75, 128));
@@ -218,26 +268,26 @@ public class HistorialView extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                    .addComponent(jbGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addComponent(jbGuardar)
                 .addGap(29, 29, 29)
                 .addComponent(jbAtras)
                 .addGap(33, 33, 33)
                 .addComponent(jbSalir)
-                .addGap(46, 46, 46))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Fecha de Consulta:");
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Peso Registrado:");
 
@@ -245,9 +295,34 @@ public class HistorialView extends javax.swing.JFrame {
         jtPesoRegistrado.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtPesoRegistrado.setForeground(new java.awt.Color(255, 255, 255));
 
-        jlFechaActual.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jlFechaActual.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jlFechaActual.setForeground(new java.awt.Color(255, 255, 255));
         jlFechaActual.setText("Fecha");
+
+        jPanel6.setBackground(new java.awt.Color(31, 75, 128));
+        jPanel6.setPreferredSize(new java.awt.Dimension(16, 85));
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Consultas anteriores");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -255,70 +330,77 @@ public class HistorialView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                            .addComponent(jlPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtPesoRegistrado, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlFechaActual))))
+                .addGap(70, 70, 70)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
+                        .addGap(0, 42, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlPesoIni)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlPesoFin))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jtPesoRegistrado, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addComponent(jlFechaActual)))))
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jlPesoIni)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jlPesoFin)
+                .addGap(65, 65, 65))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlPaciente)
+                            .addComponent(jLabel3)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jlPesoIni))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jlPesoFin)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jlFechaActual))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jlPaciente)
-                    .addComponent(jLabel4)
-                    .addComponent(jlPesoIni)
-                    .addComponent(jLabel5)
-                    .addComponent(jlPesoFin))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jlFechaActual))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(jtPesoRegistrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jtPesoRegistrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel2)
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -330,9 +412,7 @@ public class HistorialView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -350,7 +430,6 @@ public class HistorialView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        
         try {
             if (Double.parseDouble(jtPesoRegistrado.getText()) <= 0.00
                     || Double.parseDouble(jtPesoRegistrado.getText()) >= 500.00) {
@@ -358,7 +437,7 @@ public class HistorialView extends javax.swing.JFrame {
                 jtPesoRegistrado.requestFocus();
                 jtPesoRegistrado.setBorder(text_border_rojo);
                 jtPesoRegistrado.selectAll();
-                
+
             } else {
                 Historial hist = new Historial(pacData.buscarPacientePorId(historiaDieta.IdPac),
                         Double.parseDouble(jtPesoRegistrado.getText()), ahora);
@@ -421,10 +500,13 @@ public class HistorialView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton jbAtras;
@@ -435,11 +517,12 @@ public class HistorialView extends javax.swing.JFrame {
     private javax.swing.JLabel jlPaciente;
     private javax.swing.JLabel jlPesoFin;
     private javax.swing.JLabel jlPesoIni;
+    private javax.swing.JPanel jpConexion;
     private javax.swing.JTable jtHistorial;
     private javax.swing.JTextField jtPesoRegistrado;
     // End of variables declaration//GEN-END:variables
-public void MensajeSB(int color, String mensaje) {
 
+    public void MensajeSB(int color, String mensaje) {
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
             // Si el color es igual a 1 entonces es = a verde
@@ -458,11 +541,10 @@ public void MensajeSB(int color, String mensaje) {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-    
+
     private void cargarHistorial(int idPaciente) {
-        
         ArrayList<Historial> historial = (ArrayList<Historial>) historialData.obtenerHistorialXId(idPaciente);
-        
+
         if (historial != null) {
             for (Historial hist : historial) {
                 modelo.addRow(new Object[]{
@@ -472,21 +554,21 @@ public void MensajeSB(int color, String mensaje) {
             }
         }
     }
-    
+
     private void armarCabecera() {
         modelo.addColumn("N° de Consulta");
         modelo.addColumn("Fecha");
         modelo.addColumn("Peso registrado");
-        
+
         jtHistorial.setModel(modelo);
     }
-    
+
     public void borrarFilasTabla() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
         // Controlar que no este vacio o cargarlo desde el comienzo
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
-            
+
             if (modelo.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modelo.removeRow(i);
