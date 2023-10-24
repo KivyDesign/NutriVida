@@ -229,7 +229,7 @@ public class ComidasForm extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("Ingrese un nombre para busccar o complete datos para una comida nueva");
+        jlMensajeSB.setText("Ingrese un nombre para buscar o complete datos para una comida nueva");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -297,7 +297,7 @@ public class ComidasForm extends javax.swing.JFrame {
 
         jbLimpiar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/6-32x32_1.png"))); // NOI18N
-        jbLimpiar.setText("Limpiar");
+        jbLimpiar.setText(" Limpiar");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbLimpiarActionPerformed(evt);
