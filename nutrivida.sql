@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2023 a las 00:14:54
+-- Tiempo de generación: 25-10-2023 a las 00:00:35
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -47,13 +47,13 @@ CREATE TABLE `calorias` (
 --
 
 INSERT INTO `calorias` (`idCalorias`, `idGrupoAlimenticio`, `nombre`, `calorias`, `proteinas`, `grasa`, `carbohidratos`, `fibra`, `colesterol`, `estado`) VALUES
+(0, 1, 'Manteca', 6700, 100, 700, 0, 0, 1000, 1),
 (1, 1, 'Aceite de cacahuete', 9000, 0, 1000, 0, 0, 0, 1),
 (2, 1, 'Aceite de girasol', 9000, 0, 1000, 0, 0, 0, 1),
 (3, 1, 'Aceite de maíz', 9000, 0, 1000, 0, 0, 0, 1),
 (4, 1, 'Aceite de oliva', 9000, 0, 1000, 0, 0, 0, 1),
 (5, 1, 'Aceite de soja', 9000, 0, 1000, 0, 0, 0, 1),
 (6, 1, 'Aceitunas', 1490, 7, 127, 80, 0, 0, 1),
-(7, 1, 'Manteca', 6700, 100, 700, 0, 0, 1000, 1),
 (8, 1, 'Mantequilla', 7520, 7, 830, 6, 0, 2500, 1),
 (9, 1, 'Margarina vegetal', 7520, 0, 835, 4, 0, 0, 1),
 (10, 2, 'Azúcar', 3800, 0, 0, 995, 0, 0, 1),
@@ -375,7 +375,9 @@ INSERT INTO `comida` (`idComida`, `nombre`, `detalle`, `cantCalorias`, `estado`)
 (2, 'Lenteja', 'legumbres', 116, 1),
 (3, 'Banana', 'Fruta', 89, 1),
 (4, 'Atún', 'Pescado', 130, 0),
-(5, 'Zanahoria', 'Verdura', 37, 1);
+(5, 'Zanahoria', 'Verdura', 37, 1),
+(6, 'Ciruelas', 'fruta', 6, 1),
+(7, 'naranja', 'fruta', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -403,22 +405,20 @@ INSERT INTO `dieta` (`idDieta`, `nombre`, `idPaciente`, `pesoInicial`, `pesoFina
 (2, 'Masiva', 3, 150.52, 98, '2023-08-23', '2023-12-23', 1),
 (3, 'Liviana', 4, 150.52, 98, '2023-08-23', '2023-12-23', 1),
 (4, 'Normal', 5, 150.52, 98, '2023-08-23', '2023-12-23', 1),
-(19, 'ultrarrapida', 6, 120, 80, '2023-06-01', '2023-11-21', 1),
+(19, 'ultrarrapida ', 6, 118, 80, '2023-09-12', '2023-10-28', 1),
 (24, 'Cuidado Personal', 11, 120, 85, '2023-08-08', '2023-11-21', 1),
-(25, 'Leve Aumento', 17, 56, 62, '2023-08-14', '2023-11-22', 0),
-(26, 'Incremento secuencial', 17, 56, 62, '2023-08-07', '2023-10-31', 0),
-(27, 'engorde', 17, 56, 62, '2023-10-02', '2023-06-08', 0),
 (28, 'aumento relativo', 17, 56, 62, '2023-10-02', '2023-11-28', 1),
 (29, 'Ligera', 1, 89, 78.5, '2023-07-21', '2023-10-25', 1),
-(30, 'Rapida', 13, 85.36, 60, '2023-08-22', '2023-10-16', 1),
-(31, 'progresiva', 12, 150.8, 125, '2023-08-23', '2023-10-13', 0),
+(30, 'Rapida', 13, 85.36, 60, '2023-08-22', '2023-11-23', 1),
+(31, 'progresiva', 12, 150.8, 125, '2023-08-23', '2023-10-13', 1),
 (32, 'Perdedora', 14, 80, 68, '2023-09-04', '2023-12-22', 1),
 (33, 'CuidadoIntensivo', 19, 89.7, 79, '2023-09-11', '2023-09-20', 1),
 (34, 'Liviana', 9, 97.8, 90, '2023-08-15', '2023-11-14', 1),
 (35, 'Media', 7, 60.8, 48.5, '2023-09-12', '2023-12-20', 1),
 (36, 'liviana', 8, 55.35, 50, '2023-09-13', '2023-11-24', 1),
 (37, 'menor', 16, 69, 58.5, '2023-09-12', '2023-12-18', 1),
-(38, 'super', 18, 85.3, 79, '2023-09-12', '2023-11-14', 1);
+(38, 'super', 18, 85.3, 79, '2023-09-12', '2023-11-14', 1),
+(39, 'extrema', 29, 89, 78, '2023-08-29', '2023-11-23', 1);
 
 -- --------------------------------------------------------
 
@@ -448,7 +448,9 @@ INSERT INTO `dietacomida` (`idDietaComida`, `idComida`, `idDieta`, `horario`, `p
 (32, 1, 1, 'DESAYUNO', 4),
 (33, 1, 1, 'CENA', 8),
 (34, 1, 1, 'SNACK', 12),
-(35, 2, 30, 'CENA', 200);
+(35, 2, 30, 'CENA', 100),
+(36, 3, 19, 'MERIENDA', 8),
+(39, 2, 2, 'CENA', 120);
 
 -- --------------------------------------------------------
 
@@ -472,14 +474,10 @@ INSERT INTO `historial` (`IdHistorial`, `idPaciente`, `peso`, `fechaConsulta`) V
 (3, 6, 110.6, '2023-07-18'),
 (4, 6, 105.32, '2023-08-14'),
 (5, 6, 101.6, '2023-09-18'),
-(6, 6, 98.7, '2023-10-11'),
-(7, 6, 97.8, '2023-10-11'),
 (8, 6, 97.8, '2023-10-11'),
-(9, 6, 96.2, '2023-10-16'),
 (10, 6, 95.2, '2023-10-16'),
 (12, 1, 80.5, '2023-10-16'),
 (13, 1, 84.3, '2023-08-21'),
-(14, 1, 84.3, '2023-08-21'),
 (15, 2, 140.5, '2023-08-23'),
 (16, 1, 84.3, '2023-09-21'),
 (19, 2, 132.85, '2023-09-21'),
@@ -508,7 +506,10 @@ INSERT INTO `historial` (`IdHistorial`, `idPaciente`, `peso`, `fechaConsulta`) V
 (44, 16, 69, '2023-09-12'),
 (45, 16, 65.4, '2023-10-19'),
 (46, 18, 85.3, '2023-09-12'),
-(47, 18, 82.5, '2023-10-20');
+(47, 18, 82.5, '2023-10-20'),
+(48, 6, 92.7, '2023-10-24'),
+(49, 3, 129.3, '2023-10-24'),
+(50, 7, 51.5, '2023-10-24');
 
 -- --------------------------------------------------------
 
@@ -533,11 +534,11 @@ CREATE TABLE `paciente` (
 INSERT INTO `paciente` (`idPaciente`, `dni`, `nombre`, `domicilio`, `telefono`, `pesoActual`, `estado`) VALUES
 (1, 22221111, 'Gomez Pablo', '2332 Colon', '456-123', 80.2, 1),
 (2, 11113333, 'Pabla Gomes', 'Union 562', '123-564', 93.5, 1),
-(3, 11114444, 'Paola Guzman', 'Pellegrini 456', '423-456', 132.58, 1),
+(3, 11114444, 'Paola Guzman', 'Pellegrini 456', '423-454', 129.3, 1),
 (4, 11115555, 'Paulo Salas', 'Campos 458', '123-456', 72.4, 1),
 (5, 11116666, 'Paula Diaz', 'Belgrano 123', '456-456', 60.8, 1),
-(6, 11117777, 'Pedro Perez', 'Talleres 789', '123-456', 95.2, 1),
-(7, 11118888, 'Adrian Gil', 'Maipu 471', '123-741', 88.63, 1),
+(6, 11117777, 'Pedro Perez', 'Talleres 789', '123-456', 92.7, 1),
+(7, 11118888, 'Adrian Gil', 'Maipu 471', '123-741', 51.5, 1),
 (8, 11119999, 'Adriana Ramos', 'Mitre 1447', '415-456', 52.9, 1),
 (9, 11110000, 'Carlos Robledo', 'Pasco 1587', '478-456', 97.8, 1),
 (10, 11111111, 'Carla Funes', 'Sarmiento 569', '100-456', 75.8, 1),
@@ -550,7 +551,16 @@ INSERT INTO `paciente` (`idPaciente`, `dni`, `nombre`, `domicilio`, `telefono`, 
 (17, 22228888, 'Dora La Exploradora', 'Vera 490', '555-6666', 56, 0),
 (18, 22229999, 'Victor Paz', 'San Luis 2332', '266-512', 82.5, 1),
 (19, 88887777, 'Paco Perez', 'La paz 35', '456-123', 80.3, 1),
-(20, 33330000, 'Marco Ruben', 'Gascon 562', '123-789', 74, 1);
+(20, 33330000, 'Marco Ruben', 'Gascon 562', '123-789', 74, 1),
+(21, 88888888, 'Diego Mendez', 'Viamonte 35', '123-4545', 85.3, 1),
+(22, 45454545, 'Federico Fas', 'Diaz 33', '34-456123', 64.5, 1),
+(23, 42424242, 'Carlos Gardel', 'San Martin 467', '145-45642', 100, 1),
+(24, 56565656, 'Dalia Perez', 'Pampa 28', '123-123123', 77.2, 1),
+(25, 12121212, 'Adela en el Carrusel', 'Frias 23', '45-123123', 56, 1),
+(26, 54545454, 'ddada', '**/', '12', 78, 1),
+(27, 45464748, 'ggf', 'fjgf', '455', 52, 1),
+(28, 4545777, 'gfgfg', 'hdhfdh', '444', 55, 1),
+(29, 55556666, 'Lisandro Lopez', 'funes 34', '45666', 89, 1);
 
 --
 -- Índices para tablas volcadas
@@ -605,31 +615,31 @@ ALTER TABLE `paciente`
 -- AUTO_INCREMENT de la tabla `comida`
 --
 ALTER TABLE `comida`
-  MODIFY `idComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `dieta`
 --
 ALTER TABLE `dieta`
-  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `dietacomida`
 --
 ALTER TABLE `dietacomida`
-  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `IdHistorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `IdHistorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas
