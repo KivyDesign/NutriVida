@@ -365,7 +365,7 @@ public class HistorialView extends javax.swing.JFrame {
                 historialData.guardarHistorial(hist);
                 pacData.modificarPesoActual(historiaDieta.IdPac, Double.parseDouble(jtPesoRegistrado.getText()));
                 MensajeSB(1, "Consulta guardada con exito");
-                jtPesoRegistrado.setBorder(text_border);
+                jtPesoRegistrado.setBorder(text_border_disable);
                 jbGuardar.setEnabled(false);
                 borrarFilasTabla();
                 cargarHistorial(historiaDieta.IdPac);
