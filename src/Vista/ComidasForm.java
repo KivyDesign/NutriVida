@@ -540,18 +540,18 @@ public class ComidasForm extends javax.swing.JFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
 //        try {
-            Comida comida = new Comida(jtfNombre.getText(),
-                    jtfDetalle.getText(),
-                    Integer.parseInt(jlCaloriasTXT.getText()),
-                    true);
-            if(comData.buscarComidaPorNombre(comida.getNombre())==null){
-                comData.guardarComida(comida);
-                LimpiarCampos();
-                MensajeSB(1, "Comida creada");
-            }else{
-                MensajeSB(2,"ERROR: la comida ingresada ya existe");
-            }
-            
+        Comida comida = new Comida(jtfNombre.getText(),
+                jtfDetalle.getText(),
+                Integer.parseInt(jlCaloriasTXT.getText()),
+                true);
+        if (comData.buscarComidaPorNombre(comida.getNombre()) == null) {
+            comData.guardarComida(comida);
+            LimpiarCampos();
+            MensajeSB(1, "Comida creada");
+        } else {
+            MensajeSB(2, "ERROR: la comida ingresada ya existe");
+        }
+
 //        } catch (NumberFormatException ex) {
 //            MensajeSB(2, "El campo Calorías debe llenarse con un número");
 //            jtfCalorias.setBorder(text_border_rojo);
@@ -564,11 +564,12 @@ public class ComidasForm extends javax.swing.JFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         Comida comida = new Comida(Integer.parseInt(jtfID.getText()), jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jlCaloriasTXT.getText()), jcbEstado.isSelected());
         comData.modificarComida(comida);
+        LimpiarCampos();
         MensajeSB(1, "Comida guardada");
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // buscarComidaPorNombre
+            // buscarComidaPorNombre
         try {
             // Busco comida por nombre
             Comida comida = comData.buscarComidaPorNombre(jtfNombre.getText());
@@ -601,6 +602,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     jlEstado.setEnabled(true);
                     jcbEstado.setForeground(Color.WHITE);
 
+                    jtfNombre.addFocusListener(fl1);
                     jbGuardar.setEnabled(true);
                     jbNuevo.setEnabled(false);
                     e = false;
@@ -618,12 +620,12 @@ public class ComidasForm extends javax.swing.JFrame {
         try {
             Comida com = comData.buscarComidaPorNombre(jtfNombre.getText());
             if (com != null) {
-                if(dietaCom.buscarDietaComidaPorId(com.getIdComida()) == null){
-                comData.eliminarComida(com.getIdComida());
-                jcbEstado.setSelected(false);
-                LimpiarCampos();
-                MensajeSB(1, "Comida eliminada con éxito! Busque por Nombre o cargue una nueva Comida");
-                }else{
+                if (dietaCom.buscarDietaComidaPorId(com.getIdComida()) == null) {
+                    comData.eliminarComida(com.getIdComida());
+                    jcbEstado.setSelected(false);
+                    LimpiarCampos();
+                    MensajeSB(1, "Comida eliminada con éxito! Busque por Nombre o cargue una nueva Comida");
+                } else {
                     MensajeSB(2, "Error: la Comida se encuentra vinculada en la tabla DietaComida");
                 }
             } else {
@@ -791,6 +793,8 @@ public class ComidasForm extends javax.swing.JFrame {
     }
 
     public void LimpiarCampos() {
+        jtfNombre.requestFocus();
+
         jtfID.setText("");
         jtfNombre.setText("");
         jtfDetalle.setText("");
@@ -800,7 +804,7 @@ public class ComidasForm extends javax.swing.JFrame {
         jcbEstado.setEnabled(false);
         jlEstado.setEnabled(false);
         jcbEstado.setForeground(Color.GRAY);
-        
+
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
         jbBuscar.setEnabled(false);
