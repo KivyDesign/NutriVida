@@ -603,6 +603,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     jcbEstado.setForeground(Color.WHITE);
 
                     jtfNombre.addFocusListener(fl1);
+                    jbEliminar.setEnabled(false);
                     jbGuardar.setEnabled(true);
                     jbNuevo.setEnabled(false);
                     e = false;
