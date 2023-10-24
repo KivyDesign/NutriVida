@@ -22,8 +22,17 @@ public class CaloriasForm extends javax.swing.JFrame {
     private CaloriasData calData;
 
     // Para el modelo de la tabla
-    private DefaultTableModel modelo;
-    private DefaultTableModel modeloGrupoAlimenticio;
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
+    
+    private DefaultTableModel modeloGrupoAlimenticio = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
 
     private ArrayList<Calorias> listarCalorias;
 
