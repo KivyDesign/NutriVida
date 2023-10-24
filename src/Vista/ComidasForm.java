@@ -569,7 +569,7 @@ public class ComidasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-            // buscarComidaPorNombre
+        // buscarComidaPorNombre
         try {
             // Busco comida por nombre
             Comida comida = comData.buscarComidaPorNombre(jtfNombre.getText());
@@ -609,9 +609,20 @@ public class ComidasForm extends javax.swing.JFrame {
                     e = false;
                 }
             } else {
-                MensajeSB(2, "La comida no existe en la base de datos");
-                jtfNombre.requestFocus();
-                jtfNombre.selectAll();
+                if (jtfNombre.getText().equalsIgnoreCase("")) {
+                    jtfNombre.setBorder(text_border);
+                    jtfNombre.requestFocus();
+                    MensajeSB(2, "El campo Nombre debe llenarse");
+                } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
+                    jtfNombre.setBorder(text_border_rojo);
+                    jtfNombre.requestFocus();
+                    jtfNombre.selectAll();
+                    MensajeSB(2, "El campo Nombre debe llenarse solo con letras");
+                } else {
+                    MensajeSB(2, "La comida no existe en la base de datos");
+                    jtfNombre.requestFocus();
+                    jtfNombre.selectAll();
+                }
             }
         } catch (NumberFormatException ex) {
         }
@@ -825,16 +836,10 @@ public class ComidasForm extends javax.swing.JFrame {
         }
     }
 
-//ACA ARRANCA
     FocusListener fl1 = new FocusListener() {
         @Override
         public void focusGained(FocusEvent fe) {
             jtfDetalle.removeFocusListener(fl2);
-//            jtfCalorias.removeFocusListener(fl3);
-//                jbBuscar.setEnabled(false);
-//                jbNuevo.setEnabled(false);
-//                jbGuardar.setEnabled(false);
-//                jbEliminar.setEnabled(false);
         }
 
         @Override
@@ -927,7 +932,6 @@ public class ComidasForm extends javax.swing.JFrame {
 //            }
 //        }
 //    };
-
     public void habilitarBoton() {
         if (e == true) {
 //            if (jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty() || jtfCalorias.getText().isEmpty()) {
