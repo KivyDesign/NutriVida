@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
 import Controlador.ComidaData;
@@ -13,12 +8,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author javier
- */
 public class AlimentosForm extends javax.swing.JFrame {
-    
+
     private ComidaData comData;
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int fila, int columna) {
@@ -26,12 +17,9 @@ public class AlimentosForm extends javax.swing.JFrame {
         }
     };
 
-    /**
-     * Creates new form AlimentosForm
-     */
     public AlimentosForm() {
         initComponents();
-        
+
         comData = new ComidaData();
 
         // =====================================================================
@@ -52,7 +40,7 @@ public class AlimentosForm extends javax.swing.JFrame {
 
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
-        
+
         MensajeSB(1, "Ingrese un Limite Mínimo y Máximo de Calorías para el filtrado de Comidas");
         armarCabeceraDeLaTabla();
         jtComidas.getTableHeader().setReorderingAllowed(false);
@@ -340,16 +328,14 @@ public class AlimentosForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfLimiteMaxKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                // Por ahora solo cierro este form. Ampliar para ocultar el form actual
+        // Por ahora solo cierro este form. Ampliar para ocultar el form actual
         // y mostrar el form del menu en su lugar
-//        this.dispose();
 
-        // Instancio el form de menu y lo hago visible mientras oculto el
-        // form con dietas
+        // Instancio el form de ComidasForm y lo hago visible mientras oculto el
+        // form con AlimentosForm
         ComidasForm comidasForm = new ComidasForm();
         comidasForm.setVisible(true);
         this.setVisible(false);
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -426,11 +412,11 @@ public class AlimentosForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-    
+
     public void borrarFilasTabla() {
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
-            
+
             if (modelo.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modelo.removeRow(i);
@@ -438,24 +424,24 @@ public class AlimentosForm extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void armarCabeceraDeLaTabla() {
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Detalle");
         modelo.addColumn("Calorías");
-        
+
         jtComidas.setModel(modelo);
-        
+
         jtComidas.getColumnModel().getColumn(0).setPreferredWidth(10);
         jtComidas.getColumnModel().getColumn(1).setPreferredWidth(50);
         jtComidas.getColumnModel().getColumn(2).setPreferredWidth(150);
         jtComidas.getColumnModel().getColumn(3).setPreferredWidth(50);
     }
-    
+
     public void cargarComidas() {
         borrarFilasTabla();
-        
+
         ArrayList<Comida> lista = comData.listarComidas();
         for (Comida comida : lista) {
             Object[] objComida = new Object[]{comida.getIdComida(), comida.getNombre(), comida.getDetalle(), comida.getCalorias()};
