@@ -223,7 +223,8 @@ public class DetalleDieta extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(31, 75, 128));
 
         jbAgregar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jbAgregar.setText("Agregar");
+        jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/2-32x32.png"))); // NOI18N
+        jbAgregar.setText(" Agregar");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarActionPerformed(evt);
@@ -232,7 +233,7 @@ public class DetalleDieta extends javax.swing.JFrame {
 
         jbComidas.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jbComidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/5-32x32.png"))); // NOI18N
-        jbComidas.setText("Salir");
+        jbComidas.setText(" Salir");
         jbComidas.setActionCommand(" Salir");
         jbComidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +251,8 @@ public class DetalleDieta extends javax.swing.JFrame {
         });
 
         jbModificar.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        jbModificar.setText("Modificar");
+        jbModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/3-32x32.png"))); // NOI18N
+        jbModificar.setText(" Modificar");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbModificarActionPerformed(evt);
@@ -300,7 +302,7 @@ public class DetalleDieta extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Porcion en unidades:");
+        jLabel6.setText("Porción en unidades:");
 
         jtPorcion.setBackground(new java.awt.Color(21, 65, 118));
         jtPorcion.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
