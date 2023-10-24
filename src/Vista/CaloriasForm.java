@@ -228,7 +228,6 @@ public class CaloriasForm extends javax.swing.JFrame {
         if (matcher.find()) {
             // Coincidió => obtener el valor del grupo 1
             String idGrupoAlimenticio = matcher.group(1);
-//            System.out.println("idGrupoAlimenticio: " + idGrupoAlimenticio);
             // Aqui intento buscar y cargar los datos segun lo que se seleccione
             // en el ComboBox
             cargarTabla(Integer.parseInt(idGrupoAlimenticio));
@@ -237,48 +236,6 @@ public class CaloriasForm extends javax.swing.JFrame {
             System.out.println("No encontre el idGrupoAlimenticio");
         }
     }
-
-//    public void cargarCaloriaTF() {
-////        // Aqui según lo que encuentre, llamo al metodo con el DNI para que
-////        // busque y actualice los TextFields
-////        
-////        // Busco la caloria por el DNI
-////        Calorias caloria = calData.buscarCaloriaPorDni(Integer.parseInt(jtfDNI.getText()));
-////
-////        // Busco si el caloria no esta vacio
-////        jtfApellido.setText(caloria.getApellido());
-////        jtfNombre.setText(caloria.getNombre());
-////        jdcFechaNacimiento.setDate(Date.from(caloria.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-////        if (caloria.isEstado() == true) {
-////            jrbEstado.setSelected(true);
-////            // Existen otras formas tanto de colocar el texto en un RadioButton
-////            // como de configurar si este estará seleccionado por defecto
-////            // o el color del texto
-////            jrbEstado.setText("Activo");
-////            jrbEstado.setForeground(Color.white);
-////        } else if (caloria.isEstado() == false) {
-////            jrbEstado.setSelected(false);
-////            jrbEstado.setText("Inactivo");
-////            jrbEstado.setForeground(Color.gray);
-////        }
-////        seleccionarItemComboBox(Integer.parseInt(jtfDNI.getText()));
-////        
-////        // Prueba de concepto StatusBar ----------------------------------------
-////        mensajeSB(1, "El DNI del Caloria se ha podido cargar con exito");
-////        // ---------------------------------------------------------------------
-//    }
-
-//    public void cargarCamposjtCaloriasSeleccion(int obtengoID) {
-////        // Busco la caloria por el Grupo alimenticio que es el ID que recibi
-////        // y cargo la tabla
-////        Calorias calorias = calData.buscarCaloriasPorId(obtengoID);
-////
-////        // Verifico si caloria no esta vacio
-////        if (calorias != null) {
-//////            jtfDNI.setText(String.valueOf(calorias.getDni()));
-//////            jtfNombre.setText(calorias.getNombre());
-////        }
-//    }
 
     public void borrarFilasTabla() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
@@ -327,36 +284,6 @@ public class CaloriasForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
-
-//    public void seleccionarItemComboBox(int DNI) {
-////        // Aqui recibo un DNI, lo busco en la lista de calorias agregados al
-////        // ComboBox y averigua su numero de item para marcarlo como
-////        // seleccionado
-////        System.out.println("DNI: " + DNI);
-////
-////        // Cuantos items hay en el ComboBox?
-//////        int itemsEnElComboBox = jcbCargarGrupoAlimenticio.getItemCount();
-//////        System.out.println("Items en el ComboBox: " + itemsEnElComboBox);
-////        // Recorro la lista de calorias y voy leyendo cada item en el ComboBox
-////        calData.listarCalorias().forEach(item -> {
-////            if (DNI == item.getDni()) {
-//////                int obtengoID = item.getIdCaloria();
-//////                System.out.println(item.getIdCaloria());
-////                // Aqui intento buscar y cargar los datos segun lo que se
-////                // seleccione en el ComboBox
-//////                cargarCampos(obtengoID);
-////
-////                // ERROR: getSelectedIndex() solo devuelve la opcion que este
-////                // seleccionada
-////                seleccionFilaEnLaTabla = jcbCargarGrupoAlimenticio.getSelectedIndex();
-//////                return;
-////            }
-////        });
-////
-////        // Pero como ejemplo, lo asignamos a:
-////        jcbCargarGrupoAlimenticio.setSelectedIndex(seleccionFilaEnLaTabla);
-//    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -676,23 +603,11 @@ public class CaloriasForm extends javax.swing.JFrame {
     private void jtCaloriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCaloriasMouseClicked
         // Obtenemos el número de fila seleccionada al realizar un click en la tabla
         seleccionFilaEnLaTabla = jtCalorias.rowAtPoint(evt.getPoint());
-        System.out.println("Seleccion Fila En La Tabla: " + seleccionFilaEnLaTabla);
+//        System.out.println("Seleccion Fila En La Tabla: " + seleccionFilaEnLaTabla);
 
         // Lo convierto de Object a int
-        int valorID = (Integer) jtCalorias.getValueAt(seleccionFilaEnLaTabla, 0);
-        System.out.println("Valor ID: " + valorID);
-
-////        // Aquí intento buscar y cargar los datos según lo que se seleccione
-////        // en la tabla
-//////        cargarCamposjtCaloriasSeleccion(valorID);
-//
-//        // Tratare de hacer que se deseleccione la fila de la tabla o en el
-//        // mejor de los casos que quede resaltada la fila que corresponda
-//        // según cambien los datos con el ComboBox o el botón Buscar
-////        jtCalorias.setSelectionForeground(Color.black);
-////        jtCalorias.setSelectionBackground(Color.white);
-//        // Pero como ejemplo, lo asignamos a: jtCaloriasSeleccion
-////        jcbCargarAlumnos.setSelectedIndex(seleccionFilaEnLaTabla);
+//        int valorID = (Integer) jtCalorias.getValueAt(seleccionFilaEnLaTabla, 0);
+//        System.out.println("Valor ID: " + valorID);
     }//GEN-LAST:event_jtCaloriasMouseClicked
 
     private void jbLimpiarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarSeleccionActionPerformed
@@ -745,8 +660,6 @@ public class CaloriasForm extends javax.swing.JFrame {
         //
         // Instancio el objeto caloria de tipo Calorias y le cargo los datos
         // del label jlTotalCalorias de CaloriasForm
-//        System.out.println(jlTotalCalorias.getText());
-//        System.out.println(Integer.parseInt(jlTotalCalorias.getText()));
         caloriaX = new Calorias(
                 Integer.parseInt(jlTotalCalorias.getText())
         );
@@ -769,41 +682,6 @@ public class CaloriasForm extends javax.swing.JFrame {
         }
         return false;
     }
-
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(CaloriasForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new CaloriasForm().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

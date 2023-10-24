@@ -409,7 +409,7 @@ public class NutriVidaForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbPacientesActionPerformed
 
     private void jbComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComidasActionPerformed
-        // Instancio el form de pacientes y lo hago visible mientras oculto el
+        // Instancio el form de comidas y lo hago visible mientras oculto el
         // form con el menu
         ComidasForm comiForm = new ComidasForm();
         comiForm.setVisible(true);
@@ -417,7 +417,7 @@ public class NutriVidaForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbComidasActionPerformed
 
     private void jbDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDietasActionPerformed
-        // Instancio el form de pacientes y lo hago visible mientras oculto el
+        // Instancio el form de dietas y lo hago visible mientras oculto el
         // form con el menu
         ControlDietasForm dietForm = new ControlDietasForm();
         dietForm.setVisible(true);
