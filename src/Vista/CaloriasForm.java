@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
 import Controlador.CaloriasData;
 import Controlador.Conexion;
 import Modelo.Calorias;
-//import static Vista.ComidasForm.jtfCalorias;
 import java.awt.Color;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -16,10 +10,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author javier
- */
 public class CaloriasForm extends javax.swing.JFrame {
     
     // Declaraciones privadas de objetos utilizados para intercambiar ----------
@@ -103,7 +93,6 @@ public class CaloriasForm extends javax.swing.JFrame {
     private void mostrarDatos() {
         // Y le cargo los datos que estan en los textFields de la ComidasForm
         jlTotalCalorias.setText(caloriaX.getCalorias() + "");
-//        System.out.println(caloriaX.toString());
     }
 
     // Declaro al metodo getCalorias como publico para poder accederlo desde
@@ -240,47 +229,47 @@ public class CaloriasForm extends javax.swing.JFrame {
         }
     }
 
-    public void cargarCaloriaTF() {
-//        // Aqui según lo que encuentre, llamo al metodo con el DNI para que
-//        // busque y actualice los TextFields
-//        
-//        // Busco la caloria por el DNI
-//        Calorias caloria = calData.buscarCaloriaPorDni(Integer.parseInt(jtfDNI.getText()));
-//
-//        // Busco si el caloria no esta vacio
-//        jtfApellido.setText(caloria.getApellido());
-//        jtfNombre.setText(caloria.getNombre());
-//        jdcFechaNacimiento.setDate(Date.from(caloria.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-//        if (caloria.isEstado() == true) {
-//            jrbEstado.setSelected(true);
-//            // Existen otras formas tanto de colocar el texto en un RadioButton
-//            // como de configurar si este estará seleccionado por defecto
-//            // o el color del texto
-//            jrbEstado.setText("Activo");
-//            jrbEstado.setForeground(Color.white);
-//        } else if (caloria.isEstado() == false) {
-//            jrbEstado.setSelected(false);
-//            jrbEstado.setText("Inactivo");
-//            jrbEstado.setForeground(Color.gray);
-//        }
-//        seleccionarItemComboBox(Integer.parseInt(jtfDNI.getText()));
-//        
-//        // Prueba de concepto StatusBar ----------------------------------------
-//        mensajeSB(1, "El DNI del Caloria se ha podido cargar con exito");
-//        // ---------------------------------------------------------------------
-    }
+//    public void cargarCaloriaTF() {
+////        // Aqui según lo que encuentre, llamo al metodo con el DNI para que
+////        // busque y actualice los TextFields
+////        
+////        // Busco la caloria por el DNI
+////        Calorias caloria = calData.buscarCaloriaPorDni(Integer.parseInt(jtfDNI.getText()));
+////
+////        // Busco si el caloria no esta vacio
+////        jtfApellido.setText(caloria.getApellido());
+////        jtfNombre.setText(caloria.getNombre());
+////        jdcFechaNacimiento.setDate(Date.from(caloria.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+////        if (caloria.isEstado() == true) {
+////            jrbEstado.setSelected(true);
+////            // Existen otras formas tanto de colocar el texto en un RadioButton
+////            // como de configurar si este estará seleccionado por defecto
+////            // o el color del texto
+////            jrbEstado.setText("Activo");
+////            jrbEstado.setForeground(Color.white);
+////        } else if (caloria.isEstado() == false) {
+////            jrbEstado.setSelected(false);
+////            jrbEstado.setText("Inactivo");
+////            jrbEstado.setForeground(Color.gray);
+////        }
+////        seleccionarItemComboBox(Integer.parseInt(jtfDNI.getText()));
+////        
+////        // Prueba de concepto StatusBar ----------------------------------------
+////        mensajeSB(1, "El DNI del Caloria se ha podido cargar con exito");
+////        // ---------------------------------------------------------------------
+//    }
 
-    public void cargarCamposjtCaloriasSeleccion(int obtengoID) {
-//        // Busco la caloria por el Grupo alimenticio que es el ID que recibi
-//        // y cargo la tabla
-//        Calorias calorias = calData.buscarCaloriasPorId(obtengoID);
-//
-//        // Verifico si caloria no esta vacio
-//        if (calorias != null) {
-////            jtfDNI.setText(String.valueOf(calorias.getDni()));
-////            jtfNombre.setText(calorias.getNombre());
-//        }
-    }
+//    public void cargarCamposjtCaloriasSeleccion(int obtengoID) {
+////        // Busco la caloria por el Grupo alimenticio que es el ID que recibi
+////        // y cargo la tabla
+////        Calorias calorias = calData.buscarCaloriasPorId(obtengoID);
+////
+////        // Verifico si caloria no esta vacio
+////        if (calorias != null) {
+//////            jtfDNI.setText(String.valueOf(calorias.getDni()));
+//////            jtfNombre.setText(calorias.getNombre());
+////        }
+//    }
 
     public void borrarFilasTabla() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
@@ -330,34 +319,34 @@ public class CaloriasForm extends javax.swing.JFrame {
         jlMensajeSB.setText(mensaje);
     }
 
-    public void seleccionarItemComboBox(int DNI) {
-//        // Aqui recibo un DNI, lo busco en la lista de calorias agregados al
-//        // ComboBox y averigua su numero de item para marcarlo como
-//        // seleccionado
-//        System.out.println("DNI: " + DNI);
-//
-//        // Cuantos items hay en el ComboBox?
-////        int itemsEnElComboBox = jcbCargarGrupoAlimenticio.getItemCount();
-////        System.out.println("Items en el ComboBox: " + itemsEnElComboBox);
-//        // Recorro la lista de calorias y voy leyendo cada item en el ComboBox
-//        calData.listarCalorias().forEach(item -> {
-//            if (DNI == item.getDni()) {
-////                int obtengoID = item.getIdCaloria();
-////                System.out.println(item.getIdCaloria());
-//                // Aqui intento buscar y cargar los datos segun lo que se
-//                // seleccione en el ComboBox
-////                cargarCampos(obtengoID);
-//
-//                // ERROR: getSelectedIndex() solo devuelve la opcion que este
-//                // seleccionada
-//                seleccionFilaEnLaTabla = jcbCargarGrupoAlimenticio.getSelectedIndex();
-////                return;
-//            }
-//        });
-//
-//        // Pero como ejemplo, lo asignamos a:
-//        jcbCargarGrupoAlimenticio.setSelectedIndex(seleccionFilaEnLaTabla);
-    }
+//    public void seleccionarItemComboBox(int DNI) {
+////        // Aqui recibo un DNI, lo busco en la lista de calorias agregados al
+////        // ComboBox y averigua su numero de item para marcarlo como
+////        // seleccionado
+////        System.out.println("DNI: " + DNI);
+////
+////        // Cuantos items hay en el ComboBox?
+//////        int itemsEnElComboBox = jcbCargarGrupoAlimenticio.getItemCount();
+//////        System.out.println("Items en el ComboBox: " + itemsEnElComboBox);
+////        // Recorro la lista de calorias y voy leyendo cada item en el ComboBox
+////        calData.listarCalorias().forEach(item -> {
+////            if (DNI == item.getDni()) {
+//////                int obtengoID = item.getIdCaloria();
+//////                System.out.println(item.getIdCaloria());
+////                // Aqui intento buscar y cargar los datos segun lo que se
+////                // seleccione en el ComboBox
+//////                cargarCampos(obtengoID);
+////
+////                // ERROR: getSelectedIndex() solo devuelve la opcion que este
+////                // seleccionada
+////                seleccionFilaEnLaTabla = jcbCargarGrupoAlimenticio.getSelectedIndex();
+//////                return;
+////            }
+////        });
+////
+////        // Pero como ejemplo, lo asignamos a:
+////        jcbCargarGrupoAlimenticio.setSelectedIndex(seleccionFilaEnLaTabla);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -684,17 +673,17 @@ public class CaloriasForm extends javax.swing.JFrame {
         int valorID = (Integer) jtCalorias.getValueAt(seleccionFilaEnLaTabla, 0);
         System.out.println("Valor ID: " + valorID);
 
-        // Aquí intento buscar y cargar los datos según lo que se seleccione
-        // en la tabla
-        cargarCamposjtCaloriasSeleccion(valorID);
-
-        // Tratare de hacer que se deseleccione la fila de la tabla o en el
-        // mejor de los casos que quede resaltada la fila que corresponda
-        // según cambien los datos con el ComboBox o el botón Buscar
-//        jtCalorias.setSelectionForeground(Color.black);
-//        jtCalorias.setSelectionBackground(Color.white);
-        // Pero como ejemplo, lo asignamos a: jtCaloriasSeleccion
-//        jcbCargarAlumnos.setSelectedIndex(seleccionFilaEnLaTabla);
+////        // Aquí intento buscar y cargar los datos según lo que se seleccione
+////        // en la tabla
+//////        cargarCamposjtCaloriasSeleccion(valorID);
+//
+//        // Tratare de hacer que se deseleccione la fila de la tabla o en el
+//        // mejor de los casos que quede resaltada la fila que corresponda
+//        // según cambien los datos con el ComboBox o el botón Buscar
+////        jtCalorias.setSelectionForeground(Color.black);
+////        jtCalorias.setSelectionBackground(Color.white);
+//        // Pero como ejemplo, lo asignamos a: jtCaloriasSeleccion
+////        jcbCargarAlumnos.setSelectedIndex(seleccionFilaEnLaTabla);
     }//GEN-LAST:event_jtCaloriasMouseClicked
 
     private void jbLimpiarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarSeleccionActionPerformed
