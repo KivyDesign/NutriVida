@@ -589,6 +589,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     jbEliminar.setEnabled(true);
                     jbNuevo.setEnabled(false);
                     e = false;
+                    habilitarCalcularCalorias();
                     // CUANDO AGREGO ESTE FOCUSLISTEENER YA NO TENGO EL PROBLEMA QUE APARECE CUANDO
 // LE DOY BUSCAR Y PONGO UN NOMBRE INCORRECTO:                   
                     jtfNombre.addFocusListener(fl1);
@@ -599,6 +600,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     jcbEstado.setEnabled(true);
                     jlEstado.setEnabled(true);
                     jcbEstado.setForeground(Color.WHITE);
+                    habilitarCalcularCalorias();
 
                     jtfNombre.addFocusListener(fl1);
                     jbEliminar.setEnabled(false);
@@ -668,10 +670,12 @@ public class ComidasForm extends javax.swing.JFrame {
     private void jtfNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreKeyReleased
         jbBuscar.setEnabled(true);
         habilitarBoton();
+        habilitarCalcularCalorias();
     }//GEN-LAST:event_jtfNombreKeyReleased
 
     private void jtfDetalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDetalleKeyReleased
         habilitarBoton();
+        habilitarCalcularCalorias();
     }//GEN-LAST:event_jtfDetalleKeyReleased
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
@@ -796,34 +800,34 @@ public class ComidasForm extends javax.swing.JFrame {
     }
 
     public void LimpiarCampos() {
-        jtfNombre.requestFocus();
-
-        jtfID.setText("");
-        jtfNombre.setText("");
-        jtfDetalle.setText("");
-        jlCaloriasTXT.setText("0");
+//        jtfNombre.requestFocus();
+//
+//        jtfID.setText("");
+//        jtfNombre.setText("");
+//        jtfDetalle.setText("");
+//        jlCaloriasTXT.setText("0");
+////        jcbEstado.setSelected(false);
 //        jcbEstado.setSelected(false);
-        jcbEstado.setSelected(false);
-        jcbEstado.setEnabled(false);
-        jlEstado.setEnabled(false);
-        jcbEstado.setForeground(Color.GRAY);
-
-        jbGuardar.setEnabled(false);
-        jbEliminar.setEnabled(false);
-        jbBuscar.setEnabled(false);
-        jbNuevo.setEnabled(false);
-        e = true;
-        MensajeSB(1, "");
+//        jcbEstado.setEnabled(false);
+//        jlEstado.setEnabled(false);
+//        jcbEstado.setForeground(Color.GRAY);
+//
+//        jbGuardar.setEnabled(false);
+//        jbEliminar.setEnabled(false);
+//        jbBuscar.setEnabled(false);
+//        jbNuevo.setEnabled(false);
+//        e = true;
+//        MensajeSB(1, "");
+        ComidasForm comForm = new ComidasForm();
+        comForm.setVisible(true);
+        this.setVisible(false);
     }
 
-    public void estadojbNuevo() {
-        if (e == true) {
-//            if ((jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty() || jtfCalorias.getText().isEmpty())) {
-            if ((jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty())) {
-                jbNuevo.setEnabled(false);
-            } else {
-                jbNuevo.setEnabled(true);
-            }
+    public void habilitarCalcularCalorias() {
+        if ((jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty())) {
+            jbCalcularCalorias.setEnabled(false);
+        } else {
+            jbCalcularCalorias.setEnabled(true);
         }
     }
 
@@ -949,10 +953,10 @@ public class ComidasForm extends javax.swing.JFrame {
         if (e == true) {
             if (jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty()) {
                 jbNuevo.setEnabled(false);
-                jbCalcularCalorias.setEnabled(false);
+//                jbCalcularCalorias.setEnabled(false);
             } else {
                 jbNuevo.setEnabled(true);
-                jbCalcularCalorias.setEnabled(true);
+//                jbCalcularCalorias.setEnabled(true);
             }
         }
     }
@@ -983,6 +987,6 @@ public class ComidasForm extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     // CUANDO PONES TILDE EN EL NOMBRE YA NO TE LO TOMA COMO UNA LETRA!! VER ESO
 }
