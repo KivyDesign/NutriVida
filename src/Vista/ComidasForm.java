@@ -548,8 +548,8 @@ public class ComidasForm extends javax.swing.JFrame {
                     true);
             if (comData.buscarComidaPorNombre(comida.getNombre()) == null) {
                 comData.guardarComida(comida);
-                LimpiarCampos();
                 MensajeSB(1, "Comida creada");
+                LimpiarCampos();
             } else {
                 MensajeSB(2, "ERROR: la comida ingresada ya existe");
             }
@@ -561,8 +561,8 @@ public class ComidasForm extends javax.swing.JFrame {
         if (verificarNombre() == true && verificarDetalle() == true) {
             Comida comida = new Comida(Integer.parseInt(jtfID.getText()), jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jlCaloriasTXT.getText()), jcbEstado.isSelected());
             comData.modificarComida(comida);
-            LimpiarCampos();
             MensajeSB(1, "Comida guardada");
+            LimpiarCampos();
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -628,8 +628,8 @@ public class ComidasForm extends javax.swing.JFrame {
                 if (dietaCom.buscarDietaComidaPorId(com.getIdComida()) == null) {
                     comData.eliminarComida(com.getIdComida());
                     jcbEstado.setSelected(false);
-                    LimpiarCampos();
                     MensajeSB(1, "Comida eliminada con éxito! Busque por Nombre o cargue una nueva Comida");
+                    LimpiarCampos();
                 } else {
                     MensajeSB(2, "Error: la Comida se encuentra vinculada en la tabla DietaComida");
                 }
@@ -641,6 +641,7 @@ public class ComidasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        jlMensajeSB.setText("Ingrese un nombre para buscar o complete datos para una comida nueva");
         LimpiarCampos();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
@@ -826,6 +827,9 @@ public class ComidasForm extends javax.swing.JFrame {
 //        MensajeSB(1, "");
         ComidasForm comForm = new ComidasForm();
         comForm.setVisible(true);
+        comForm.jlMensajeSB.setText(this.jlMensajeSB.getText());
+        // ANDAAA SOLO TENGO QUE PROBARLO BIEN BIEN CORREJIR CUANDO LIMPIO MODIFICO HAGO UN NUEVO O ELIMINO
+        // TAMBIEN VER EL TEMA DEL JLABEL CALORIAS NO PUEDE CREAR NUEVOS O GUARDAR CAMBIOS CUANDO ESTA EN 0
         this.setVisible(false);
     }
 
