@@ -331,7 +331,7 @@ public class AlimentosForm extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Por ahora solo cierro este form. Ampliar para ocultar el form actual
         // y mostrar el form del menu en su lugar
-
+        //
         // Instancio el form de ComidasForm y lo hago visible mientras oculto el
         // form con AlimentosForm
         ComidasForm comidasForm = new ComidasForm();
