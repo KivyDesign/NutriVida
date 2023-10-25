@@ -73,6 +73,8 @@ public class ComidasForm extends javax.swing.JFrame {
         jcbEstado.setEnabled(false);
         jcbEstado.setForeground(Color.GRAY);
 
+        jbCalcularCalorias.setEnabled(false);
+
         jbBuscar.setEnabled(false);
         jbNuevo.setEnabled(false);
         jbGuardar.setEnabled(false);
@@ -539,25 +541,29 @@ public class ComidasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        Comida comida = new Comida(jtfNombre.getText(),
-                jtfDetalle.getText(),
-                Integer.parseInt(jlCaloriasTXT.getText()),
-                true);
-        if (comData.buscarComidaPorNombre(comida.getNombre()) == null) {
-            comData.guardarComida(comida);
-            LimpiarCampos();
-            MensajeSB(1, "Comida creada");
-        } else {
-            MensajeSB(2, "ERROR: la comida ingresada ya existe");
+        if (verificarNombre() == true && verificarDetalle() == true) {
+            Comida comida = new Comida(jtfNombre.getText(),
+                    jtfDetalle.getText(),
+                    Integer.parseInt(jlCaloriasTXT.getText()),
+                    true);
+            if (comData.buscarComidaPorNombre(comida.getNombre()) == null) {
+                comData.guardarComida(comida);
+                LimpiarCampos();
+                MensajeSB(1, "Comida creada");
+            } else {
+                MensajeSB(2, "ERROR: la comida ingresada ya existe");
+            }
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        Comida comida = new Comida(Integer.parseInt(jtfID.getText()), jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jlCaloriasTXT.getText()), jcbEstado.isSelected());
 
-        comData.modificarComida(comida);
-        LimpiarCampos();
-        MensajeSB(1, "Comida guardada");
+        if (verificarNombre() == true && verificarDetalle() == true) {
+            Comida comida = new Comida(Integer.parseInt(jtfID.getText()), jtfNombre.getText(), jtfDetalle.getText(), Integer.parseInt(jlCaloriasTXT.getText()), jcbEstado.isSelected());
+            comData.modificarComida(comida);
+            LimpiarCampos();
+            MensajeSB(1, "Comida guardada");
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -601,16 +607,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     e = false;
                 }
             } else {
-                if (jtfNombre.getText().equalsIgnoreCase("")) {
-                    jtfNombre.setBorder(text_border);
-                    jtfNombre.requestFocus();
-                    MensajeSB(2, "El campo Nombre debe llenarse");
-                } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
-                    jtfNombre.setBorder(text_border_rojo);
-                    jtfNombre.requestFocus();
-                    jtfNombre.selectAll();
-                    MensajeSB(2, "El campo Nombre debe llenarse solo con letras");
-                } else {
+                if (verificarNombre() == true) {
                     MensajeSB(2, "La comida no existe en la base de datos");
                     jtfNombre.requestFocus();
                     jtfNombre.selectAll();
@@ -648,21 +645,23 @@ public class ComidasForm extends javax.swing.JFrame {
         //
         // Instancio el objeto persona de tipo Calorias y le cargo los datos
         // de los textFields de ComidasForm
-        caloriaX = new Calorias(
-                Integer.parseInt(jlCaloriasTXT.getText())
-        );
-        System.out.println(caloriaX.getCalorias());
-        System.out.println(jlCaloriasTXT.getText());
+        if (verificarNombre() == true && verificarDetalle() == true) {
+            caloriaX = new Calorias(
+                    Integer.parseInt(jlCaloriasTXT.getText())
+            );
+            System.out.println(caloriaX.getCalorias());
+            System.out.println(jlCaloriasTXT.getText());
 
-        // Si la CaloriasForm ya existe, la mostramos
-        if (caloriasForm != null) {
-            caloriasForm.setVisible(true);
-        } else {
-            // Si no existe, la instanciamos y le pasamos los datos a traves
-            // del objeto de tipo caloriaX
-            caloriasForm = new CaloriasForm(caloriaX);
-            // Y luego la mostramos
-            caloriasForm.setVisible(true);
+            // Si la CaloriasForm ya existe, la mostramos
+            if (caloriasForm != null) {
+                caloriasForm.setVisible(true);
+            } else {
+                // Si no existe, la instanciamos y le pasamos los datos a traves
+                // del objeto de tipo caloriaX
+                caloriasForm = new CaloriasForm(caloriaX);
+                // Y luego la mostramos
+                caloriasForm.setVisible(true);
+            }
         }
     }//GEN-LAST:event_jbCalcularCaloriasActionPerformed
 
@@ -853,11 +852,15 @@ public class ComidasForm extends javax.swing.JFrame {
 //                jtfNombre.removeFocusListener(this);
 //
 //            }
-            if(verificarNombre(jtfNombre.getText())==true){
+            if (verificarNombre() == true) {
                 jtfNombre.setBorder(text_border_disable);
                 jtfDetalle.addFocusListener(fl2);
                 jtfNombre.removeFocusListener(this);
             }
+//                jtfNombre.requestFocus();
+//                jtfNombre.selectAll();
+//                System.out.println("algo");
+//            }
         }
     };
 
@@ -879,20 +882,29 @@ public class ComidasForm extends javax.swing.JFrame {
 // HACER METODOS PARA LA SEGURIDAD.,, EN EL FOCUS LISTENER 2 FIJARSE SI EL IF 
 //DEL EQUALS SE PUEDE METER DENTRO DEL VERIFICARNOMBRE O UTILIZAR ESE METODO
 //EN EL Fl2
-                if (jtfDetalle.getText().equalsIgnoreCase("")) {
-                    jtfDetalle.setBorder(text_border);
-                    jtfDetalle.requestFocus();
-                    MensajeSB(2, "El campo Detalle debe llenarse");
-                    jcbEstado.setEnabled(false);
-                    jtfNombre.setDisabledTextColor(Color.white);
-//                    jtfCalorias.setDisabledTextColor(Color.white);
-                } else {
-                    jtfDetalle.setBorder(text_border_disable);
-//                        estadojbNuevo();
-                    jtfNombre.addFocusListener(fl1);
-//                    jtfCalorias.addFocusListener(fl3);
-                    jtfDetalle.removeFocusListener(fl2);
-                }
+//            if (jtfDetalle.getText().equalsIgnoreCase("")) {
+//                jtfDetalle.setBorder(text_border);
+//                jtfDetalle.requestFocus();
+//                MensajeSB(2, "El campo Detalle debe llenarse");
+//                jcbEstado.setEnabled(false);
+//                jtfNombre.setDisabledTextColor(Color.white);
+////                    jtfCalorias.setDisabledTextColor(Color.white);
+//            } else {
+//                jtfDetalle.setBorder(text_border_disable);
+////                        estadojbNuevo();
+//                jtfNombre.addFocusListener(fl1);
+////                    jtfCalorias.addFocusListener(fl3);
+//                jtfDetalle.removeFocusListener(fl2);
+//            }
+////            }
+            if (verificarDetalle() == true) {
+                jtfDetalle.setBorder(text_border_disable);
+                jtfNombre.addFocusListener(fl1);
+                jtfDetalle.removeFocusListener(this);
+            }
+//                jtfDetalle.requestFocus();
+//                jtfDetalle.selectAll();
+//                System.out.println("algo detalle");
 //            }
         }
     };
@@ -935,21 +947,22 @@ public class ComidasForm extends javax.swing.JFrame {
 //    };
     public void habilitarBoton() {
         if (e == true) {
-//            if (jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty() || jtfCalorias.getText().isEmpty()) {
             if (jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty()) {
                 jbNuevo.setEnabled(false);
+                jbCalcularCalorias.setEnabled(false);
             } else {
                 jbNuevo.setEnabled(true);
+                jbCalcularCalorias.setEnabled(true);
             }
         }
     }
 
-    public boolean verificarNombre(String texto) {
-        if (texto.equalsIgnoreCase("")) {
+    public boolean verificarNombre() {
+        if (jtfNombre.getText().equalsIgnoreCase("")) {
             jtfNombre.setBorder(text_border);
             jtfNombre.requestFocus();
             MensajeSB(2, "El campo Nombre debe llenarse");
-        } else if (PruebaDeCaracteres(texto) == false) {
+        } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
             jtfNombre.setBorder(text_border_rojo);
             jtfNombre.requestFocus();
             jtfNombre.selectAll();
@@ -959,25 +972,17 @@ public class ComidasForm extends javax.swing.JFrame {
         }
         return false;
     }
-    
-//    public boolean verificarDetalle(String texto){
-//        if (texto.equalsIgnoreCase("")) {
-//                jtfNombre.setBorder(text_border);
-//                jtfNombre.requestFocus();
-//                MensajeSB(2, "El campo Nombre debe llenarse");
-//            } else {
-//                if (jtfDetalle.getText().equalsIgnoreCase("")) {
-//                    jtfDetalle.setBorder(text_border);
-//                    jtfDetalle.requestFocus();
-//                    MensajeSB(2, "El campo Detalle debe llenarse");
-//                    jcbEstado.setEnabled(false);
-//                    jtfNombre.setDisabledTextColor(Color.white);
-//                } else {
-//                    jtfDetalle.setBorder(text_border_disable);
-//                    jtfNombre.addFocusListener(fl1);
-//                    jtfDetalle.removeFocusListener(fl2);
-//                }
-//            }
-//    }
 
+    public boolean verificarDetalle() {
+        if (jtfDetalle.getText().equalsIgnoreCase("")) {
+            jtfDetalle.setBorder(text_border);
+            jtfDetalle.requestFocus();
+            MensajeSB(2, "El campo Detalle debe llenarse");
+        } else {
+            return true;
+        }
+        return false;
+    }
+    
+    // CUANDO PONES TILDE EN EL NOMBRE YA NO TE LO TOMA COMO UNA LETRA!! VER ESO
 }
