@@ -590,6 +590,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     jbNuevo.setEnabled(false);
                     e = false;
                     habilitarCalcularCalorias();
+                    jtfDetalle.setBorder(text_border_disable);
                     // CUANDO AGREGO ESTE FOCUSLISTEENER YA NO TENGO EL PROBLEMA QUE APARECE CUANDO
 // LE DOY BUSCAR Y PONGO UN NOMBRE INCORRECTO:                   
                     jtfNombre.addFocusListener(fl1);
@@ -601,6 +602,7 @@ public class ComidasForm extends javax.swing.JFrame {
                     jlEstado.setEnabled(true);
                     jcbEstado.setForeground(Color.WHITE);
                     habilitarCalcularCalorias();
+                    jtfDetalle.setBorder(text_border_disable);
 
                     jtfNombre.addFocusListener(fl1);
                     jbEliminar.setEnabled(false);
