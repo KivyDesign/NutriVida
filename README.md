@@ -1,4 +1,58 @@
-# NutriVida
+# Guía VI - FINAL - “Proyecto Transversal: NutriVida”
+
+## Vistas del Form principal Menú y los Frames de Gestión
+
+Vistas finales de las pantallas que componen todo el Proyecto Transversal de Integración realizado durante la Etapa 6, desarrollado completamente por el Grupo 22
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/00.png)
+
+<p align="center">Pantalla de Menú Principal</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/01.png)
+
+<p align="center">Formulario: Gestión de Pacientes</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/02.png)
+
+<p align="center">Formulario: Dieta Personal</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/03.png)
+
+<p align="center">Formulario: Detalles de la Dieta</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/04.png)
+
+<p align="center">Historial del Paciente</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/05.png)
+
+<p align="center">Formulario: Gestión de Comidas</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/06.png)
+
+<p align="center">Formulario: Gestión de Calorías</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/07.png)
+
+<p align="center">Formulario: Gestión de Comidas</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/08.png)
+
+<p align="center">Formulario: Gestión de Alimentos</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/09.png)
+
+<p align="center">Formulario: Gestión de Alimentos filtrados por calorías</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/10.png)
+
+<p align="center">Formulario: Control de Dietas</p>
+
+![image](https://github.com/KivyDesign/NutriVida/blob/main/IMGs/11.png)
+
+<p align="center">Pantalla de agradecimiento por todo el esfuerzo y la buena predisposición de los integrantes del equipo para salir adelante y completar el Proyecto Transversal de Integración. Gracias !TOTALES¡</p>
+
+
 
 ## INSTRUCTIVO:
 
