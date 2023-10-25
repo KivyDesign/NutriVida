@@ -288,7 +288,7 @@ public class AlimentosForm extends javax.swing.JFrame {
             if (!jtfLimiteMax.getText().isEmpty()) {
                 l2 = Integer.parseInt(jtfLimiteMax.getText());
             }
-            MensajeSB(1, "");
+            MensajeSB(1, "Ingrese un Limite Mínimo y Máximo de Calorías para el filtrado de Comidas");
             borrarFilasTabla();
             ArrayList<Comida> lista = comData.listarComidasCalorias(l1, l2);
             for (Comida comida : lista) {
@@ -313,7 +313,7 @@ public class AlimentosForm extends javax.swing.JFrame {
             if (!jtfLimiteMax.getText().isEmpty()) {
                 l2 = Integer.parseInt(jtfLimiteMax.getText());
             }
-            MensajeSB(1, "");
+            MensajeSB(1, "Ingrese un Limite Mínimo y Máximo de Calorías para el filtrado de Comidas");
             borrarFilasTabla();
             ArrayList<Comida> lista = comData.listarComidasCalorias(l1, l2);
             for (Comida comida : lista) {
