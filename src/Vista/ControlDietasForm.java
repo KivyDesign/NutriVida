@@ -143,7 +143,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
 
         jlMensajeSB.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jlMensajeSB.setForeground(new java.awt.Color(255, 255, 255));
-        jlMensajeSB.setText("Figuran solo pacientes Activos, ordenadas por fecha de finalizacion");
+        jlMensajeSB.setText("Figuran solo pacientes Activos, ordenadas por fecha de finalización");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -225,10 +225,10 @@ public class ControlDietasForm extends javax.swing.JFrame {
                 .addComponent(jBVolver)
                 .addGap(29, 29, 29)
                 .addComponent(jBSalir)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Dietas terminadas y vigentes");
 
