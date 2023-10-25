@@ -671,12 +671,12 @@ public class ComidasForm extends javax.swing.JFrame {
 
     private void jtfNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreKeyReleased
         jbBuscar.setEnabled(true);
-        habilitarBoton();
+        habilitarNuevo();
         habilitarCalcularCalorias();
     }//GEN-LAST:event_jtfNombreKeyReleased
 
     private void jtfDetalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDetalleKeyReleased
-        habilitarBoton();
+        habilitarNuevo();
         habilitarCalcularCalorias();
     }//GEN-LAST:event_jtfDetalleKeyReleased
 
@@ -787,8 +787,12 @@ public class ComidasForm extends javax.swing.JFrame {
         // Busco si los caracteres ingresados son letras
         int b = 0;
         int i = 0;
+        String letras="abcdefghijklmnñopqrstuvwxyzáéíóú";
         for (i = 0; i < texto.length(); i++) {
-            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') && texto.charAt(i) != ' ') {
+//            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') && texto.charAt(i) != ' ' ) {
+//                b++;
+//            }
+            if(letras.indexOf(texto.toLowerCase().charAt(i))==-1){
                 b++;
             }
         }
@@ -951,7 +955,7 @@ public class ComidasForm extends javax.swing.JFrame {
 //            }
 //        }
 //    };
-    public void habilitarBoton() {
+    public void habilitarNuevo() {
         if (e == true) {
             if (jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty()) {
                 jbNuevo.setEnabled(false);
