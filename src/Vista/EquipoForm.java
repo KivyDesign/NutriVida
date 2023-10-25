@@ -15,6 +15,9 @@ public class EquipoForm extends javax.swing.JFrame {
     /** Creates new form EquipoForm */
     public EquipoForm() {
         initComponents();
+        
+        // Display the pacientes form in the center of the screen
+        this.setLocationRelativeTo(null);
     }
 
     /** This method is called from within the constructor to
