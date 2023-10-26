@@ -70,5 +70,4 @@ public class Comida {
     public String toString() {
         return idComida + " - " + nombre + ", Calorias= " + calorias;
     }
-
 }

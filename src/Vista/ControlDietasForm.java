@@ -33,10 +33,10 @@ public class ControlDietasForm extends javax.swing.JFrame {
             // Configuro de color rojo el panel del titulo principal
             jpConexion.setBackground(new Color(255, 50, 0));
         }
-        
+
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
-        
+
         modelo = new DefaultTableModel() {
             public boolean isCellEditable(int fila, int columna) {
                 return false;
@@ -350,8 +350,8 @@ public class ControlDietasForm extends javax.swing.JFrame {
     private javax.swing.JLabel jlMensajeSB;
     private javax.swing.JPanel jpConexion;
     // End of variables declaration//GEN-END:variables
-private void armarCabecera() {
-        // modelo.addColumn("ID");
+
+    private void armarCabecera() {
         modelo.addColumn("Nombre Paciente");
         modelo.addColumn("D.N.I.");
         modelo.addColumn("P. buscado");
@@ -359,7 +359,6 @@ private void armarCabecera() {
         modelo.addColumn("Fecha Final");
 
         jTDieta.setModel(modelo);
-        // jTDieta.getColumnModel().getColumn(0).setPreferredWidth(50);
         jTDieta.getColumnModel().getColumn(0).setPreferredWidth(220);
         jTDieta.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTDieta.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -368,7 +367,6 @@ private void armarCabecera() {
     }
 
     private void cargarDietas() {
-
         ArrayList<Dieta> dietas = (ArrayList<Dieta>) dietaData.listarDietas();
 
         if (dietas != null) {
@@ -399,7 +397,6 @@ private void armarCabecera() {
     }
 
     private void cargarDietasNoCumplidas() {
-
         ArrayList<Dieta> dietas = (ArrayList<Dieta>) dietaData.listarDietasNoCumplidas();
 
         if (dietas != null) {
@@ -416,7 +413,6 @@ private void armarCabecera() {
     }
 
     public void MensajeSB(int color, String mensaje) {
-
         if (color == 1) {
             jlMensajeSB.setForeground(new Color(255, 255, 255));
         } else if (color == 2) {
@@ -425,7 +421,6 @@ private void armarCabecera() {
 
             jlMensajeSB.setForeground(new Color(31, 75, 128));
         }
-
         jlMensajeSB.setText(mensaje);
     }
 }

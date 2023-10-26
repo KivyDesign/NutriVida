@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
 import Controlador.ComidaData;
@@ -23,25 +18,21 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author german
- */
 public class DetalleDieta extends javax.swing.JFrame {
-    
     private DefaultTableModel modelo;
     private ComidaData comData;
     private DietaComidaData dietaComidaData;
     private DietasForm dietasForm;
     private DietaData dietaData;
     private int nuevaPorcion;
+    
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
     Border text_border_rojo = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(232, 65, 24));
-    
+
     public DetalleDieta() {
         initComponents();
-        
+
         // =====================================================================
         // Realizo la coneccion a la DB
         Connection con = Conexion.getConexion();
@@ -60,12 +51,12 @@ public class DetalleDieta extends javax.swing.JFrame {
 
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
-        
+
         modelo = new DefaultTableModel() {
             // Clase Interna Anónima
             public boolean isCellEditable(int fila, int columna) {
                 // Si retorno true las celdas son todas editables, con false
-//             ninguna celda es editable
+                // ninguna celda es editable
                 if (columna == 1) {
                     return true;
                 }
@@ -83,12 +74,11 @@ public class DetalleDieta extends javax.swing.JFrame {
         cargarContenido();
         cargarComidas();
         cargarHorarios();
-//        listSelectionListener();
 
         // Al modelo de la jTable le agrego un ListModelListener que me permite
         // operar sobre los cambios realizados en una celda
         anadeListenerAlModelo();
-        
+
         jbModificar.setEnabled(false);
     }
 
@@ -293,12 +283,6 @@ public class DetalleDieta extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Comida:");
 
-        jcHorario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcHorarioActionPerformed(evt);
-            }
-        });
-
         jLabel6.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Porción en unidades:");
@@ -414,12 +398,8 @@ public class DetalleDieta extends javax.swing.JFrame {
     private void jbComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComidasActionPerformed
         NutriVidaForm nutvidForm = new NutriVidaForm();
         nutvidForm.setVisible(true);
-        this.setVisible(false);        
+        this.setVisible(false);
     }//GEN-LAST:event_jbComidasActionPerformed
-
-    private void jcHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcHorarioActionPerformed
-        
-    }//GEN-LAST:event_jcHorarioActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         try {
@@ -446,8 +426,6 @@ public class DetalleDieta extends javax.swing.JFrame {
             jtPorcion.requestFocus();
             jtPorcion.selectAll();
         }
-        
-
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
@@ -535,14 +513,14 @@ public class DetalleDieta extends javax.swing.JFrame {
         modelo.addColumn("Porciones");
         modelo.addColumn("Comida");
         modelo.addColumn("Horario");
-        
+
         jTcontenido.setModel(modelo);
         jTcontenido.getColumnModel().getColumn(0).setPreferredWidth(70);
         jTcontenido.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTcontenido.getColumnModel().getColumn(2).setPreferredWidth(220);
         jTcontenido.getColumnModel().getColumn(2).setPreferredWidth(100);
     }
-    
+
     private void cargarContenido() {
         ArrayList<DietaComida> dietaComida = (ArrayList<DietaComida>) dietaComidaData.listarDietaComidas(dietasForm.idDieta);
         if (dietaComida != null) {
@@ -554,10 +532,10 @@ public class DetalleDieta extends javax.swing.JFrame {
                     cont.getHorario()});
             }
         } else {
-            System.out.println("error dieta comida null");
+            System.out.println("Error: dieta comida null");
         }
     }
-    
+
     private void cargarComidas() {
         // Limpio el ComboBox
         jCComidas.removeAllItems();
@@ -567,21 +545,19 @@ public class DetalleDieta extends javax.swing.JFrame {
             jCComidas.addItem(listar);
         }
     }
-    
+
     public void MensajeSB(int color, String mensaje) {
-        
         if (color == 1) {
             jlMensajeSB.setForeground(new Color(255, 255, 255));
         } else if (color == 2) {
             jlMensajeSB.setForeground(new Color(255, 50, 0));
         } else if (color == 3) {
-            
+
             jlMensajeSB.setForeground(new Color(31, 75, 128));
         }
-        
         jlMensajeSB.setText(mensaje);
     }
-    
+
     public void cargarHorarios() {
         // Limpio el ComboBox
         jcHorario.removeAllItems();
@@ -590,19 +566,17 @@ public class DetalleDieta extends javax.swing.JFrame {
         jcHorario.addItem(Horario.MERIENDA);
         jcHorario.addItem(Horario.CENA);
         jcHorario.addItem(Horario.SNACK);
-        
     }
-    
+
     public void anadeListenerAlModelo() {
         jTcontenido.getModel().addTableModelListener(new TableModelListener() {
-            
             @Override
             public void tableChanged(TableModelEvent evento) {
                 cambioPorcion(evento);
             }
         });
     }
-    
+
     public void cambioPorcion(TableModelEvent evento) {
         // Solo se trata el evento UPDATE, correspondiente al cambio de valor
         // de una celda.
@@ -612,7 +586,7 @@ public class DetalleDieta extends javax.swing.JFrame {
             int fila = evento.getFirstRow();
             int columna = evento.getColumn();
             int c = 0;
-            
+
             try {
                 Object nueva = jTcontenido.getValueAt(fila, columna);
                 int pars = Integer.parseInt(nueva.toString());
@@ -635,15 +609,15 @@ public class DetalleDieta extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void listSelectionListener() {
         jTcontenido.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            
+
             @Override
             public void valueChanged(ListSelectionEvent evento) {
                 int filaSeleccionada = jTcontenido.getSelectedRow();
                 int columnaSeleccionada = jTcontenido.getSelectedColumn();
-                
+
                 if (jTcontenido.isCellEditable(filaSeleccionada, columnaSeleccionada) && filaSeleccionada >= 0 && columnaSeleccionada >= 0) {
                     Object valor = jTcontenido.getValueAt(filaSeleccionada, columnaSeleccionada);
                     nuevaPorcion = Integer.parseInt(valor.toString());
@@ -651,13 +625,13 @@ public class DetalleDieta extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void borrarFilasTabla() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
         // Controlar que no este vacio o cargarlo desde el comienzo
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
-            
+
             if (modelo.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modelo.removeRow(i);

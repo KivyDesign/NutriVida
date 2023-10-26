@@ -1,6 +1,5 @@
 package Controlador;
 
-import Modelo.Comida;
 import Modelo.Dieta;
 import java.sql.Connection;
 import java.sql.Date;
@@ -83,7 +82,7 @@ public class DietaData {
         PreparedStatement ps = null;
         PacienteData pacData = new PacienteData();
         try {
-            String sql = "SELECT idDieta, nombre, idPaciente, pesoInicial, pesoFinal, fechaInicial, fechaFinal, estado FROM dieta WHERE estado=1 AND idPaciente = ?";
+            String sql = "SELECT idDieta, nombre, idPaciente, pesoInicial, pesoFinal, fechaInicial, fechaFinal, estado FROM dieta WHERE estado = 1 AND idPaciente = ?";
             ps = con.prepareStatement(sql);
             ps.setInt(1, idPaciente);
             ResultSet rs = ps.executeQuery();
@@ -136,7 +135,7 @@ public class DietaData {
         ArrayList<Dieta> dietas = new ArrayList<>();
 
         try {
-            String sql = "SELECT d.idDieta FROM dieta d,paciente p WHERE d.idPaciente=p.idPaciente and d.estado = 1 and p.estado=1 order by d.fechaFinal";
+            String sql = "SELECT d.idDieta FROM dieta d, paciente p WHERE d.idPaciente = p.idPaciente AND d.estado = 1 AND p.estado = 1 ORDER BY d.fechaFinal";
             PreparedStatement ps = con.prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
@@ -148,7 +147,7 @@ public class DietaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta" + ex.getMessage());
         }
         // Retorno el Array dietas con los valores de la consulta
         return dietas;
@@ -158,14 +157,13 @@ public class DietaData {
         ArrayList<Dieta> dietas = new ArrayList<>();
 
         try {
-            String sql = "SELECT idDieta FROM dieta d,paciente p WHERE p.idPaciente=d.idPaciente and pesoFinal < pesoActual and fechafinal <= ? and d.estado=1 and p.estado=1 order by fechaFinal";
+            String sql = "SELECT idDieta FROM dieta d, paciente p WHERE p.idPaciente = d.idPaciente AND pesoFinal < pesoActual AND fechafinal <= ? AND d.estado = 1 AND p.estado = 1 ORDER BY fechaFinal";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(LocalDate.now()));
             ResultSet rs = ps.executeQuery();
 
             // Recorro el ResultSet y lo cargo en el Array dietas
             while (rs.next()) {
-
                 dietas.add(buscarDietaPorId(rs.getInt("idDieta")));
             }
             ps.close();

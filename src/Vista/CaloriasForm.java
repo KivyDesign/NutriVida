@@ -11,12 +11,11 @@ import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 
 public class CaloriasForm extends javax.swing.JFrame {
-    
     // Declaraciones privadas de objetos utilizados para intercambiar ----------
     // información entre formularios
     private Calorias caloriaX;
     // -------------------------------------------------------------------------
-    
+
     // Declaro los atributos para acceder a los metodos que necesito
     // para caloria
     private CaloriasData calData;
@@ -27,7 +26,7 @@ public class CaloriasForm extends javax.swing.JFrame {
             return false;
         }
     };
-    
+
     private DefaultTableModel modeloGrupoAlimenticio = new DefaultTableModel() {
         public boolean isCellEditable(int fila, int columna) {
             return false;
@@ -42,11 +41,11 @@ public class CaloriasForm extends javax.swing.JFrame {
 
     private int totalDeCalorias = 0;
     private int limitoCincoRegistros = 0;
-    
+
     // Recibo por el constructor el objeto c de tipo Calorias ------------------
-    public CaloriasForm(Calorias  c) {
+    public CaloriasForm(Calorias c) {
         initComponents();
-        
+
         // Aqui los conecto a los metodos
         modelo = (DefaultTableModel) jtCalorias.getModel();
         modeloGrupoAlimenticio = (DefaultTableModel) jtCaloriasSeleccion.getModel();
@@ -85,19 +84,19 @@ public class CaloriasForm extends javax.swing.JFrame {
         // Cargar calorias en la tabla
         idGrupoAlimenticio = 1;
         cargarTabla(idGrupoAlimenticio);
-        
+
         // =====================================================================
         // Centro el form en la pantalla
         this.setLocationRelativeTo(this);
-        
+
         // Lo asigno al objeto c a caloria -------------------------------------
         this.caloriaX = c;
-        
+
         // Muestro los datos que recibo del form principal
         mostrarDatos();
         // ---------------------------------------------------------------------
     }
-    
+
     // -------------------------------------------------------------------------
     private void mostrarDatos() {
         // Y le cargo los datos que estan en los textFields de la ComidasForm
@@ -194,7 +193,6 @@ public class CaloriasForm extends javax.swing.JFrame {
         borrarFilasTabla();
         calData.listarCaloriasPorGrupoalimenticio(idGrupoAlimenticio).forEach(calorias -> {
             modelo.addRow(new Object[]{
-                // calorias.getIdCalorias(),
                 calorias.getIdGrupoAlimenticio(),
                 calorias.getNombre(),
                 calorias.getCalorias(),
@@ -203,7 +201,6 @@ public class CaloriasForm extends javax.swing.JFrame {
                 calorias.getCarbohidratos(),
                 calorias.getFibra(),
                 calorias.getColesterol()
-//                calorias.getEstado()
             });
         });
     }
@@ -213,8 +210,6 @@ public class CaloriasForm extends javax.swing.JFrame {
         // Busco el ID en la cadena de texto
         // https://es.stackoverflow.com/questions/123704/c%C3%B3mo-extraer-parte-de-una-cadena-seg%C3%BAn-un-patr%C3%B3n
         // 
-//        System.out.println("String seleccionada: " + jcbCargarGrupoAlimenticio.getSelectedItem());
-
         // En tu código sería:
         //     String cadena = JTextField.getText();
         // Pero como ejemplo, lo asignamos a:
@@ -284,6 +279,7 @@ public class CaloriasForm extends javax.swing.JFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlMensajeSB.setText(mensaje);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -603,11 +599,6 @@ public class CaloriasForm extends javax.swing.JFrame {
     private void jtCaloriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCaloriasMouseClicked
         // Obtenemos el número de fila seleccionada al realizar un click en la tabla
         seleccionFilaEnLaTabla = jtCalorias.rowAtPoint(evt.getPoint());
-//        System.out.println("Seleccion Fila En La Tabla: " + seleccionFilaEnLaTabla);
-
-        // Lo convierto de Object a int
-//        int valorID = (Integer) jtCalorias.getValueAt(seleccionFilaEnLaTabla, 0);
-//        System.out.println("Valor ID: " + valorID);
     }//GEN-LAST:event_jtCaloriasMouseClicked
 
     private void jbLimpiarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarSeleccionActionPerformed
@@ -663,7 +654,6 @@ public class CaloriasForm extends javax.swing.JFrame {
         caloriaX = new Calorias(
                 Integer.parseInt(jlTotalCalorias.getText())
         );
-        System.out.println(caloriaX.getCalorias());
 
         // PRECAUCIÓN: Cierro el form secundario solo ocultandolo, no es un
         // EXIT_ON_CLOSE que destruiría la información del form

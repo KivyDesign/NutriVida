@@ -230,7 +230,7 @@ public class NutriVidaForm extends javax.swing.JFrame {
         jLabel15.setBackground(new java.awt.Color(80, 80, 80));
         jLabel15.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel15.setText("Desde aquí realice toda su magia al");
+        jLabel15.setText("Desde aquí haga toda su magia al");
 
         jLabel16.setBackground(new java.awt.Color(80, 80, 80));
         jLabel16.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N

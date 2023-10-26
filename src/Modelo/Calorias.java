@@ -128,5 +128,4 @@ public class Calorias {
     public String toString() {
         return "Calorias{" + "idCalorias=" + idCalorias + ", idGrupoAlimenticio=" + idGrupoAlimenticio + ", nombre=" + nombre + ", calorias=" + calorias + ", proteinas=" + proteinas + ", grasa=" + grasa + ", carbohidratos=" + carbohidratos + ", fibra=" + fibra + ", colesterol=" + colesterol + ", estado=" + estado + '}';
     }
-
 }

@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class PacienteData {
@@ -20,7 +18,7 @@ public class PacienteData {
     }
 
     public void guardarPaciente(Paciente paciente) {
-        String sql = "INSERT INTO paciente(dni, nombre, domicilio, telefono,pesoActual, estado) VALUES(?, ?, ?,?, ?, ?)";
+        String sql = "INSERT INTO paciente(dni, nombre, domicilio, telefono, pesoActual, estado) VALUES(?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, paciente.getDni());
@@ -55,7 +53,7 @@ public class PacienteData {
 
     public void modificarPaciente(Paciente paciente) {
         try {
-            String sql = "UPDATE paciente SET dni = ?, nombre = ?, domicilio = ?, telefono = ?,pesoActual=?,estado=? WHERE idPaciente = ?";
+            String sql = "UPDATE paciente SET dni = ?, nombre = ?, domicilio = ?, telefono = ?, pesoActual = ?, estado = ? WHERE idPaciente = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, paciente.getDni());
             ps.setString(2, paciente.getNombre());
@@ -76,7 +74,7 @@ public class PacienteData {
         Paciente paciente = null;
         PreparedStatement ps = null;
         try {
-            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono,pesoActual, estado FROM paciente WHERE dni = ?";
+            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono, pesoActual, estado FROM paciente WHERE dni = ?";
 
             ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
@@ -91,7 +89,6 @@ public class PacienteData {
                 paciente.setPesoActual(rs.getDouble("pesoActual"));
                 paciente.setEstado(rs.getBoolean("estado"));
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
@@ -103,7 +100,7 @@ public class PacienteData {
         Paciente paciente = null;
         PreparedStatement ps = null;
         try {
-            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono,pesoActual, estado FROM paciente WHERE idPaciente = ?";
+            String sql = "SELECT idPaciente, dni, nombre, domicilio, telefono, pesoActual, estado FROM paciente WHERE idPaciente = ?";
 
             ps = con.prepareStatement(sql);
             ps.setInt(1, idPaciente);
@@ -118,7 +115,6 @@ public class PacienteData {
                 paciente.setPesoActual(rs.getDouble("pesoActual"));
                 paciente.setEstado(rs.getBoolean("estado"));
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
@@ -130,15 +126,12 @@ public class PacienteData {
         try {
             String sql = "UPDATE paciente SET pesoActual = ? WHERE idPaciente = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setDouble(1, pesoActual);
             ps.setInt(2, idPaciente);
             ps.executeUpdate();
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
         }
     }
-
 }

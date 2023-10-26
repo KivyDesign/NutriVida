@@ -57,27 +57,26 @@ public class TestNutriVida {
         // Consulta de una comida
         Comida comid = comData.buscarComidaPorId(4);
         System.out.println(comid.toString());
-        
+
         // Listar calorias de comidas
         for (Comida comida : comData.listarComidasCalorias(89, 130)) {
-            System.out.println("comida calorias requeridas " + comida.getNombre());
+            System.out.println("Comida calorias requeridas: " + comida.getNombre());
         }
-        
+
         ArrayList<Comida> lista = comData.listarComidas();
-          for (Comida comida : lista) {
-              System.out.println(comida.toString());
-          }
-          System.out.println("");
-        
+        for (Comida comida : lista) {
+            System.out.println(comida.toString());
+        }
+        System.out.println("");
+
         /**
          * ---------------------------------------------------------------------
          * Probando PacienteData
          * ---------------------------------------------------------------------
          */
-
         // Agrego un paciente nuevo
         PacienteData pacData = new PacienteData();
-        
+
 //        Paciente paciente0 = new Paciente(11112222, "Pablo Gomez", "Colon 2332", "123-456", true);
 //        Paciente paciente1 = new Paciente(11113333, "Pabla Gomes", "Union 562", "123-564", true);
 //        Paciente paciente2 = new Paciente(11114444, "Paola Guzman", "Pellegrini 456","423-456", true);
@@ -115,7 +114,6 @@ public class TestNutriVida {
          * Probando DietaData
          * ---------------------------------------------------------------------
          */
-
         // Guardar dietas
         DietaData dietaData = new DietaData();
 //        Dieta dieta1 = new Dieta("Masiva", pacData.buscarPacientePorId(3), 150.52, 98.00, LocalDate.of(2023, 8, 23), LocalDate.of(2023, 12, 23), true);
@@ -124,7 +122,7 @@ public class TestNutriVida {
 //        dietaData.guardarDieta(dieta1);
 //        dietaData.guardarDieta(dieta2);
 //        dietaData.guardarDieta(dieta3);
-        
+
         // Eliminar dieta
 //        dietaData.eliminarDietaPorId(5);
 

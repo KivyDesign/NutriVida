@@ -47,7 +47,7 @@ public class HistorialView extends javax.swing.JFrame {
         // Display the pacientes form in the center of the screen
         this.setLocationRelativeTo(null);
 
-        //creo un DietasForm
+        // Creo un DietasForm
         historiaDieta = new DietasForm();
         pacData = new PacienteData();
         historialData = new HistorialData();

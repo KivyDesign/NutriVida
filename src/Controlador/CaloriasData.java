@@ -54,10 +54,9 @@ public class CaloriasData {
             if (rs.next()) {
                 calorias.setIdCalorias(rs.getInt(1));
             }
-
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al insertar en la tabla Calorias" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al insertar en la tabla Calorias: " + ex.getMessage());
         }
     }
 
@@ -72,7 +71,7 @@ public class CaloriasData {
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Calorias" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Calorias: " + ex.getMessage());
         }
     }
 
@@ -97,7 +96,7 @@ public class CaloriasData {
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Calorias" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Calorias: " + ex.getMessage());
         }
     }
 
@@ -126,7 +125,6 @@ public class CaloriasData {
                 calorias.setFibra(rs.getInt("colesterol"));
                 calorias.setEstado(rs.getBoolean("estado"));
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Calorias" + ex.getMessage());
@@ -151,7 +149,6 @@ public class CaloriasData {
             while (rs.next()) {
                 calorias.add(buscarCaloriasPorId(rs.getInt("idCalorias")));
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "listarCalorias = Error al acceder a la tabla Calorias: " + ex.getMessage());
@@ -193,31 +190,18 @@ public class CaloriasData {
         // Retorno el Array calorias con los valores de la consulta
         return calorias;
     }
-    
-    /*
-     Estructura de la tabla calorias
-     int idCalorias
-     int idGrupoAlimenticio
-     String nombre
-     int calorias
-     int proteinas
-     int grasa
-     int carbohidratos
-     int fibra
-     int colesterol
-     Boolean estado
-     */
+
     public ArrayList<Calorias> listarCaloriasPorGrupoalimenticio(int idGrupoAlimenticio) {
         ArrayList<Calorias> calorias = new ArrayList<>();
 
         try {
             // La consulta funciona en MySQL
             String sql = "SELECT * FROM calorias WHERE idGrupoAlimenticio = ? AND estado = 1 ORDER BY nombre";
-            
+
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ps.setInt(1, idGrupoAlimenticio);
-            
+
             ResultSet rs = ps.executeQuery();
 
             // Recorro el ResultSet y lo cargo en el Array calorias
@@ -255,7 +239,7 @@ public class CaloriasData {
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Calorias" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Calorias: " + ex.getMessage());
         }
     }
 }

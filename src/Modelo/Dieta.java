@@ -104,5 +104,4 @@ public class Dieta {
     public String toString() {
         return "Dieta{" + "idDieta=" + idDieta + ", nombre=" + nombre + ", paciente=" + paciente + ", pesoInicial=" + pesoInicial + ", pesoFinal=" + pesoFinal + ", fechaInicial=" + fechaInicial + ", fechaFinal=" + fechaFinal + ", estado=" + estado + '}';
     }
-
 }

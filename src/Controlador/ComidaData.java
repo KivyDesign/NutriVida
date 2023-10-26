@@ -108,7 +108,6 @@ public class ComidaData {
                 comida.setCalorias(rs.getInt("cantCalorias"));
                 comida.setEstado(rs.getBoolean("estado"));
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Comida");
@@ -120,13 +119,13 @@ public class ComidaData {
         ArrayList<Comida> comidas = new ArrayList<>();
 
         try {
-            String sql = "SELECT idComida FROM comida WHERE estado = 1 and cantCalorias >= ? and cantCalorias <= ?";
+            String sql = "SELECT idComida FROM comida WHERE estado = 1 AND cantCalorias >= ? AND cantCalorias <= ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, calMin);
             ps.setInt(2, calMax);
             ResultSet rs = ps.executeQuery();
 
-            // Recorro el ResultSet y lo cargo en el Array alumnos
+            // Recorro el ResultSet y lo cargo en el Array comidas
             while (rs.next()) {
 
                 comidas.add(buscarComidaPorId(rs.getInt("idComida")));
@@ -135,7 +134,7 @@ public class ComidaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "listarComidasCalorias = Error al acceder a la tabla comida: " + ex.getMessage());
         }
-        // Retorno el Array alumnos con los valores de la consulta
+        // Retorno el Array comidas con los valores de la consulta
         return comidas;
     }
 
@@ -152,7 +151,7 @@ public class ComidaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Comida " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Comida:" + ex.getMessage());
         }
         return listaComidas;
     }

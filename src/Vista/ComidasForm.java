@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
 import Controlador.ComidaData;
@@ -17,12 +12,7 @@ import java.sql.Connection;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
-/**
- *
- * @author javier
- */
 public class ComidasForm extends javax.swing.JFrame {
-
     // Declaraciones privadas de objetos utilizados para intercambiar ----------
     // información entre formularios
     private CaloriasForm caloriasForm;
@@ -551,13 +541,11 @@ public class ComidasForm extends javax.swing.JFrame {
                 comData.guardarComida(comida);
                 MensajeSB(1, "Comida creada");
                 LimpiarCampos();
-
             }
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-
         if (verificarNombre() == true && verificarDetalle() == true) {
             if (Integer.parseInt(jlCaloriasTXT.getText()) <= 0) {
                 MensajeSB(2, "ERROR: la cantidad de calorias debe ser mayor a 0");
@@ -571,7 +559,6 @@ public class ComidasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // buscarComidaPorNombre
         try {
             // Busco comida por nombre
             Comida comida = comData.buscarComidaPorNombre(jtfNombre.getText());
@@ -595,10 +582,10 @@ public class ComidasForm extends javax.swing.JFrame {
                     e = false;
                     habilitarCalcularCalorias();
                     jtfDetalle.setBorder(text_border_disable);
-                    // CUANDO AGREGO ESTE FOCUSLISTEENER YA NO TENGO EL PROBLEMA QUE APARECE CUANDO
-// LE DOY BUSCAR Y PONGO UN NOMBRE INCORRECTO:                   
+                    // CUANDO AGREGO ESTE FOCUSLISTEENER YA NO TENGO EL PROBLEMA
+                    // QUE APARECE CUANDO LE DOY BUSCAR Y PONGO UN NOMBRE INCORRECTO:                   
                     jtfNombre.addFocusListener(fl1);
-//--------------------------------------------
+                    // ---------------------------------------------------------
                     MensajeSB(1, "Comida encontrada");
                 } else {
                     MensajeSB(2, "La comida ingresada se encuentra dada de baja. Para activarla complete el campo Estado y pulse Guardar");
@@ -768,7 +755,6 @@ public class ComidasForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void MensajeSB(int color, String mensaje) {
-
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
             // Si el color es igual a 1 entonces es = a verde
@@ -804,7 +790,6 @@ public class ComidasForm extends javax.swing.JFrame {
         } else {
             return true;
         }
-
     }
 
     public void LimpiarCampos() {

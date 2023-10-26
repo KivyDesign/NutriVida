@@ -54,7 +54,6 @@ public class PacientesForm extends javax.swing.JFrame {
         // Posiciono el foco en el nombre al iniciar el form
         jtfDNI.requestFocus();
         jcbEstado.setEnabled(false);
-
     }
     public static int nroId = -1;
     public static String nombreP = "";
@@ -441,8 +440,7 @@ public class PacientesForm extends javax.swing.JFrame {
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // Por ahora solo cierro este form. Ampliar para ocultar el form actual
         // y mostrar el form del menu en su lugar
-//        this.dispose();
-
+        //
         // Instancio el form de menu y lo hago visible mientras oculto el
         // form con pacientes
         NutriVidaForm nutvidForm = new NutriVidaForm();
@@ -456,7 +454,6 @@ public class PacientesForm extends javax.swing.JFrame {
         DietasForm dietForm = new DietasForm();
         dietForm.setVisible(true);
         this.setVisible(false);
-
     }//GEN-LAST:event_jbDietaPersonalActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -468,9 +465,9 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfDNI.selectAll();
                 jbNuevo.setEnabled(true);
             } else {
-                // Busco alumno por DNI
+                // Busco paciente por DNI
                 Paciente paciente = pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText()));
-                // Busco si el alumno no esta vacio
+                // Busco si el paciente no esta vacio
                 if (paciente != null) {
                     jtfID.setText(paciente.getIdPaciente() + "");
                     jtfDomicilio.setText(paciente.getDomicilio());
@@ -579,14 +576,14 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfPesoActual.selectAll();
                 jtfPesoActual.setBorder(text_border_rojo);
             } else {
-
                 Paciente paciente = new Paciente(
                         Integer.parseInt(jtfDNI.getText()),
                         jtfNombre.getText(),
                         jtfDomicilio.getText(),
                         jtfTelefono.getText(),
                         Double.parseDouble(jtfPesoActual.getText()),
-                        true);
+                        true
+                );
 
                 // Primero busco si existe para no agregarlo repetido y lo
                 // inserto al paciente
@@ -596,7 +593,6 @@ public class PacientesForm extends javax.swing.JFrame {
                 // Si lo agregue con exito no es null y se lo informo al DataEntry
                 if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
                     MensajeSB(1, "Paciente agregado con exito! Busque por DNI o cargue un nuevo Paciente");
-//                    LimpiarCampos();//no los limpio porque me sirven para cargar nueva dieta
                     jbDietaPersonal.setEnabled(true);
                     jbNuevo.setEnabled(false);
                     jbEliminar.setEnabled(true);
@@ -604,16 +600,8 @@ public class PacientesForm extends javax.swing.JFrame {
                     jbBuscar.setEnabled(false);
                     // Set borders todos subrayados en amarillo a excepción del ID que es
                     // blanco y de solo 1 pixel de grosor para indicar que no es editable
-//                    jtfID.setBorder(text_border_disable);
-//                    jtfNombre.setBorder(text_border);
                     jtfDNI.setBorder(text_border_disable);
-//                    jtfDomicilio.setBorder(text_border);
-//                    jtfTelefono.setBorder(text_border);
                     jtfPesoActual.setBorder(text_border_disable);
-//
-//                    // Posiciono el foco en el nombre al iniciar el form
-//                    jtfNombre.requestFocus();
-
                 } else {
                     MensajeSB(2, "ERROR: El paciente no se pudo agregar");
                 }
@@ -626,7 +614,6 @@ public class PacientesForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
     }
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
         // Desabilito RadioButon porque el sistema utiliza borrado lógico
         jcbEstado.setEnabled(false);
         try {
@@ -634,7 +621,6 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfNombre.requestFocus();
                 jtfNombre.selectAll();
                 jtfNombre.setBorder(text_border_rojo);
-
             } else if (jtfDNI.getText().length() != 8) {
                 jtfNombre.setBorder(text_border_disable);
                 MensajeSB(2, "Debe ser un DNI valido de 8 digitos");
@@ -643,15 +629,8 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfDNI.setBorder(text_border_rojo);
             } else if (!jtfDNI.getText().equals(paraDniDuplicado)
                     && pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
-
-                MensajeSB(2, "Este DNI pertece a otro paciente,debe primero cambiar el otro DNI/Paciente para proceder");
+                MensajeSB(2, "Este DNI pertece a otro paciente, debe primero cambiar el otro DNI/Paciente para proceder");
                 jtfDNI.setBorder(text_border_rojo);
-
-//        } else if (pacData.buscarPacientePorDni(Integer.parseInt(jtfDNI.getText())) != null) {
-                //            MensajeSB(2, "El DNI ya esta utilizado en otro paciente");
-                //            jtfDNI.requestFocus();
-                //            jtfDNI.selectAll();
-                //            jtfDNI.setBorder(text_border_rojo);
             } else if (jtfDomicilio.getText().isEmpty()) {
                 jtfNombre.setBorder(text_border_disable);
                 jtfDNI.setBorder(text_border_disable);
@@ -670,12 +649,12 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfNombre.setBorder(text_border_disable);
                 jtfDNI.setBorder(text_border_disable);
                 jtfDomicilio.setBorder(text_border_disable);
-                MensajeSB(2, "Debe Agregar un Telefono");
+                MensajeSB(2, "Debe Agregar un Teléfono");
                 jtfTelefono.requestFocus();
                 jtfTelefono.selectAll();
                 jtfTelefono.setBorder(text_border_rojo);
             } else if (!jtfTelefono.getText().matches("[0-9-]+")) {
-                MensajeSB(2, "El telefono tiene que tener solo numeros y guiones medios (-)");
+                MensajeSB(2, "El teléfono tiene que tener solo números y guiones medios (-)");
                 jtfTelefono.requestFocus();
                 jtfTelefono.selectAll();
                 jtfTelefono.setBorder(text_border_rojo);
@@ -685,7 +664,7 @@ public class PacientesForm extends javax.swing.JFrame {
                 jtfDNI.setBorder(text_border_disable);
                 jtfDomicilio.setBorder(text_border_disable);
                 jtfTelefono.setBorder(text_border_disable);
-                MensajeSB(2, "Debe Agregar un peso valido entre 1 y 500");
+                MensajeSB(2, "Debe Agregar un peso válido entre 1 y 500");
                 jtfPesoActual.requestFocus();
                 jtfPesoActual.selectAll();
                 jtfPesoActual.setBorder(text_border_rojo);
@@ -697,7 +676,8 @@ public class PacientesForm extends javax.swing.JFrame {
                         jtfDomicilio.getText(),
                         jtfTelefono.getText(),
                         Double.parseDouble(jtfPesoActual.getText()),
-                        jcbEstado.isSelected());
+                        jcbEstado.isSelected()
+                );
                 pacData.modificarPaciente(paciente);
                 MensajeSB(1, "Paciente Guardado");
                 jbDietaPersonal.setEnabled(true);
@@ -726,7 +706,7 @@ public class PacientesForm extends javax.swing.JFrame {
             if (paciente != null) {
                 pacData.eliminarPaciente(paciente.getIdPaciente());
                 jcbEstado.setSelected(false);
-                MensajeSB(1, "El paciente fue eliminado con exito! Busque por DNI o cargue un nuevo Paciente");
+                MensajeSB(1, "El paciente fue eliminado con éxito! Busque por DNI o cargue un nuevo Paciente");
                 LimpiarCampos();
                 jtfNombre.setBorder(text_border);
                 jtfDNI.setBorder(text_border);
@@ -746,7 +726,6 @@ public class PacientesForm extends javax.swing.JFrame {
             jtfDNI.requestFocus();
             jtfDNI.selectAll();
             jtfDNI.setBorder(text_border_rojo);
-
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
@@ -823,7 +802,6 @@ public class PacientesForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void MensajeSB(int color, String mensaje) {
-
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
             // Si el color es igual a 1 entonces es = a verde
@@ -885,8 +863,6 @@ public class PacientesForm extends javax.swing.JFrame {
 
             return false;
         }
-
         return true;
     }
-
 }

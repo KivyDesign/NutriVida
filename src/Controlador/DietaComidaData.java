@@ -1,6 +1,5 @@
 package Controlador;
 
-import Modelo.Comida;
 import Modelo.DietaComida;
 import Modelo.Horario;
 import java.sql.Connection;
@@ -23,7 +22,7 @@ public class DietaComidaData {
     }
 
     public void guardarDietaComida(DietaComida dietaComida) {
-        String sql = "INSERT INTO dietacomida (idComida, idDieta, horario, porcion) VALUES (?, ?, ? , ?)";
+        String sql = "INSERT INTO dietacomida (idComida, idDieta, horario, porcion) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, dietaComida.getComida().getIdComida());
@@ -86,7 +85,7 @@ public class DietaComidaData {
         ArrayList<DietaComida> dietas = new ArrayList<>();
 
         try {
-            String sql = "SELECT idDietaComida, idComida, idDieta, horario, porcion FROM dietacomida WHERE idDieta = ? order by horario";
+            String sql = "SELECT idDietaComida, idComida, idDieta, horario, porcion FROM dietacomida WHERE idDieta = ? ORDER BY horario";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idDieta);
             ResultSet rs = ps.executeQuery();
@@ -109,19 +108,20 @@ public class DietaComidaData {
         // Retorno el Array dietaComida con los valores de la consulta
         return dietas;
     }
-    public void modificarPorcion(int idDietaComida,int porcion){
-        try{
-        String sql= "UPDATE dietacomida SET  porcion = ? WHERE idDietaComida = ?";
-       PreparedStatement ps = con.prepareStatement(sql);
+
+    public void modificarPorcion(int idDietaComida, int porcion) {
+        try {
+            String sql = "UPDATE dietacomida SET  porcion = ? WHERE idDietaComida = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, porcion);
             ps.setInt(2, idDietaComida);
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla DietaComida");
-        } 
+        }
     }
-    
+
     public DietaComida buscarDietaComidaPorId(int idComida) {
         DietaComida dietacomida = null;
         PreparedStatement ps = null;
@@ -138,11 +138,10 @@ public class DietaComidaData {
                 dietacomida.setHorario(Horario.valueOf(rs.getString("horario")));
                 dietacomida.setPorcion(rs.getInt("porcion"));
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla DietaComida");
         }
         return dietacomida;
-}
+    }
 }

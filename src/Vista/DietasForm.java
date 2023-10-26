@@ -13,7 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
 public class DietasForm extends javax.swing.JFrame {
-
     // Creación de los bordes que utilizaremos en los TextFileds
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
@@ -29,7 +28,7 @@ public class DietasForm extends javax.swing.JFrame {
         dietadata = new DietaData();
         pacienteData = new PacienteData();
 
-        //creo objeto clase PacientesForm
+        // Creo objeto clase PacientesForm
         numId = new PacientesForm();
 
         // =====================================================================
@@ -72,8 +71,7 @@ public class DietasForm extends javax.swing.JFrame {
             jtfPesoInicial.setBorder(text_border_disable);
             jtfPesoFinal.setBorder(text_border_disable);
             if (dieta.getFechaFinal().compareTo(ahora) <= 0) {
-                MensajeSB(2, "La fecha de culminacion de la dieta se venció");
-
+                MensajeSB(2, "La fecha de culminación de la dieta se venció");
             }
             jCheckBox1.setSelected(dieta.isEstado());
             jCheckBox1.setEnabled(false);
@@ -93,9 +91,8 @@ public class DietasForm extends javax.swing.JFrame {
             jtfNombre.setBorder(text_border);
             jtfPesoInicial.setBorder(text_border);
             jtfPesoFinal.setBorder(text_border);
-            MensajeSB(7, "No se encontro dieta para este Paciente cree una nueva");
+            MensajeSB(7, "No se encontró dieta para este Paciente cree una nueva");
         }
-
     }
     public static String nombrePac = "";
     public static String pesoIni = "";
@@ -522,17 +519,15 @@ public class DietasForm extends javax.swing.JFrame {
                     jtfPesoInicial.setBorder(text_border_disable);
                     jtfPesoFinal.setBorder(text_border_disable);
                 } else if ((jDateChooser2.getDate()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate().compareTo(ahora) <= 0) {
-                    MensajeSB(2, "La fecha de culminacion de la dieta debe ser posterior al día de hoy");
+                    MensajeSB(2, "La fecha de culminación de la dieta debe ser posterior al día de hoy");
                     jtfNombre.setBorder(text_border_disable);
                     jtfPesoInicial.setBorder(text_border_disable);
                     jtfPesoFinal.setBorder(text_border_disable);
                 } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
-                    MensajeSB(2, "la fecha inicial del tratamiento debe ser menor que la final");
+                    MensajeSB(2, "La fecha inicial del tratamiento debe ser menor que la final");
                     jtfNombre.setBorder(text_border_disable);
                     jtfPesoInicial.setBorder(text_border_disable);
                     jtfPesoFinal.setBorder(text_border_disable);
-
-                    // Posiciono el foco en el nombre al iniciar el form
                 } else {
                     Dieta dieta = new Dieta(jtfNombre.getText(), pacienteData.buscarPacientePorId(numId.nroId), Double.parseDouble(jtfPesoInicial.getText()),
                             Double.parseDouble(jtfPesoFinal.getText()),
@@ -541,7 +536,7 @@ public class DietasForm extends javax.swing.JFrame {
                             true);
                     dietadata.guardarDieta(dieta);
                     jtfID.setText(dieta.getIdDieta() + "");
-                    MensajeSB(1, "Dieta guardada con exito");
+                    MensajeSB(1, "Dieta guardada con éxito");
                     jtfNombre.setBorder(text_border_disable);
                     jtfPesoInicial.setBorder(text_border_disable);
                     jtfPesoFinal.setBorder(text_border_disable);
@@ -553,7 +548,7 @@ public class DietasForm extends javax.swing.JFrame {
                     jbDetalleDieta.setEnabled(true);
                 }
             } catch (NumberFormatException ex) {
-                MensajeSB(2, "los pesos deben ser números entre 1 y 500");
+                MensajeSB(2, "Los pesos deben ser números entre 1 y 500");
                 jtfNombre.setBorder(text_border_disable);
                 jtfPesoInicial.setBorder(text_border_disable);
                 jtfPesoFinal.setBorder(text_border_disable);
@@ -589,16 +584,15 @@ public class DietasForm extends javax.swing.JFrame {
                     jtfPesoInicial.setBorder(text_border);
                     jtfPesoFinal.setBorder(text_border);
                 } else if ((jDateChooser2.getDate()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate().compareTo(ahora) <= 0) {
-                    MensajeSB(2, "La fecha de culminacion de la dieta debe ser posterior al día de hoy");
+                    MensajeSB(2, "La fecha de culminación de la dieta debe ser posterior al día de hoy");
                     jtfNombre.setBorder(text_border);
                     jtfPesoInicial.setBorder(text_border);
                     jtfPesoFinal.setBorder(text_border);
                 } else if (jDateChooser1.getDate().compareTo(jDateChooser2.getDate()) >= 0) {
-                    MensajeSB(2, "la fecha inicial del tratamiento debe ser menor que la final");
+                    MensajeSB(2, "La fecha inicial del tratamiento debe ser menor que la final");
                     jtfNombre.setBorder(text_border);
                     jtfPesoInicial.setBorder(text_border);
                     jtfPesoFinal.setBorder(text_border);
-
                 } else {
                     jtfPaciente.setText(numId.nombreP);
                     jtfPaciente.setEditable(false);
@@ -608,10 +602,10 @@ public class DietasForm extends javax.swing.JFrame {
                             jDateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                             true);
                     dietadata.modificarDieta(dieta);
-                    MensajeSB(1, "Modificacion guardada con exito");
+                    MensajeSB(1, "Modificación guardada con éxito");
                 }
             } catch (NumberFormatException ex) {
-                MensajeSB(2, "los pesos deben comprenderse entre 1 y 500");
+                MensajeSB(2, "Los pesos deben comprenderse entre 1 y 500");
                 jtfNombre.setBorder(text_border);
                 jtfPesoInicial.setBorder(text_border);
                 jtfPesoFinal.setBorder(text_border);
@@ -621,7 +615,7 @@ public class DietasForm extends javax.swing.JFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         dietadata.eliminarDietaPorId(Integer.parseInt(jtfID.getText()));
-        MensajeSB(1, "Dieta eliminada con exito. Ahora puede asignar una nueva");
+        MensajeSB(1, "Dieta eliminada con éxito. Ahora puede asignar una nueva");
         jbEliminar.setEnabled(false);
         jbGuardar.setEnabled(false);
         jbSeguimiento.setEnabled(false);

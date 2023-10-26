@@ -65,7 +65,6 @@ public class HistorialData {
                 historial.setPeso(rs.getDouble("peso"));
                 historial.setFechaConsulta(rs.getDate("fechaConsulta").toLocalDate());
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Historial");
@@ -99,11 +98,11 @@ public class HistorialData {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 listaHistorial.add(buscarHistorialPorId(rs.getInt("idHistorial")));
-            }    ps.close();
+            }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla historial " + ex.getMessage());
         }
-
         return listaHistorial;
     }
-        }
+}

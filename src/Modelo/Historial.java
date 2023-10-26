@@ -1,12 +1,7 @@
-
 package Modelo;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author german
- */
 public class Historial {
   private int idHistorial;
   private Paciente paciente;
@@ -65,5 +60,4 @@ public class Historial {
     public String toString() {
         return "Historial{" + "idHistorial=" + idHistorial + ", paciente=" + paciente + ", peso=" + peso + ", fechaConsulta=" + fechaConsulta + '}';
     }
-  
 }

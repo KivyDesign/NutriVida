@@ -1,6 +1,7 @@
 package Modelo;
 
 public class Paciente {
+
     private int idPaciente;
     private int dni;
     private String nombre;
@@ -30,13 +31,6 @@ public class Paciente {
         this.pesoActual = pesoActual;
         this.estado = estado;
     }
-
-   
-
-    
-//    public Paciente(int parseInt, String text, boolean b) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
 
     public double getPesoActual() {
         return pesoActual;
@@ -98,5 +92,4 @@ public class Paciente {
     public String toString() {
         return "Paciente{" + "idPaciente=" + idPaciente + ", dni=" + dni + ", nombre=" + nombre + ", domicilio=" + domicilio + ", telefono=" + telefono + ", estado=" + estado + '}';
     }
-    
 }
