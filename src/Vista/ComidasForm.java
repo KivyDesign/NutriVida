@@ -788,7 +788,7 @@ public class ComidasForm extends javax.swing.JFrame {
         // Busco si los caracteres ingresados son letras
         int b = 0;
         int i = 0;
-        String letras="abcdefghijklmnñopqrstuvwxyzáéíóú";
+        String letras="abcdefghijklmnñopqrstuvwxyzáéíóú ";
         for (i = 0; i < texto.length(); i++) {
 //            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') && texto.charAt(i) != ' ' ) {
 //                b++;
@@ -870,6 +870,7 @@ public class ComidasForm extends javax.swing.JFrame {
                 jtfNombre.setBorder(text_border_disable);
                 jtfDetalle.addFocusListener(fl2);
                 jtfNombre.removeFocusListener(this);
+                MensajeSB(1,"");
             }
 //                jtfNombre.requestFocus();
 //                jtfNombre.selectAll();
@@ -915,6 +916,7 @@ public class ComidasForm extends javax.swing.JFrame {
                 jtfDetalle.setBorder(text_border_disable);
                 jtfNombre.addFocusListener(fl1);
                 jtfDetalle.removeFocusListener(this);
+                MensajeSB(1,"");
             }
 //                jtfDetalle.requestFocus();
 //                jtfDetalle.selectAll();
