@@ -794,9 +794,6 @@ public class ComidasForm extends javax.swing.JFrame {
         int i = 0;
         String letras = "abcdefghijklmnñopqrstuvwxyzáéíóú ";
         for (i = 0; i < texto.length(); i++) {
-//            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') && texto.charAt(i) != ' ' ) {
-//                b++;
-//            }
             if (letras.indexOf(texto.toLowerCase().charAt(i)) == -1) {
                 b++;
             }
@@ -811,29 +808,9 @@ public class ComidasForm extends javax.swing.JFrame {
     }
 
     public void LimpiarCampos() {
-//        jtfNombre.requestFocus();
-//
-//        jtfID.setText("");
-//        jtfNombre.setText("");
-//        jtfDetalle.setText("");
-//        jlCaloriasTXT.setText("0");
-////        jcbEstado.setSelected(false);
-//        jcbEstado.setSelected(false);
-//        jcbEstado.setEnabled(false);
-//        jlEstado.setEnabled(false);
-//        jcbEstado.setForeground(Color.GRAY);
-//
-//        jbGuardar.setEnabled(false);
-//        jbEliminar.setEnabled(false);
-//        jbBuscar.setEnabled(false);
-//        jbNuevo.setEnabled(false);
-//        e = true;
-//        MensajeSB(1, "");
         ComidasForm comForm = new ComidasForm();
         comForm.setVisible(true);
         comForm.jlMensajeSB.setText(this.jlMensajeSB.getText());
-        // ANDAAA SOLO TENGO QUE PROBARLO BIEN BIEN CORREJIR CUANDO LIMPIO MODIFICO HAGO UN NUEVO O ELIMINO
-        // TAMBIEN VER EL TEMA DEL JLABEL CALORIAS NO PUEDE CREAR NUEVOS O GUARDAR CAMBIOS CUANDO ESTA EN 0
         this.setVisible(false);
     }
 
@@ -853,33 +830,12 @@ public class ComidasForm extends javax.swing.JFrame {
 
         @Override
         public void focusLost(FocusEvent fe) {
-//            if (jtfNombre.getText().equalsIgnoreCase("")) {
-//                jtfNombre.setBorder(text_border);
-//                jtfNombre.requestFocus();
-//                MensajeSB(2, "El campo Nombre debe llenarse");
-//            } else if (PruebaDeCaracteres(jtfNombre.getText()) == false) {
-//                jtfNombre.setBorder(text_border_rojo);
-//                jtfNombre.requestFocus();
-//                jtfNombre.selectAll();
-//                MensajeSB(2, "El campo Nombre debe llenarse solo con letras");
-//            } else {
-//                jtfNombre.setBorder(text_border_disable);
-////                    estadojbNuevo();
-//                jtfDetalle.addFocusListener(fl2);
-////                jtfCalorias.addFocusListener(fl3);
-//                jtfNombre.removeFocusListener(this);
-//
-//            }
             if (verificarNombre() == true) {
                 jtfNombre.setBorder(text_border_disable);
                 jtfDetalle.addFocusListener(fl2);
                 jtfNombre.removeFocusListener(this);
                 MensajeSB(1, "");
             }
-//                jtfNombre.requestFocus();
-//                jtfNombre.selectAll();
-//                System.out.println("algo");
-//            }
         }
     };
 
@@ -887,92 +843,25 @@ public class ComidasForm extends javax.swing.JFrame {
         @Override
         public void focusGained(FocusEvent fe) {
             jtfNombre.removeFocusListener(fl1);
-//            jtfCalorias.removeFocusListener(fl3);
         }
 
         @Override
         public void focusLost(FocusEvent fe) {
-//            if (jtfNombre.getText().equalsIgnoreCase("")) {
-//                jtfNombre.setBorder(text_border);
-//                jtfNombre.requestFocus();
-//                MensajeSB(2, "El campo Nombre debe llenarse");
-//            } else {
-
-// HACER METODOS PARA LA SEGURIDAD.,, EN EL FOCUS LISTENER 2 FIJARSE SI EL IF 
-//DEL EQUALS SE PUEDE METER DENTRO DEL VERIFICARNOMBRE O UTILIZAR ESE METODO
-//EN EL Fl2
-//            if (jtfDetalle.getText().equalsIgnoreCase("")) {
-//                jtfDetalle.setBorder(text_border);
-//                jtfDetalle.requestFocus();
-//                MensajeSB(2, "El campo Detalle debe llenarse");
-//                jcbEstado.setEnabled(false);
-//                jtfNombre.setDisabledTextColor(Color.white);
-////                    jtfCalorias.setDisabledTextColor(Color.white);
-//            } else {
-//                jtfDetalle.setBorder(text_border_disable);
-////                        estadojbNuevo();
-//                jtfNombre.addFocusListener(fl1);
-////                    jtfCalorias.addFocusListener(fl3);
-//                jtfDetalle.removeFocusListener(fl2);
-//            }
-////            }
             if (verificarDetalle() == true) {
                 jtfDetalle.setBorder(text_border_disable);
                 jtfNombre.addFocusListener(fl1);
                 jtfDetalle.removeFocusListener(this);
                 MensajeSB(1, "");
             }
-//                jtfDetalle.requestFocus();
-//                jtfDetalle.selectAll();
-//                System.out.println("algo detalle");
-//            }
         }
     };
 
-//    FocusListener fl3 = new FocusListener() {
-//        @Override
-//        public void focusGained(FocusEvent fe) {
-//            jtfNombre.removeFocusListener(fl1);
-//            jtfDetalle.removeFocusListener(fl2);
-//        }
-//
-//        @Override
-//        public void focusLost(FocusEvent fe) {
-//            if (jtfCalorias.getText().equalsIgnoreCase("")) {
-//                jtfCalorias.setBorder(text_border);
-//                jtfCalorias.requestFocus();
-//                MensajeSB(2, "El campo Calorias debe llenarse");
-//            } else {
-//                try {
-//                    if (Integer.parseInt(jtfCalorias.getText()) < 0 || Integer.parseInt(jtfCalorias.getText()) > 20000) {
-//                        jtfCalorias.setBorder(text_border_rojo);
-//                        jtfCalorias.requestFocus();
-//                        jtfCalorias.selectAll();
-//                        MensajeSB(2, "El campo Calorias está fuera de rango(0-20000)");
-//                    } else {
-//                        jtfCalorias.setBorder(text_border_disable);
-////                            estadojbNuevo();
-//                        jtfNombre.addFocusListener(fl1);
-//                        jtfDetalle.addFocusListener(fl2);
-//                        jtfCalorias.removeFocusListener(fl3);
-//                    }
-//                } catch (NumberFormatException ex) {
-//                    MensajeSB(2, "El campo Calorias debe llenarse con números");
-//                    jtfCalorias.setBorder(text_border_rojo);
-//                    jtfCalorias.requestFocus();
-//                    jtfCalorias.selectAll();
-//                }
-//            }
-//        }
-//    };
     public void habilitarNuevo() {
         if (e == true) {
             if (jtfNombre.getText().isEmpty() || jtfDetalle.getText().isEmpty()) {
                 jbNuevo.setEnabled(false);
-//                jbCalcularCalorias.setEnabled(false);
             } else {
                 jbNuevo.setEnabled(true);
-//                jbCalcularCalorias.setEnabled(true);
             }
         }
     }
@@ -1003,6 +892,4 @@ public class ComidasForm extends javax.swing.JFrame {
         }
         return false;
     }
-
-    // CUANDO PONES TILDE EN EL NOMBRE YA NO TE LO TOMA COMO UNA LETRA!! VER ESO
 }
