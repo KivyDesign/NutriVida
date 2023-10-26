@@ -501,16 +501,16 @@ public class DietasForm extends javax.swing.JFrame {
             jtfNombre.setBorder(text_border_rojo);
         } else {
             try {
-                if (Double.parseDouble(jtfPesoInicial.getText()) <= 0.00
-                        || Double.parseDouble(jtfPesoInicial.getText()) >= 500.00) {
-                    MensajeSB(2, "El peso inicial debe comprenderse entre 0 y 500");
+                if (Double.parseDouble(jtfPesoInicial.getText()) < 1.00
+                        || Double.parseDouble(jtfPesoInicial.getText()) > 500.00) {
+                    MensajeSB(2, "El peso inicial debe comprenderse entre 1 y 500");
                     jtfPesoInicial.requestFocus();
                     jtfPesoInicial.selectAll();
                     jtfPesoInicial.setBorder(text_border_rojo);
                     jtfNombre.setBorder(text_border_disable);
-                } else if (Double.parseDouble(jtfPesoFinal.getText()) <= 0.00
-                        || Double.parseDouble(jtfPesoFinal.getText()) >= 500.00) {
-                    MensajeSB(2, "El peso final debe comprenderse entre 0 y 500");
+                } else if (Double.parseDouble(jtfPesoFinal.getText()) < 1.00
+                        || Double.parseDouble(jtfPesoFinal.getText()) > 500.00) {
+                    MensajeSB(2, "El peso final debe comprenderse entre 1 y 500");
                     jtfPesoFinal.requestFocus();
                     jtfPesoFinal.selectAll();
                     jtfPesoFinal.setBorder(text_border_rojo);
@@ -553,7 +553,7 @@ public class DietasForm extends javax.swing.JFrame {
                     jbDetalleDieta.setEnabled(true);
                 }
             } catch (NumberFormatException ex) {
-                MensajeSB(2, "los pesos deben ser números entre 0 y 500");
+                MensajeSB(2, "los pesos deben ser números entre 1 y 500");
                 jtfNombre.setBorder(text_border_disable);
                 jtfPesoInicial.setBorder(text_border_disable);
                 jtfPesoFinal.setBorder(text_border_disable);
@@ -568,16 +568,16 @@ public class DietasForm extends javax.swing.JFrame {
             jtfNombre.setBorder(text_border_rojo);
         } else {
             try {
-                if (Double.parseDouble(jtfPesoInicial.getText()) <= 0.00
-                        || Double.parseDouble(jtfPesoInicial.getText()) >= 500.00) {
-                    MensajeSB(2, "El peso inicial debe comprenderse entre 0 y 500");
+                if (Double.parseDouble(jtfPesoInicial.getText()) < 1.00
+                        || Double.parseDouble(jtfPesoInicial.getText()) > 500.00) {
+                    MensajeSB(2, "El peso inicial debe comprenderse entre 1 y 500");
                     jtfPesoInicial.requestFocus();
                     jtfPesoInicial.selectAll();
                     jtfPesoInicial.setBorder(text_border_rojo);
                     jtfNombre.setBorder(text_border);
-                } else if (Double.parseDouble(jtfPesoFinal.getText()) <= 0.00
-                        || Double.parseDouble(jtfPesoFinal.getText()) >= 500.00) {
-                    MensajeSB(2, "El peso final debe comprenderse entre 0 y 500");
+                } else if (Double.parseDouble(jtfPesoFinal.getText()) < 1.00
+                        || Double.parseDouble(jtfPesoFinal.getText()) > 500.00) {
+                    MensajeSB(2, "El peso final debe comprenderse entre 1 y 500");
                     jtfPesoFinal.requestFocus();
                     jtfPesoFinal.selectAll();
                     jtfPesoFinal.setBorder(text_border_rojo);
@@ -611,7 +611,7 @@ public class DietasForm extends javax.swing.JFrame {
                     MensajeSB(1, "Modificacion guardada con exito");
                 }
             } catch (NumberFormatException ex) {
-                MensajeSB(2, "los pesos deben comprenderse entre 0 y 500");
+                MensajeSB(2, "los pesos deben comprenderse entre 1 y 500");
                 jtfNombre.setBorder(text_border);
                 jtfPesoInicial.setBorder(text_border);
                 jtfPesoFinal.setBorder(text_border);
