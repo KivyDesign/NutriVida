@@ -68,9 +68,9 @@ public class DietasForm extends javax.swing.JFrame {
             jtfPesoFinal.setText(dieta.getPesoFinal() + "");
             jDateChooser1.setDate(Date.from(dieta.getFechaInicial().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             jDateChooser2.setDate(Date.from(dieta.getFechaFinal().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-            jtfNombre.setBorder(text_border);
-            jtfPesoInicial.setBorder(text_border);
-            jtfPesoFinal.setBorder(text_border);
+            jtfNombre.setBorder(text_border_disable);
+            jtfPesoInicial.setBorder(text_border_disable);
+            jtfPesoFinal.setBorder(text_border_disable);
             if (dieta.getFechaFinal().compareTo(ahora) <= 0) {
                 MensajeSB(2, "La fecha de culminacion de la dieta se venció");
 
