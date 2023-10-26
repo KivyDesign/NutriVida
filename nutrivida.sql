@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2023 a las 01:11:26
+-- Tiempo de generación: 27-10-2023 a las 01:47:53
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -373,7 +373,7 @@ CREATE TABLE `comida` (
 INSERT INTO `comida` (`idComida`, `nombre`, `detalle`, `cantCalorias`, `estado`) VALUES
 (1, 'Frutilla', 'Es una fruta', 33, 1),
 (2, 'Lenteja', 'legumbres', 116, 1),
-(3, 'Banana', 'Fruta', 89, 1),
+(3, 'Banana', 'Fruta', 8, 1),
 (4, 'Atun', 'Pescado', 130, 1),
 (5, 'Zanahoria', 'Verdura', 37, 1),
 (6, 'Ciruelas', 'fruta', 6, 1),
@@ -423,20 +423,21 @@ INSERT INTO `dieta` (`idDieta`, `nombre`, `idPaciente`, `pesoInicial`, `pesoFina
 (2, 'Masiva', 3, 150.52, 98, '2023-08-23', '2023-12-23', 1),
 (3, 'Liviana', 4, 150.52, 98, '2023-08-23', '2023-12-23', 1),
 (4, 'Normal', 5, 150.52, 98, '2023-08-23', '2023-12-23', 1),
-(19, 'ultrarrapida ', 6, 118, 80, '2023-09-12', '2023-10-28', 1),
+(19, 'ultrarrapido', 6, 118, 80, '2023-06-22', '2023-10-28', 1),
 (24, 'Cuidado Personal', 11, 120, 85, '2023-08-08', '2023-11-21', 1),
 (28, 'aumento relativo', 17, 56, 62, '2023-10-02', '2023-11-28', 1),
 (29, 'Ligera', 1, 89, 78.5, '2023-07-21', '2023-10-25', 1),
-(30, 'Rapida', 13, 85.36, 60, '2023-08-22', '2023-11-23', 1),
+(30, 'Rapida', 13, 85.36, 60, '2023-09-12', '2023-11-21', 1),
 (31, 'progresiva', 12, 150.8, 125, '2023-08-23', '2023-10-13', 1),
 (32, 'Perdedora', 14, 80, 68, '2023-09-04', '2023-12-22', 1),
 (33, 'CuidadoIntensivo', 19, 89.7, 79, '2023-09-11', '2023-09-20', 1),
 (34, 'Liviana', 9, 97.8, 90, '2023-08-15', '2023-11-14', 1),
 (35, 'Media', 7, 60.8, 48.5, '2023-09-12', '2023-12-20', 1),
 (36, 'liviana', 8, 55.35, 50, '2023-09-13', '2023-11-24', 1),
-(37, 'menor', 16, 69, 58.5, '2023-09-12', '2023-12-18', 1),
 (38, 'super', 18, 85.3, 79, '2023-09-12', '2023-11-14', 1),
-(39, 'extrema', 29, 89, 78, '2023-08-29', '2023-11-23', 1);
+(39, 'extrema', 29, 89, 78, '2023-08-29', '2023-11-23', 1),
+(40, 'ligera', 15, 90.5, 78.5, '2023-09-21', '2023-12-21', 1),
+(41, 'ligera', 16, 69, 58, '2023-08-15', '2023-11-22', 1);
 
 -- --------------------------------------------------------
 
@@ -457,6 +458,7 @@ CREATE TABLE `dietacomida` (
 --
 
 INSERT INTO `dietacomida` (`idDietaComida`, `idComida`, `idDieta`, `horario`, `porcion`) VALUES
+(10, 6, 1, 'MERIENDA', 3),
 (21, 1, 28, 'MERIENDA', 25),
 (25, 1, 1, 'DESAYUNO', 4),
 (27, 2, 1, 'DESAYUNO', 220),
@@ -469,7 +471,9 @@ INSERT INTO `dietacomida` (`idDietaComida`, `idComida`, `idDieta`, `horario`, `p
 (35, 2, 30, 'CENA', 100),
 (36, 3, 19, 'MERIENDA', 8),
 (39, 2, 2, 'CENA', 120),
-(41, 5, 30, 'MERIENDA', 3);
+(41, 5, 30, 'MERIENDA', 3),
+(42, 8, 31, 'ALMUERZO', 1),
+(44, 2, 31, 'CENA', 1);
 
 -- --------------------------------------------------------
 
@@ -529,7 +533,8 @@ INSERT INTO `historial` (`IdHistorial`, `idPaciente`, `peso`, `fechaConsulta`) V
 (48, 6, 92.7, '2023-10-24'),
 (49, 3, 129.3, '2023-10-24'),
 (50, 7, 51.5, '2023-10-24'),
-(51, 6, 93.5, '2023-10-24');
+(51, 6, 93.5, '2023-10-24'),
+(52, 12, 135.8, '2023-10-26');
 
 -- --------------------------------------------------------
 
@@ -563,7 +568,7 @@ INSERT INTO `paciente` (`idPaciente`, `dni`, `nombre`, `domicilio`, `telefono`, 
 (9, 11110000, 'Carlos Robledo', 'Pasco 1587', '478-456', 97.8, 1),
 (10, 11111111, 'Carla Funes', 'Sarmiento 569', '100-456', 75.8, 1),
 (11, 22225555, 'Francisco Peralta', 'Las Heras 1809', '123-4567', 119.5, 1),
-(12, 22223333, 'Pascual Funes', 'Chubut 3450', '123-789', 148.5, 1),
+(12, 22223333, 'Pascual Funes', 'Chubut 3450', '123-789', 135.8, 1),
 (13, 11112222, 'Daniela Paso', 'Ayacucho', '123-335', 75.2, 1),
 (14, 22224444, 'Horacio Larreta', 'Mitre 578', '111-234', 80, 1),
 (15, 22226666, 'Roberto Calvo', 'Colon 2390', '777-8888', 90.5, 1),
@@ -641,19 +646,19 @@ ALTER TABLE `comida`
 -- AUTO_INCREMENT de la tabla `dieta`
 --
 ALTER TABLE `dieta`
-  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `idDieta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `dietacomida`
 --
 ALTER TABLE `dietacomida`
-  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `IdHistorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `IdHistorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `paciente`
