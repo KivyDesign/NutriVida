@@ -52,8 +52,6 @@ Vistas finales de las pantallas que componen todo el Proyecto Transversal de Int
 
 <p align="center">Pantalla de agradecimiento por todo el esfuerzo y la buena predisposición de los integrantes del equipo para salir adelante y completar el Proyecto Transversal de Integración. Gracias !TOTALES¡</p>
 
-
-
 ## INSTRUCTIVO:
 
 > El proyecto será una aplicación en Java/MySQL. Se debe crear las tablas de la base de datos, y las correspondientes clases. Utilice una clase para la conexión y confeccione la interfaz gráfica (GUI). El grupo deberá presentar el proyecto en 3 etapas.
@@ -98,4 +96,11 @@ La nutricionista al planificar la dieta para un paciente, y considera un conjunt
 
 <p align="center">Vista de Diseñador</p>
 
+# Miembros del Equipo 22
+
+<p align="center">© 2023 Creative Guido, all rights reserved. Made with ❤️ for a better web.</p>
+<p align="center">@https://github.com/germanesalvatierra</p>
+<p align="center">@https://github.com/KivyDesign</p>
+<p align="center">@https://github.com/arielMilton</p>
+<p align="center">@https://github.com/EnzoRey</p>
 
