@@ -225,7 +225,7 @@ public class ControlDietasForm extends javax.swing.JFrame {
                 .addComponent(jBVolver)
                 .addGap(29, 29, 29)
                 .addComponent(jBSalir)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
@@ -372,7 +372,6 @@ public class ControlDietasForm extends javax.swing.JFrame {
         if (dietas != null) {
             for (Dieta dieta : dietas) {
                 modelo.addRow(new Object[]{
-                    //   dieta.getPaciente().getIdPaciente(),
                     dieta.getPaciente().getNombre(),
                     dieta.getPaciente().getDni(),
                     dieta.getPesoFinal(),
@@ -402,7 +401,6 @@ public class ControlDietasForm extends javax.swing.JFrame {
         if (dietas != null) {
             for (Dieta dieta : dietas) {
                 modelo.addRow(new Object[]{
-                    //    dieta.getPaciente().getIdPaciente(),
                     dieta.getPaciente().getNombre(),
                     dieta.getPaciente().getDni(),
                     dieta.getPesoFinal(),
@@ -418,7 +416,6 @@ public class ControlDietasForm extends javax.swing.JFrame {
         } else if (color == 2) {
             jlMensajeSB.setForeground(new Color(255, 50, 0));
         } else if (color == 3) {
-
             jlMensajeSB.setForeground(new Color(31, 75, 128));
         }
         jlMensajeSB.setText(mensaje);
