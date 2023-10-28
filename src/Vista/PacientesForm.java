@@ -486,7 +486,7 @@ public class PacientesForm extends javax.swing.JFrame {
                         jtfDomicilio.setBorder(text_border_disable);
                         jtfTelefono.setBorder(text_border_disable);
                         jtfPesoActual.setBorder(text_border_disable);
-                        MensajeSB(1, "Paciente encontrado");
+                        MensajeSB(1, "Paciente encontrado, modifique, elimine o entre a su area personal");
                         jbBuscar.setEnabled(false);
                         jbDietaPersonal.setEnabled(true);
                     } else {

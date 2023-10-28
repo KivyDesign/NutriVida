@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
 public class DietasForm extends javax.swing.JFrame {
+
     // Creación de los bordes que utilizaremos en los TextFileds
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.YELLOW);
     Border text_border_disable = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE);
@@ -520,6 +521,11 @@ public class DietasForm extends javax.swing.JFrame {
                     jtfPesoFinal.setBorder(text_border_disable);
                 } else if ((jDateChooser2.getDate()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate().compareTo(ahora) <= 0) {
                     MensajeSB(2, "La fecha de culminación de la dieta debe ser posterior al día de hoy");
+                    jtfNombre.setBorder(text_border_disable);
+                    jtfPesoInicial.setBorder(text_border_disable);
+                    jtfPesoFinal.setBorder(text_border_disable);
+                } else if ((jDateChooser1.getDate()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate().compareTo(ahora) < 0) {
+                    MensajeSB(2, "La fecha de inicio de la dieta debe ser el día de hoy o posterior");
                     jtfNombre.setBorder(text_border_disable);
                     jtfPesoInicial.setBorder(text_border_disable);
                     jtfPesoFinal.setBorder(text_border_disable);
